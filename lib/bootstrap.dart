@@ -9,7 +9,7 @@ Future<Widget?> bootstrap(FutureOr<Widget> Function() builder) async {
   return BlocOverrides.runZoned(
     () async {
       await EasyLocalization.ensureInitialized();
-      return null;
+      runApp(await builder());
     },
     blocObserver: AppBlocObserver(),
   );
