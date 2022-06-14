@@ -2,7 +2,6 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:freeland/app/auth/domain/entities/form_status.dart';
 import 'package:freeland/app/auth/presentation/login/login_bloc/login_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
@@ -35,7 +34,7 @@ class LoginScreen extends StatelessWidget {
         create: (context) => getIt<LoginBloc>(),
         child: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
-            if (state.formStatus is ErrorFormStatus) {
+            if (state.formStatus.isFail()) {
               BotToast.showText(text: "error");
             }
           },
@@ -45,16 +44,29 @@ class LoginScreen extends StatelessWidget {
               formGroup: loginBloc.loginForm,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  vertical: verticalAppPadding.h,
                   horizontal: horizontalAppPadding.w,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: ListView(
                   children: [
-                    Text(
-                      "أهلا بك مجدداً 🌟",
-                      style: Theme.of(context).textTheme.headline5,
+                    SizedBox(height: 12.0.h),
+                    Column(
+                      children: [
+                        Icon(Icons.admin_panel_settings_outlined,
+                            color: Theme.of(context).primaryColor,
+                            size: 150.0.r),
+                        SizedBox(height: 4.0.h),
+                        Text(
+                          "Welcome Back To FreeLand",
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        SizedBox(height: 8.0.h),
+                        Text(
+                          "We Missed You!",
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 100.0.h),
                     Column(
                       children: [
                         CustomReactiveTextField(
@@ -62,16 +74,15 @@ class LoginScreen extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           validationMessages: (control) => {
                             ValidationMessage.required: AppStrings.required,
-                            ValidationMessage.email: AppStrings.required,
                           },
-                          labelText: "البريد الإلكتروني",
+                          labelText: "User Name",
                           formControlName: LoginBloc.emailKey,
                         ),
                         SizedBox(height: 10.0.h),
                         CustomReactiveTextField(
                           maxLines: 1,
                           keyboardType: TextInputType.text,
-                          labelText: "كلمة السر",
+                          labelText: "Password",
                           validationMessages: (control) => {
                             ValidationMessage.required: AppStrings.required,
                           },
@@ -79,29 +90,31 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 100.0.h),
                     Column(
                       children: [
-                        (state.formStatus is! LoadingFormStatus)
+                        (!state.formStatus.isLoading())
                             ? SizedBox(
-                          width: 120.0.w,
-                              child: ElevatedButton(
+                                width: 120.0.w,
+                                child: ElevatedButton(
                                   onPressed: () {
                                     loginBloc.add(LoginSubmission(context));
                                   },
-                                  child: Text(
-                                    "استمر",
+                                  child: const Text(
+                                    "Login",
                                   ),
                                 ),
-                            )
+                              )
                             : const CircularProgressIndicator(),
+                        SizedBox(height: 4.0.h),
                         SizedBox(
                           width: 120.0.w,
                           child: OutlinedButton(
                             onPressed: () {
                               context.goNamed(SignUpScreen.routeName);
                             },
-                            child: Text(
-                              "أنشئ حسابا",
+                            child: const Text(
+                              "SignUp",
                             ),
                           ),
                         ),

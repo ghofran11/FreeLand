@@ -1,16 +1,14 @@
 part of 'login_bloc.dart';
 
 class LoginState {
-  final FormStatus formStatus;
+  final BlocStatus formStatus;
 
   LoginState({
-    this.formStatus = const EditingFormStatus(),
+    this.formStatus = const BlocStatus(),
   });
 
   LoginState copyWith(
-      {FormStatus? formState,
-      BlocStatus? statusGetLocalization,
-      BlocStatus? statusSetLocalization}) {
+      {BlocStatus? formState,}) {
     return LoginState(
       formStatus: formState ?? formStatus,
     );

@@ -1,5 +1,5 @@
 class AppStrings {
-  static const required = "مطلوب";
-  static const email = "بريد ألكتروني";
-  static const number = "رقم";
+  static const required = "Required";
+  static const email = "Email";
+  static const number = "Number";
 }

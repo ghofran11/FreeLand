@@ -11,7 +11,7 @@ const double horizontalAppPadding = 24;
 const double verticalAppPadding = 24;
 
 const kIconSize = 22.0;
-const buttonBorderRadius = 20.0;
+const buttonBorderRadius = 15.0;
 const String fontFamily = "Almarai";
 const designSize = Size(360, 690);
 
