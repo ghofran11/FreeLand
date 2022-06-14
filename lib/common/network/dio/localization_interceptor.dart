@@ -15,7 +15,7 @@ class LocalizationInterceptor extends Interceptor {
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     ///ToDo
-    options.headers.addAll({'lang': "ar"});
+    // options.headers.addAll({'lang': "ar"});
     handler.next(options);
   }
 }

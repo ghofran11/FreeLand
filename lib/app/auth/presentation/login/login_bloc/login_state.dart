@@ -21,7 +21,7 @@ class LoginState {
     String token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
     return LoginParams(
       deviceToken: token,
-      phoneNumber: loginForm.control(LoginBloc.emailKey).value,
+      email: loginForm.control(LoginBloc.emailKey).value,
       password: loginForm.control(LoginBloc.passwordFieldKey).value,
     );
   }

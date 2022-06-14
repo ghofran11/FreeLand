@@ -11,7 +11,7 @@ const double horizontalAppPadding = 24;
 const double verticalAppPadding = 24;
 
 const kIconSize = 22.0;
-const buttonBorderRadius = 15.0;
+const buttonBorderRadius = 20.0;
 const String fontFamily = "Almarai";
 const designSize = Size(360, 690);
 
@@ -26,7 +26,7 @@ final ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
   primary: AppColors.primary,
   elevation: 1,
   padding: buttonRPadding.r,
-  shape: RoundedRectangleBorder(borderRadius: borderRadiusCircular),
+  shape: RoundedRectangleBorder(borderRadius: borderRadiusCircular.r),
 );
 
 final ButtonStyle textButtonStyle = TextButton.styleFrom(
@@ -60,10 +60,13 @@ final InputDecorationTheme inputDecorationThemeDark = InputDecorationTheme(
 final ButtonStyle outlineButtonStyle = OutlinedButton.styleFrom(
   primary: AppColors.primary,
   padding: buttonRPadding.r,
-  side: const BorderSide(color: AppColors.primary),
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(buttonBorderRadius.r),
+  //todo:fix this later
+  textStyle: const TextStyle(
+    fontFamily: fontFamily,
+    color: AppColors.primary,
   ),
+  side: const BorderSide(color: AppColors.primary),
+  shape: RoundedRectangleBorder(borderRadius: borderRadiusCircular.r),
 );
 
 final dialogTheme = DialogTheme(
@@ -111,6 +114,7 @@ InputDecoration dynamicInputDecorationTheme({
 
 class MyInputBorder extends OutlineInputBorder {
   final Color fillColor;
+
   const MyInputBorder({
     required this.fillColor,
     BorderSide borderSide = const BorderSide(),
@@ -121,6 +125,7 @@ class MyInputBorder extends OutlineInputBorder {
           borderRadius: borderRadius,
           gapPadding: gapPadding,
         );
+
   @override
   void paint(Canvas canvas, Rect rect,
       {double? gapStart,

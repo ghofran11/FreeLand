@@ -66,10 +66,7 @@ class MyAppState extends State<MyApp> {
                       child = _botToastBuilder(context, child);
                       child = DevicePreview.appBuilder(context, child);
                       return Builder(builder: (context) {
-                        return Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: child!,
-                        );
+                        return child!;
                       });
                     },
                   ),
@@ -82,10 +79,7 @@ class MyAppState extends State<MyApp> {
     final Completer<void> completer = Completer();
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
-
-    // final injection =
     await initInjection(context);
-    // await Future.wait<dynamic>([injection]);
     try {
       await getIt<FirebaseNotificationService>()
           .setUpFirebase()

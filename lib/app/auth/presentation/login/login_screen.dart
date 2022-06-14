@@ -82,27 +82,27 @@ class LoginScreen extends StatelessWidget {
                     Column(
                       children: [
                         (state.formStatus is! LoadingFormStatus)
-                            ? ElevatedButton(
-                                onPressed: () {
-                                  loginBloc.add(LoginSubmission(context));
-                                },
-                                child: Text(
-                                  "استمر",
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary),
+                            ? SizedBox(
+                          width: 120.0.w,
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    loginBloc.add(LoginSubmission(context));
+                                  },
+                                  child: Text(
+                                    "استمر",
+                                  ),
                                 ),
-                              )
+                            )
                             : const CircularProgressIndicator(),
-                        ElevatedButton(
-                          onPressed: () {
-                            context.goNamed(SignUpScreen.routeName);
-                          },
-                          child: Text(
-                            "أنشئ حسابا",
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary),
+                        SizedBox(
+                          width: 120.0.w,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              context.goNamed(SignUpScreen.routeName);
+                            },
+                            child: Text(
+                              "أنشئ حسابا",
+                            ),
                           ),
                         ),
                       ],

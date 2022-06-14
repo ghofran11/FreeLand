@@ -30,4 +30,5 @@ Future<void> authInject() async {
       refreshDeviceTokenService: getIt<RefreshDeviceTokenService>()));
 
   getIt.registerFactory(() => LoginBloc());
+
 }
