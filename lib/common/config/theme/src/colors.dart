@@ -11,6 +11,7 @@ class AppColors {
   static const Color black50 = Color(0xFF797C82);
   static const Color primary = Color(0xff007FFF);
   static const Color accent = Color(0xff007FFF);
+  static const Color background = Color(0xEEF0F0F5);
 
   static const Color blueAppBar = Color(0xff007FF0);
   static const Color blueWith100 = Color(0xff007FFF);

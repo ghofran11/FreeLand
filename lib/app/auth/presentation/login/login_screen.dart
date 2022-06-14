@@ -1,12 +1,17 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/app/auth/domain/entities/form_status.dart';
 import 'package:freeland/app/auth/presentation/login/login_bloc/login_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
+import 'package:freeland/common/config/theme/src/styles.dart';
+import 'package:freeland/common/widgets/test_field.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import '../../../../common/constant/constants.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -39,61 +44,68 @@ class LoginScreen extends StatelessWidget {
             return ReactiveForm(
               formGroup: loginBloc.loginForm,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(
+                  vertical: verticalAppPadding.h,
+                  horizontal: horizontalAppPadding.w,
+                ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text(
-                      "Log in ",
-                      style: TextStyle(color: Colors.black),
+                    Text(
+                      "أهلا بك مجدداً 🌟",
+                      style: Theme.of(context).textTheme.headline5,
                     ),
-                    const Text(
-                      "PhoneNumber ",
-                      style: TextStyle(color: Colors.black),
+                    Column(
+                      children: [
+                        CustomReactiveTextField(
+                          maxLines: 1,
+                          keyboardType: TextInputType.emailAddress,
+                          validationMessages: (control) => {
+                            ValidationMessage.required: AppStrings.required,
+                            ValidationMessage.email: AppStrings.required,
+                          },
+                          labelText: "البريد الإلكتروني",
+                          formControlName: LoginBloc.emailKey,
+                        ),
+                        SizedBox(height: 10.0.h),
+                        CustomReactiveTextField(
+                          maxLines: 1,
+                          keyboardType: TextInputType.text,
+                          labelText: "كلمة السر",
+                          validationMessages: (control) => {
+                            ValidationMessage.required: AppStrings.required,
+                          },
+                          formControlName: LoginBloc.passwordFieldKey,
+                        ),
+                      ],
                     ),
-                    ReactiveTextField(
-                      maxLines: 1,
-                      keyboardType: TextInputType.number,
-                      validationMessages: (control) => {
-                        ValidationMessage.required: "مطلوب",
-                        ValidationMessage.number: "رقم",
-                      },
-                      formControlName: LoginBloc.phoneNumberKey,
-                    ),
-                    const Text(
-                      "PassWord ",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    ReactiveTextField(
-                      maxLines: 1,
-                      keyboardType: TextInputType.text,
-                      validationMessages: (control) => {
-                        ValidationMessage.required: "مطلوب",
-                      },
-                      formControlName: LoginBloc.passwordFieldKey,
-                    ),
-                    (state.formStatus is! LoadingFormStatus)
-                        ? ElevatedButton(
-                            onPressed: () {
-                              loginBloc.add(LoginSubmission(context));
-                            },
-                            child: Text(
-                              "استمر",
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary),
-                            ),
-                          )
-                        : const CircularProgressIndicator(),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.goNamed(SignUpScreen.routeName);
-                      },
-                      child: Text(
-                        "أنشئ حسابا",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary),
-                      ),
+                    Column(
+                      children: [
+                        (state.formStatus is! LoadingFormStatus)
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  loginBloc.add(LoginSubmission(context));
+                                },
+                                child: Text(
+                                  "استمر",
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary),
+                                ),
+                              )
+                            : const CircularProgressIndicator(),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.goNamed(SignUpScreen.routeName);
+                          },
+                          child: Text(
+                            "أنشئ حسابا",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),

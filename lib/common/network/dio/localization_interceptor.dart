@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 const _intCodes = {
@@ -15,7 +14,8 @@ class LocalizationInterceptor extends Interceptor {
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    options.headers.addAll({'lang': _intCodes[context.locale.languageCode]});
+    ///ToDo
+    options.headers.addAll({'lang': "ar"});
     handler.next(options);
   }
 }

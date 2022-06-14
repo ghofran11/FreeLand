@@ -19,9 +19,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   final loginForm = FormGroup(
     {
-      phoneNumberKey: FormControl<String>(validators: [
+      emailKey: FormControl<String>(validators: [
         Validators.required,
-        Validators.number,
+        Validators.email,
       ]),
       passwordFieldKey: FormControl<String>(validators: [
         Validators.required,
@@ -78,6 +78,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     return false;
   }
 
-  static const phoneNumberKey = "phoneNumberKey";
+  static const emailKey = "emailKey";
   static const passwordFieldKey = "passwordFieldKey";
 }

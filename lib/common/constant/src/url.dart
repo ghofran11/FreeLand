@@ -1,10 +1,8 @@
 class AppUri {
-  static const String baseUrlProduction = "http://194.32.76.82:8642/";
-  static const baseUrlDevelopment = "http://194.32.76.82:8642/";
-  static const refreshDeviceToken = "User/RefreshToken";
-  static const signInUser = "User/SignIn";
-  static const getLessons = "Lesson/GetAll";
+  static const baseUrlDevelopment = "http://freeland-001-site1.btempurl.com/";
+  static const signInUser = "Account/Login";
+  static const signUpUser = "Account/Create";
 
-  //ToDo
-  static const signUpUser = "";
+//ToDo
+  static const refreshDeviceToken = "User/RefreshToken";
 }

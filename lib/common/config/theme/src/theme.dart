@@ -19,6 +19,7 @@ class AppThemes {
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: AppColors.primary,
       ),
+      scaffoldBackgroundColor: AppColors.background,
       outlinedButtonTheme: OutlinedButtonThemeData(style: outlineButtonStyle),
       elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
       appBarTheme: const AppBarTheme(
