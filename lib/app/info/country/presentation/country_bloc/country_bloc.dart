@@ -7,9 +7,8 @@ import '../../../../../core/bloc_status.dart';
 import '../../infrastrcture/repo/country_repository.dart';
 
 class CountryBloc extends Bloc<CountryEvent,CountryState>{
-
- late final CountryRepo _countryRepo;
-
+  List<CountryDto> countries=[];
+  late final CountryRepo _countryRepo;
   CountryBloc(CountryRepo countryRepo) : super(CountryState()){
     _countryRepo=countryRepo;
     on<CountryEvent>((event, emit) async {
@@ -18,9 +17,11 @@ class CountryBloc extends Bloc<CountryEvent,CountryState>{
 
         (await _countryRepo.fetchAllCountry()).fold(
                  (left) => emit(state.copyWith(formState: BlocStatus.fail(error: left))),
-                (right) => {}
+                (right) => {
+                  countries=  right,
+                  emit(state.copyWith(formState: BlocStatus.success())),
+                 }
         );
-
       }
     });
   }
