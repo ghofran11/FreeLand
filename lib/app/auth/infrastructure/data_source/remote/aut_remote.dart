@@ -13,8 +13,9 @@ class AuthRemote {
 
   Future<User> login({
     required LoginParams params,
-    required String? deviceToken,
-  }) async {
+    required String? deviceToken, })
+
+  async {
     return throwDioException<User>(() async {
       late final Response response;
       var json = params.toJson();

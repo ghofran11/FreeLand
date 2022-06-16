@@ -11,6 +11,8 @@ import 'package:freeland/common/platform_services/firebase/notification_firebase
 import 'package:freeland/common/utils/storage_service.dart';
 import 'package:freeland/injection/injection.dart';
 
+import '../../app/auth/presentation/sign_up/sign_up_bloc/sign_up_bloc.dart';
+
 Future<void> authInject() async {
   getIt.registerSingleton<AuthLocal>(
       AuthLocal(local: getIt<StorageService<SharedStorage>>()));
@@ -29,6 +31,6 @@ Future<void> authInject() async {
       notificationService: getIt<FirebaseNotificationService>(),
       refreshDeviceTokenService: getIt<RefreshDeviceTokenService>()));
 
-  getIt.registerFactory(() => LoginBloc());
-
+  getIt.registerFactory(() => LoginBloc(getIt<AuthRepository>()));
+  getIt.registerFactory(() => SignUpBloc(getIt<AuthRepository>()));
 }

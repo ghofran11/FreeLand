@@ -27,8 +27,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     },
   );
 
-  LoginBloc() : super(LoginState()) {
-    _authRepository = getIt<AuthRepository>();
+  LoginBloc(AuthRepository authRepository) : super(LoginState()) {
+    _authRepository =authRepository;
     on<LoginEvent>((event, emit) async {
       if (event is LoginSubmission) {
         if (loginForm.valid) {
