@@ -155,6 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }, builder: (context, state) {
                               final CountryBloc countryBloc =
                                   context.read<CountryBloc>();
+                              countryBloc.add(GetAllCountryEvent());
 
                               if (state.formStatus.isSuccess()) {
                                 List<CountryDto> _countries =
