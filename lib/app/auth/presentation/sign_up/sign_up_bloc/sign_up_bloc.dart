@@ -5,15 +5,12 @@ import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_even
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_state.dart';
 import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/core/bloc_status.dart';
-import 'package:freeland/injection/injection.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../../domain/entities/sign_up_params.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   late final AuthRepository _authRepository;
 
-  var  signUpForm = FormGroup(
+  var signUpForm = FormGroup(
     {
       fullNameKey: FormControl<String>(
         validators: [
@@ -37,7 +34,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       countryKey: FormControl<CountryDto>(validators: [
         Validators.required,
       ]),
-      cityKey: FormControl<String>(validators: [
+      cityKey: FormControl<CityDto>(validators: [
         Validators.required,
       ]),
     },
@@ -56,6 +53,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         } else {
           signUpForm.markAllAsTouched();
         }
+      } else if (event is CountrySelected) {
+        emit(state.copyWith(countrySelected: event.country));
       }
     });
   }

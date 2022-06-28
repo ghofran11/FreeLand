@@ -1,17 +1,11 @@
-import 'dart:collection';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_event.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_state.dart';
-import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
-import 'package:freeland/app/info/country/infrastrcture/data_source/remote/country_remote.dart';
-import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_event.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_state.dart';
@@ -20,12 +14,10 @@ import 'package:freeland/common/widgets/test_field.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../common/config/theme/src/styles.dart';
-import '../../../info/country/infrastrcture/model/country.dart';
 import '../../../info/country/infrastrcture/model/country.dart';
 import '../../../info/country/presentation/country_bloc/country_bloc.dart';
 
@@ -180,26 +172,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   mode: Mode.MENU,
                                   formControlName: SignUpBloc.countryKey,
                                   items: _countries,
-                                 // itemAsString: (CountryDto? u) => u!.name,
+                                  itemAsString: (CountryDto? u) => u!.name,
                                   showClearButton: true,
+                                  onBeforeChange: (prev, next) async {
+                                    signUpBloc.add(CountrySelected(
+                                        country: next as CountryDto));
+                                    return true;
+                                  },
                                 );
                               } else {
                                 return const CircularProgressIndicator();
                               }
                             }),
                             SizedBox(height: 10.0.h),
-                            // ReactiveDropdownSearch<String, CityDto>(
-                            //   decoration:
-                            //       const InputDecoration(labelText: 'City'),
-                            //   mode: Mode.MENU,
-                            //   formControlName: SignUpBloc.cityKey,
-                            //   items: (signUpBloc.signUpForm
-                            //           .control(SignUpBloc.countryKey)
-                            //           .value as CountryDto)
-                            //       .cityDtos,
-                            //   itemAsString: (CityDto? u) => u!.name,
-                            //   showClearButton: true,
-                            // ),
+                            if (state.countrySelected != null)
+                              ReactiveDropdownSearch<CityDto, CityDto>(
+                                decoration:
+                                    const InputDecoration(labelText: 'City'),
+                                mode: Mode.MENU,
+                                formControlName: SignUpBloc.cityKey,
+                                items: (signUpBloc.signUpForm
+                                        .control(SignUpBloc.countryKey)
+                                        .value as CountryDto)
+                                    .cityDtos,
+                                itemAsString: (CityDto? u) => u!.name,
+                                showClearButton: true,
+                              ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
                               maxLines: 1,
