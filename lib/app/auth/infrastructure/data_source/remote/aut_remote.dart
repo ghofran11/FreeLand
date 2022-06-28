@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:freeland/app/auth/domain/entities/login_params.dart';
 import 'package:freeland/app/auth/domain/entities/sign_up_params.dart';
 import 'package:freeland/common/constant/src/url.dart';
@@ -18,8 +17,7 @@ class AuthRemote {
     return throwDioException<User>(() async {
       late final Response response;
       var json = params.toJson();
-      FormData data= params.toFormData(json);
-      response = await _dio.post(AppUri.signInUser, data: data);
+      response = await _dio.post(AppUri.signInUser, data: json);
       return User.fromMap(response.data);
     });
   }

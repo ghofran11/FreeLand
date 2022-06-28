@@ -21,6 +21,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emailKey: FormControl<String>(validators: [
         Validators.required,
       ]),
+      rememberMeKey: FormControl<bool>(validators: []),
       passwordFieldKey: FormControl<String>(validators: [
         Validators.required,
       ]),
@@ -50,18 +51,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     (await _authRepository.login(
             params: await state.getLoginParams(loginForm, context)))
         .fold(
-      (left) =>
-          emit(state.copyWith(formState: BlocStatus.fail(error: left))),
+      (left) => emit(state.copyWith(formState: BlocStatus.fail(error: left))),
       (right) {},
     );
   }
 
   Future<void> _skip(Emitter emit, BuildContext context) async {
-    emit(state.copyWith(formState:BlocStatus.loading()));
+    emit(state.copyWith(formState: BlocStatus.loading()));
 
     (await _authRepository.login(params: const LoginParams.skip())).fold(
-      (left) =>
-          emit(state.copyWith(formState: BlocStatus.fail(error: left))),
+      (left) => emit(state.copyWith(formState: BlocStatus.fail(error: left))),
       (right) {},
     );
   }
@@ -76,4 +75,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   static const emailKey = "emailKey";
   static const passwordFieldKey = "passwordFieldKey";
+  static const rememberMeKey = "rememberMeKey";
 }

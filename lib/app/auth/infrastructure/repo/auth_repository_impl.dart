@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 import 'package:either_dart/either.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:freeland/app/auth/domain/entities/login_params.dart';
 import 'package:freeland/app/auth/domain/entities/sign_up_params.dart';
 import 'package:freeland/app/auth/domain/repos/auth_repository.dart';
@@ -134,13 +133,13 @@ class AuthRepositoryImpl extends AuthRepository {
     } catch (_) {}
   }
 
-  _unsubscribeFromTopics() async {
-    try {
-      return await notificationService.unsubscribeFromTopics(topics: allTopics);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
+  // _unsubscribeFromTopics() async {
+  //   try {
+  //     return await notificationService.unsubscribeFromTopics(topics: allTopics);
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //   }
+  // }
 
   @override
   Stream<AuthStatus> get authStatusStream =>

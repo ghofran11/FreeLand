@@ -1,20 +1,33 @@
 class User {
   final String id;
   final String fullName;
+  final String userName;
+  final String? cityId;
+  final String? cityName;
+  final String? countryId;
+  final String? countryName;
+  final String? imagePath;
   final String? email;
   final String? phoneNumber;
   final String? password;
   final String accessToken;
   final String refreshToken;
 
-  const User(
-      {required this.id,
-      required this.fullName,
-      required this.accessToken,
-      required this.refreshToken,
-      this.phoneNumber,
-      this.password,
-      this.email});
+  const User({
+    required this.id,
+    required this.userName,
+    required this.fullName,
+    required this.accessToken,
+    required this.refreshToken,
+    this.phoneNumber,
+    this.password,
+    this.email,
+    this.cityId,
+    this.cityName,
+    this.countryId,
+    this.countryName,
+    this.imagePath,
+  });
 
   @override
   String toString() {
@@ -25,6 +38,8 @@ class User {
         ' refreshToken: $refreshToken,'
         ' email: $email,'
         ' phoneNumber: $phoneNumber'
+
+        ///ToDo > not completed
         '}';
   }
 
@@ -36,6 +51,12 @@ class User {
     String? email,
     String? phoneNumber,
     String? password,
+    String? userName,
+    String? countryId,
+    String? countryName,
+    String? cityId,
+    String? cityName,
+    String? imagePath,
     List<String>? topics,
     List? roles,
   }) {
@@ -47,6 +68,12 @@ class User {
       email: email ?? this.email,
       password: password ?? this.password,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      userName: userName ?? this.userName,
+      countryId: countryId ?? this.countryId,
+      countryName: countryName ?? this.countryName,
+      cityId: cityId ?? this.cityId,
+      cityName: cityName ?? this.cityName,
+      imagePath: imagePath ?? this.imagePath,
     );
   }
 
@@ -59,6 +86,12 @@ class User {
       'email': email,
       "phoneNumber": phoneNumber,
       'password': password,
+      'userName': userName,
+      'imagePath': imagePath,
+      'cityName': cityName,
+      'cityId': cityId,
+      'countryName': countryName,
+      'countryId': countryId,
     };
   }
 
@@ -68,7 +101,14 @@ class User {
       fullName: map['fullName'] as String,
       phoneNumber: map['phoneNumber'] as String?,
       email: map['email'] as String?,
-      accessToken: map['accessToken'] as String,
+      //ToDo
+      accessToken: map['token'] as String? ?? "mock token",
+      userName: map['userName'] as String,
+      countryId: map['countryId'] as String?,
+      cityId: map['cityId'] as String?,
+      countryName: map['countryName'] as String?,
+      cityName: map['cityName'] as String?,
+      imagePath: map['imagePath'] as String?,
       refreshToken: map['refreshToken'] as String,
       password: map.containsKey("type") ? map['password'] : null,
     );

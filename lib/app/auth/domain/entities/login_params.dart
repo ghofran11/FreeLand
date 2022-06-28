@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 class LoginParams extends Equatable {
@@ -41,18 +40,10 @@ class LoginParams extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      'Password': password,
-      'UserName': email,
-      "RememberMe": true,
+      'password': password,
+      'userName': email,
+      "rememberMe": true,
       'deviceToken': deviceToken,
     };
-  }
-
-  FormData toFormData(Map<String, dynamic> json) {
-    return FormData.fromMap( {
-      'Password': password,
-      'UserName': email,
-      "RememberMe": true,
-    });
   }
 }

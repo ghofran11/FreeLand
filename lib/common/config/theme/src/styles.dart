@@ -7,11 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'colors.dart';
 
 ///constant
-const double horizontalAppPadding = 24;
-const double verticalAppPadding = 24;
+const double horizontalAppPadding = 18;
+const double verticalAppPadding = 18;
 
-const kIconSize = 22.0;
-const buttonBorderRadius = 15.0;
+const kIconSize = 24.0;
+const buttonBorderRadius = 24.0;
 const String fontFamily = "Almarai";
 const designSize = Size(360, 690);
 
@@ -19,8 +19,7 @@ const designSize = Size(360, 690);
 EdgeInsets buttonRPadding =
     EdgeInsets.symmetric(horizontal: 12.r, vertical: 12.r);
 
-BorderRadius borderRadiusCircular = BorderRadius.circular(10.r);
-Radius radiusCircular = Radius.circular(12.r);
+BorderRadius borderRadiusCircular = BorderRadius.circular(buttonBorderRadius.r);
 
 final ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
   primary: AppColors.primary,
@@ -60,7 +59,6 @@ final InputDecorationTheme inputDecorationThemeDark = InputDecorationTheme(
 final ButtonStyle outlineButtonStyle = OutlinedButton.styleFrom(
   primary: AppColors.primary,
   padding: buttonRPadding.r,
-  //todo:fix this later
   textStyle: const TextStyle(
     fontFamily: fontFamily,
     color: AppColors.primary,
@@ -77,12 +75,13 @@ final dialogTheme = DialogTheme(
 
 final cardTheme = CardTheme(
     margin: EdgeInsets.zero,
-    elevation: 5,
+    elevation: 2,
+    color: AppColors.cardColor,
     shape: RoundedRectangleBorder(
       borderRadius: borderRadiusCircular,
     ));
 
-final iconTheme = IconThemeData(size: kIconSize.r, color: Colors.black);
+final iconTheme = IconThemeData(size: kIconSize.r, color: Colors.redAccent);
 
 InputDecoration dynamicInputDecorationTheme({
   required ThemeData themeData,

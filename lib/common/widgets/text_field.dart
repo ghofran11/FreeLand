@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart' as provider;
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -8,7 +9,8 @@ class CustomReactiveTextField<T> extends StatefulWidget {
   final String? hintText;
   final String? labelText;
   final String? formControlName;
-  final IconData? prefix;
+  final String? prefixPath;
+  final IconData? prefixIcon;
   final TextInputType? keyboardType;
   final FocusNode? focus;
   final TextInputAction? textInputAction;
@@ -34,7 +36,8 @@ class CustomReactiveTextField<T> extends StatefulWidget {
     this.labelText,
     this.validationMessages,
     this.formControlName,
-    this.prefix,
+    this.prefixPath,
+    this.prefixIcon,
     this.keyboardType,
     this.focus,
     this.textInputAction,
@@ -85,22 +88,32 @@ class _CustomReactiveTextFieldState<T>
       valueAccessor: widget.valueAccessor,
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
-        fillColor: AppColors.red,
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(buttonBorderRadius.r),
-          borderSide:
-              BorderSide(color: Theme.of(context).primaryColor, width: 2.0.r),
+          borderRadius: borderRadiusCircular,
+          borderSide: BorderSide(color: themeData.primaryColor, width: 2.0.r),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(buttonBorderRadius.r),
+          borderRadius: borderRadiusCircular,
           borderSide: BorderSide(
+            width: 1.0.r,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadiusCircular,
+          borderSide: BorderSide(
+            color: AppColors.borderColor,
             width: 1.0.r,
           ),
         ),
         hintText: widget.hintText,
         labelText: widget.labelText,
+        fillColor: themeData.cardTheme.color,
+        filled: true,
         icon: widget.icon,
         suffix: widget.suffix,
+        iconColor: AppColors.borderColor,
+        hintStyle: themeData.textTheme.labelSmall
+            ?.copyWith(color: themeData.disabledColor),
         suffixIcon: _obscureText != null
             ? IconButton(
                 onPressed: _onTapEye,
@@ -120,6 +133,7 @@ class _CustomReactiveTextFieldState<T>
                   child: Icon(
                     _obscureText! ? Icons.visibility_off : Icons.visibility,
                     size: widget.iconSize,
+                    color: AppColors.borderColor,
                     key: Key(
                       _obscureText.toString(),
                     ),
@@ -127,14 +141,28 @@ class _CustomReactiveTextFieldState<T>
                 ),
               )
             : null,
-        prefixIcon: widget.prefix != null
+        prefixIcon: widget.prefixIcon != null
             ? Icon(
-                widget.prefix,
+                widget.prefixIcon,
                 size: widget.iconSize ?? themeData.iconTheme.size,
-                color: widget.iconColor,
+                color: widget.iconColor ?? themeData.primaryColor,
               )
-            : null,
-        prefixIconConstraints: widget.prefixIconConstraints,
+            : widget.prefixPath != null
+                ? Container(
+                    clipBehavior: Clip.hardEdge,
+                    height: widget.iconSize ?? themeData.iconTheme.size,
+                    width: widget.iconSize ?? themeData.iconTheme.size,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: provider.Svg(
+                      widget.prefixPath!,
+                      size: Size(widget.iconSize ?? themeData.iconTheme.size!,
+                          widget.iconSize ?? themeData.iconTheme.size!),
+                      color: widget.iconColor ?? themeData.primaryColor,
+                    ))),
+                  )
+                : null,
+        // prefixIconConstraints: widget.prefixIconConstraints,
       ),
     );
   }
