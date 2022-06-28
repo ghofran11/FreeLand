@@ -30,9 +30,9 @@ class SignUpState {
       phoneNumber: signUpForm.control(SignUpBloc.phoneNumberKey).value,
       email:  signUpForm.control(SignUpBloc.emailKey).value,
       address: signUpForm.control(SignUpBloc.addressKey).value,
-      countryId: '',
-      cityId: '',
-      bDay: '',
+      countryId: signUpForm.control(SignUpBloc.countryKey).value,
+      cityId: signUpForm.control(SignUpBloc.cityKey).value,
+      bDay:  signUpForm.control(SignUpBloc.birthDayKey).value,
     );
   }
 }

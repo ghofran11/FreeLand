@@ -15,7 +15,7 @@ class CountryRepo {
   Future<Either<String, List<CountryDto>>> fetchAllCountry() async {
     return throwAppException<List<CountryDto>>(() async {
       final List<CountryDto> countries = await remote.fetchAllCountry();
-      return Right(countries);
+      return (countries);
     });
   }
 }

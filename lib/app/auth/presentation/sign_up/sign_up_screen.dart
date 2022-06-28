@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:bot_toast/bot_toast.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,15 +12,21 @@ import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_stat
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
 import 'package:freeland/app/info/country/infrastrcture/data_source/remote/country_remote.dart';
 import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
+import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_event.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_state.dart';
 import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/test_field.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
+import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:dropdown_search/dropdown_search.dart';
+
 import '../../../../common/config/theme/src/styles.dart';
+import '../../../info/country/infrastrcture/model/country.dart';
+import '../../../info/country/infrastrcture/model/country.dart';
 import '../../../info/country/presentation/country_bloc/country_bloc.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -38,18 +47,16 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  DateTime _dateTime = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
-    // Text(_dateTime == null ? 'Nothing has been picked yet' : _dateTime.toString());
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: BlocProvider(
             create: (context) => getIt<SignUpBloc>(),
             child: BlocProvider(
-              create: (context) => getIt<CountryBloc>(),
+              create: (context) =>
+                  getIt<CountryBloc>()..add(GetAllCountryEvent()),
               child: BlocConsumer<SignUpBloc, SignUpState>(
                   listener: (context, state) {
                 if (state.formStatus.isFail()) {
@@ -128,22 +135,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               formControlName: SignUpBloc.addressKey,
                             ),
                             SizedBox(height: 10.0.h),
-                            CustomReactiveTextField(
-                              onTap: () {
-                                showDatePicker(
+                            DateTimeField(
+                              format: DateFormat("yyyy-MM-dd"),
+                              onShowPicker: (context, currentValue) {
+                                return showDatePicker(
                                     context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(2001),
-                                    lastDate: DateTime(2021));
+                                    firstDate: DateTime(1900),
+                                    initialDate: currentValue ?? DateTime.now(),
+                                    lastDate: DateTime(2100));
                               },
-                              maxLines: 1,
-                              keyboardType: TextInputType.datetime,
-                              validationMessages: (control) => {
-                                ValidationMessage.required: AppStrings.required,
-                              },
-                              labelText: "Birth Day",
-                              formControlName: SignUpBloc.addressKey,
+                              decoration:
+                                  const InputDecoration(labelText: "BirthDay"),
                             ),
+                            // ReactiveDateTimePicker(
+                            //   formControlName: SignUpBloc.birthDayKey,
+                            //   decoration: const InputDecoration(
+                            //     labelText: 'Date',
+                            //     border: OutlineInputBorder(),
+                            //     helperText: '',
+                            //     suffixIcon: Icon(Icons.calendar_today),
+                            //   ),
+                            // ),
                             SizedBox(height: 10.0.h),
                             BlocConsumer<CountryBloc, CountryState>(
                                 listener: (context, state) {
@@ -155,45 +167,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }, builder: (context, state) {
                               final CountryBloc countryBloc =
                                   context.read<CountryBloc>();
-                              countryBloc.add(GetAllCountryEvent());
 
                               if (state.formStatus.isSuccess()) {
                                 List<CountryDto> _countries =
                                     countryBloc.countries;
-                                return DropdownSearch<CountryDto>(
-                                  items: _countries,
-                                  dropdownSearchDecoration:
-                                      const InputDecoration(
-                                    labelText: "Country",
-                                    hintText: "country in menu mode",
+
+                                return ReactiveDropdownSearch<CountryDto,
+                                    CountryDto>(
+                                  decoration: const InputDecoration(
+                                    labelText: 'Country',
                                   ),
+                                  mode: Mode.MENU,
+                                  formControlName: SignUpBloc.countryKey,
+                                  items: _countries,
+                                 // itemAsString: (CountryDto? u) => u!.name,
+                                  showClearButton: true,
                                 );
-                              }
-                              else {
+                              } else {
                                 return const CircularProgressIndicator();
                               }
                             }),
                             SizedBox(height: 10.0.h),
-                            DropdownSearch<int>(
-                              items: const [
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                6,
-                                7,
-                              ],
-                              dropdownSearchDecoration: const InputDecoration(
-                                labelText: "City",
-                                hintText: "country in menu mode",
-                              ),
-                            ),
+                            // ReactiveDropdownSearch<String, CityDto>(
+                            //   decoration:
+                            //       const InputDecoration(labelText: 'City'),
+                            //   mode: Mode.MENU,
+                            //   formControlName: SignUpBloc.cityKey,
+                            //   items: (signUpBloc.signUpForm
+                            //           .control(SignUpBloc.countryKey)
+                            //           .value as CountryDto)
+                            //       .cityDtos,
+                            //   itemAsString: (CityDto? u) => u!.name,
+                            //   showClearButton: true,
+                            // ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
                               maxLines: 1,
                               keyboardType: TextInputType.text,
                               labelText: "Password",
+                              obscureText: true,
                               validationMessages: (control) => {
                                 ValidationMessage.required: AppStrings.required,
                               },
@@ -210,7 +222,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     width: 120.0.w,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        // signUpBloc.add(SignUpSubmission(context));
+                                        signUpBloc
+                                            .add(SignUpSubmission(context));
                                       },
                                       child: const Text(
                                         "Sign Up",
