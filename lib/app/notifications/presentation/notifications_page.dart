@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:freeland/common/widgets/text.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class NotificationsPage extends StatelessWidget {
+  const NotificationsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CustomText.titleLarge("Home Coming Soon"),
+        child: CustomText.titleLarge("Notifications Coming Soon"),
       ),
     );
-    ;
   }
 }

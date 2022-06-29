@@ -17,7 +17,7 @@ Future<Either<String, U>> throwAppException<U>(FutureOr Function() call) async {
   }
 }
 
-////To use in remote
+///To use in remote
 Future<T> throwDioException<T>(FutureOr<T> Function() call) async {
   try {
     return await call();

@@ -33,9 +33,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEvent>((event, emit) async {
       if (event is LoginSubmission) {
         if (loginForm.valid) {
-          debugPrint((await state.getLoginParams(loginForm, event.context))
-              .toString());
-          await submission(emit, event.context);
+          debugPrint(state.getLoginParams(loginForm).toString());
+          await submission(emit);
         } else {
           loginForm.markAllAsTouched();
         }
@@ -45,11 +44,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
   }
 
-  submission(Emitter emit, BuildContext context) async {
+  submission(Emitter emit) async {
     emit(state.copyWith(formState: BlocStatus.loading()));
 
-    (await _authRepository.login(
-            params: await state.getLoginParams(loginForm, context)))
+    (await _authRepository.login(params: await state.getLoginParams(loginForm)))
         .fold(
       (left) => emit(state.copyWith(formState: BlocStatus.fail(error: left))),
       (right) {},

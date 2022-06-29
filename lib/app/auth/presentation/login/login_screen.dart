@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                             (!state.formStatus.isLoading())
                                 ? ElevatedButton(
                                     onPressed: () {
-                                      loginBloc.add(LoginSubmission(context));
+                                      loginBloc.add(const LoginSubmission());
                                     },
                                     child: CustomText.bodyMedium(
                                       "Login",

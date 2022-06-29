@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freeland/app/auth/presentation/login/login_screen.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
-import 'package:freeland/app/home/presentation/ui/screen/home_screen.dart';
+import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/app/root/splash_screen.dart';
 import 'package:freeland/app/welcome/presentation/welcome_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -40,10 +40,10 @@ class RouterConfig {
               ),
             ]),
         GoRoute(
-            path: HomeScreen.routePath,
-            name: HomeScreen.routeName,
+            path: RootScreen.routePath,
+            name: RootScreen.routeName,
             pageBuilder: (context, state) =>
-                HomeScreen.pageBuilder(context, state),
+                RootScreen.pageBuilder(context, state),
             routes: [])
       ],
       debugLogDiagnostics: true,
@@ -69,13 +69,13 @@ class RouterConfig {
 
         /// -------------------- [RootScreen] --------------------
 
-        final bool isInHomeScreen = state.location == HomeScreen.routePath;
+        final bool isInRootScreen = state.location == RootScreen.routePath;
         final bool isAuthenticated =
             _appManager.state.status == Status.authenticated;
         if (isAuthenticated &&
-            (!isInHomeScreen &&
-                !state.location.contains(HomeScreen.routePath))) {
-          return HomeScreen.routePath;
+            (!isInRootScreen &&
+                !state.location.contains(RootScreen.routePath))) {
+          return RootScreen.routePath;
         }
 
         /// -------------------- [LoginScreen] --------------------

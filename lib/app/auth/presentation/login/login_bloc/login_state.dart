@@ -7,15 +7,15 @@ class LoginState {
     this.formStatus = const BlocStatus(),
   });
 
-  LoginState copyWith(
-      {BlocStatus? formState,}) {
+  LoginState copyWith({
+    BlocStatus? formState,
+  }) {
     return LoginState(
       formStatus: formState ?? formStatus,
     );
   }
 
-  Future<LoginParams> getLoginParams(
-      FormGroup loginForm, BuildContext context) async {
+  Future<LoginParams> getLoginParams(FormGroup loginForm) async {
     String token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
     return LoginParams(
       deviceToken: token,
