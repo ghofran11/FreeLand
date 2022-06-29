@@ -1,5 +1,4 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,10 +9,9 @@ import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_event.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_state.dart';
 import 'package:freeland/common/constant/src/strings.dart';
-import 'package:freeland/common/widgets/test_field.dart';
+import 'package:freeland/common/widgets/text_field.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -132,7 +130,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               formControlName: SignUpBloc.birthDayKey,
                               decoration: const InputDecoration(
                                 labelText: 'BirthDay',
-
                                 helperText: '',
                                 suffixIcon: Icon(Icons.calendar_today),
                               ),
@@ -160,7 +157,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     labelText: 'Country',
                                   ),
                                   mode: Mode.MENU,
-
                                   formControlName: SignUpBloc.countryKey,
                                   items: _countries,
                                   itemAsString: (CountryDto? u) => u!.name,
