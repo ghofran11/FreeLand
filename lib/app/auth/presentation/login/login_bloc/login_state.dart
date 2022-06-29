@@ -1,27 +1,25 @@
 part of 'login_bloc.dart';
 
 class LoginState {
-  final FormStatus formStatus;
+  final BlocStatus formStatus;
 
   LoginState({
-    this.formStatus = const EditingFormStatus(),
+    this.formStatus = const BlocStatus(),
   });
 
-  LoginState copyWith(
-      {FormStatus? formState,
-      BlocStatus? statusGetLocalization,
-      BlocStatus? statusSetLocalization}) {
+  LoginState copyWith({
+    BlocStatus? formState,
+  }) {
     return LoginState(
       formStatus: formState ?? formStatus,
     );
   }
 
-  Future<LoginParams> getLoginParams(
-      FormGroup loginForm, BuildContext context) async {
+  Future<LoginParams> getLoginParams(FormGroup loginForm) async {
     String token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
     return LoginParams(
       deviceToken: token,
-      phoneNumber: loginForm.control(LoginBloc.phoneNumberKey).value,
+      email: loginForm.control(LoginBloc.emailKey).value,
       password: loginForm.control(LoginBloc.passwordFieldKey).value,
     );
   }

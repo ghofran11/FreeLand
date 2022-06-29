@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 import 'package:either_dart/either.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:freeland/app/auth/domain/entities/login_params.dart';
 import 'package:freeland/app/auth/domain/entities/sign_up_params.dart';
 import 'package:freeland/app/auth/domain/repos/auth_repository.dart';
@@ -71,18 +70,26 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<String?> signUp({
+  Future<Either<String, Never>> signUp({
     required SignUpParams params,
   }) async {
     final token = await _getToken();
-    try {
+    return throwAppException<Never>(() async {
       final User result =
-          await remote.signUp(params: params, deviceToken: token);
-      _saveUser(result, params);
+      await remote.signUp(params: params, deviceToken: token);
+      //update user storage and token
+      await reactiveTokenStorage.write(AuthTokenModel(
+        accessToken: result.accessToken,
+        refreshToken: result.refreshToken,
+      ));
+      final User userWithPass = result.copyWith(password: params.password);
+      await setUser(userWithPass);
+      _init();
+      await _subscribeToTopics();
       return null;
-    } on AppException catch (e) {
-      return e.message;
-    }
+    });
+
+
   }
 
   @override
@@ -134,13 +141,13 @@ class AuthRepositoryImpl extends AuthRepository {
     } catch (_) {}
   }
 
-  _unsubscribeFromTopics() async {
-    try {
-      return await notificationService.unsubscribeFromTopics(topics: allTopics);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
+  // _unsubscribeFromTopics() async {
+  //   try {
+  //     return await notificationService.unsubscribeFromTopics(topics: allTopics);
+  //   } catch (e) {
+  //     debugPrint(e.toString());
+  //   }
+  // }
 
   @override
   Stream<AuthStatus> get authStatusStream =>

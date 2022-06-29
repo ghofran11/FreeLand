@@ -72,7 +72,6 @@ class DioClient with DioMixin implements Dio {
           return authTokenModel;
         },
       ),
-      LocalizationInterceptor(context),
       if (!kReleaseMode) logInterceptor,
       ErrorInterceptor(),
     ]);

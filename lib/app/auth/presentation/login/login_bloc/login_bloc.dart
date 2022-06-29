@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freeland/app/auth/domain/entities/form_status.dart';
 import 'package:freeland/app/auth/domain/entities/login_params.dart';
 import 'package:freeland/app/auth/domain/repos/auth_repository.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
@@ -19,24 +18,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   final loginForm = FormGroup(
     {
-      phoneNumberKey: FormControl<String>(validators: [
+      emailKey: FormControl<String>(validators: [
         Validators.required,
-        Validators.number,
       ]),
+      rememberMeKey: FormControl<bool>(validators: []),
       passwordFieldKey: FormControl<String>(validators: [
         Validators.required,
       ]),
     },
   );
 
-  LoginBloc() : super(LoginState()) {
-    _authRepository = getIt<AuthRepository>();
+  LoginBloc(AuthRepository authRepository) : super(LoginState()) {
+    _authRepository =authRepository;
     on<LoginEvent>((event, emit) async {
       if (event is LoginSubmission) {
         if (loginForm.valid) {
-          debugPrint((await state.getLoginParams(loginForm, event.context))
-              .toString());
-          await submission(emit, event.context);
+          debugPrint(state.getLoginParams(loginForm).toString());
+          await submission(emit);
         } else {
           loginForm.markAllAsTouched();
         }
@@ -46,38 +44,34 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
   }
 
-  submission(Emitter emit, BuildContext context) async {
-    emit(state.copyWith(formState: const LoadingFormStatus()));
+  submission(Emitter emit) async {
+    emit(state.copyWith(formState: BlocStatus.loading()));
 
-    (await _authRepository.login(
-            params: await state.getLoginParams(loginForm, context)))
+    (await _authRepository.login(params: await state.getLoginParams(loginForm)))
         .fold(
-      (left) =>
-          emit(state.copyWith(formState: ErrorFormStatus(errorMessage: left))),
+      (left) => emit(state.copyWith(formState: BlocStatus.fail(error: left))),
       (right) {},
     );
   }
 
   Future<void> _skip(Emitter emit, BuildContext context) async {
-    emit(state.copyWith(formState: const LoadingFormStatus()));
+    emit(state.copyWith(formState: BlocStatus.loading()));
 
     (await _authRepository.login(params: const LoginParams.skip())).fold(
-      (left) =>
-          emit(state.copyWith(formState: ErrorFormStatus(errorMessage: left))),
+      (left) => emit(state.copyWith(formState: BlocStatus.fail(error: left))),
       (right) {},
     );
   }
 
   static bool buildWhen(LoginState pre, LoginState next) {
     final nextFormStatus = next.formStatus;
-    if (((nextFormStatus is ErrorFormStatus ||
-        nextFormStatus is LoadingFormStatus ||
-        nextFormStatus is InitFormStatus))) {
+    if (((!nextFormStatus.isSuccess()))) {
       return true;
     }
     return false;
   }
 
-  static const phoneNumberKey = "phoneNumberKey";
+  static const emailKey = "emailKey";
   static const passwordFieldKey = "passwordFieldKey";
+  static const rememberMeKey = "rememberMeKey";
 }

@@ -3,13 +3,15 @@ import 'dart:developer';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/app/auth/domain/repos/auth_repository.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
 import 'package:freeland/common/config/firebase.dart';
+import 'package:freeland/common/config/theme/src/styles.dart';
+import 'package:freeland/common/config/theme/src/theme.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
 import 'package:freeland/core/user/provider/user_provider.dart';
 import 'package:freeland/injection/injection.dart';
@@ -51,22 +53,23 @@ class MyAppState extends State<MyApp> {
                 BlocProvider<AppManagerBloc>.value(value: _provider),
               ],
               child: Builder(builder: (context) {
-                final child = MaterialApp.router(
-                  supportedLocales: context.supportedLocales,
-                  locale: context.locale,
-                  routeInformationParser:
-                      routerConfig.router.routeInformationParser,
-                  routerDelegate: routerConfig.router.routerDelegate,
-                  localizationsDelegates: context.localizationDelegates,
-                  builder: (context, child) {
-                    child = _botToastBuilder(context, child);
-                    child = DevicePreview.appBuilder(context, child);
-                    return Builder(builder: (context) {
-                      return child!;
-                    });
-                  },
+                return ScreenUtilInit(
+                  designSize: designSize,
+                  builder: (context, _) => MaterialApp.router(
+                    debugShowCheckedModeBanner: false,
+                    routeInformationParser:
+                        routerConfig.router.routeInformationParser,
+                    routerDelegate: routerConfig.router.routerDelegate,
+                    theme: AppThemes.lightThemeData,
+                    builder: (context, child) {
+                      child = _botToastBuilder(context, child);
+                      child = DevicePreview.appBuilder(context, child);
+                      return Builder(builder: (context) {
+                        return child!;
+                      });
+                    },
+                  ),
                 );
-                return child;
               }),
             ));
   }
@@ -75,10 +78,7 @@ class MyAppState extends State<MyApp> {
     final Completer<void> completer = Completer();
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
-
-    // final injection =
     await initInjection(context);
-    // await Future.wait<dynamic>([injection]);
     try {
       await getIt<FirebaseNotificationService>()
           .setUpFirebase()

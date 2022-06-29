@@ -7,9 +7,14 @@ import 'package:freeland/app/auth/infrastructure/data_source/remote/aut_remote.d
 import 'package:freeland/app/auth/infrastructure/data_source/remote/refresh_device_token.dart';
 import 'package:freeland/app/auth/infrastructure/repo/auth_repository_impl.dart';
 import 'package:freeland/app/auth/presentation/login/login_bloc/login_bloc.dart';
+import 'package:freeland/app/info/country/infrastrcture/repo/country_repository.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
 import 'package:freeland/common/utils/storage_service.dart';
 import 'package:freeland/injection/injection.dart';
+
+import '../../app/auth/presentation/sign_up/sign_up_bloc/sign_up_bloc.dart';
+import '../../app/info/country/infrastrcture/data_source/remote/country_remote.dart';
+import '../../app/info/country/presentation/country_bloc/country_bloc.dart';
 
 Future<void> authInject() async {
   getIt.registerSingleton<AuthLocal>(
@@ -29,5 +34,11 @@ Future<void> authInject() async {
       notificationService: getIt<FirebaseNotificationService>(),
       refreshDeviceTokenService: getIt<RefreshDeviceTokenService>()));
 
-  getIt.registerFactory(() => LoginBloc());
+  getIt.registerFactory(() => LoginBloc(getIt<AuthRepository>()));
+  getIt.registerFactory(() => SignUpBloc(getIt<AuthRepository>()));
+
+  getIt.registerFactory(() => CountryRemote(getIt<Dio>()));
+  getIt.registerFactory(() => CountryRepo(getIt<CountryRemote>()));
+
+  getIt.registerFactory(() => CountryBloc(getIt<CountryRepo>()));
 }

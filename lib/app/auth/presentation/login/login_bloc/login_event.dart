@@ -6,8 +6,7 @@ abstract class LoginEvent {
 }
 
 class LoginSubmission extends LoginEvent {
-  final BuildContext context;
-  const LoginSubmission(this.context);
+  const LoginSubmission();
 }
 
 class LoginStarted extends LoginEvent {

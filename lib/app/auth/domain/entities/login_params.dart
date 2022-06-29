@@ -2,19 +2,19 @@ import 'package:equatable/equatable.dart';
 
 class LoginParams extends Equatable {
   final String password;
-  final String phoneNumber;
+  final String email;
   final String? deviceToken;
 
   @override
-  List<Object?> get props => [password, deviceToken, phoneNumber];
+  List<Object?> get props => [password, deviceToken, email];
 
   const LoginParams.skip({this.deviceToken})
       : password = '',
-        phoneNumber = '';
+        email = '';
 
   const LoginParams({
     required this.password,
-    required this.phoneNumber,
+    required this.email,
     this.deviceToken,
   });
 
@@ -22,18 +22,18 @@ class LoginParams extends Equatable {
   String toString() {
     return 'LoginParams{'
         ' password: $password,'
-        ' accountVerification: $phoneNumber,'
+        ' accountVerification: $email,'
         ' deviceToken: $deviceToken,';
   }
 
   LoginParams copyWith({
     String? password,
-    String? phoneNumber,
+    String? email,
     String? deviceToken,
   }) {
     return LoginParams(
       password: password ?? this.password,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      email: email ?? this.email,
       deviceToken: deviceToken ?? this.deviceToken,
     );
   }
@@ -41,7 +41,7 @@ class LoginParams extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       'password': password,
-      'phoneNumber': phoneNumber,
+      'userName': email,
       "rememberMe": true,
       'deviceToken': deviceToken,
     };

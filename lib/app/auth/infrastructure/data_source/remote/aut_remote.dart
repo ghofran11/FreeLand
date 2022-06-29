@@ -16,7 +16,7 @@ class AuthRemote {
   }) async {
     return throwDioException<User>(() async {
       late final Response response;
-      var json = params.toJson()..addAll({'deviceToken': deviceToken});
+      var json = params.toJson();
       response = await _dio.post(AppUri.signInUser, data: json);
       return User.fromMap(response.data);
     });

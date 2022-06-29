@@ -8,4 +8,5 @@ final getIt = GetIt.instance;
 Future initInjection(BuildContext context) async {
   await generalInject(context);
   await authInject();
+
 }

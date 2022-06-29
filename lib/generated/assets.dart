@@ -2,5 +2,8 @@
 class Assets {
   Assets._();
 
-  static const String translationsAr = 'translations/en.json';
+  static const String iconsLoading = 'assets/icons/loading.json';
+  static const String iconsLock = 'assets/icons/lock.svg';
+  static const String iconsUser = 'assets/icons/user.svg';
+  static const String imagesImg = 'assets/images/img.png';
 }
