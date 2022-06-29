@@ -1,11 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
 import 'package:freeland/injection/injection.dart';
 
 class SignUpParams extends Equatable {
   final String fullName;
-
+  final String userName;
   final String password;
   final String email;
   final String phoneNumber;
@@ -15,8 +17,7 @@ class SignUpParams extends Equatable {
   final String? deviceToken;
   final int userType;
   final String bDay;
-
-
+  final String? file;
 
   @override
   List<Object> get props => [
@@ -24,39 +25,40 @@ class SignUpParams extends Equatable {
         password,
       ];
 
-
-  const SignUpParams({
-    required this.fullName,
-    required this.password,
-    required this.address,
-    required this.countryId,
-    required this.email,
-    required this.phoneNumber,
-    this.cityId,
-    this.deviceToken,
-    this.userType=1,
-    required this.bDay
-  });
+  const SignUpParams(
+      {required this.fullName,
+      required this.password,
+      required this.address,
+      required this.countryId,
+      required this.email,
+      required this.phoneNumber,
+      this.cityId,
+      this.deviceToken,
+      this.userType = 1,
+      required this.bDay,
+      this.file,
+      required this.userName});
 
   Future<Map<String, dynamic>> toJson() async {
     String token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
     return {
       'FullName': fullName,
-      'Email':email,
-      'PhoneNumber':phoneNumber,
+      'UserName': "userName",
+      'Email': email,
+      'PhoneNumber': phoneNumber,
       'Password': password,
-      'Address':address,
+      'Address': address,
       'CityId': cityId,
       'CountryId': countryId,
       'deviceToken': token,
-      'UserType':userType,
-      'BDay':bDay
-
+      'UserType': userType,
+      'BDay': bDay,
     };
   }
 
   SignUpParams copyWith({
     String? fullName,
+    String? userName,
     String? accountVerification,
     String? email,
     String? phoneNumber,
@@ -67,21 +69,27 @@ class SignUpParams extends Equatable {
     String? cityId,
     String? countryId,
     int? userType,
-    String? bDay
-
-
+    String? bDay,
+    String? file,
   }) {
     return SignUpParams(
       fullName: fullName ?? this.fullName,
-        email: email ?? this.email,
-        phoneNumber: phoneNumber ?? this.phoneNumber,
+      userName: userName ?? this.userName,
+      email: email ?? this.email,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
       password: password ?? this.password,
-      address: address??this.address,
+      address: address ?? this.address,
       deviceToken: deviceToken ?? this.deviceToken,
       countryId: countryId ?? this.countryId,
       cityId: cityId ?? this.cityId,
-      userType: userType??this.userType,
-        bDay: bDay??this.bDay
+      userType: userType ?? this.userType,
+      bDay: bDay ?? this.bDay,
+      file: file ?? this.file,
     );
   }
+
+  // Future<FormData> toFormData() async {
+  //   return FormData.fromMap(await toJson()
+  //     ..addAll({"File": await MultipartFile.fromFile("jkj")}));
+  // }
 }

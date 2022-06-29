@@ -28,15 +28,20 @@ class SignUpState {
       FormGroup signUpForm, BuildContext context) async {
     String token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
     return SignUpParams(
-      deviceToken: token,
-      fullName: signUpForm.control(SignUpBloc.fullNameKey).value,
-      password: signUpForm.control(SignUpBloc.passwordFieldKey).value,
-      phoneNumber: signUpForm.control(SignUpBloc.phoneNumberKey).value,
-      email: signUpForm.control(SignUpBloc.emailKey).value,
-      address: signUpForm.control(SignUpBloc.addressKey).value,
-      countryId: signUpForm.control(SignUpBloc.countryKey).value,
-      cityId: signUpForm.control(SignUpBloc.cityKey).value,
-      bDay: signUpForm.control(SignUpBloc.birthDayKey).value,
-    );
+        deviceToken: token,
+        fullName: signUpForm.control(SignUpBloc.fullNameKey).value,
+        password: signUpForm.control(SignUpBloc.passwordFieldKey).value,
+        phoneNumber: signUpForm.control(SignUpBloc.phoneNumberKey).value,
+        email: signUpForm.control(SignUpBloc.emailKey).value,
+        address: signUpForm.control(SignUpBloc.addressKey).value,
+        countryId:( signUpForm.control(SignUpBloc.countryKey).value as CountryDto).id,
+        cityId: (signUpForm.control(SignUpBloc.cityKey).value as CityDto).id,
+        bDay: signUpForm.control(SignUpBloc.birthDayKey).value.toString(),
+        file: '',
+        userName: '');
+  }
+  @override
+  String toString() {
+    return formStatus.toString();
   }
 }

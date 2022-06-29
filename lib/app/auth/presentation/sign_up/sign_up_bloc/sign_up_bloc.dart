@@ -29,8 +29,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           validators: [Validators.required, Validators.email]),
       passwordFieldKey: FormControl<String>(
           validators: [Validators.required, Validators.minLength(8)]),
-      birthDayKey: FormControl<String>(
-          validators: [Validators.required, Validators.minLength(8)]),
+      birthDayKey: FormControl<DateTime>(
+          validators: [Validators.required,] ),
       countryKey: FormControl<CountryDto>(validators: [
         Validators.required,
       ]),
@@ -40,7 +40,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     },
   );
 
-  //String get fullNameKey => signUpForm.control('fullNameKey').value;
 
   SignUpBloc(AuthRepository authRepository) : super(SignUpState()) {
     _authRepository = authRepository;

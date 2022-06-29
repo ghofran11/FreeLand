@@ -14,6 +14,7 @@ import 'package:freeland/common/widgets/test_field.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -127,27 +128,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               formControlName: SignUpBloc.addressKey,
                             ),
                             SizedBox(height: 10.0.h),
-                            DateTimeField(
-                              format: DateFormat("yyyy-MM-dd"),
-                              onShowPicker: (context, currentValue) {
-                                return showDatePicker(
-                                    context: context,
-                                    firstDate: DateTime(1900),
-                                    initialDate: currentValue ?? DateTime.now(),
-                                    lastDate: DateTime(2100));
-                              },
-                              decoration:
-                                  const InputDecoration(labelText: "BirthDay"),
+                            ReactiveDateTimePicker(
+                              formControlName: SignUpBloc.birthDayKey,
+                              decoration: const InputDecoration(
+                                labelText: 'BirthDay',
+
+                                helperText: '',
+                                suffixIcon: Icon(Icons.calendar_today),
+                              ),
                             ),
-                            // ReactiveDateTimePicker(
-                            //   formControlName: SignUpBloc.birthDayKey,
-                            //   decoration: const InputDecoration(
-                            //     labelText: 'Date',
-                            //     border: OutlineInputBorder(),
-                            //     helperText: '',
-                            //     suffixIcon: Icon(Icons.calendar_today),
-                            //   ),
-                            // ),
                             SizedBox(height: 10.0.h),
                             BlocConsumer<CountryBloc, CountryState>(
                                 listener: (context, state) {
@@ -167,13 +156,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 return ReactiveDropdownSearch<CountryDto,
                                     CountryDto>(
                                   decoration: const InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
                                     labelText: 'Country',
                                   ),
                                   mode: Mode.MENU,
+
                                   formControlName: SignUpBloc.countryKey,
                                   items: _countries,
                                   itemAsString: (CountryDto? u) => u!.name,
-                                  showClearButton: true,
                                   onBeforeChange: (prev, next) async {
                                     signUpBloc.add(CountrySelected(
                                         country: next as CountryDto));
@@ -196,7 +186,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         .value as CountryDto)
                                     .cityDtos,
                                 itemAsString: (CityDto? u) => u!.name,
-                                showClearButton: true,
                               ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
