@@ -71,18 +71,26 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<String?> signUp({
+  Future<Either<String, Never>> signUp({
     required SignUpParams params,
   }) async {
     final token = await _getToken();
-    try {
+    return throwAppException<Never>(() async {
       final User result =
-          await remote.signUp(params: params, deviceToken: token);
-      _saveUser(result, params);
+      await remote.signUp(params: params, deviceToken: token);
+      //update user storage and token
+      await reactiveTokenStorage.write(AuthTokenModel(
+        accessToken: result.accessToken,
+        refreshToken: result.refreshToken,
+      ));
+      final User userWithPass = result.copyWith(password: params.password);
+      await setUser(userWithPass);
+      _init();
+      await _subscribeToTopics();
       return null;
-    } on AppException catch (e) {
-      return e.message;
-    }
+    });
+
+
   }
 
   @override

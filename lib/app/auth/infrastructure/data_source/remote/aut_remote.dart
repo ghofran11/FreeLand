@@ -18,7 +18,7 @@ class AuthRemote {
     return throwDioException<User>(() async {
       late final Response response;
       var json = params.toJson();
-      FormData data= params.toFormData(json);
+      FormData data = params.toFormData(json);
       response = await _dio.post(AppUri.signInUser, data: data);
       return User.fromMap(response.data);
     });

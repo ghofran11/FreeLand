@@ -11,7 +11,7 @@ abstract class AuthRepository {
     required LoginParams params,
   });
 
-  Future<String?> signUp({
+  Future<Either<String, dynamic>> signUp({
     required SignUpParams params,
   });
 
@@ -25,15 +25,5 @@ abstract class AuthRepository {
 
   User? getUser();
 
-// Future<Either<String, bool>> resetPassword(
-//     {required String email,
-//     required String pinCode,
-//     required String newPassword});
-//
-// Future<Either<String, bool>> forgetPassword({required String email});
-// Future<Either<String, bool>> confirmResetPasswordCode(
-//     {required String email, required String pinCode});
-// Future<String?> verify({
-//   required SignUpParams params,
-// });
+
 }

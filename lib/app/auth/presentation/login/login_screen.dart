@@ -31,11 +31,11 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
           child: Center(
               child: BlocProvider(
-        create: (context) => getIt<LoginBloc>(),
-        child: BlocConsumer<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state.formStatus.isFail()) {
-              BotToast.showText(text: "error");
+                create: (context) => getIt<LoginBloc>(),
+                 child: BlocConsumer<LoginBloc, LoginState>(
+                    listener: (context, state) {
+                 if (state.formStatus.isFail()) {
+                 BotToast.showText(text: "error");
             }
           },
           builder: (context, state) {
