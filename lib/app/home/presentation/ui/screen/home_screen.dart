@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
+import 'package:freeland/app/home/presentation/ui/widget/job_card.dart';
 import 'package:freeland/app/job/presentation/ui/screen/job_screen.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/common/widgets/text_field.dart';
@@ -30,51 +31,56 @@ class HomePage extends StatelessWidget {
         "searchKey": FormControl<String>(validators: []),
       },
     );
-
     return Scaffold(
-        body: Padding(
-      padding: EdgeInsets.symmetric(horizontal: horizontalAppPadding.w),
-      child: ListView(
+      body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                context.pushNamed(SignUpScreen.routeName);
-                },
-                icon: const FaIcon(
-                  FontAwesomeIcons.searchengin,
-                  color: AppColors.primary,
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        context.pushNamed(SignUpScreen.routeName);
+                      },
+                      icon: const FaIcon(
+                        FontAwesomeIcons.searchengin,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    const CustomText.titleMedium(
+                      "Hello,Adam1",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              const CustomText.titleMedium(
-                "Hello,Adam1",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          ReactiveForm(
-            formGroup: searchForm,
-            child: CustomReactiveTextField(
-              formControlName: 'searchKey',
-              labelText: 'Search',
-              keyboardType: TextInputType.text,
-              suffixIcon:
-                  FaIcon(FontAwesomeIcons.magnifyingGlass, size: 18.0.r),
+                ReactiveForm(
+                  formGroup: searchForm,
+                  child: CustomReactiveTextField(
+                    formControlName: 'searchKey',
+                    labelText: 'Search',
+                    keyboardType: TextInputType.text,
+                    suffixIcon:
+                        FaIcon(FontAwesomeIcons.magnifyingGlass, size: 18.0.r),
+                  ),
+                ),
+                SizedBox(
+                  height: 22.0.h,
+                ),
+                const CustomText.titleMedium('Tips for you',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(
+                  height: 12.0.h,
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            height: 22.0.h,
-          ),
-          const CustomText.titleMedium('Tips for you',
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(
-            height: 12.0.h,
           ),
           CarouselSlider(
               options: CarouselOptions(
@@ -83,103 +89,110 @@ class HomePage extends StatelessWidget {
                 autoPlay: true,
               ),
               items: _items(context)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const CustomText.titleMedium('Job Recommendations',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              TextButton(
-                child: const CustomText.bodySmall('See All',
-                    style: TextStyle(color: AppColors.primary)),
-                onPressed: () {},
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CustomText.titleMedium('Job Recommendations',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                TextButton(
+                  child: const CustomText.bodySmall('See All',
+                      style: TextStyle(color: AppColors.primary)),
+                  onPressed: () {},
+                ),
+              ],
+            ),
           ),
           SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 1),
               child: Row(
                 children: const [
+                  SizedBox(
+                    width: 2,
+                  ),
                   Chip(
-                    label: Text("All Job"),
+                    padding: EdgeInsets.zero,
+                    label: Text(
+                      "All Job",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                   SizedBox(
                     width: 5,
                   ),
                   Chip(
-                    label: Text("Design"),
+                    padding: EdgeInsets.zero,
+                    label: Text(
+                      "Design",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                   SizedBox(
                     width: 3,
                   ),
                   Chip(
-                    label: Text("Full-Stack"),
+                    padding: EdgeInsets.zero,
+                    label: Text(
+                      "Full Stack",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                   SizedBox(
                     width: 3,
                   ),
                   Chip(
-                    label: Text("Front End"),
+                    padding: EdgeInsets.zero,
+                    label: Text(
+                      "back",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                   SizedBox(
                     width: 3,
                   ),
                   Chip(
-                    label: Text("Writer"),
+                    padding: EdgeInsets.zero,
+                    label: Text(
+                      "witter",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                   SizedBox(
                     width: 3,
                   ),
                   Chip(
-                    label: Text("Mobile App"),
+                    padding: EdgeInsets.zero,
+                    label: Text(
+                      "Mobile App",
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ),
                 ],
               )),
           ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 12.0.h),
             separatorBuilder: (context, index) => SizedBox(
               height: 8.0.h,
             ),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  context.pushNamed(JobScreen.routeName);
-                },
-                child: Card(
-                  color: Colours.white,
-                  // color: Colors.white.withOpacity(0.8)
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        CustomText.titleMedium('Ahmad Ahmad'),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        CustomText.labelMedium(' \$400-700'),
-                        CustomText.labelMedium(
-                            'Ahmad Ahmad \$400-700  we have project Ahmad Ahmad we have project Ahmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have project',
-                            maxLines: 1,
-                            textOverflow: TextOverflow.ellipsis),
-                      ],
-                    ),
-                  ),
-                ),
-              );
+              return const JobCard();
             },
             itemCount: 4,
           ),
         ],
       ),
-    ));
+    );
   }
 
   _items(BuildContext context) {
     List<Widget> list = [];
     for (int i = 0; i < tips.imgList.length; i++) {
-      list.add(Container(
+      list.add(
+        Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -194,7 +207,9 @@ class HomePage extends StatelessWidget {
             child: Container(
               color: AppColors.grey.withOpacity(0.1),
             ),
-          )));
+          ),
+        ),
+      );
     }
     return list;
   }

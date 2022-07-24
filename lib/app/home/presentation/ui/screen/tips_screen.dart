@@ -37,29 +37,41 @@ class TipsScreen extends StatelessWidget {
               horizontal: horizontalAppPadding.w),
           children: [
             const SizedBox(
-              height: 12,
+              height: 20,
             ),
             Row(
               children: [
-                IconButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.primary,
-                    )),
+                Container(
+                  width: 30,
+                  height: 30,
+                  decoration:BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius:const BorderRadius.all(
+                        Radius.circular(10)),
+                  ),
+                  child: IconButton(
+                   // padding: EdgeInsets.symmetric(horizontal: 5,vertical:5 ),
+                      onPressed: () {
+                        context.pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.primary,
+                      ),
+                  ),
+                ),
+                SizedBox(width: 3.0.w,),
                 const CustomText.titleLarge(
                   'Tips for You',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: AppColors.primary),
+                      fontWeight: FontWeight.bold,),
                 ),
               ],
             ),
-            SizedBox(height: 6.0.h,),
+            SizedBox(height: 25.0.h,),
             Container(
               height: 180.0.h,
-              width: 100,
+              width: 100.0.w,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
@@ -67,10 +79,10 @@ class TipsScreen extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                       Radius.circular(buttonBorderRadius))),
             ),
-            SizedBox(height: 15.0.h,),
+            SizedBox(height: 25.0.h,),
             CustomText.titleMedium(
               tips.titelList[index],
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style:const TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 10.0.h,
