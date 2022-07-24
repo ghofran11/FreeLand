@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/profile/presentation/projects_update_screen.dart';
 import 'package:freeland/app/profile/presentation/widgets/portfolio_info.dart';
 import 'package:freeland/common/widgets/text.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileProjectsSection extends StatelessWidget {
-  const ProfileProjectsSection({Key? key}) : super(key: key);
+  final bool showEdit;
+  const ProfileProjectsSection({Key? key, this.showEdit = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,16 @@ class ProfileProjectsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomText.headlineSmall("Projects"),
+        Row(
+          children: [
+            const CustomText.headlineSmall("Projects"),
+            IconButton(
+                onPressed: () {
+                  context.pushNamed(ProjectsUpdateScreen.routeName);
+                },
+                icon: const FaIcon(FontAwesomeIcons.pen))
+          ],
+        ),
         SizedBox(height: 8.0.h),
         ListView.separated(
           shrinkWrap: true,

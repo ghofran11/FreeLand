@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freeland/app/auth/presentation/login/login_screen.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
+import 'package:freeland/app/profile/presentation/personal_info_update_screen.dart';
 import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/app/root/splash_screen.dart';
 import 'package:freeland/app/welcome/presentation/welcome_screen.dart';
@@ -44,7 +45,14 @@ class RouterConfig {
             name: RootScreen.routeName,
             pageBuilder: (context, state) =>
                 RootScreen.pageBuilder(context, state),
-            routes: [])
+            routes: [
+              GoRoute(
+                path: PersonalInfoUpdate.routePath,
+                name: PersonalInfoUpdate.routeName,
+                pageBuilder: (context, state) =>
+                    PersonalInfoUpdate.pageBuilder(context, state),
+              )
+            ])
       ],
       debugLogDiagnostics: true,
       errorPageBuilder: _buildErrorPage,
