@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:freeland/app/auth/presentation/login/login_screen.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
+import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
+import 'package:freeland/app/job/presentation/ui/screen/comment_screen.dart';
+import 'package:freeland/app/job/presentation/ui/screen/job_screen.dart';
+import 'package:freeland/app/job/presentation/ui/screen/offer_screen.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/project_on.dart';
 import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/app/root/splash_screen.dart';
 import 'package:freeland/app/welcome/presentation/welcome_screen.dart';
@@ -44,7 +49,43 @@ class RouterConfig {
             name: RootScreen.routeName,
             pageBuilder: (context, state) =>
                 RootScreen.pageBuilder(context, state),
-            routes: [])
+            routes: [
+              GoRoute(
+                  path: ProjectOn.routePath,
+                  name: ProjectOn.routeName,
+                  pageBuilder: (context, state) =>
+                      ProjectOn.pageBuilder(context, state),
+                  routes: []),
+              GoRoute(
+                  path: TipsScreen.routePath,
+                  name: TipsScreen.routeName,
+                  pageBuilder: (context, state) =>
+                      TipsScreen.pageBuilder(context, state),
+                  routes: []),
+              GoRoute(
+                  path: JobScreen.routePath,
+                  name: JobScreen.routeName,
+                  pageBuilder: (context, state) =>
+                      JobScreen.pageBuilder(context, state),
+                  routes: [
+                    GoRoute(
+                        path:commentScreen.routePath,
+                        name: commentScreen.routeName,
+                        pageBuilder: (context, state) =>
+                            commentScreen.pageBuilder(context, state),
+                        routes: [
+
+                        ]),
+                    GoRoute(
+                        path:OfferScreen.routePath,
+                        name: OfferScreen.routeName,
+                        pageBuilder: (context, state) =>
+                            OfferScreen.pageBuilder(context, state),
+                        routes: [
+
+                        ]),
+                  ]),
+            ])
       ],
       debugLogDiagnostics: true,
       errorPageBuilder: _buildErrorPage,

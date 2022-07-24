@@ -76,10 +76,10 @@ final dialogTheme = DialogTheme(
 final cardTheme = CardTheme(
     margin: EdgeInsets.zero,
     elevation: 2,
-    color: AppColors.cardColor,
     shape: RoundedRectangleBorder(
-      borderRadius: borderRadiusCircular,
-    ));
+      borderRadius:BorderRadius.circular(15.0.r) ,
+    )
+    );
 
 final iconTheme = IconThemeData(size: kIconSize.r, color: Colors.redAccent);
 

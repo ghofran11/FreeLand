@@ -11,6 +11,7 @@ class CustomReactiveTextField<T> extends StatefulWidget {
   final String? formControlName;
   final String? prefixPath;
   final IconData? prefixIcon;
+  final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final FocusNode? focus;
   final TextInputAction? textInputAction;
@@ -55,6 +56,7 @@ class CustomReactiveTextField<T> extends StatefulWidget {
     this.suffix,
     this.readOnly = false,
     this.valueAccessor,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -140,7 +142,12 @@ class _CustomReactiveTextFieldState<T>
                   ),
                 ),
               )
-            : null,
+            :               ( widget.suffixIcon!=null)?
+        Padding(
+                padding: EdgeInsets.all(14.0.r),
+          child: widget.suffixIcon,
+              ): null,
+
         prefixIcon: widget.prefixIcon != null
             ? Icon(
                 widget.prefixIcon,

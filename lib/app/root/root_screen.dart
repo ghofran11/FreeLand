@@ -7,6 +7,7 @@ import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manage
 import 'package:freeland/app/home/presentation/ui/screen/home_screen.dart';
 import 'package:freeland/app/notifications/presentation/notifications_page.dart';
 import 'package:freeland/app/profile/profile_page.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/projects_screen.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,15 +42,6 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                context.read<AppManagerBloc>().add(const AppManagerLoggedOut());
-              },
-              icon: const FaIcon(FontAwesomeIcons.infinity))
-        ],
-      ),
       bottomNavigationBar: BottomNavyBar(
         iconSize: 20.r,
 
@@ -83,6 +75,13 @@ class _RootScreenState extends State<RootScreen> {
             textAlign: TextAlign.center,
             title: const CustomText.bodySmall("Profile"),
           ),
+          BottomNavyBarItem(
+            icon: const FaIcon(
+              FontAwesomeIcons.bookOpen,
+            ),
+            textAlign: TextAlign.center,
+            title: const CustomText.bodySmall("Projects"),
+          ),
         ],
       ),
       body: SafeArea(
@@ -90,6 +89,7 @@ class _RootScreenState extends State<RootScreen> {
           HomePage(),
           NotificationsPage(),
           ProfilePage(),
+          ProjectPage()
         ]),
       ),
     );

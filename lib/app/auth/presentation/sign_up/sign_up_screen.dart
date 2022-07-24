@@ -17,6 +17,7 @@ import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../common/config/theme/src/styles.dart';
+import '../../../../generated/assets.dart';
 import '../../../info/country/infrastrcture/model/country.dart';
 import '../../../info/country/presentation/country_bloc/country_bloc.dart';
 
@@ -93,7 +94,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ValidationMessage.required: AppStrings.required,
                               },
                               labelText: "Full Name",
+                              prefixPath: Assets.iconsUser,
                               formControlName: SignUpBloc.fullNameKey,
+                            ),
+                            SizedBox(height: 10.0.h),
+                            CustomReactiveTextField(
+                              maxLines: 1,
+                              keyboardType: TextInputType.text,
+                              validationMessages: (control) => {
+                                ValidationMessage.required: AppStrings.required,
+                              },
+                              labelText: "User Name",
+                              formControlName: SignUpBloc.userNameKey,
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
@@ -114,6 +126,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Phone Number",
                               formControlName: SignUpBloc.phoneNumberKey,
+                              // prefixIcon:Icon(
+                              //   Icons.person,
+                              // ),
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(

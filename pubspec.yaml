@@ -55,12 +55,20 @@ dependencies:
   reactive_dropdown_search: ^0.6.0
   reactive_date_time_picker: ^0.2.0
   font_awesome_flutter: ^10.1.0
+  colours: ^0.0.2
   readmore: ^2.1.0
+  comment_box: ^0.0.17
+  syncfusion_flutter_sliders: ^20.2.39
+  smooth_page_indicator: ^1.0.0+2
+  flutter_chat_ui: 1.5.8
+  percent_indicator: ^4.0.1
   dio_refresh_bot:
     git:
       url: https://github.com/flutterbots/flutterbots.git
       ref: fix_refresh_token
       path: packages/dio_refresh_bot
+
+
 
 
 

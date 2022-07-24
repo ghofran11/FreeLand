@@ -17,6 +17,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           Validators.required,
         ],
       ),
+      userNameKey: FormControl<String>(
+        validators: [
+          Validators.required,
+        ],
+      ),
       addressKey: FormControl<String>(validators: [
         Validators.required,
       ]),
@@ -29,8 +34,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           validators: [Validators.required, Validators.email]),
       passwordFieldKey: FormControl<String>(
           validators: [Validators.required, Validators.minLength(8)]),
-      birthDayKey: FormControl<DateTime>(
-          validators: [Validators.required,] ),
+      birthDayKey: FormControl<DateTime>(validators: [
+        Validators.required,
+      ]),
       countryKey: FormControl<CountryDto>(validators: [
         Validators.required,
       ]),
@@ -39,7 +45,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       ]),
     },
   );
-
 
   SignUpBloc(AuthRepository authRepository) : super(SignUpState()) {
     _authRepository = authRepository;
@@ -69,6 +74,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   static const fullNameKey = "fullNameKey";
+  static const userNameKey = "userNameKey";
   static const phoneNumberKey = "phoneNumberKey";
   static const addressKey = "addressKey";
   static const emailKey = "emailKey";

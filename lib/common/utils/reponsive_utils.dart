@@ -49,7 +49,7 @@ class _SizeReportingWidgetState extends State<SizeReportingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _notifySize());
+    // WidgetsBinding.instance.addPostFrameCallback((_) => _notifySize());
     return widget.child;
   }
 
@@ -82,9 +82,9 @@ class MeasureSizeRenderObject extends RenderProxyBox {
     if (oldSize == newSize) return;
 
     oldSize = newSize;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      onChange(newSize);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   onChange(newSize);
+    // });
   }
 }
 

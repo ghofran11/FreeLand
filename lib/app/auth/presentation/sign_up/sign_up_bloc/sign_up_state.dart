@@ -30,6 +30,7 @@ class SignUpState {
     return SignUpParams(
         deviceToken: token,
         fullName: signUpForm.control(SignUpBloc.fullNameKey).value,
+        userName: signUpForm.control(SignUpBloc.userNameKey).value,
         password: signUpForm.control(SignUpBloc.passwordFieldKey).value,
         phoneNumber: signUpForm.control(SignUpBloc.phoneNumberKey).value,
         email: signUpForm.control(SignUpBloc.emailKey).value,
@@ -37,8 +38,8 @@ class SignUpState {
         countryId:( signUpForm.control(SignUpBloc.countryKey).value as CountryDto).id,
         cityId: (signUpForm.control(SignUpBloc.cityKey).value as CityDto).id,
         bDay: signUpForm.control(SignUpBloc.birthDayKey).value.toString(),
-        file: '',
-        userName: '');
+        file: '');
+
   }
   @override
   String toString() {
