@@ -5,9 +5,9 @@ import 'package:freeland/app/auth/presentation/login/login_screen.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
-import 'package:freeland/app/job/presentation/ui/screen/comment_screen.dart';
-import 'package:freeland/app/job/presentation/ui/screen/job_screen.dart';
-import 'package:freeland/app/job/presentation/ui/screen/offer_screen.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/comment_screen.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/project_detail.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/offer_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_on.dart';
 import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/app/root/splash_screen.dart';
@@ -63,16 +63,16 @@ class RouterConfig {
                       TipsScreen.pageBuilder(context, state),
                   routes: []),
               GoRoute(
-                  path: JobScreen.routePath,
-                  name: JobScreen.routeName,
+                  path: ProjectDetail.routePath,
+                  name: ProjectDetail.routeName,
                   pageBuilder: (context, state) =>
-                      JobScreen.pageBuilder(context, state),
+                      ProjectDetail.pageBuilder(context, state),
                   routes: [
                     GoRoute(
-                        path:commentScreen.routePath,
-                        name: commentScreen.routeName,
+                        path:CommentScreen.routePath,
+                        name: CommentScreen.routeName,
                         pageBuilder: (context, state) =>
-                            commentScreen.pageBuilder(context, state),
+                            CommentScreen.pageBuilder(context, state),
                         routes: [
 
                         ]),

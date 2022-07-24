@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui';
 
+import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,7 +23,7 @@ EdgeInsets buttonRPadding =
 BorderRadius borderRadiusCircular = BorderRadius.circular(buttonBorderRadius.r);
 
 final ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
-  primary: AppColors.primary,
+  primary: Colours.lightBlue,
   elevation: 1,
   padding: buttonRPadding.r,
   shape: RoundedRectangleBorder(borderRadius: borderRadiusCircular.r),

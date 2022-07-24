@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
 import 'package:freeland/app/home/presentation/ui/widget/job_card.dart';
-import 'package:freeland/app/job/presentation/ui/screen/job_screen.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/project_detail.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:go_router/go_router.dart';

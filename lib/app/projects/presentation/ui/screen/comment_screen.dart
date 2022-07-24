@@ -8,13 +8,13 @@ import 'package:go_router/go_router.dart';
 import '../../../../../common/config/theme/src/styles.dart';
 import '../../../../../common/widgets/text.dart';
 
-class commentScreen extends StatefulWidget {
-  commentScreen({Key? key}) : super(key: key);
+class CommentScreen extends StatefulWidget {
+  const CommentScreen({Key? key}) : super(key: key);
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: commentScreen(),
+      child: CommentScreen(),
     );
   }
 
@@ -22,10 +22,10 @@ class commentScreen extends StatefulWidget {
   static const routeName = 'comment_screen';
 
   @override
-  State<commentScreen> createState() => _commentScreenState();
+  State<CommentScreen> createState() => _CommentScreenState();
 }
 
-class _commentScreenState extends State<commentScreen> {
+class _CommentScreenState extends State<CommentScreen> {
   final formKey = GlobalKey<FormState>();
 
   final TextEditingController commentController = TextEditingController();
@@ -54,50 +54,50 @@ class _commentScreenState extends State<commentScreen> {
   ];
 
   Widget commentChild(data) {
-    return ListView(
+    return Column(
       children: [
         for (var i = 0; i < data.length; i++)
           Padding(
             padding: const EdgeInsets.fromLTRB(2.0, 8.0, 2.0, 0.0),
-            child: ListTile(
-              leading: GestureDetector(
-                onTap: () async {
-                  // Display the image in large form.
-                  print("Comment Clicked");
-                },
-                child: Container(
-                  height: 50.0,
-                  width: 50.0,
-                  decoration:  const BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius:  BorderRadius.all(Radius.circular(50))),
-                  child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(data[i]['pic'] + "$i")),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: GestureDetector(
+                    onTap: () async {
+                      // Display the image in large form.
+                      print("Comment Clicked");
+                    },
+                    child: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      decoration:  const BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius:  BorderRadius.all(Radius.circular(50))),
+                      child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: NetworkImage(data[i]['pic'] + "$i")),
+                    ),
+                  ),
+                  title: Text(
+                    data[i]['name'],
+                    style:const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(data[i]['message']),
                 ),
-              ),
-              title: Text(
-                data[i]['name'],
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(data[i]['message']),
+              const  Divider(color: AppColors.grey2),
+              ],
             ),
-          )
+          ),
       ],
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:const CustomText.titleLarge("Comment",style: TextStyle(color: AppColors.white),),
-        backgroundColor: AppColors.primary,
-      ),
       body: Container(
         child: CommentBox(
           userImage:
-              "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
+          "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
           child: commentChild(filedata),
           labelText: 'Write a comment...',
           withBorder: false,
@@ -109,7 +109,7 @@ class _commentScreenState extends State<commentScreen> {
                 var value = {
                   'name': 'New User',
                   'pic':
-                      'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
+                  'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
                   'message': commentController.text
                 };
                 filedata.insert(0, value);

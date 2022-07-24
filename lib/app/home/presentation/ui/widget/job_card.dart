@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../common/config/theme/src/colors.dart';
 import '../../../../../common/widgets/text.dart';
-import '../../../../job/presentation/ui/screen/job_screen.dart';
+import '../../../../projects/presentation/ui/screen/project_detail.dart';
 class JobCard extends StatelessWidget {
   const JobCard({Key? key}) : super(key: key);
 
@@ -12,7 +12,7 @@ class JobCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return  InkWell(
       onTap: () {
-        context.pushNamed(JobScreen.routeName);
+        context.pushNamed(ProjectDetail.routeName);
       },
       child: Card(
         color: Colours.white,
