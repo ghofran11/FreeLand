@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:freeland/app/auth/presentation/login/login_screen.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
-import 'package:freeland/app/profile/presentation/personal_info_update_screen.dart';
+import 'package:freeland/app/profile/presentation/screens/all_projects_screen.dart';
+import 'package:freeland/app/profile/presentation/screens/all_work_screen.dart';
+import 'package:freeland/app/profile/presentation/screens/personal_info_update_screen.dart';
+import 'package:freeland/app/profile/presentation/screens/protofolio_update_screen.dart';
+import 'package:freeland/app/profile/presentation/screens/update_career_screen.dart';
+import 'package:freeland/app/profile/presentation/widgets/update_add_work.dart';
 import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/app/root/splash_screen.dart';
 import 'package:freeland/app/welcome/presentation/welcome_screen.dart';
@@ -51,7 +56,38 @@ class RouterConfig {
                 name: PersonalInfoUpdate.routeName,
                 pageBuilder: (context, state) =>
                     PersonalInfoUpdate.pageBuilder(context, state),
-              )
+              ),
+              GoRoute(
+                path: AllProjectsScreen.routePath,
+                name: AllProjectsScreen.routeName,
+                pageBuilder: (context, state) =>
+                    AllProjectsScreen.pageBuilder(context, state),
+              ),
+              GoRoute(
+                path: AllWorkScreen.routePath,
+                name: AllWorkScreen.routeName,
+                pageBuilder: (context, state) =>
+                    AllWorkScreen.pageBuilder(context, state),
+              ),
+              GoRoute(
+                path: CareerUpdateScreen.routePath,
+                name: CareerUpdateScreen.routeName,
+                pageBuilder: (context, state) =>
+                    CareerUpdateScreen.pageBuilder(context, state),
+              ),
+              GoRoute(
+                  path: PortfolioUpdateScreen.routePath,
+                  name: PortfolioUpdateScreen.routeName,
+                  pageBuilder: (context, state) =>
+                      PortfolioUpdateScreen.pageBuilder(context, state),
+                  routes: [
+                    GoRoute(
+                      path: AddUpdateWork.routePath,
+                      name: AddUpdateWork.routeName,
+                      pageBuilder: (context, state) =>
+                          AddUpdateWork.pageBuilder(context, state),
+                    ),
+                  ]),
             ])
       ],
       debugLogDiagnostics: true,

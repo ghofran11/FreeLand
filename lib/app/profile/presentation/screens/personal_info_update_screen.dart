@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
+import 'package:freeland/common/widgets/pdf_picker/pdf_picker.dart';
+import 'package:freeland/common/widgets/pdf_picker/pdf_picker_provider.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -29,6 +32,7 @@ class _PersonalInfoUpdateState extends State<PersonalInfoUpdate> {
   FormGroup formGroup = FormGroup({
     "name": FormControl<String>(),
     "bio": FormControl<String>(),
+    "phoneNumber": FormControl<String>(),
     "categories_search": FormControl<String>(),
   });
 
@@ -57,7 +61,7 @@ class _PersonalInfoUpdateState extends State<PersonalInfoUpdate> {
         child: ReactiveForm(
           formGroup: formGroup,
           child: ListView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(
                 vertical: verticalAppPadding.h,
                 horizontal: horizontalAppPadding.w),
@@ -74,6 +78,14 @@ class _PersonalInfoUpdateState extends State<PersonalInfoUpdate> {
                 labelText: "Bio",
                 formControlName: "bio",
                 icon: FaIcon(FontAwesomeIcons.list),
+              ),
+              SizedBox(height: 12.0.h),
+              const CustomReactiveTextField(
+                maxLines: null,
+                labelText: "Phone Number",
+                formControlName: "phoneNumber",
+                keyboardType: TextInputType.phone,
+                icon: FaIcon(Icons.phone_android_outlined),
               ),
               SizedBox(height: 12.0.h),
               Wrap(
@@ -143,6 +155,10 @@ class _PersonalInfoUpdateState extends State<PersonalInfoUpdate> {
                       ),
                     ),
                   ]),
+              ChangeNotifierProvider<PdfPickerProvider>(
+                create: (_) => PdfPickerProvider(),
+                child: PdfHolder(),
+              ),
             ],
           ),
         ),

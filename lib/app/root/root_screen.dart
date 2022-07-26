@@ -86,11 +86,14 @@ class _RootScreenState extends State<RootScreen> {
         ],
       ),
       body: SafeArea(
-        child: PageView(controller: _pageController, children: const [
-          HomePage(),
-          NotificationsPage(),
-          ProfilePage(),
-        ]),
+        child: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              HomePage(),
+              NotificationsPage(),
+              ProfilePage(),
+            ]),
       ),
     );
   }

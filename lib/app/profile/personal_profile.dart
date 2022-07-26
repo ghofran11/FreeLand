@@ -11,7 +11,7 @@ import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../common/widgets/statistics_widget.dart';
-import 'presentation/personal_info_update_screen.dart';
+import 'presentation/screens/personal_info_update_screen.dart';
 import 'presentation/widgets/profile_image.dart';
 
 class PersonalProfile extends StatelessWidget {
@@ -107,14 +107,14 @@ class PersonalProfile extends StatelessWidget {
         SizedBox(
           height: 12.0.h,
         ),
-        const ProfileProjectsSection(
-          showEdit: true,
-        ),
+        const ProfileProjectsSection(),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 12.0.h),
           child: const Divider(color: AppColors.black),
         ),
-        const ProfilePortfolioSection(),
+        const ProfilePortfolioSection(
+          showEdit: true,
+        ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 12.0.h),
           child: const Divider(color: AppColors.black),
