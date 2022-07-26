@@ -20,6 +20,9 @@ const designSize = Size(360, 690);
 EdgeInsets buttonRPadding =
     EdgeInsets.symmetric(horizontal: 12.r, vertical: 12.r);
 
+EdgeInsets screenPadding = EdgeInsets.symmetric(
+    horizontal: horizontalAppPadding.r, vertical: verticalAppPadding.r);
+
 BorderRadius borderRadiusCircular = BorderRadius.circular(buttonBorderRadius.r);
 
 final ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(

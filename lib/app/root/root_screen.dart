@@ -42,6 +42,15 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.read<AppManagerBloc>().add(const AppManagerLoggedOut());
+              },
+              icon: const FaIcon(FontAwesomeIcons.infinity))
+        ],
+      ),
       bottomNavigationBar: BottomNavyBar(
         iconSize: 20.r,
 
@@ -85,7 +94,7 @@ class _RootScreenState extends State<RootScreen> {
         ],
       ),
       body: SafeArea(
-        child: PageView(controller: _pageController, children: const [
+        child: PageView(controller: _pageController, physics: const NeverScrollableScrollPhysics(),children: const [
           HomePage(),
           NotificationsPage(),
           ProfilePage(),

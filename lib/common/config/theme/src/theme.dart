@@ -40,6 +40,7 @@ class AppThemes {
       ),
       iconTheme: iconTheme,
       chipTheme: const ChipThemeData(
+          deleteIconColor: AppColors.primary,
           selectedColor: AppColors.primary,
           backgroundColor: AppColors.white,
           side: BorderSide(color: AppColors.primary, width: 1.5),

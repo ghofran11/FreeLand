@@ -30,6 +30,7 @@ class CustomReactiveTextField<T> extends StatefulWidget {
   final Widget? icon;
   final Widget? suffix;
   final ControlValueAccessor<T, String>? valueAccessor;
+  final VoidCallback? onSubmitted;
 
   const CustomReactiveTextField({
     Key? key,
@@ -57,6 +58,7 @@ class CustomReactiveTextField<T> extends StatefulWidget {
     this.readOnly = false,
     this.valueAccessor,
     this.suffixIcon,
+    this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -84,31 +86,26 @@ class _CustomReactiveTextFieldState<T>
       readOnly: widget.readOnly,
       maxLines: widget.maxLines,
       onTap: widget.onTap,
+      onSubmitted: widget.onSubmitted,
       validationMessages: widget.validationMessages,
       textInputAction: widget.textInputAction ?? TextInputAction.next,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       valueAccessor: widget.valueAccessor,
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
+
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadiusCircular,
-          borderSide: BorderSide(color: themeData.primaryColor, width: 2.0.r),
+          borderSide: BorderSide(style: BorderStyle.none, width: 2.0.r),
         ),
-        border: OutlineInputBorder(
-          borderRadius: borderRadiusCircular,
-          borderSide: BorderSide(
-            width: 1.0.r,
-          ),
-        ),
+        border: InputBorder.none,
         enabledBorder: OutlineInputBorder(
           borderRadius: borderRadiusCircular,
-          borderSide: BorderSide(
-            color: AppColors.borderColor,
-            width: 1.0.r,
-          ),
+          borderSide: BorderSide(width: 1.0.r, style: BorderStyle.none),
         ),
         hintText: widget.hintText,
         labelText: widget.labelText,
+
         fillColor: themeData.cardTheme.color,
         filled: true,
         icon: widget.icon,
