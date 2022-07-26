@@ -8,11 +8,12 @@ import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/comment_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_detail.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/offer_screen.dart';
-import 'package:freeland/app/projects/presentation/ui/screen/project_on.dart';
 import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/app/root/splash_screen.dart';
 import 'package:freeland/app/welcome/presentation/welcome_screen.dart';
 import 'package:go_router/go_router.dart';
+
+import '../app/projects/presentation/ui/screen/working_on.dart';
 
 class RouterConfig {
   late final GoRouter router;
@@ -51,10 +52,10 @@ class RouterConfig {
                 RootScreen.pageBuilder(context, state),
             routes: [
               GoRoute(
-                  path: ProjectOn.routePath,
-                  name: ProjectOn.routeName,
+                  path: WorkingOn.routePath,
+                  name: WorkingOn.routeName,
                   pageBuilder: (context, state) =>
-                      ProjectOn.pageBuilder(context, state),
+                      WorkingOn.pageBuilder(context, state),
                   routes: []),
               GoRoute(
                   path: TipsScreen.routePath,

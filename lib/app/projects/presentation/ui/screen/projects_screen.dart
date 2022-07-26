@@ -2,7 +2,7 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:freeland/app/projects/presentation/ui/screen/project_on.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/working_on.dart';
 import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -16,16 +16,10 @@ class ProjectPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
      body: ListView(
-       padding: EdgeInsets.symmetric(horizontal: horizontalAppPadding.w),
+       padding: EdgeInsets.symmetric(horizontal: horizontalAppPadding.w,vertical: 150),
        physics: const BouncingScrollPhysics(),
-
        children: [
          SizedBox(height: 10.0.h,),
-         const CustomText.titleLarge(
-           'Projects',
-           style: TextStyle(
-               fontWeight: FontWeight.bold, color: AppColors.primary),
-         ),
          SizedBox(height: 10.0.h,),
         Row(
           children: const [
@@ -37,13 +31,13 @@ class ProjectPage extends StatelessWidget {
          SizedBox(height: 10.0.h),
          Card(
            child: Padding(
-             padding: const EdgeInsets.all(10.0),
+             padding: const EdgeInsets.all(12.0),
              child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                children:  [
                 const CustomText.titleMedium('Medical Website'),
                  SizedBox(height: 5.0.h,),
-                const CustomText.titleMedium('200-500 \$'),
+                const CustomText.titleMedium('200-500 \$',style: TextStyle(color: AppColors.primary,fontSize: 15),),
                  SizedBox(height: 5.0.h,),
                  const CustomText.titleMedium('15 offer'),
                  SizedBox(height: 5.0.h,),
@@ -62,14 +56,13 @@ class ProjectPage extends StatelessWidget {
            ],
          ),
          SizedBox(height: 10.0.h),
-
          InkWell(
            onTap: (){
-             context.pushNamed(ProjectOn.routeName);
+             context.pushNamed(WorkingOn.routeName);
            },
            child: Card(
              child: Padding(
-               padding: const EdgeInsets.all(8.0),
+               padding: const EdgeInsets.all(12.0),
                child: Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children:  [

@@ -60,7 +60,6 @@ dependencies:
   comment_box: ^0.0.17
   syncfusion_flutter_sliders: ^20.2.39
   smooth_page_indicator: ^1.0.0+2
-  flutter_chat_ui: 1.5.8
   percent_indicator: ^4.0.1
   dio_refresh_bot:
     git:

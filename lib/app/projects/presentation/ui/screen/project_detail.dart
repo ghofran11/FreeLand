@@ -41,104 +41,97 @@ class _ProjectDetailState extends State<ProjectDetail> {
     return Scaffold(
       body: ListView(
         physics: const BouncingScrollPhysics(),
-        padding: EdgeInsets.symmetric(
-            vertical: verticalAppPadding.h, horizontal: horizontalAppPadding.w),
+
         children: [
-          const SizedBox(
-            height: 12,
-          ),
           Stack(
             children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(buttonBorderRadius),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        height: 190.0.h,
-                        width: 340.0.w,
-                        clipBehavior: Clip.hardEdge,
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: CachedNetworkImageProvider(
-                                    "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(buttonBorderRadius)))),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  CustomText.titleLarge('UI/UX Design'),
-                                  CustomText.bodySmall(
-                                    'by Ahmad Ahmad',
-                                    style: TextStyle(color: Colours.grey),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Column(
-                                children: const [
-                                  CustomText.titleMedium('\$200-300',
-                                      style:
-                                          TextStyle(color: Colours.lightBlue)),
-                                  CustomText.labelMedium('Available'),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15.0.h,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const CustomText.titleMedium(
-                                'Details',
-                                style: TextStyle(
-                                  color: Colours.lightBlue,
-                                  decoration: TextDecoration.underline,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      height: MediaQuery.of(context).size.height/4,
+                      width: MediaQuery.of(context).size.width,
+                      clipBehavior: Clip.hardEdge,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: CachedNetworkImageProvider(
+                                  "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft:  Radius.circular(buttonBorderRadius),
+                            bottomRight:  Radius.circular(buttonBorderRadius)
+                             ))),
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                CustomText.titleMedium('UI/UX Design'),
+                                CustomText.bodySmall(
+                                  'by Ahmad Ahmad',
+                                  style: TextStyle(color: Colours.grey),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5.0.h,
-                              ),
-                              const CustomText.bodyMedium(
-                                  'UI/UX het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap. Vraag een online demo aan en ontdek wat Mopinion voor jou kan betekenen. Online Demo. Maak eigen feedbackforms. Real Time inzichten. Feedback voor Apps. Verhoog conversie. Slimmere dashboards. Feedback voor Websites. Feedback voor Email. Typen: Mopinion voor Websites, Mopinion voor Apps.Verhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap'),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const Divider(color: AppColors.black),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Row(
-                        children: [
-                         const CustomText.titleSmall("Leave a comment"),
-                          const Spacer(),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.arrow_forward_ios_outlined,
-                              color: Colours.lightBlue,
+                              ],
                             ),
-                            onPressed: () {
-                              context.pushNamed(CommentScreen.routeName);
-                            },
-                          ),
-                        ],
-                      ),
+                            const Spacer(),
+                            Column(
+                              children: const [
+                                CustomText.titleSmall('\$200-300',
+                                    style:
+                                        TextStyle(color: Colours.lightBlue,)),
+                                CustomText.labelMedium('Available'),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15.0.h,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const CustomText.titleMedium(
+                              'Details',
+                              style: TextStyle(
+                                color: Colours.lightBlue,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5.0.h,
+                            ),
+                            const CustomText.bodyMedium(
+                                'UI/UX het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap. Vraag een online demo aan en ontdek wat Mopinion voor jou kan betekenen. Online Demo. Maak eigen feedbackforms. Real Time inzichten. Feedback voor Apps. Verhoog conversie. Slimmere dashboards. Feedback voor Websites. Feedback voor Email. Typen: Mopinion voor Websites, Mopinion voor Apps.Verhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap'),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+
+                  const Divider(color: AppColors.black),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                       const CustomText.titleSmall("Leave a comment"),
+                        const Spacer(),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            color: Colours.lightBlue,
+                          ),
+                          onPressed: () {
+                            context.pushNamed(CommentScreen.routeName);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               IconButton(
                   onPressed: () {
