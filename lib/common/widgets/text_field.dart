@@ -12,6 +12,7 @@ class CustomReactiveTextField<T> extends StatefulWidget {
   final String? prefixPath;
   final IconData? prefixIcon;
   final Widget? suffixIcon;
+  final InputDecoration? decoration;
   final TextInputType? keyboardType;
   final FocusNode? focus;
   final TextInputAction? textInputAction;
@@ -44,6 +45,7 @@ class CustomReactiveTextField<T> extends StatefulWidget {
     this.focus,
     this.textInputAction,
     this.onTap,
+    this.decoration,
     this.backgroundColor,
     this.contentColor,
     this.controller,

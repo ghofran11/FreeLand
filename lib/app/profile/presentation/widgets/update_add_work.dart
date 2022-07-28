@@ -45,7 +45,7 @@ class AddUpdateWork extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: CustomText.titleLarge("Add/Update Work"),
+        title:const CustomText.titleLarge("Add/Update Work"),
       ),
       body: SafeArea(
         child: ReactiveForm(

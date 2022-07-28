@@ -44,7 +44,6 @@ class HomePage extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        context.pushNamed(SignUpScreen.routeName);
                       },
                       icon: const FaIcon(
                         FontAwesomeIcons.searchengin,
@@ -94,7 +93,7 @@ class HomePage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CustomText.titleMedium('Job Recommendations',
+                const CustomText.titleMedium('Latest Projects',
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 TextButton(
                   child: const CustomText.bodySmall('See All',

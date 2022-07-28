@@ -7,7 +7,7 @@ import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manage
 import 'package:freeland/app/home/presentation/ui/screen/home_screen.dart';
 import 'package:freeland/app/notifications/presentation/notifications_page.dart';
 import 'package:freeland/app/profile/profile_page.dart';
-import 'package:freeland/app/projects/presentation/ui/screen/projects_screen.dart';
+import 'package:freeland/app/projects/presentation/ui/projects_screen.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
 

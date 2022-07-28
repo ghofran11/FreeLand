@@ -2,12 +2,14 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_event.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_state.dart';
 import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_event.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_state.dart';
+import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:freeland/injection/injection.dart';
@@ -94,8 +96,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ValidationMessage.required: AppStrings.required,
                               },
                               labelText: "Full Name",
-                              prefixPath: Assets.iconsUser,
                               formControlName: SignUpBloc.fullNameKey,
+                              icon: const FaIcon(FontAwesomeIcons.idCard),
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
@@ -104,11 +106,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               validationMessages: (control) => {
                                 ValidationMessage.required: AppStrings.required,
                               },
+                              icon: const FaIcon(FontAwesomeIcons.idBadge),
                               labelText: "User Name",
                               formControlName: SignUpBloc.userNameKey,
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
+                              icon: const FaIcon(FontAwesomeIcons.m),
                               maxLines: 1,
                               keyboardType: TextInputType.emailAddress,
                               validationMessages: (control) => {
@@ -119,6 +123,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
+                              icon: const FaIcon(
+                                  FontAwesomeIcons.mobileScreenButton),
                               maxLines: 1,
                               keyboardType: TextInputType.number,
                               validationMessages: (control) => {
@@ -132,6 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
+                              icon: const FaIcon(FontAwesomeIcons.locationDot),
                               maxLines: 1,
                               keyboardType: TextInputType.text,
                               validationMessages: (control) => {
@@ -143,10 +150,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             SizedBox(height: 10.0.h),
                             ReactiveDateTimePicker(
                               formControlName: SignUpBloc.birthDayKey,
-                              decoration: const InputDecoration(
-                                labelText: 'BirthDay',
-                                helperText: '',
-                                suffixIcon: Icon(Icons.calendar_today),
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: borderRadiusCircular,
+                                  borderSide: BorderSide(
+                                      style: BorderStyle.none, width: 2.0.r),
+                                ),
+                                border: InputBorder.none,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: borderRadiusCircular,
+                                  borderSide: BorderSide(
+                                      width: 1.0.r, style: BorderStyle.none),
+                                ),
+                                filled: true,
+                                fillColor: AppColors.white,
+                                icon:
+                                    const FaIcon(FontAwesomeIcons.calendarDays),
+                                labelText: 'Date of Birth',
                               ),
                             ),
                             SizedBox(height: 10.0.h),
@@ -167,9 +187,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                                 return ReactiveDropdownSearch<CountryDto,
                                     CountryDto>(
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     contentPadding: EdgeInsets.zero,
                                     labelText: 'Country',
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: borderRadiusCircular,
+                                      borderSide: BorderSide(
+                                          style: BorderStyle.none,
+                                          width: 2.0.r),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: borderRadiusCircular,
+                                      borderSide: BorderSide(
+                                          width: 1.0.r,
+                                          style: BorderStyle.none),
+                                    ),
+                                    filled: true,
+                                    fillColor: AppColors.white,
+                                    icon:const FaIcon(FontAwesomeIcons.flag),
                                   ),
                                   mode: Mode.MENU,
                                   formControlName: SignUpBloc.countryKey,
@@ -188,8 +224,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             SizedBox(height: 10.0.h),
                             if (state.countrySelected != null)
                               ReactiveDropdownSearch<CityDto, CityDto>(
-                                decoration:
-                                    const InputDecoration(labelText: 'City'),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: borderRadiusCircular,
+                                      borderSide: BorderSide(
+                                          style: BorderStyle.none,
+                                          width: 2.0.r),
+                                    ),
+                                    border: InputBorder.none,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: borderRadiusCircular,
+                                      borderSide: BorderSide(
+                                          width: 1.0.r,
+                                          style: BorderStyle.none),
+
+                                    ),
+                                    filled: true,
+                                    fillColor: AppColors.white,
+                                    icon:const FaIcon(FontAwesomeIcons.building),
+                                    labelText: 'City'),
                                 mode: Mode.MENU,
                                 formControlName: SignUpBloc.cityKey,
                                 items: (signUpBloc.signUpForm
@@ -200,6 +254,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
+                              icon: FaIcon(FontAwesomeIcons.lock),
                               maxLines: 1,
                               keyboardType: TextInputType.text,
                               labelText: "Password",

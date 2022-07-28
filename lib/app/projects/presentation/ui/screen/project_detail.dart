@@ -82,7 +82,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                               children: const [
                                 CustomText.titleSmall('\$200-300',
                                     style:
-                                        TextStyle(color: Colours.lightBlue,)),
+                                        TextStyle(color: AppColors.primary,)),
                                 CustomText.labelMedium('Available'),
                               ],
                             ),
@@ -94,13 +94,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const CustomText.titleMedium(
-                              'Details',
-                              style: TextStyle(
-                                color: Colours.lightBlue,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
                             SizedBox(
                               height: 5.0.h,
                             ),
@@ -146,13 +139,16 @@ class _ProjectDetailState extends State<ProjectDetail> {
           SizedBox(
             height: 10.0.h,
           ),
-          ElevatedButton(
-            onPressed: () {
-              context.pushNamed(OfferScreen.routeName);
-            },
-            child: const CustomText.bodyMedium(
-              'ADD YOUR OFFER',
-              style: TextStyle(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                context.pushNamed(OfferScreen.routeName);
+              },
+              child: const CustomText.bodyMedium(
+                'ADD YOUR OFFER',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],

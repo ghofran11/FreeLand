@@ -26,7 +26,7 @@ EdgeInsets screenPadding = EdgeInsets.symmetric(
 BorderRadius borderRadiusCircular = BorderRadius.circular(buttonBorderRadius.r);
 
 final ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
-  primary: Colours.lightBlue,
+  primary: AppColors.primary,
   elevation: 1,
   padding: buttonRPadding.r,
   shape: RoundedRectangleBorder(borderRadius: borderRadiusCircular.r),

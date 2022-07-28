@@ -31,6 +31,7 @@ class _OfferScreenState extends State<OfferScreen> {
   final offerForm = FormGroup(
     {
       "offerKey": FormControl<String>(validators: []),
+      "salaryKey": FormControl<String>(validators: []),
     },
   );
 
@@ -88,9 +89,9 @@ class _OfferScreenState extends State<OfferScreen> {
                     ReactiveForm(
                       formGroup: offerForm,
                       child: const CustomReactiveTextField(
-                        formControlName: 'offerKey',
+                        formControlName: 'salaryKey',
                         labelText: 'What salary do you want',
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                       ),
                     ),
                     SizedBox(
