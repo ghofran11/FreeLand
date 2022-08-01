@@ -114,7 +114,7 @@ class HomePage extends StatelessWidget {
                   Chip(
                     padding: EdgeInsets.zero,
                     label: Text(
-                      "All Job",
+                      "All Project",
                       style: TextStyle(fontSize: 12),
                     ),
                   ),

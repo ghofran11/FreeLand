@@ -26,6 +26,8 @@ class AddProject extends StatelessWidget {
       'projectDeadline':FormControl<DateTime>(),
       'projectDesc':FormControl<DateTime>(),
       'minSalary':FormControl<DateTime>(),
+      'maxSalary':FormControl<DateTime>(),
+      'image':FormControl<DateTime>(),
     }
     );
 
@@ -85,9 +87,7 @@ class AddProject extends StatelessWidget {
               ),
               SizedBox(height: 12.0.h),
               ReactiveDateTimePicker(
-
                 formControlName: 'projectDeadline',
-
                 decoration:  InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius:borderRadiusCircular ,
@@ -118,6 +118,22 @@ class AddProject extends StatelessWidget {
                 formControlName: "minSalary",
                 keyboardType: TextInputType.number,
                 icon: FaIcon(Icons.monetization_on_outlined),
+              ),
+              SizedBox(height: 12.0.h),
+              const CustomReactiveTextField(
+                maxLines: null,
+                labelText: "Max Salary",
+                formControlName: "maxSalary",
+                keyboardType: TextInputType.number,
+                icon: FaIcon(Icons.monetization_on_outlined),
+              ),
+              SizedBox(height: 12.0.h),
+              const CustomReactiveTextField(
+                maxLines: null,
+                labelText: "Add image to your project",
+                formControlName: "image",
+                keyboardType: TextInputType.number,
+                icon: FaIcon(Icons.image),
               ),
             ],
           ),

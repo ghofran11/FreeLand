@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Full Name",
                               formControlName: SignUpBloc.fullNameKey,
-                              icon: const FaIcon(FontAwesomeIcons.idCard),
+                              icon:const FaIcon(FontAwesomeIcons.idCard,color: AppColors.primary,size: 20,),
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
@@ -106,25 +106,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               validationMessages: (control) => {
                                 ValidationMessage.required: AppStrings.required,
                               },
-                              icon: const FaIcon(FontAwesomeIcons.idBadge),
                               labelText: "User Name",
                               formControlName: SignUpBloc.userNameKey,
+                              icon:const FaIcon(FontAwesomeIcons.idBadge,color: AppColors.primary,size: 20,),
+
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
-                              icon: const FaIcon(FontAwesomeIcons.m),
                               maxLines: 1,
-                              keyboardType: TextInputType.emailAddress,
                               validationMessages: (control) => {
                                 ValidationMessage.required: AppStrings.required,
                               },
                               labelText: "Email",
                               formControlName: SignUpBloc.emailKey,
+                              icon:const FaIcon(FontAwesomeIcons.pencil,color: AppColors.primary,size: 20,),
+
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
-                              icon: const FaIcon(
-                                  FontAwesomeIcons.mobileScreenButton),
+
                               maxLines: 1,
                               keyboardType: TextInputType.number,
                               validationMessages: (control) => {
@@ -132,13 +132,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Phone Number",
                               formControlName: SignUpBloc.phoneNumberKey,
-                              // prefixIcon:Icon(
-                              //   Icons.person,
-                              // ),
+                              icon:const FaIcon(FontAwesomeIcons.mobileScreenButton,color: AppColors.primary,size: 20,),
+
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
-                              icon: const FaIcon(FontAwesomeIcons.locationDot),
                               maxLines: 1,
                               keyboardType: TextInputType.text,
                               validationMessages: (control) => {
@@ -146,6 +144,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Address",
                               formControlName: SignUpBloc.addressKey,
+                              icon:const FaIcon(FontAwesomeIcons.locationDot,color: AppColors.primary,size: 20,),
+
                             ),
                             SizedBox(height: 10.0.h),
                             ReactiveDateTimePicker(
@@ -164,9 +164,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 filled: true,
                                 fillColor: AppColors.white,
-                                icon:
-                                    const FaIcon(FontAwesomeIcons.calendarDays),
                                 labelText: 'Date of Birth',
+                                icon:const FaIcon(FontAwesomeIcons.calendarDays,color: AppColors.primary,size: 20,),
+
                               ),
                             ),
                             SizedBox(height: 10.0.h),
@@ -205,7 +205,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     filled: true,
                                     fillColor: AppColors.white,
-                                    icon:const FaIcon(FontAwesomeIcons.flag),
+                                    icon:const FaIcon(FontAwesomeIcons.flag,color: AppColors.primary,size: 20,),
+
                                   ),
                                   mode: Mode.MENU,
                                   formControlName: SignUpBloc.countryKey,
@@ -242,7 +243,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     filled: true,
                                     fillColor: AppColors.white,
-                                    icon:const FaIcon(FontAwesomeIcons.building),
+                                    icon:const FaIcon(FontAwesomeIcons.building,color: AppColors.primary,size: 20,),
                                     labelText: 'City'),
                                 mode: Mode.MENU,
                                 formControlName: SignUpBloc.cityKey,
@@ -254,7 +255,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
-                              icon: FaIcon(FontAwesomeIcons.lock),
+                              //icon: const Icon(Icons.lock,color: AppColors.primary,) ,
+
                               maxLines: 1,
                               keyboardType: TextInputType.text,
                               labelText: "Password",
