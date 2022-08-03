@@ -108,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                             const CustomText.bodyMedium('Remember me'),
                           ],
                         ),
-                        SizedBox(height: 100.0.h),
+                        SizedBox(height: 50.0.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
@@ -128,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                                 : const LoadingProgress(),
                             SizedBox(height: 4.0.h),
                             if (!state.formStatus.isLoading())
-                              ElevatedButton(
+                              OutlinedButton(
                                 onPressed: () {
                                   context.goNamed(SignUpScreen.routeName);
                                 },

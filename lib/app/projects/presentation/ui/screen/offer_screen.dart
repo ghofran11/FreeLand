@@ -60,7 +60,7 @@ class _OfferScreenState extends State<OfferScreen> {
                   const CustomText.titleLarge(
                     'Offer UI/UX Designer ',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: AppColors.primary),
+                     ),
                   ),
                 ],
               ),
@@ -75,12 +75,17 @@ class _OfferScreenState extends State<OfferScreen> {
                     SizedBox(
                       height: 15.0.h,
                     ),
+                  const  CustomText.bodyMedium("Warning: you must describe an offer in accurate details,set the price carefully, and do not forget to fill out all the official documents you have."),
+                    SizedBox(
+                      height: 20.0.h,
+                    ),
                     ReactiveForm(
                       formGroup: offerForm,
                       child: const CustomReactiveTextField(
                         formControlName: 'offerKey',
                         labelText: 'Write your offer description',
                         keyboardType: TextInputType.text,
+                        icon: FaIcon(FontAwesomeIcons.penToSquare),
                       ),
                     ),
                     SizedBox(
@@ -90,8 +95,9 @@ class _OfferScreenState extends State<OfferScreen> {
                       formGroup: offerForm,
                       child: const CustomReactiveTextField(
                         formControlName: 'salaryKey',
-                        labelText: 'What salary do you want',
+                        labelText: 'What salary do you want?',
                         keyboardType: TextInputType.number,
+                        icon:  FaIcon(Icons.monetization_on_outlined,size: 30,),
                       ),
                     ),
                     SizedBox(

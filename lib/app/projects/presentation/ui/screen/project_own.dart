@@ -53,7 +53,9 @@ class ProjectOwn extends StatelessWidget {
                                 bottomRight:
                                     Radius.circular(buttonBorderRadius)))),
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 10
+                      ),
                       child: Column(
                         children: [
                           Row(
@@ -91,7 +93,7 @@ class ProjectOwn extends StatelessWidget {
                               ),
                               const AppReadMore(
                                   text:
-                                      'UI/UX het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap. Vraag een online demo aan en ontdek wat Mopinion voor jou kan betekenen. Online Demo. Maak eigen feedbackforms. Real Time inzichten. Feedback voor Apps. Verhoog conversie. Slimmere dashboards. Feedback voor Websites. Feedback voor Email. Typen: Mopinion voor Websites, Mopinion voor Apps.Verhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap')
+                                      'UI/UX het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap. Vraag een online demo aan en ontdek wat Mopinion voor jou kan betekenen. Online Demo. Maak eigen feedbackforms. Real Time inzichten. Feedback voor Apps. Verhoog conversie. Slimmere dashboards. Feedback voor Websites. Feedback voor Email. Typen: Mopinion voor Websites, Mopinion voor Apps.Verhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap ')
                             ],
                           ),
                         ],
@@ -99,6 +101,14 @@ class ProjectOwn extends StatelessWidget {
                     ),
                   ],
                 ),
+                IconButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: AppColors.primary,
+                    )),
               ],
             ),
             SingleChildScrollView(
@@ -167,7 +177,7 @@ class ProjectOwn extends StatelessWidget {
                                               child: const Text('Cancel',
                                                   style: TextStyle(
                                                       color: AppColors
-                                                          .primary)),
+                                                          .grey2)),
                                               onPressed: () {
                                                 Navigator.of(context)
                                                     .pop();
@@ -209,7 +219,7 @@ class ProjectOwn extends StatelessWidget {
                                       textOverflow:
                                       TextOverflow.ellipsis),
                                   trailing: Text(timeago.format(minAgo,
-                                      locale: 'en_short')),
+                                      locale: 'en_short'),style:const TextStyle(fontSize: 11)),
                                 );
                               },
                               separatorBuilder: (context, index) =>
@@ -227,7 +237,6 @@ class ProjectOwn extends StatelessWidget {
                                   leading: GestureDetector(
                                     onTap: () async {
                                       // Display the image in large form.
-
                                     },
                                     child: Container(
                                       height: 50.0,
@@ -238,7 +247,7 @@ class ProjectOwn extends StatelessWidget {
                                               Radius.circular(50))),
                                       child: const CircleAvatar(
                                           radius: 50,
-                                          backgroundImage: NetworkImage(
+                                          backgroundImage: CachedNetworkImageProvider(
                                               "https://picsum.photos/300/30")),
                                     ),
                                   ),
@@ -248,7 +257,8 @@ class ProjectOwn extends StatelessWidget {
                                   ),
                                   subtitle:const Text('i can offer you..'),
                                   trailing: Text(timeago.format(minAgo,
-                                      locale: 'en_short')),
+                                      locale: 'en_short',
+                                  ),style:const TextStyle(fontSize: 11),),
                                 );
                               },
                               separatorBuilder: (context, index) =>

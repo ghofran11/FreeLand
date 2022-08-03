@@ -11,7 +11,7 @@ import 'colors.dart';
 const double horizontalAppPadding = 18;
 const double verticalAppPadding = 18;
 
-const kIconSize = 24.0;
+const kIconSize = 20.0;
 const buttonBorderRadius = 24.0;
 const String fontFamily = "Almarai";
 const designSize = Size(360, 690);
@@ -85,7 +85,7 @@ final cardTheme = CardTheme(
     )
     );
 
-final iconTheme = IconThemeData(size: kIconSize.r, color: Colors.redAccent);
+final iconTheme = IconThemeData(size: kIconSize.r, color: AppColors.grey2);
 
 InputDecoration dynamicInputDecorationTheme({
   required ThemeData themeData,

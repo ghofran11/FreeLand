@@ -41,7 +41,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
     return Scaffold(
       body: ListView(
         physics: const BouncingScrollPhysics(),
-
         children: [
           Stack(
             children: [
@@ -49,7 +48,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      height: MediaQuery.of(context).size.height/4,
+                      height: MediaQuery.of(context).size.height / 4,
                       width: MediaQuery.of(context).size.width,
                       clipBehavior: Clip.hardEdge,
                       decoration: const BoxDecoration(
@@ -58,11 +57,12 @@ class _ProjectDetailState extends State<ProjectDetail> {
                               image: CachedNetworkImageProvider(
                                   "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
                           borderRadius: BorderRadius.only(
-                            bottomLeft:  Radius.circular(buttonBorderRadius),
-                            bottomRight:  Radius.circular(buttonBorderRadius)
-                             ))),
+                              bottomLeft: Radius.circular(buttonBorderRadius),
+                              bottomRight:
+                                  Radius.circular(buttonBorderRadius)))),
                   Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 10),
                     child: Column(
                       children: [
                         Row(
@@ -81,8 +81,9 @@ class _ProjectDetailState extends State<ProjectDetail> {
                             Column(
                               children: const [
                                 CustomText.titleSmall('\$200-300',
-                                    style:
-                                        TextStyle(color: AppColors.primary,)),
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                    )),
                                 CustomText.labelMedium('Available'),
                               ],
                             ),
@@ -104,13 +105,30 @@ class _ProjectDetailState extends State<ProjectDetail> {
                       ],
                     ),
                   ),
-
                   const Divider(color: AppColors.black),
                   Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
                       children: [
-                       const CustomText.titleSmall("Leave a comment"),
+                        Container(
+                          height: 50.0,
+                          width: 50.0,
+                          decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50))),
+                          child: const CircleAvatar(
+                              radius: 50,
+                              backgroundImage: CachedNetworkImageProvider(
+                                "https://www.acecloudhosting.com/blog/wp-content/uploads/2020/05/remote-working-for-small-business-600x343.jpg",
+                              )),
+                        ),
+                        SizedBox(
+                          width: 5.0.h,
+                        ),
+                        const CustomText.titleSmall(
+                          "Leave a comment",
+                          style: TextStyle(color: AppColors.grey2),
+                        ),
                         const Spacer(),
                         IconButton(
                           icon: const Icon(
@@ -146,7 +164,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                 context.pushNamed(OfferScreen.routeName);
               },
               child: const CustomText.bodyMedium(
-                'ADD YOUR OFFER',
+                'Add your offer',
                 style: TextStyle(color: Colors.white),
               ),
             ),

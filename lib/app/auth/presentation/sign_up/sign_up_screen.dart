@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -97,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Full Name",
                               formControlName: SignUpBloc.fullNameKey,
-                              icon:const FaIcon(FontAwesomeIcons.idCard,color: AppColors.primary,size: 20,),
+                              prefixIcon:FontAwesomeIcons.idCard,
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
@@ -108,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "User Name",
                               formControlName: SignUpBloc.userNameKey,
-                              icon:const FaIcon(FontAwesomeIcons.idBadge,color: AppColors.primary,size: 20,),
+                              prefixIcon:FontAwesomeIcons.user,
 
                             ),
                             SizedBox(height: 10.0.h),
@@ -119,12 +120,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Email",
                               formControlName: SignUpBloc.emailKey,
-                              icon:const FaIcon(FontAwesomeIcons.pencil,color: AppColors.primary,size: 20,),
+                              prefixIcon:FontAwesomeIcons.pencil
 
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
-
                               maxLines: 1,
                               keyboardType: TextInputType.number,
                               validationMessages: (control) => {
@@ -132,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Phone Number",
                               formControlName: SignUpBloc.phoneNumberKey,
-                              icon:const FaIcon(FontAwesomeIcons.mobileScreenButton,color: AppColors.primary,size: 20,),
+                              prefixIcon: FontAwesomeIcons.mobileScreenButton,
 
                             ),
                             SizedBox(height: 10.0.h),
@@ -144,7 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Address",
                               formControlName: SignUpBloc.addressKey,
-                              icon:const FaIcon(FontAwesomeIcons.locationDot,color: AppColors.primary,size: 20,),
+                              prefixIcon: FontAwesomeIcons.locationDot
 
                             ),
                             SizedBox(height: 10.0.h),
@@ -165,7 +165,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 filled: true,
                                 fillColor: AppColors.white,
                                 labelText: 'Date of Birth',
-                                icon:const FaIcon(FontAwesomeIcons.calendarDays,color: AppColors.primary,size: 20,),
+                                prefixIcon: const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: FaIcon(FontAwesomeIcons.calendarDays,color: AppColors.primary,size: 20,),
+                                ),
+
 
                               ),
                             ),
@@ -205,7 +209,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     filled: true,
                                     fillColor: AppColors.white,
-                                    icon:const FaIcon(FontAwesomeIcons.flag,color: AppColors.primary,size: 20,),
+                                    prefixIcon:const Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: FaIcon(FontAwesomeIcons.flag,color: AppColors.primary,size: 20,),
+                                    ),
 
                                   ),
                                   mode: Mode.MENU,
@@ -226,6 +233,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             if (state.countrySelected != null)
                               ReactiveDropdownSearch<CityDto, CityDto>(
                                 decoration: InputDecoration(
+                                  iconColor: AppColors.green,
+                                   suffixIconColor:  AppColors.green,
                                     contentPadding: EdgeInsets.zero,
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: borderRadiusCircular,
@@ -243,8 +252,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     filled: true,
                                     fillColor: AppColors.white,
-                                    icon:const FaIcon(FontAwesomeIcons.building,color: AppColors.primary,size: 20,),
-                                    labelText: 'City'),
+                                   prefixIcon:const Padding(
+                                     padding: EdgeInsets.all(12.0),
+                                     child: FaIcon(FontAwesomeIcons.building,color: AppColors.primary,size: 20,),
+                                   ),
+                                    labelText: ' City'),
                                 mode: Mode.MENU,
                                 formControlName: SignUpBloc.cityKey,
                                 items: (signUpBloc.signUpForm
@@ -256,10 +268,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
                               //icon: const Icon(Icons.lock,color: AppColors.primary,) ,
-
                               maxLines: 1,
                               keyboardType: TextInputType.text,
                               labelText: "Password",
+                              prefixIcon: Icons.lock,
                               obscureText: true,
                               validationMessages: (control) => {
                                 ValidationMessage.required: AppStrings.required,
@@ -269,10 +281,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             SizedBox(height: 10.0.h),
                           ],
                         ),
-                        SizedBox(height: 100.0.h),
+                        SizedBox(height: 50.0.h),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             (!state.formStatus.isLoading())
+
                                 ? SizedBox(
                                     width: 120.0.w,
                                     child: ElevatedButton(

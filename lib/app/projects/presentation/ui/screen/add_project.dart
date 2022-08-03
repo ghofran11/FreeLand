@@ -73,8 +73,7 @@ class AddProject extends StatelessWidget {
                       )),
                   const CustomText.titleLarge(
                     'Add Project ',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: AppColors.primary),
+
                   ),
                 ],
               ),

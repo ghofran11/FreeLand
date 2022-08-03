@@ -41,24 +41,15 @@ class TipsScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration:BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius:const BorderRadius.all(
-                        Radius.circular(10)),
-                  ),
-                  child: IconButton(
-                   // padding: EdgeInsets.symmetric(horizontal: 5,vertical:5 ),
-                      onPressed: () {
-                        context.pop();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: AppColors.primary,
-                      ),
-                  ),
+                IconButton(
+                 // padding: EdgeInsets.symmetric(horizontal: 5,vertical:5 ),
+                    onPressed: () {
+                      context.pop();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: AppColors.primary,
+                    ),
                 ),
                 SizedBox(width: 3.0.w,),
                 const CustomText.titleLarge(

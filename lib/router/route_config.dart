@@ -6,6 +6,7 @@ import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/add_project.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/all_own_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/comment_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_detail.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/offer_screen.dart';
@@ -101,6 +102,12 @@ class RouterConfig {
                   name: WorkingOn.routeName,
                   pageBuilder: (context, state) =>
                       WorkingOn.pageBuilder(context, state),
+                  routes: []),
+              GoRoute(
+                  path:AllOwnProject.routePath,
+                  name: AllOwnProject.routeName,
+                  pageBuilder: (context, state) =>
+                      AllOwnProject.pageBuilder(context, state),
                   routes: []),
               GoRoute(
                   path:AddProject.routePath,

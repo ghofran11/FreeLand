@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/add_project.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/all_own_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_own.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/working_on.dart';
 import 'package:go_router/go_router.dart';
@@ -19,11 +20,11 @@ class ProjectPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
         body: ListView(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(
             horizontal: horizontalAppPadding.w,
+            vertical: verticalAppPadding.h
           ),
           children: [
             SizedBox(
@@ -51,14 +52,19 @@ class ProjectPage extends StatelessWidget {
               height: 15.0.h,
             ),
             Row(
-              children: const [
-                CustomText.titleMedium(
+              children:  [
+               const CustomText.titleMedium(
                   'Own project',
                   style: TextStyle(fontSize: 15),
                 ),
-                Spacer(),
-                CustomText.bodySmall("See All",
-                    style: TextStyle(color: AppColors.primary))
+               const Spacer(),
+                InkWell(
+                  onTap: (){
+                    context.pushNamed(AllOwnProject.routeName);
+                  },
+                  child:const CustomText.bodySmall("See All",
+                      style: TextStyle(color: AppColors.primary)),
+                )
               ],
             ),
             SizedBox(height: 10.0.h),
@@ -82,11 +88,11 @@ class ProjectPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const CustomText.titleMedium('Medical Website'),
+                              const CustomText.titleSmall('Medical Website'),
                               SizedBox(
-                                height: 25.0.h,
+                                height: 15.0.h,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -97,7 +103,8 @@ class ProjectPage extends StatelessWidget {
                                       const CustomText.titleMedium(
                                         '\$ 200-500',
                                         style:
-                                            TextStyle(color: AppColors.primary),
+                                            TextStyle(color: AppColors.primary,
+                                            fontSize: 14),
                                       ),
                                       SizedBox(
                                         height: 10.0.h,
@@ -105,7 +112,7 @@ class ProjectPage extends StatelessWidget {
                                       const CustomText.bodyMedium(
                                         'Salary',
                                         style:
-                                            TextStyle(color: AppColors.grey2),
+                                            TextStyle(color: AppColors.grey2,fontSize:12 ),
                                       ),
                                     ],
                                   ),
@@ -119,7 +126,8 @@ class ProjectPage extends StatelessWidget {
                                       const CustomText.titleMedium(
                                         ' 15',
                                         style:
-                                            TextStyle(color: AppColors.primary),
+                                            TextStyle(color: AppColors.primary,
+                                            fontSize: 14),
                                       ),
                                       SizedBox(
                                         height: 10.0.h,
@@ -127,7 +135,7 @@ class ProjectPage extends StatelessWidget {
                                       const CustomText.bodyMedium(
                                         'Offer',
                                         style:
-                                            TextStyle(color: AppColors.grey2),
+                                            TextStyle(color: AppColors.grey2,fontSize: 12),
                                       ),
                                     ],
                                   ),
@@ -141,7 +149,7 @@ class ProjectPage extends StatelessWidget {
                                       const CustomText.titleMedium(
                                         '\$ 200',
                                         style:
-                                            TextStyle(color: AppColors.primary),
+                                            TextStyle(color: AppColors.primary,fontSize: 14),
                                       ),
                                       SizedBox(
                                         height: 10.0.h,
@@ -149,7 +157,7 @@ class ProjectPage extends StatelessWidget {
                                       const CustomText.bodyMedium(
                                         'Average',
                                         style:
-                                            TextStyle(color: AppColors.grey2),
+                                            TextStyle(color: AppColors.grey2,fontSize: 12),
                                       ),
                                     ],
                                   ),
@@ -163,7 +171,7 @@ class ProjectPage extends StatelessWidget {
                   }),
             ),
             SizedBox(
-              height: 30.0.h,
+              height: 16.0.h,
             ),
             Row(
               children: const [

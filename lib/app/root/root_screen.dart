@@ -42,15 +42,15 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                context.read<AppManagerBloc>().add(const AppManagerLoggedOut());
-              },
-              icon: const FaIcon(FontAwesomeIcons.infinity))
-        ],
-      ),
+      // appBar: AppBar(
+      //   actions: [
+      //     IconButton(
+      //         onPressed: () {
+      //           context.read<AppManagerBloc>().add(const AppManagerLoggedOut());
+      //         },
+      //         icon: const FaIcon(FontAwesomeIcons.infinity))
+      //   ],
+      // ),
       bottomNavigationBar: BottomNavyBar(
         iconSize: 20.r,
 
