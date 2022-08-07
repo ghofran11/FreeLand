@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:colours/colours.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
 import 'package:freeland/app/home/presentation/ui/widget/job_card.dart';
-import 'package:freeland/app/projects/presentation/ui/screen/project_detail.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:go_router/go_router.dart';
@@ -44,17 +42,16 @@ class HomePage extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
+                        Scaffold.of(context).openDrawer();
                       },
-                      icon: const FaIcon(
-                        FontAwesomeIcons.searchengin,
-                        color: AppColors.primary,
-                      ),
+                      icon: SvgPicture.asset(Assets.iconsLogoFreeland,
+                          height: 35.0.r),
                     ),
                     const SizedBox(
                       width: 15,
                     ),
                     const CustomText.titleMedium(
-                      "Hello,Adam1",
+                      "Hello, Woroud",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),

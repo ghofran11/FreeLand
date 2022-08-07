@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_event.dart';
@@ -12,6 +13,7 @@ import 'package:freeland/app/info/country/presentation/country_bloc/country_even
 import 'package:freeland/app/info/country/presentation/country_bloc/country_state.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/constant/src/strings.dart';
+import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
@@ -72,14 +74,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: 12.0.h),
                         Column(
                           children: [
-                            Icon(Icons.admin_panel_settings_outlined,
-                                color: Theme.of(context).primaryColor,
-                                size: 150.0.r),
-                            SizedBox(height: 4.0.h),
-                            Text(
-                              "FreeLand ",
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
+                            SvgPicture.asset(Assets.iconsLogoFreeland,
+                                height: 150.0.r),
+                            const CustomText.headlineMedium("Freeland",
+                                style: TextStyle(
+                                  color: AppColors.primary,
+                                ),
+                                textAlign: TextAlign.center),
                             SizedBox(height: 10.0.h),
                             Text(
                               "Sign Up for free",
@@ -98,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "Full Name",
                               formControlName: SignUpBloc.fullNameKey,
-                              prefixIcon:FontAwesomeIcons.idCard,
+                              prefixIcon: FontAwesomeIcons.idCard,
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
@@ -109,20 +110,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                               labelText: "User Name",
                               formControlName: SignUpBloc.userNameKey,
-                              prefixIcon:FontAwesomeIcons.user,
-
+                              prefixIcon: FontAwesomeIcons.user,
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
-                              maxLines: 1,
-                              validationMessages: (control) => {
-                                ValidationMessage.required: AppStrings.required,
-                              },
-                              labelText: "Email",
-                              formControlName: SignUpBloc.emailKey,
-                              prefixIcon:FontAwesomeIcons.pencil
-
-                            ),
+                                maxLines: 1,
+                                validationMessages: (control) => {
+                                      ValidationMessage.required:
+                                          AppStrings.required,
+                                    },
+                                labelText: "Email",
+                                formControlName: SignUpBloc.emailKey,
+                                prefixIcon: FontAwesomeIcons.pencil),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
                               maxLines: 1,
@@ -133,20 +132,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               labelText: "Phone Number",
                               formControlName: SignUpBloc.phoneNumberKey,
                               prefixIcon: FontAwesomeIcons.mobileScreenButton,
-
                             ),
                             SizedBox(height: 10.0.h),
                             CustomReactiveTextField(
-                              maxLines: 1,
-                              keyboardType: TextInputType.text,
-                              validationMessages: (control) => {
-                                ValidationMessage.required: AppStrings.required,
-                              },
-                              labelText: "Address",
-                              formControlName: SignUpBloc.addressKey,
-                              prefixIcon: FontAwesomeIcons.locationDot
-
-                            ),
+                                maxLines: 1,
+                                keyboardType: TextInputType.text,
+                                validationMessages: (control) => {
+                                      ValidationMessage.required:
+                                          AppStrings.required,
+                                    },
+                                labelText: "Address",
+                                formControlName: SignUpBloc.addressKey,
+                                prefixIcon: FontAwesomeIcons.locationDot),
                             SizedBox(height: 10.0.h),
                             ReactiveDateTimePicker(
                               formControlName: SignUpBloc.birthDayKey,
@@ -167,10 +164,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 labelText: 'Date of Birth',
                                 prefixIcon: const Padding(
                                   padding: EdgeInsets.all(12.0),
-                                  child: FaIcon(FontAwesomeIcons.calendarDays,color: AppColors.primary,size: 20,),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.calendarDays,
+                                    color: AppColors.primary,
+                                    size: 20,
+                                  ),
                                 ),
-
-
                               ),
                             ),
                             SizedBox(height: 10.0.h),
@@ -209,11 +208,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     filled: true,
                                     fillColor: AppColors.white,
-                                    prefixIcon:const Padding(
+                                    prefixIcon: const Padding(
                                       padding: EdgeInsets.all(12.0),
-                                      child: FaIcon(FontAwesomeIcons.flag,color: AppColors.primary,size: 20,),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.flag,
+                                        color: AppColors.primary,
+                                        size: 20,
+                                      ),
                                     ),
-
                                   ),
                                   mode: Mode.MENU,
                                   formControlName: SignUpBloc.countryKey,
@@ -233,8 +235,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             if (state.countrySelected != null)
                               ReactiveDropdownSearch<CityDto, CityDto>(
                                 decoration: InputDecoration(
-                                  iconColor: AppColors.green,
-                                   suffixIconColor:  AppColors.green,
+                                    iconColor: AppColors.green,
+                                    suffixIconColor: AppColors.green,
                                     contentPadding: EdgeInsets.zero,
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: borderRadiusCircular,
@@ -248,14 +250,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       borderSide: BorderSide(
                                           width: 1.0.r,
                                           style: BorderStyle.none),
-
                                     ),
                                     filled: true,
                                     fillColor: AppColors.white,
-                                   prefixIcon:const Padding(
-                                     padding: EdgeInsets.all(12.0),
-                                     child: FaIcon(FontAwesomeIcons.building,color: AppColors.primary,size: 20,),
-                                   ),
+                                    prefixIcon: const Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.building,
+                                        color: AppColors.primary,
+                                        size: 20,
+                                      ),
+                                    ),
                                     labelText: ' City'),
                                 mode: Mode.MENU,
                                 formControlName: SignUpBloc.cityKey,
@@ -286,7 +291,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             (!state.formStatus.isLoading())
-
                                 ? SizedBox(
                                     width: 120.0.w,
                                     child: ElevatedButton(

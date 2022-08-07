@@ -16,7 +16,12 @@ class LoginState {
   }
 
   Future<LoginParams> getLoginParams(FormGroup loginForm) async {
-    String token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
+    String token = " ";
+    try {
+      token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
+    } catch (_) {
+      print("Token bugged");
+    }
     return LoginParams(
       deviceToken: token,
       email: loginForm.control(LoginBloc.emailKey).value,

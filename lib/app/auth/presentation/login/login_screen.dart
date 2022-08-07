@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:freeland/app/auth/presentation/login/login_bloc/login_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
+import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
@@ -58,13 +60,15 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(height: verticalAppPadding.h),
                         Column(
                           children: [
-                            Icon(Icons.admin_panel_settings_outlined,
-                                color: Theme.of(context).primaryColor,
-                                size: 150.0.r),
+                            SvgPicture.asset(Assets.iconsLogoFreeland,
+                                height: 150.0.r),
                             SizedBox(height: 4.0.h),
                             Text(
                               "Welcome Back To FreeLand",
-                              style: Theme.of(context).textTheme.headline5,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  ?.copyWith(color: AppColors.primary),
                             ),
                             SizedBox(height: 8.0.h),
                             Text(

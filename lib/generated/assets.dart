@@ -2,8 +2,11 @@
 class Assets {
   Assets._();
 
+  static const String iconsFreeland = 'assets/icons/freeland.svg';
   static const String iconsLoading = 'assets/icons/loading.json';
   static const String iconsLock = 'assets/icons/lock.svg';
+  static const String iconsLogo = 'assets/icons/logo.svg';
+  static const String iconsLogoFreeland = 'assets/icons/logo_freeland.svg';
   static const String iconsUser = 'assets/icons/user.svg';
   static const String imagesImg = 'assets/images/img.png';
 }

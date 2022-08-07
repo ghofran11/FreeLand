@@ -9,7 +9,6 @@ import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-
 class ProjectOwn extends StatelessWidget {
   ProjectOwn({Key? key}) : super(key: key);
 
@@ -48,14 +47,12 @@ class ProjectOwn extends StatelessWidget {
                                 image: CachedNetworkImageProvider(
                                     "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
                             borderRadius: BorderRadius.only(
-                                bottomLeft:
-                                    Radius.circular(buttonBorderRadius),
+                                bottomLeft: Radius.circular(buttonBorderRadius),
                                 bottomRight:
                                     Radius.circular(buttonBorderRadius)))),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 18, vertical: 10
-                      ),
+                          horizontal: 18, vertical: 10),
                       child: Column(
                         children: [
                           Row(
@@ -112,170 +109,171 @@ class ProjectOwn extends StatelessWidget {
               ],
             ),
             SingleChildScrollView(
-              child: Column(children: [
-                DefaultTabController(
-                  length: 2,
-                  child: Column(
-                    children: [
-                      const TabBar(
-                        tabs: [
-                          Tab(
-                            text: 'Offer',
-                          ),
-                          Tab(
-                            text: 'Comment',
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height:  300,
-                        child: TabBarView(
-                          children: [
-                            ListView.separated(
-                              itemBuilder:
-                                  (BuildContext context, int index) {
-                                return ListTile(
-                                  onTap: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          elevation: 25,
-                                          title:
-                                          const Text('Ahmad Ahmad'),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
+              child: Column(
+                children: [
+                  DefaultTabController(
+                    length: 2,
+                    child: Column(
+                      children: [
+                        const TabBar(
+                          tabs: [
+                            Tab(
+                              text: 'Offer',
+                            ),
+                            Tab(
+                              text: 'Comment',
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 300,
+                          child: TabBarView(
+                            children: [
+                              ListView.separated(
+                                itemBuilder: (BuildContext context, int index) {
+                                  return ListTile(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            elevation: 25,
+                                            title: const Text('Ahmad Ahmad'),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: <Widget>[
-                                                const AppReadMore(
-                                                  text:
+                                                const Text(
                                                   'I can submit a good and serious offer to start the project directly for a period of 3 months, with accuracy and skill at work, and a salary of 300  ',
+                                                  style: TextStyle(
+                                                      color: AppColors.grey2,
+                                                      fontSize: 14),
                                                 ),
                                                 SizedBox(
-                                                  height: 5.0.h,
+                                                  height: 10.0.h,
                                                 ),
                                                 const Text(
                                                   'Would you like to approve of this message?',
                                                   style: TextStyle(
-                                                      color:
-                                                      AppColors.grey2,
-                                                      fontSize: 14),
+                                                      color: AppColors.primary,
+                                                      fontSize: 18),
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: const Text(
-                                                'Approve',
-                                                style: TextStyle(
-                                                    color: AppColors
-                                                        .primary),
-                                              ),
-                                              onPressed: () {},
-                                            ),
-                                            TextButton(
-                                              child: const Text('Cancel',
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: const Text(
+                                                  'Approve',
                                                   style: TextStyle(
-                                                      color: AppColors
-                                                          .grey2)),
-                                              onPressed: () {
-                                                Navigator.of(context)
-                                                    .pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
+                                                      color: AppColors.primary),
+                                                ),
+                                                onPressed: () {},
+                                              ),
+                                              TextButton(
+                                                child: const Text('Cancel',
+                                                    style: TextStyle(
+                                                        color:
+                                                            AppColors.grey2)),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        // Display the image in large form.
                                       },
-                                    );
-                                  },
-                                  leading: GestureDetector(
-                                    onTap: () async {
-                                      // Display the image in large form.
-
-                                    },
-                                    child: Container(
-                                      height: 50.0,
-                                      width: 50.0,
-                                      decoration: const BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50))),
-                                      child: const CircleAvatar(
-                                          radius: 50,
-                                          backgroundImage: NetworkImage(
-                                              "https://picsum.photos/300/30")),
-                                    ),
-                                  ),
-                                  title: const Text(
-                                    'Ahmad Ahmad',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  subtitle: const CustomText.bodySmall(
-                                      'Ahmad Ahmad \$400-700  we have project Ahmad Ahmad we have project Ahmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have project',
-                                      style: TextStyle(
-                                        color: AppColors.grey2,
+                                      child: Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: NetworkImage(
+                                                "https://picsum.photos/300/30")),
                                       ),
-                                      maxLines: 1,
-                                      textOverflow:
-                                      TextOverflow.ellipsis),
-                                  trailing: Text(timeago.format(minAgo,
-                                      locale: 'en_short'),style:const TextStyle(fontSize: 11)),
-                                );
-                              },
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(
-                                    width: 7.0.w,
-                                  ),
-                              itemCount: 10,
-                              physics:const BouncingScrollPhysics(),
-                            ),
-                            ListView.separated(
-                              physics:const BouncingScrollPhysics(),
-                              itemBuilder:
-                                  (BuildContext context, int index) {
-                                return ListTile(
-                                  leading: GestureDetector(
-                                    onTap: () async {
-                                      // Display the image in large form.
-                                    },
-                                    child: Container(
-                                      height: 50.0,
-                                      width: 50.0,
-                                      decoration: const BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50))),
-                                      child: const CircleAvatar(
-                                          radius: 50,
-                                          backgroundImage: CachedNetworkImageProvider(
-                                              "https://picsum.photos/300/30")),
                                     ),
-                                  ),
-                                  title: const Text(
-                                    'Ahmad Ahmad',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                  subtitle:const Text('i can offer you..'),
-                                  trailing: Text(timeago.format(minAgo,
-                                      locale: 'en_short',
-                                  ),style:const TextStyle(fontSize: 11),),
-                                );
-                              },
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(
-                                    width: 7.0.w,
-                                  ),
-                              itemCount: 5,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                                    title: const Text(
+                                      'Ahmad Ahmad',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    subtitle: const CustomText.bodySmall(
+                                        'Ahmad Ahmad \$400-700  we have project Ahmad Ahmad we have project Ahmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have project',
+                                        style: TextStyle(
+                                          color: AppColors.grey2,
+                                        ),
+                                        maxLines: 1,
+                                        textOverflow: TextOverflow.ellipsis),
+                                    trailing: Text(
+                                        timeago.format(minAgo,
+                                            locale: 'en_short'),
+                                        style: const TextStyle(fontSize: 11)),
+                                  );
+                                },
+                                separatorBuilder: (context, index) => SizedBox(
+                                  width: 7.0.w,
+                                ),
+                                itemCount: 10,
+                                physics: const BouncingScrollPhysics(),
+                              ),
+                              ListView.separated(
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return ListTile(
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        // Display the image in large form.
+                                      },
+                                      child: Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage:
+                                                CachedNetworkImageProvider(
+                                                    "https://picsum.photos/300/30")),
+                                      ),
+                                    ),
+                                    title: const Text(
+                                      'Ahmad Ahmad',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    subtitle: const Text('i can offer you..'),
+                                    trailing: Text(
+                                      timeago.format(
+                                        minAgo,
+                                        locale: 'en_short',
+                                      ),
+                                      style: const TextStyle(fontSize: 11),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (context, index) => SizedBox(
+                                  width: 7.0.w,
+                                ),
+                                itemCount: 5,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],),
+                ],
+              ),
             ),
-
           ],
         ),
       ),

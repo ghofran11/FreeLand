@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'memate-e5c9a.appspot.com',
   );
 
+  ///ToDo:
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDGoS6LSX1nYdARQTjApqkZdi_ytleK9_M',
     appId: '1:683807261155:ios:737b783c281c904918e0d6',
@@ -57,6 +58,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'memate-e5c9a.appspot.com',
     iosClientId:
         '683807261155-kkvlmq3voc7cfjik8s53auh6olnlad0l.apps.googleusercontent.com',
-    iosBundleId: 'com.elkood.memate',
+    iosBundleId: 'com.example.freeland',
   );
 }

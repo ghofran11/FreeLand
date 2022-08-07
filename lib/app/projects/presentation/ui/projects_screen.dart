@@ -23,9 +23,8 @@ class ProjectPage extends StatelessWidget {
         body: ListView(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(
-            horizontal: horizontalAppPadding.w,
-            vertical: verticalAppPadding.h
-          ),
+              horizontal: horizontalAppPadding.w,
+              vertical: verticalAppPadding.h),
           children: [
             SizedBox(
               height: 10.0.h,
@@ -52,17 +51,17 @@ class ProjectPage extends StatelessWidget {
               height: 15.0.h,
             ),
             Row(
-              children:  [
-               const CustomText.titleMedium(
+              children: [
+                const CustomText.titleMedium(
                   'Own project',
                   style: TextStyle(fontSize: 15),
                 ),
-               const Spacer(),
+                const Spacer(),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     context.pushNamed(AllOwnProject.routeName);
                   },
-                  child:const CustomText.bodySmall("See All",
+                  child: const CustomText.bodySmall("See All",
                       style: TextStyle(color: AppColors.primary)),
                 )
               ],
@@ -84,7 +83,7 @@ class ProjectPage extends StatelessWidget {
                         context.pushNamed(ProjectOwn.routeName);
                       },
                       child: Card(
-                        color:Colours.aliceBlue.shade100,
+                        color: Colours.aliceBlue.shade100,
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Column(
@@ -102,8 +101,8 @@ class ProjectPage extends StatelessWidget {
                                     children: [
                                       const CustomText.titleMedium(
                                         '\$ 200-500',
-                                        style:
-                                            TextStyle(color: AppColors.primary,
+                                        style: TextStyle(
+                                            color: AppColors.primary,
                                             fontSize: 14),
                                       ),
                                       SizedBox(
@@ -111,8 +110,9 @@ class ProjectPage extends StatelessWidget {
                                       ),
                                       const CustomText.bodyMedium(
                                         'Salary',
-                                        style:
-                                            TextStyle(color: AppColors.grey2,fontSize:12 ),
+                                        style: TextStyle(
+                                            color: AppColors.grey2,
+                                            fontSize: 12),
                                       ),
                                     ],
                                   ),
@@ -125,8 +125,8 @@ class ProjectPage extends StatelessWidget {
                                     children: [
                                       const CustomText.titleMedium(
                                         ' 15',
-                                        style:
-                                            TextStyle(color: AppColors.primary,
+                                        style: TextStyle(
+                                            color: AppColors.primary,
                                             fontSize: 14),
                                       ),
                                       SizedBox(
@@ -134,8 +134,9 @@ class ProjectPage extends StatelessWidget {
                                       ),
                                       const CustomText.bodyMedium(
                                         'Offer',
-                                        style:
-                                            TextStyle(color: AppColors.grey2,fontSize: 12),
+                                        style: TextStyle(
+                                            color: AppColors.grey2,
+                                            fontSize: 12),
                                       ),
                                     ],
                                   ),
@@ -148,16 +149,18 @@ class ProjectPage extends StatelessWidget {
                                     children: [
                                       const CustomText.titleMedium(
                                         '\$ 200',
-                                        style:
-                                            TextStyle(color: AppColors.primary,fontSize: 14),
+                                        style: TextStyle(
+                                            color: AppColors.primary,
+                                            fontSize: 14),
                                       ),
                                       SizedBox(
                                         height: 10.0.h,
                                       ),
                                       const CustomText.bodyMedium(
                                         'Average',
-                                        style:
-                                            TextStyle(color: AppColors.grey2,fontSize: 12),
+                                        style: TextStyle(
+                                            color: AppColors.grey2,
+                                            fontSize: 12),
                                       ),
                                     ],
                                   ),
@@ -188,7 +191,7 @@ class ProjectPage extends StatelessWidget {
             ),
             SizedBox(height: 5.0.h),
             SizedBox(
-              height: 180,
+              height: 170,
               child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(5),
@@ -204,38 +207,57 @@ class ProjectPage extends StatelessWidget {
                         context.pushNamed(WorkingOn.routeName);
                       },
                       child: Card(
-
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              const CustomText.titleMedium('UI flowers Lab',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w500)),
                               Row(
                                 children: [
+                                  const CustomText.bodyMedium(
+                                    'Progress rate:',
+                                    style: TextStyle(color: AppColors.grey2),
+                                  ),
+                                  SizedBox(
+                                    width: 15.0.w,
+                                  ),
                                   CircularPercentIndicator(
                                     radius: 25.0,
                                     lineWidth: 5.0,
-                                    percent: 0.7,
-                                    center: const Text("75%"),
-                                    progressColor: AppColors.green,
+                                    percent: index % 2 == 0 ? 0.3 : 0.7,
+                                    center: index % 2 == 0
+                                        ? const Text("30%")
+                                        : const Text("75%"),
+                                    progressColor: index % 2 == 0
+                                        ? AppColors.yellow
+                                        : AppColors.green,
                                   ),
-                                  SizedBox(width:15.0.w,),
-                                const  CustomText.bodyMedium('progress rate',style: TextStyle(color: AppColors.grey2),)
                                 ],
                               ),
-                              SizedBox(height: 20.0.h,),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const CustomText.titleLarge(
-                                      'UI flowers Lab'),
                                   SizedBox(
                                     height: 5.0.h,
                                   ),
-                                  const CustomText.titleMedium('Level 2 '),
+                                  const CustomText.titleMedium('Level: 2 '),
                                   SizedBox(
                                     height: 5.0.h,
                                   ),
-                                  const CustomText.titleMedium('Deadline 15/5'),
+                                  Row(
+                                    children: [
+                                      const CustomText.titleMedium(
+                                          'Deadline: '),
+                                      CustomText.titleMedium(
+                                          (index % 2 == 0) ? '15/5' : '17/4',
+                                          style: TextStyle(
+                                              color: Colors.redAccent)),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ],
