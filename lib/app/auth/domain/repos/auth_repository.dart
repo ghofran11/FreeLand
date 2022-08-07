@@ -24,6 +24,4 @@ abstract class AuthRepository {
   Future<void> setUser(User value);
 
   User? getUser();
-
-
 }

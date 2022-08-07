@@ -55,7 +55,8 @@ class _RootScreenState extends State<RootScreen> {
         iconSize: 20.r,
 
         selectedIndex: _selectedIndex,
-        showElevation: true, // use this to remove appBar's elevation
+        showElevation: true,
+        // use this to remove appBar's elevation
         onItemSelected: (index) => setState(() {
           _selectedIndex = index;
           _pageController.animateToPage(index,
@@ -72,7 +73,7 @@ class _RootScreenState extends State<RootScreen> {
           ),
           BottomNavyBarItem(
             icon: const FaIcon(
-              FontAwesomeIcons.list,
+              FontAwesomeIcons.solidBell,
             ),
             textAlign: TextAlign.center,
             title: const CustomText.bodySmall("Notifications"),
@@ -94,12 +95,15 @@ class _RootScreenState extends State<RootScreen> {
         ],
       ),
       body: SafeArea(
-        child: PageView(controller: _pageController, physics: const NeverScrollableScrollPhysics(),children: const [
-          HomePage(),
-          NotificationsPage(),
-          ProfilePage(),
-          ProjectPage()
-        ]),
+        child: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              const HomePage(),
+              NotificationsPage(),
+              const ProfilePage(),
+              const ProjectPage()
+            ]),
       ),
     );
   }

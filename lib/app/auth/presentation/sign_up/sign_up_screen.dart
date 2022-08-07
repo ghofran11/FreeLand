@@ -1,5 +1,4 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,9 +17,7 @@ import 'package:go_router/go_router.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
 import '../../../../common/config/theme/src/styles.dart';
-import '../../../../generated/assets.dart';
 import '../../../info/country/infrastrcture/model/country.dart';
 import '../../../info/country/presentation/country_bloc/country_bloc.dart';
 
@@ -116,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             CustomReactiveTextField(
                               maxLines: 1,
                               validationMessages: (control) => {
-                                ValidationMessage.required: AppStrings.required,
+                                ValidationMessage.required: AppStrings.email,
                               },
                               labelText: "Email",
                               formControlName: SignUpBloc.emailKey,

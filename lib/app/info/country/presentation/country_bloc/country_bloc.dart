@@ -25,6 +25,4 @@ class CountryBloc extends Bloc<CountryEvent,CountryState>{
       }
     });
   }
-
-
 }
