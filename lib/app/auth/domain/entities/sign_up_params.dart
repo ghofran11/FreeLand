@@ -17,7 +17,7 @@ class SignUpParams extends Equatable {
   final String? deviceToken;
   final int userType;
   final String bDay;
-  final String? file;
+
 
   @override
   List<Object> get props => [
@@ -36,14 +36,13 @@ class SignUpParams extends Equatable {
       this.deviceToken,
       this.userType = 1,
       required this.bDay,
-      this.file,
       required this.userName});
 
   Future<Map<String, dynamic>> toJson() async {
     String token = await getIt<FirebaseNotificationService>().getToken() ?? " ";
     return {
       'FullName': fullName,
-      'UserName': "userName",
+      'UserName': userName,
       'Email': email,
       'PhoneNumber': phoneNumber,
       'Password': password,
@@ -84,12 +83,6 @@ class SignUpParams extends Equatable {
       cityId: cityId ?? this.cityId,
       userType: userType ?? this.userType,
       bDay: bDay ?? this.bDay,
-      file: file ?? this.file,
     );
   }
-
-  // Future<FormData> toFormData() async {
-  //   return FormData.fromMap(await toJson()
-  //     ..addAll({"File": await MultipartFile.fromFile("jkj")}));
-  // }
 }

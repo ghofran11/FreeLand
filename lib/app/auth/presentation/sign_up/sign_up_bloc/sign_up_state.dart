@@ -38,7 +38,7 @@ class SignUpState {
         countryId:( signUpForm.control(SignUpBloc.countryKey).value as CountryDto).id,
         cityId: (signUpForm.control(SignUpBloc.cityKey).value as CityDto).id,
         bDay: signUpForm.control(SignUpBloc.birthDayKey).value.toString(),
-        file: '');
+        );
 
   }
   @override
