@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freeland/app/contract/contract_screen.dart';
 import 'package:freeland/app/profile/presentation/widgets/read_more.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
@@ -168,7 +169,9 @@ class ProjectOwn extends StatelessWidget {
                                                   style: TextStyle(
                                                       color: AppColors.primary),
                                                 ),
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  context.pushNamed(ContractScreen.routeName);
+                                                },
                                               ),
                                               TextButton(
                                                 child: const Text('Cancel',

@@ -10,7 +10,7 @@ import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AddProject extends StatelessWidget {
-   AddProject({Key? key}) : super(key: key);
+  AddProject({Key? key}) : super(key: key);
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
@@ -21,15 +21,14 @@ class AddProject extends StatelessWidget {
   static const routePath = 'add_project_screen';
   static const routeName = 'add_project_screen';
 
-    final formGroup=FormGroup(  {
-      'projectName':FormControl<String>(),
-      'projectDeadline':FormControl<DateTime>(),
-      'projectDesc':FormControl<DateTime>(),
-      'minSalary':FormControl<DateTime>(),
-      'maxSalary':FormControl<DateTime>(),
-      'image':FormControl<DateTime>(),
-    }
-    );
+  final formGroup = FormGroup({
+    'projectName': FormControl<String>(),
+    'projectDeadline': FormControl<DateTime>(),
+    'projectDesc': FormControl<DateTime>(),
+    'minSalary': FormControl<DateTime>(),
+    'maxSalary': FormControl<DateTime>(),
+    'image': FormControl<DateTime>(),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +72,12 @@ class AddProject extends StatelessWidget {
                       )),
                   const CustomText.titleLarge(
                     'Add Project ',
-
                   ),
                 ],
               ),
-              SizedBox(height: 10.0.h,),
+              SizedBox(
+                height: 10.0.h,
+              ),
               const CustomReactiveTextField(
                 maxLines: 1,
                 labelText: "Project Name",
@@ -87,18 +87,20 @@ class AddProject extends StatelessWidget {
               SizedBox(height: 12.0.h),
               ReactiveDateTimePicker(
                 formControlName: 'projectDeadline',
-                decoration:  InputDecoration(
+                decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
-                    borderRadius:borderRadiusCircular ,
-                    borderSide: BorderSide(style: BorderStyle.none, width: 2.0.r),
+                    borderRadius: borderRadiusCircular,
+                    borderSide:
+                        BorderSide(style: BorderStyle.none, width: 2.0.r),
                   ),
                   border: InputBorder.none,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: borderRadiusCircular,
-                    borderSide: BorderSide(width: 1.0.r, style: BorderStyle.none),
+                    borderSide:
+                        BorderSide(width: 1.0.r, style: BorderStyle.none),
                   ),
                   filled: true,
-                  fillColor:AppColors.white,
+                  fillColor: AppColors.white,
                   icon: const FaIcon(Icons.calendar_today),
                   labelText: 'Project Deadline',
                 ),
@@ -126,14 +128,21 @@ class AddProject extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 icon: FaIcon(Icons.monetization_on_outlined),
               ),
-              SizedBox(height: 12.0.h),
-              const CustomReactiveTextField(
-                maxLines: null,
-                labelText: "Add image to your project",
-                formControlName: "image",
-                keyboardType: TextInputType.number,
-                icon: FaIcon(Icons.image),
+              SizedBox(height: 20.0.h),
+              Center(
+                child: CustomText.bodyMedium(
+                  "Add image to your project",
+                ),
               ),
+              Icon(Icons.image,
+                  size: 120.0.r, color: AppColors.primary.withOpacity(0.3)),
+              // const CustomReactiveTextField(
+              //   maxLines: null,
+              //   labelText: "Add image to your project",
+              //   formControlName: "image",
+              //   keyboardType: TextInputType.number,
+              //   icon: FaIcon(Icons.image),
+              // ),
             ],
           ),
         ),
