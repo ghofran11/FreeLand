@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:freeland/app/auth/infrastructure/data_source/local/reactive_token_storage.dart';
+import 'package:freeland/app/profile/infrastructur/data_source/profile_remote.dart';
+import 'package:freeland/app/profile/infrastructur/repo/profile_repo.dart';
+import 'package:freeland/app/profile/presentation/state/my_proflile_bloc/my_profile_bloc.dart';
 import 'package:freeland/common/constant/src/url.dart';
 import 'package:freeland/common/network/dio/dio_client.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
@@ -22,4 +25,9 @@ Future generalInject(BuildContext context) async {
   getIt.registerSingleton<Dio>(
     DioClient(AppUri.baseUrlDevelopment + "api/", context: context),
   );
+
+  getIt.registerFactory(() => ProfileRemote(getIt<Dio>()));
+  getIt.registerFactory(() => ProfileRepoImpl(getIt<ProfileRemote>()));
+
+  getIt.registerSingleton(MyProfileBloc(getIt<ProfileRepoImpl>()));
 }

@@ -1,12 +1,10 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
 import 'package:freeland/app/home/presentation/ui/screen/home_screen.dart';
 import 'package:freeland/app/notifications/presentation/notifications_page.dart';
-import 'package:freeland/app/profile/profile_page.dart';
+import 'package:freeland/app/profile/personal_profile_page.dart';
 import 'package:freeland/app/projects/presentation/ui/projects_screen.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
@@ -101,7 +99,7 @@ class _RootScreenState extends State<RootScreen> {
             children: [
               const HomePage(),
               NotificationsPage(),
-              const ProfilePage(),
+              const PersonalProfilePage(),
               const ProjectPage()
             ]),
       ),

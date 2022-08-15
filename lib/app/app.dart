@@ -18,6 +18,8 @@ import 'package:freeland/injection/injection.dart';
 import 'package:freeland/router/route_config.dart';
 import 'package:provider/provider.dart';
 
+import 'profile/presentation/state/my_proflile_bloc/my_profile_bloc.dart';
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -29,6 +31,7 @@ class MyAppState extends State<MyApp> {
   final _botToastBuilder = BotToastInit();
   late RouterConfig routerConfig;
   late AppManagerBloc _provider;
+  late MyProfileBloc _profile;
 
   @override
   void initState() {
@@ -51,6 +54,8 @@ class MyAppState extends State<MyApp> {
               providers: [
                 ChangeNotifierProvider(create: (_) => UserProvider()),
                 BlocProvider<AppManagerBloc>.value(value: _provider),
+                BlocProvider<MyProfileBloc>.value(
+                    value: getIt<MyProfileBloc>()..add(MyProfileFetched())),
               ],
               child: Builder(builder: (context) {
                 return ScreenUtilInit(
