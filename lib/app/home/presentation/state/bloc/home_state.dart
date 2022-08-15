@@ -1,10 +1,25 @@
 part of 'home_bloc.dart';
 
-class HomeState extends Equatable {
-  final Result resultAds;
-  const HomeState({this.resultAds = const Result.init()});
-  copyWith({Result? resultAds}) =>
-      HomeState(resultAds: resultAds ?? this.resultAds);
+class HomeState  {
   @override
-  List get props => [resultAds];
+  List<Object?> get props => [categoryStatus,serviceStatus];
+
+   final BlocStatus categoryStatus;
+   final BlocStatus serviceStatus;
+
+  const HomeState({
+    this.categoryStatus = const BlocStatus(),
+    this.serviceStatus = const BlocStatus(),
+  });
+
+  HomeState copyWith(
+      {BlocStatus? categoryStatus,
+        BlocStatus? serviceStatus
+      }) {
+    return HomeState(
+      categoryStatus: categoryStatus ?? this.categoryStatus,
+      serviceStatus: serviceStatus?? this.serviceStatus
+    );
+  }
+
 }

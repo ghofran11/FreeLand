@@ -6,7 +6,7 @@ class AppException implements Exception {
   AppException(this.message, this.innerException);
 
   ///ToDo
-  factory AppException.unknown() => AppException("Some ", Exception());
+  factory AppException.unknown() => AppException("Some Thing Went Wrong", Exception());
 
   factory AppException.known(message) => AppException(message, Exception());
 
