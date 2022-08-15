@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:freeland/app/auth/presentation/login/login_bloc/login_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
+import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
@@ -119,7 +120,7 @@ class LoginScreen extends StatelessWidget {
                             (!state.formStatus.isLoading())
                                 ? ElevatedButton(
                                     onPressed: () {
-                                      loginBloc.add(const LoginSubmission());
+                                       loginBloc.add(const LoginSubmission());
                                     },
                                     child: CustomText.bodyMedium(
                                       "Login",

@@ -227,10 +227,12 @@ class ProjectOwn extends StatelessWidget {
                                 itemCount: 10,
                                 physics: const BouncingScrollPhysics(),
                               ),
-                              ListView.separated(
-                                physics: const BouncingScrollPhysics(),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ListTile(
+                              ListView(
+                                children: [
+                                  ListTile(
+                                    // onTap: () {
+                                    //   context.pushNamed(ContactUs.routeName);
+                                    // },
                                     leading: GestureDetector(
                                       onTap: () async {
                                         // Display the image in large form.
@@ -244,29 +246,204 @@ class ProjectOwn extends StatelessWidget {
                                                 Radius.circular(50))),
                                         child: const CircleAvatar(
                                             radius: 50,
-                                            backgroundImage:
-                                                CachedNetworkImageProvider(
-                                                    "https://picsum.photos/300/30")),
+                                            backgroundImage: NetworkImage(
+                                                "https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uJTIwbG9va2luZyUyMGF0JTIwY2FtZXJhfGVufDB8fDB8fA%3D%3D&w=1000&q=80")),
                                       ),
                                     ),
                                     title: const Text(
-                                      'Ahmad Ahmad',
+                                      'Asad Abart',
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    subtitle: const Text('i can offer you..'),
+                                    subtitle: const CustomText.bodySmall(
+                                      "Sorry, can you clarify the last point? thanks",
+                                        style: TextStyle(
+                                          color: AppColors.grey2,
+                                        ),
+                                        maxLines: 1,
+                                        textOverflow: TextOverflow.ellipsis),
                                     trailing: Text(
-                                      timeago.format(
-                                        minAgo,
-                                        locale: 'en_short',
+                                        timeago.format(minAgo, locale: 'en_short'),
+                                        style: const TextStyle(fontSize: 11)),
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    onTap: () {},
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        // Display the image in large form.
+                                      },
+                                      child: Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: NetworkImage(
+                                              "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
+                                            )),
                                       ),
-                                      style: const TextStyle(fontSize: 11),
                                     ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) => SizedBox(
-                                  width: 7.0.w,
-                                ),
-                                itemCount: 5,
+                                    title: const Text(
+                                      'Yaser Ali',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    subtitle: const CustomText.bodySmall(
+                                      'All best,good luck',
+                                        style: TextStyle(
+                                          color: AppColors.grey2,
+                                        ),
+                                        maxLines: 2,
+                                        textOverflow: TextOverflow.ellipsis),
+                                    trailing: Text(
+                                        timeago.format(minAgo, locale: 'en_short'),
+                                        style: const TextStyle(fontSize: 11)),
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    onTap: () {},
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        // Display the image in large form.
+                                      },
+                                      child: Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: NetworkImage(
+                                                "https://st.depositphotos.com/1005858/1815/i/600/depositphotos_18158781-stock-photo-good-guy-portrait.jpg")),
+                                      ),
+                                    ),
+                                    title: const Text(
+                                      'Zaid AlMouhmad',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    subtitle: const CustomText.bodySmall(
+                                      'Good luck, I hope you find a freelancer as soon as possible. ',
+                                        style: TextStyle(
+                                          color: AppColors.grey2,
+                                        ),
+                                        maxLines: 2,
+                                        textOverflow: TextOverflow.ellipsis),
+                                    trailing: Text(
+                                        timeago.format(minAgo, locale: 'en_short'),
+                                        style: const TextStyle(fontSize: 11)),
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    onTap: () {},
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        // Display the image in large form.
+                                      },
+                                      child: Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: NetworkImage(
+                                                "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80")),
+                                      ),
+                                    ),
+                                    title: const Text(
+                                      'Adam Aouad',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    subtitle: const CustomText.bodySmall(
+                                        'shared a post:We want a designer and programmer to make a program about the flower lab for a private lab for a period of 5 months',
+                                        style: TextStyle(
+                                          color: AppColors.grey2,
+                                        ),
+                                        maxLines: 2,
+                                        textOverflow: TextOverflow.ellipsis),
+                                    trailing: Text(
+                                        timeago.format(minAgo, locale: 'en_short'),
+                                        style: const TextStyle(fontSize: 11)),
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    onTap: () {},
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        // Display the image in large form.
+                                      },
+                                      child: Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: NetworkImage(
+                                                "https://i.pinimg.com/236x/47/dc/2f/47dc2fd60f0e7724d503ad5e635884ac.jpg")),
+                                      ),
+                                    ),
+                                    title: const Text(
+                                      'Jood Mosa',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    subtitle: const CustomText.bodySmall(
+                                        "joud send to you  offer on Post UI/UX design :you have 14 offer ",
+                                        style: TextStyle(
+                                          color: AppColors.grey2,
+                                        ),
+                                        maxLines: 2,
+                                        textOverflow: TextOverflow.ellipsis),
+                                    trailing: Text(
+                                        timeago.format(minAgo, locale: 'en_short'),
+                                        style: const TextStyle(fontSize: 11)),
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    onTap: () {},
+                                    leading: GestureDetector(
+                                      onTap: () async {
+                                        // Display the image in large form.
+                                      },
+                                      child: Container(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const CircleAvatar(
+                                            radius: 50,
+                                            backgroundImage: NetworkImage(
+                                                "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80")),
+                                      ),
+                                    ),
+                                    title: const Text(
+                                      'Omar Asad',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
+                                    subtitle: const CustomText.bodySmall(
+                                        "People with similar interest are offer on post front end Project ",
+                                        style: TextStyle(
+                                          color: AppColors.grey2,
+                                        ),
+                                        maxLines: 2,
+                                        textOverflow: TextOverflow.ellipsis),
+                                    trailing: Text(
+                                        timeago.format(minAgo, locale: 'en_short'),
+                                        style: const TextStyle(fontSize: 11)),
+                                  ),
+                                  const Divider(),
+                                ],
+                                physics: const BouncingScrollPhysics(),
                               ),
                             ],
                           ),

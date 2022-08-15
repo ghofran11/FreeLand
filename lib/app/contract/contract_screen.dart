@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
 import 'package:freeland/common/widgets/text.dart';
@@ -34,7 +35,7 @@ class ContractScreen extends StatelessWidget {
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: ContractScreen(),
+      child: const ContractScreen(),
     );
   }
 
@@ -69,44 +70,44 @@ class ContractScreen extends StatelessWidget {
               ],
             ),
             Row(
-              children: [
-                const CustomText.bodyMedium(
+              children: const [
+                CustomText.bodyMedium(
                   'Project Owner: ',
                 ),
-                const CustomText.bodyMedium(
+                CustomText.bodyMedium(
                   'Mahmoud Mahmoud',
                   style: TextStyle(color: AppColors.primary),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 12.0,
             ),
             Row(
-              children: [
-                const CustomText.bodyMedium(
+              children: const [
+                CustomText.bodyMedium(
                   'Project Owner: ',
                 ),
-                const CustomText.bodyMedium(
+                CustomText.bodyMedium(
                   'Mahmoud Ahmed',
                   style: TextStyle(color: AppColors.primary),
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Divider(thickness: 1.5),
             ),
-            CustomReactiveTextField(
+            const CustomReactiveTextField(
               formControlName: 'desc',
               maxLines: 6,
               labelText: "Project Description",
               hintText: "Plaeas add a clear full description of this contract ",
             ),
             SizedBox(
-              height: 12.0,
+              height: 12.0.h,
             ),
-            CustomReactiveTextField(
+            const CustomReactiveTextField(
               formControlName: 'levels',
               maxLines: 1,
               labelText: "Number of Levels",
@@ -115,7 +116,7 @@ class ContractScreen extends StatelessWidget {
             ReactiveValueListenableBuilder(
                 formControlName: 'levels',
                 builder: (context, control, child) {
-                  if (form.control('levels').value != null)
+                  if (form.control('levels').value != null) {
                     return Column(
                       children: List.generate(
                           form.control('levels').value as int,
@@ -130,18 +131,18 @@ class ContractScreen extends StatelessWidget {
                                             color: index % 2 == 0
                                                 ? AppColors.green
                                                 : AppColors.yellowAccent)),
-                                    CustomReactiveTextField(
+                                    const CustomReactiveTextField(
                                       formControlName: 'price',
                                       maxLines: 1,
                                       labelText: "Price Of the level",
                                       keyboardType: TextInputType.number,
                                     ),
-                                    CustomReactiveTextField(
+                                    const CustomReactiveTextField(
                                       formControlName: 'deadline',
                                       maxLines: 1,
                                       labelText: "Deadline",
                                     ),
-                                    CustomReactiveTextField(
+                                    const CustomReactiveTextField(
                                       formControlName: 'deadline_support',
                                       maxLines: 1,
                                       hintText:
@@ -152,10 +153,11 @@ class ContractScreen extends StatelessWidget {
                                 ),
                               )),
                     );
-                  else
+                  } else {
                     return Container();
+                  }
                 }),
-            ElevatedButton(onPressed: () {}, child: Text('Sunmit Contract'))
+            ElevatedButton(onPressed: () {}, child: const Text('Submit Contract'))
           ],
         ),
       )),

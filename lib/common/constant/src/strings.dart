@@ -3,4 +3,5 @@ class AppStrings {
   static const email = "Email";
   static const number = "Number";
   static const defaultErrorMsg = "Some thing went wrong";
+  static const defaultSuccessMsg = "Done Succeffuly";
 }

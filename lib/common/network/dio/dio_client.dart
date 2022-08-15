@@ -49,29 +49,29 @@ class DioClient with DioMixin implements Dio {
         logInterceptor,
       ]);
     this.interceptors.addAll([
-      RefreshTokenInterceptor<AuthTokenModel>(
-        dio: this,
-        tokenProtocol: TokenProtocol(
-          shouldRefresh: (response, token) => response?.statusCode == 403,
-        ),
-        onRevoked: (dioError) {},
-        tokenStorage: getIt<ReactiveTokenStorage>(),
-        tokenDio: tokenDio,
-        refreshToken: (token, dio) async {
-          ///ToDo:
-          // final response = await dio.post(
-          //   AppUri.refreshToken,
-          //   queryParameters: {
-          //     'userId': getIt<AuthApi>().getUser()?.id,
-          //     'refreshToken': token.refreshToken,
-          //   },
-          // );
-          // final authTokenModel = AuthTokenModel.fromMap(response.data);
-          final authTokenModel =
-              AuthTokenModel(accessToken: "", refreshToken: "");
-          return authTokenModel;
-        },
-      ),
+      // RefreshTokenInterceptor<AuthTokenModel>(
+      //   dio: this,
+      //   tokenProtocol: TokenProtocol(
+      //     shouldRefresh: (response, token) => false,
+      //   ),
+      //   onRevoked: (dioError) {},
+      //   tokenStorage: getIt<ReactiveTokenStorage>(),
+      //   tokenDio: tokenDio,
+      //   refreshToken: (token, dio) async {
+      //     ///ToDo:
+      //     // final response = await dio.post(
+      //     //   AppUri.refreshToken,
+      //     //   queryParameters: {
+      //     //     'userId': getIt<AuthApi>().getUser()?.id,
+      //     //     'refreshToken': token.refreshToken,
+      //     //   },
+      //     // );
+      //     // final authTokenModel = AuthTokenModel.fromMap(response.data);
+      //     final authTokenModel =
+      //         AuthTokenModel(accessToken: "", refreshToken: "");
+      //     return authTokenModel;
+      //   },
+      // ),
       if (!kReleaseMode) logInterceptor,
       ErrorInterceptor(),
     ]);

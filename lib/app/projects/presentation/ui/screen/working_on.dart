@@ -14,7 +14,7 @@ class WorkingOn extends StatefulWidget {
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: WorkingOn(),
+      child: const WorkingOn(),
     );
   }
 
@@ -50,14 +50,12 @@ class _WorkingOnState extends State<WorkingOn> {
                     )),
                 const CustomText.titleLarge(
                   'Flower Lab Details',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: AppColors.primary),
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: CustomText.bodyMedium(
+            const Padding(
+              padding: EdgeInsets.all(12.0),
+              child: const CustomText.bodyMedium(
                   "These are the levels of Flowes LAb prject, when you finish a level please submit it as completed to move on to next level>"),
             ),
             SizedBox(
@@ -85,17 +83,17 @@ class _WorkingOnState extends State<WorkingOn> {
         endChild: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText.titleLarge('Analise'),
-            CustomText.bodyMedium(
+           const CustomText.titleLarge('Analise'),
+            const CustomText.bodyMedium(
               'Description for level is: Facebook is a social networking site that makes it easy for you to connect and share with family and friends online. Originally designed for college students, Facebook was created in 2004 by Mark Zuckerberg while he was enrolled at Harvard University. By 2006, anyone over the age of 13 with a valid email address could join Facebook. Today, Facebook is the worlds largest social network, with more than 1 billion users worldwide.',
             ),
-            SizedBox(height: 4.0),
-            CustomText.bodySmall(
+            const SizedBox(height: 4.0),
+            const CustomText.bodySmall(
               'Budget: 100 S.P',
               style: TextStyle(color: AppColors.grey2),
             ),
-            SizedBox(height: 4.0),
-            CustomText.bodySmall(
+            const SizedBox(height: 4.0),
+            const CustomText.bodySmall(
               'Deadline 20/1/2022',
               style: TextStyle(color: AppColors.grey2),
             ),
@@ -107,7 +105,7 @@ class _WorkingOnState extends State<WorkingOn> {
                       _selectedIndex = index + 1;
                     });
                   },
-                  child: Text("Submit this level as Completed")),
+                  child: const Text("Submit this level as Completed")),
             )
           ],
         ),
@@ -115,7 +113,7 @@ class _WorkingOnState extends State<WorkingOn> {
         isLast: length == index + 1,
         indicatorStyle: IndicatorStyle(
           indicatorXY: 0.0,
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           width: 32,
           height: 35,
           color: AppColors.primary,
@@ -133,7 +131,7 @@ class _WorkingOnState extends State<WorkingOn> {
             child: Center(
               child: Text(
                 (index + 1).toString(),
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.white,
                   fontSize: 20,
                 ),
@@ -229,19 +227,19 @@ class OtherLevel extends StatelessWidget {
       endChild: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 12.0,
           ),
           (index % 2 == 0)
-              ? CustomText.titleLarge('Support')
-              : CustomText.titleLarge('Design'),
+              ? const CustomText.titleLarge('Support')
+              : const CustomText.titleLarge('Design'),
         ],
       ),
       lineXY: 0.1,
       isLast: length == index + 1,
       indicatorStyle: IndicatorStyle(
         indicatorXY: 0.0,
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         width: 32,
         height: 35,
         color: AppColors.primary,
@@ -259,7 +257,7 @@ class OtherLevel extends StatelessWidget {
           child: Center(
             child: Text(
               (index + 1).toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppColors.white,
                 fontSize: 20,
               ),

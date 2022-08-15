@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/comment_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/offer_screen.dart';
+import 'package:freeland/common/widgets/currency_symbo.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -17,12 +19,14 @@ import '../../../../../common/widgets/text.dart';
 import '../../../../home/presentation/ui/screen/home_screen.dart';
 
 class ProjectDetail extends StatefulWidget {
-  ProjectDetail({Key? key}) : super(key: key);
+  final ServiceDto service;
+
+  ProjectDetail({Key? key, required this.service}) : super(key: key);
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: ProjectDetail(),
+      child: ProjectDetail(service: state.extra as ServiceDto),
     );
   }
 
@@ -39,138 +43,170 @@ class _ProjectDetailState extends State<ProjectDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
+      body: Stack(
         children: [
-          Stack(
+          ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      width: MediaQuery.of(context).size.width,
-                      clipBehavior: Clip.hardEdge,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: CachedNetworkImageProvider(
-                                  "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(buttonBorderRadius),
-                              bottomRight:
-                                  Radius.circular(buttonBorderRadius)))),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 10),
-                    child: Column(
+              Container(
+                  height: MediaQuery.of(context).size.height / 4,
+                  width: MediaQuery.of(context).size.width,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: CachedNetworkImageProvider(
+                              "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(buttonBorderRadius),
+                          bottomRight:
+                          Radius.circular(buttonBorderRadius)))),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 18, vertical: 10),
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                CustomText.titleMedium('UI/UX Design'),
-                                CustomText.bodySmall(
-                                  'by Ahmad Ahmad',
-                                  style: TextStyle(color: Colours.grey),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            Column(
-                              children: const [
-                                CustomText.titleSmall('\$200-300',
-                                    style: TextStyle(
-                                      color: AppColors.primary,
-                                    )),
-                                CustomText.labelMedium('Available'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15.0.h,
-                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: 5.0.h,
+                            CustomText.titleMedium(widget.service.name),
+                            CustomText.bodySmall(
+                              widget.service.nameOwner,
+                              style: const TextStyle(color: Colours.grey),
                             ),
-                            const CustomText.bodyMedium(
-                                'UI/UX het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap. Vraag een online demo aan en ontdek wat Mopinion voor jou kan betekenen. Online Demo. Maak eigen feedbackforms. Real Time inzichten. Feedback voor Apps. Verhoog conversie. Slimmere dashboards. Feedback voor Websites. Feedback voor Email. Typen: Mopinion voor Websites, Mopinion voor Apps.Verhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschapVerhoog het succes van jouw email campagnes. Begin met het sturen van de juiste boodschap'),
+                          ],
+                        ),
+                        const Spacer(),
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                CustomText.labelMedium(
+                                  widget.service.minPrice.toString(),
+                                  style:
+                                  const TextStyle(color: AppColors.primary),
+                                ),
+                                const CurrencySymbol(
+                                  color: AppColors.primary,
+                                ),
+                                const CustomText.labelMedium('-'),
+                                CustomText.labelMedium(
+                                    widget.service.maxPrice.toString(),
+                                    style: const TextStyle(
+                                        color: AppColors.primary)),
+                                const CurrencySymbol(
+                                  color: AppColors.primary,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ],
                     ),
-                  ),
-                  const Divider(color: AppColors.black),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
+                    SizedBox(
+                      height: 15.0.h,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 50.0,
-                          width: 50.0,
-                          decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50))),
-                          child: const CircleAvatar(
-                              radius: 50,
-                              backgroundImage: CachedNetworkImageProvider(
-                                "https://www.acecloudhosting.com/blog/wp-content/uploads/2020/05/remote-working-for-small-business-600x343.jpg",
-                              )),
-                        ),
                         SizedBox(
-                          width: 5.0.h,
+                          height: 5.0.h,
                         ),
-                        const CustomText.titleSmall(
-                          "Leave a comment",
-                          style: TextStyle(color: AppColors.grey2),
-                        ),
-                        const Spacer(),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            color: Colours.lightBlue,
-                          ),
-                          onPressed: () {
-                            context.pushNamed(CommentScreen.routeName);
-                          },
-                        ),
+                        CustomText.bodyMedium(widget.service.description),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              IconButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.primary,
-                  )),
+              const Divider(color: AppColors.black),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 50.0,
+                        width: 50.0,
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                            BorderRadius.all(Radius.circular(50))),
+                        child: const CircleAvatar(
+                            radius: 50,
+                            backgroundImage: CachedNetworkImageProvider(
+                              "https://www.acecloudhosting.com/blog/wp-content/uploads/2020/05/remote-working-for-small-business-600x343.jpg",
+                            )),
+                      ),
+                    ),
+
+                    Expanded(
+                      flex: 4,
+                      child: InkWell(
+                        onTap: () {
+                          context.pushNamed(CommentScreen.routeName,
+                          extra: widget.service.id);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            CustomText.titleSmall(
+                              "Leave a comment",
+                              style: TextStyle(color: AppColors.grey2),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              color: Colours.lightBlue,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+
+
             ],
           ),
-          SizedBox(
-            height: 10.0.h,
+          Positioned(
+            top: 20,
+           left: 0,
+            child:                   IconButton(
+              onPressed: () {
+                context.pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.primary,
+              )),
           ),
-          Padding(
+          Positioned(
+
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child:           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
+              // style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green),),
               onPressed: () {
-                context.pushNamed(OfferScreen.routeName);
+                context.pushNamed(OfferScreen.routeName,
+                    extra: [widget.service.id,widget.service.name]);
               },
               child: const CustomText.bodyMedium(
                 'Add your offer',
                 style: TextStyle(color: Colors.white),
               ),
             ),
-          ),
+          ),)
         ],
-      ),
+      )
+
+
+
     );
   }
 }

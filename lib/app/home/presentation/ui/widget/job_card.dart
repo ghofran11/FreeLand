@@ -1,18 +1,22 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freeland/app/home/infrastructure/models/service.dart';
+import 'package:freeland/common/widgets/currency_symbo.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../common/config/theme/src/colors.dart';
 import '../../../../../common/widgets/text.dart';
 import '../../../../projects/presentation/ui/screen/project_detail.dart';
 class JobCard extends StatelessWidget {
-  const JobCard({Key? key}) : super(key: key);
+  ServiceDto service;
+   JobCard({Key? key,required this. service,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return  InkWell(
       onTap: () {
-        context.pushNamed(ProjectDetail.routeName);
+       context.pushNamed(ProjectDetail.routeName,extra: service);
       },
       child: Card(
         color: Colours.white,
@@ -21,18 +25,27 @@ class JobCard extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              CustomText.titleMedium('Ahmad Ahmad'),
+            children:  [
+              CustomText.titleMedium(service.nameOwner),
               SizedBox(
-                height: 3,
+                height: 3.0.h,
               ),
-              CustomText.labelMedium(' \$400-700'),
+              Row(
+                children: [
+                  CustomText.labelMedium(service.minPrice.toString() ,style:const TextStyle(color: AppColors.primary),),
+                  const CurrencySymbol(color: AppColors.primary,),
+                  const CustomText.labelMedium(' - ' ),
+                  CustomText.labelMedium(service.maxPrice. toString(),style:const TextStyle(color: AppColors.primary),),
+                  const CurrencySymbol(color: AppColors.primary,),
+
+                ],
+              ),
               SizedBox(
-                height: 3,
+                height: 3.0.h,
               ),
               CustomText.bodySmall(
-                  'Ahmad Ahmad \$400-700  we have project Ahmad Ahmad we have project Ahmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have projectAhmad Ahmad \$400-700  we have project',
-                  style: TextStyle(color: AppColors.grey2,),
+                service.description,
+                  style:const TextStyle(color: AppColors.grey2,),
                   maxLines: 1,
                   textOverflow: TextOverflow.ellipsis),
             ],

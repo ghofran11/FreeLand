@@ -60,7 +60,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       } else if (event is CountrySelected) {
         emit(state.copyWith(countrySelected: event.country));
       }
-    });
+    }
+    );
   }
 
   submission(Emitter emit, BuildContext context) async {
