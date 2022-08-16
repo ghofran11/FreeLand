@@ -63,12 +63,18 @@ class HomePage extends StatelessWidget {
                     children: [
                       ReactiveForm(
                         formGroup: searchForm,
-                        child: CustomReactiveTextField(
-                          formControlName: 'searchKey',
-                          labelText: 'Search',
-                          keyboardType: TextInputType.text,
-                          suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass,
-                              size: 18.0.r),
+                        child: InkWell(
+                          onTap: () {
+                            //ToDo: Navigate to search screen
+                          },
+                          child: CustomReactiveTextField(
+                            formControlName: 'searchKey',
+                            labelText: 'Search',
+                            keyboardType: TextInputType.text,
+                            readOnly: true,
+                            suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass,
+                                size: 18.0.r),
+                          ),
                         ),
                       ),
                       SizedBox(
