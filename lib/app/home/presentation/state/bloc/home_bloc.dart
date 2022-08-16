@@ -46,18 +46,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   emit(state.copyWith(serviceStatus: BlocStatus.success()))
                 });
       }
-      if(event is FetchAllUser){
+      if (event is FetchAllUser) {
         emit(state.copyWith(userStatus: BlocStatus.loading()));
 
-
         (await _homeRepositoryImpl.fetchAllUsers()).fold(
-                (left) => emit(
-                state.copyWith(userStatus: BlocStatus.fail(error: left))),
-                (right) => {
-              users = right,
-              emit(state.copyWith(userStatus: BlocStatus.success())),
-            });
-
+            (left) =>
+                emit(state.copyWith(userStatus: BlocStatus.fail(error: left))),
+            (right) => {
+                  users = right,
+                  emit(state.copyWith(userStatus: BlocStatus.success())),
+                });
       }
       if (event is CommonQuestionsFetched) {
         emit(state.copyWith(commonQuestionsStatus: BlocStatus.loading()));

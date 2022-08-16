@@ -1,4 +1,3 @@
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -51,7 +50,9 @@ class HomePage extends StatelessWidget {
         child: Container(
           color: AppColors.background,
           child: BlocProvider(
-            create: (context) => getIt<HomeBloc>()..add(FetchAllCategory())..add(FetchAllUser()),
+            create: (context) => getIt<HomeBloc>()
+              ..add(FetchAllCategory())
+              ..add(FetchAllUser()),
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [

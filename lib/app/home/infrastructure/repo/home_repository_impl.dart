@@ -7,7 +7,6 @@ import 'package:freeland/app/home/infrastructure/models/contact_us_params.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/home/infrastructure/models/user.dart';
 import 'package:freeland/common/network/error_handler.dart';
-import 'package:freeland/core/user/entities/user.dart';
 
 class HomeRepositoryImpl extends HomeRepository {
   HomeRemote remote;
@@ -53,4 +52,5 @@ class HomeRepositoryImpl extends HomeRepository {
       final List<UserDto> user = await remote.fetchAllUser();
       return (user);
     });
-  }}
+  }
+}

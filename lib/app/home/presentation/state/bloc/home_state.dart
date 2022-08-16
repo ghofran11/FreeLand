@@ -2,12 +2,17 @@ part of 'home_bloc.dart';
 
 class HomeState {
   @override
-  List<Object?> get props =>
-      [categoryStatus, serviceStatus, contactUsStatus, commonQuestionsStatus,userStatus];
+  List<Object?> get props => [
+        categoryStatus,
+        serviceStatus,
+        contactUsStatus,
+        commonQuestionsStatus,
+        userStatus
+      ];
 
-   final BlocStatus categoryStatus;
-   final BlocStatus serviceStatus;
-   final BlocStatus userStatus;
+  final BlocStatus categoryStatus;
+  final BlocStatus serviceStatus;
+  final BlocStatus userStatus;
   final BlocStatus contactUsStatus;
   final BlocStatus commonQuestionsStatus;
 
@@ -22,11 +27,11 @@ class HomeState {
   HomeState copyWith(
       {BlocStatus? categoryStatus,
       BlocStatus? serviceStatus,
-        BlocStatus? userStatus,
+      BlocStatus? userStatus,
       BlocStatus? commonQuestionsStatus,
       BlocStatus? contactUsStatus}) {
     return HomeState(
-        userStatus: userStatus ?? this.userStatus
+        userStatus: userStatus ?? this.userStatus,
         categoryStatus: categoryStatus ?? this.categoryStatus,
         contactUsStatus: contactUsStatus ?? this.contactUsStatus,
         commonQuestionsStatus:
@@ -34,9 +39,8 @@ class HomeState {
         serviceStatus: serviceStatus ?? this.serviceStatus);
   }
 
-   @override
-   String toString() {
-     return "FetchAllCategory: $categoryStatus,FetchAllService: $serviceStatus,FetchAllUser:$userStatus ";
-   }
-
+  @override
+  String toString() {
+    return "FetchAllCategory: $categoryStatus,FetchAllService: $serviceStatus,FetchAllUser:$userStatus ";
+  }
 }
