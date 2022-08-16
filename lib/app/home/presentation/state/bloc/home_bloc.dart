@@ -3,6 +3,7 @@ import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/home/infrastructure/models/commom_question.dart';
 import 'package:freeland/app/home/infrastructure/models/contact_us_params.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
+import 'package:freeland/app/home/infrastructure/models/user.dart';
 import 'package:freeland/app/home/infrastructure/repo/home_repository_impl.dart';
 import 'package:freeland/common/widgets/image_holder/image_file.dart';
 import 'package:freeland/core/bloc_status.dart';
@@ -15,6 +16,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<CategoryDto> categories = [];
   List<ServiceDto> services = [];
+  List<UserDto> users = [];
   List<CommonQuestionModel> commonQuestions = [];
   late final HomeRepositoryImpl _homeRepositoryImpl;
 
@@ -43,6 +45,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   services = right,
                   emit(state.copyWith(serviceStatus: BlocStatus.success()))
                 });
+      }
+      if(event is FetchAllUser){
+        emit(state.copyWith(userStatus: BlocStatus.loading()));
+
+
+        (await _homeRepositoryImpl.fetchAllUsers()).fold(
+                (left) => emit(
+                state.copyWith(userStatus: BlocStatus.fail(error: left))),
+                (right) => {
+              users = right,
+              emit(state.copyWith(userStatus: BlocStatus.success())),
+            });
+
       }
       if (event is CommonQuestionsFetched) {
         emit(state.copyWith(commonQuestionsStatus: BlocStatus.loading()));

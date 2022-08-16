@@ -110,12 +110,10 @@ class NotificationsPage extends StatelessWidget {
                                  physics: const BouncingScrollPhysics(),
                                );
                              }
-
                              else if (state.notificationStatus.isLoading()) {
                                return const LoadingProgress();
                              }
                              return Container();
-
                            }),
                             ListView(
                               children: [

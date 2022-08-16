@@ -17,3 +17,5 @@ class ContactUSSubmitted extends HomeEvent {
 class CommonQuestionsFetched extends HomeEvent {
   CommonQuestionsFetched();
 }
+
+class FetchAllUser extends HomeEvent{}

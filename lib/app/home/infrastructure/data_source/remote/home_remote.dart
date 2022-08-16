@@ -3,6 +3,7 @@ import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/home/infrastructure/models/commom_question.dart';
 import 'package:freeland/app/home/infrastructure/models/contact_us_params.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
+import 'package:freeland/app/home/infrastructure/models/user.dart';
 import 'package:freeland/common/constant/src/url.dart';
 import 'package:freeland/common/network/error_handler.dart';
 
@@ -48,6 +49,15 @@ class HomeRemote {
             maxPrice: 200)
       ];
       return services;
+    });
+  }
+
+  Future<List<UserDto>> fetchAllUser() async {
+    return throwDioException<List<UserDto>>(() async {
+      late final Response response;
+      response = await _dio.get(AppUri.userFetched);
+      var users = userFromJson(response.data);
+      return users;
     });
   }
 
