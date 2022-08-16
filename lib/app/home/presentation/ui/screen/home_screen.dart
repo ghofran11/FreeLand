@@ -1,16 +1,12 @@
-import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:freeland/app/home/infrastructure/models/category.dart';
-import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/home/presentation/state/bloc/home_bloc.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
 import 'package:freeland/app/home/presentation/ui/widget/job_card.dart';
@@ -41,7 +37,7 @@ class HomePage extends StatelessWidget {
     );
     return Scaffold(
       body: BlocProvider(
-        create: (context) => getIt<HomeBloc>()..add(FetchAllCategory()),
+        create: (context) => getIt<HomeBloc>()..add(FetchAllCategory())..add(FetchAllUser()),
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [

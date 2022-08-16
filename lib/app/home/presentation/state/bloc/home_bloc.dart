@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
+import 'package:freeland/app/home/infrastructure/models/user.dart';
 import 'package:freeland/app/home/infrastructure/repo/home_repository_impl.dart';
 import 'package:freeland/core/bloc_status.dart';
 import 'package:freeland/core/result_builder/result.dart';
@@ -14,6 +15,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<CategoryDto> categories = [];
   List<ServiceDto> services = [];
+  List<UserDto> users = [];
   late final HomeRepositoryImpl _homeRepositoryImpl;
 
   HomeBloc(HomeRepositoryImpl homeRepositoryImpl) : super(const HomeState()) {
@@ -42,6 +44,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   services = right,
                   emit(state.copyWith(serviceStatus: BlocStatus.success()))
                 });
+      }
+      if(event is FetchAllUser){
+        emit(state.copyWith(userStatus: BlocStatus.loading()));
+
+
+        (await _homeRepositoryImpl.fetchAllUsers()).fold(
+                (left) => emit(
+                state.copyWith(userStatus: BlocStatus.fail(error: left))),
+                (right) => {
+              users = right,
+              emit(state.copyWith(userStatus: BlocStatus.success())),
+            });
+
       }
     });
   }

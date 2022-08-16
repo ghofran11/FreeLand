@@ -1,3 +1,8 @@
+
+List<User> categoriesFromJson(List<dynamic> data) {
+  return data.map((e) => User.fromMap(e)).toList();
+}
+
 class User {
   final String id;
   final String fullName;

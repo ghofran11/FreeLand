@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/add_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/all_own_project.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/pending_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_own.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/working_on.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +54,7 @@ class ProjectPage extends StatelessWidget {
             Row(
               children: [
                 const CustomText.titleMedium(
-                  'Own project',
+                  'Post projects',
                   style: TextStyle(fontSize: 15),
                 ),
                 const Spacer(),
@@ -256,6 +257,105 @@ class ProjectPage extends StatelessWidget {
                                           (index % 2 == 0) ? '15/5' : '17/4',
                                           style: TextStyle(
                                               color: Colors.redAccent)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+            SizedBox(
+              height: 30.0.h,
+            ),
+            Row(
+              children: const [
+                CustomText.titleMedium(
+                  'Pending Project',
+                  style: TextStyle(),
+                ),
+                Spacer(),
+                CustomText.bodySmall(
+                  "See All",
+                  style: TextStyle(color: AppColors.primary),
+                )
+              ],
+            ),
+            SizedBox(height: 10.0.h),
+            SizedBox(
+              height: 250,
+              child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(5),
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 7.0.h,
+                  ),
+                  itemCount: 2,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        context.pushNamed(PendingProject.routeName);
+                      },
+                      child: Card(
+                        color: Colours.aliceBlue.shade100,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const CustomText.titleSmall('Medical Website'),
+                              SizedBox(
+                                height: 15.0.h,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    children: [
+                                      const CustomText.titleMedium(
+                                        'ALi sadi',
+                                        style: TextStyle(
+                                            color: AppColors.primary,
+                                            fontSize: 14),
+                                      ),
+                                      SizedBox(
+                                        height: 10.0.h,
+                                      ),
+                                      const CustomText.bodyMedium(
+                                        'Freelancer',
+                                        style: TextStyle(
+                                            color: AppColors.grey2,
+                                            fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      height: 40.0.h,
+                                      child: const VerticalDivider(
+                                        color: AppColors.grey2,
+                                      )),
+                                  Column(
+                                    children: [
+                                      const CustomText.titleMedium(
+                                        ' \$ 500',
+                                        style: TextStyle(
+                                            color: AppColors.primary,
+                                            fontSize: 14),
+                                      ),
+                                      SizedBox(
+                                        height: 10.0.h,
+                                      ),
+                                      const CustomText.bodyMedium(
+                                        'Salary',
+                                        style: TextStyle(
+                                            color: AppColors.grey2,
+                                            fontSize: 12),
+                                      ),
                                     ],
                                   ),
                                 ],

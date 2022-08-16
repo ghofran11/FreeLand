@@ -16,6 +16,7 @@ import 'package:freeland/app/projects/presentation/ui/screen/add_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/all_own_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/comment_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/offer_screen.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/pending_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_detail.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_own.dart';
 import 'package:freeland/app/root/root_screen.dart';
@@ -115,6 +116,12 @@ class RouterConfig {
                   name: AddProject.routeName,
                   pageBuilder: (context, state) =>
                       AddProject.pageBuilder(context, state),
+                  routes: []),
+              GoRoute(
+                  path: PendingProject.routePath,
+                  name: PendingProject.routeName,
+                  pageBuilder: (context, state) =>
+                      PendingProject.pageBuilder(context, state),
                   routes: []),
               GoRoute(
                   path: ProjectOwn.routePath,

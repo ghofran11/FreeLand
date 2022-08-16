@@ -3,7 +3,9 @@ import 'package:freeland/app/home/domain/repos/home_repository.dart';
 import 'package:freeland/app/home/infrastructure/data_source/remote/home_remote.dart';
 import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
+import 'package:freeland/app/home/infrastructure/models/user.dart';
 import 'package:freeland/common/network/error_handler.dart';
+import 'package:freeland/core/user/entities/user.dart';
 
 class HomeRepositoryImpl extends HomeRepository{
   HomeRemote remote;
@@ -25,5 +27,13 @@ class HomeRepositoryImpl extends HomeRepository{
     return throwAppException<List<ServiceDto>>(() async {
       final List<ServiceDto> services = await remote.fetchAllService(categoryId);
       return (services);
+    });
+  }
+
+  @override
+  Future<Either<String, List<UserDto>>> fetchAllUsers() {
+    return throwAppException<List<UserDto>>(() async {
+      final List<UserDto> user = await remote.fetchAllUser();
+      return (user);
     });
   }}

@@ -8,3 +8,5 @@ class FetchAllService extends HomeEvent {
   final String id;
   FetchAllService({required this. id});
 }
+
+class FetchAllUser extends HomeEvent{}
