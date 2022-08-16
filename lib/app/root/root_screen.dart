@@ -6,6 +6,7 @@ import 'package:freeland/app/home/presentation/ui/screen/home_screen.dart';
 import 'package:freeland/app/notifications/presentation/notifications_page.dart';
 import 'package:freeland/app/profile/personal_profile_page.dart';
 import 'package:freeland/app/projects/presentation/ui/projects_screen.dart';
+import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,20 +41,12 @@ class _RootScreenState extends State<RootScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-      //     IconButton(
-      //         onPressed: () {
-      //           context.read<AppManagerBloc>().add(const AppManagerLoggedOut());
-      //         },
-      //         icon: const FaIcon(FontAwesomeIcons.infinity))
-      //   ],
-      // ),
       bottomNavigationBar: BottomNavyBar(
         iconSize: 20.r,
 
         selectedIndex: _selectedIndex,
         showElevation: true,
+        backgroundColor: AppColors.background,
         // use this to remove appBar's elevation
         onItemSelected: (index) => setState(() {
           _selectedIndex = index;
@@ -66,6 +59,7 @@ class _RootScreenState extends State<RootScreen> {
             icon: const FaIcon(
               FontAwesomeIcons.house,
             ),
+            inactiveColor: AppColors.borderColor,
             title: const CustomText.bodySmall("Home"),
             textAlign: TextAlign.center,
           ),
@@ -73,22 +67,25 @@ class _RootScreenState extends State<RootScreen> {
             icon: const FaIcon(
               FontAwesomeIcons.solidBell,
             ),
+            inactiveColor: AppColors.borderColor,
             textAlign: TextAlign.center,
             title: const CustomText.bodySmall("Notifications"),
           ),
           BottomNavyBarItem(
-            icon: const FaIcon(
-              FontAwesomeIcons.solidUser,
-            ),
-            textAlign: TextAlign.center,
-            title: const CustomText.bodySmall("Profile"),
-          ),
-          BottomNavyBarItem(
+            inactiveColor: AppColors.borderColor,
             icon: const FaIcon(
               FontAwesomeIcons.bookOpen,
             ),
             textAlign: TextAlign.center,
             title: const CustomText.bodySmall("Projects"),
+          ),
+          BottomNavyBarItem(
+            icon: const FaIcon(
+              FontAwesomeIcons.solidUser,
+            ),
+            inactiveColor: AppColors.borderColor,
+            textAlign: TextAlign.center,
+            title: const CustomText.bodySmall("Profile"),
           ),
         ],
       ),
@@ -97,10 +94,10 @@ class _RootScreenState extends State<RootScreen> {
             controller: _pageController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              const HomePage(),
+              HomePage(),
               NotificationsPage(),
+              const ProjectPage(),
               const PersonalProfilePage(),
-              const ProjectPage()
             ]),
       ),
     );

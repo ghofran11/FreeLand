@@ -18,6 +18,8 @@ import 'package:freeland/app/projects/presentation/ui/screen/comment_screen.dart
 import 'package:freeland/app/projects/presentation/ui/screen/offer_screen.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_detail.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/project_own.dart';
+import 'package:freeland/app/root/common_questions_screen.dart';
+import 'package:freeland/app/root/contact_us_screen.dart';
 import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/app/root/splash_screen.dart';
 import 'package:freeland/app/welcome/presentation/welcome_screen.dart';
@@ -61,6 +63,18 @@ class RouterConfig {
             pageBuilder: (context, state) =>
                 RootScreen.pageBuilder(context, state),
             routes: [
+              GoRoute(
+                path: CommonQuestionsScreen.routePath,
+                name: CommonQuestionsScreen.routeName,
+                pageBuilder: (context, state) =>
+                    CommonQuestionsScreen.pageBuilder(context, state),
+              ),
+              GoRoute(
+                path: ContactUsScreen.routePath,
+                name: ContactUsScreen.routeName,
+                pageBuilder: (context, state) =>
+                    ContactUsScreen.pageBuilder(context, state),
+              ),
               GoRoute(
                 path: PersonalInfoUpdate.routePath,
                 name: PersonalInfoUpdate.routeName,

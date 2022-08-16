@@ -2,11 +2,18 @@
 class Assets {
   Assets._();
 
+  static const String fontsAlmaraiBold = 'assets/fonts/Almarai_Bold.ttf';
+  static const String fontsAlmaraiExtraBold =
+      'assets/fonts/Almarai_ExtraBold.ttf';
+  static const String fontsAlmaraiLight = 'assets/fonts/Almarai_Light.ttf';
+  static const String fontsAlmaraiRegular = 'assets/fonts/Almarai_Regular.ttf';
   static const String iconsFreeland = 'assets/icons/freeland.svg';
   static const String iconsLoading = 'assets/icons/loading.json';
   static const String iconsLock = 'assets/icons/lock.svg';
   static const String iconsLogo = 'assets/icons/logo.svg';
   static const String iconsLogoFreeland = 'assets/icons/logo_freeland.svg';
   static const String iconsUser = 'assets/icons/user.svg';
+  static const String imagesCommonQuestions =
+      'assets/images/common_questions.png';
   static const String imagesImg = 'assets/images/img.png';
 }

@@ -1,4 +1,3 @@
-import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,7 +21,7 @@ class AppThemes {
       textSelectionTheme: const TextSelectionThemeData(
         cursorColor: AppColors.primary,
       ),
-      scaffoldBackgroundColor: Colours.whiteSmoke,
+      scaffoldBackgroundColor: AppColors.background,
       outlinedButtonTheme: OutlinedButtonThemeData(style: outlineButtonStyle),
       elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
       appBarTheme: const AppBarTheme(

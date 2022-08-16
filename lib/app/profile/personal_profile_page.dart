@@ -8,6 +8,7 @@ import 'package:freeland/app/profile/presentation/widgets/portfolio_section.dart
 import 'package:freeland/app/profile/presentation/widgets/projects_section.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
+import 'package:freeland/common/constant/constants.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
@@ -41,7 +42,10 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                 horizontal: horizontalAppPadding.w),
             children: [
               // ImageHolder(onUpdateImage: (image) {}, onDeleteImage: () {}),
-              ProfileImage(),
+              ProfileImage(
+                  //ToDo
+                  // image: state.profile.,
+                  ),
               Padding(
                 padding: EdgeInsets.all(8.0.r),
                 child: CustomText.titleLarge(
@@ -70,14 +74,14 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
+                children: [
                   StatisticsWidget(
                     color: AppColors.green,
                     child: FaIcon(
                       FontAwesomeIcons.listCheck,
                       color: AppColors.green,
                     ),
-                    title: "4",
+                    title: state.profile!.numOfCompletedProjects.toString(),
                   ),
                   StatisticsWidget(
                     color: AppColors.blueAccent2,
@@ -85,7 +89,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                       FontAwesomeIcons.solidCircleUser,
                       color: AppColors.blueAccent2,
                     ),
-                    title: "300",
+                    title: state.profile!.numOfConnections.toString(),
                   ),
                   StatisticsWidget(
                     color: AppColors.yellow,
@@ -93,44 +97,34 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                       FontAwesomeIcons.solidStar,
                       color: AppColors.yellow,
                     ),
-                    title: "3.4",
+                    title: state.profile!.evalution.toString(),
                   ),
                 ],
               ),
               Wrap(
-                spacing: 4.0.w,
-                alignment: WrapAlignment.center,
-                children: const [
-                  Chip(
-                    label: Text("Ui-Ux"),
-                  ),
-                  Chip(
-                    label: Text("Designing"),
-                  ),
-                  Chip(
-                    label: Text("TTTTT"),
-                  ),
-                  Chip(
-                    label: Text("Front End"),
-                  ),
-                  Chip(
-                    label: Text("Ui-Ux"),
-                  ),
-                  Chip(
-                    label: Text("Ui-Ux"),
-                  ),
-                ],
-              ),
+                  spacing: 4.0.w,
+                  alignment: WrapAlignment.center,
+                  children: List.generate(
+                    state.profile!.careerDtos.length,
+                    (index) => Chip(
+                      label: CustomText.bodyMedium(
+                          state.profile!.careerDtos[index].name),
+                    ),
+                  )),
               SizedBox(
                 height: 12.0.h,
               ),
-              const ProfileProjectsSection(),
+              ProfileProjectsSection(
+                services: state.profile!.serviceDtos,
+                isMe: true,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.0.h),
                 child: const Divider(color: AppColors.black),
               ),
-              const ProfilePortfolioSection(
-                showEdit: true,
+              ProfilePortfolioSection(
+                works: state.profile!.workDtos,
+                isMe: true,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.0.h),
@@ -151,9 +145,10 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
         }
 
         if (state.profileStatus.isFail()) {
-          return Text("Err");
+          return Text(state.profileStatus.error ?? AppStrings.defaultErrorMsg);
         }
-        return LoadingProgress();
+
+        return const LoadingProgress();
       },
     );
   }

@@ -6,7 +6,8 @@ import 'package:either_dart/either.dart';
 import 'package:freeland/common/network/app_exception.dart';
 
 /// To use in repo
-Future<Either<String, U>> throwAppException<U>(FutureOr Function() call) async {
+Future<Either<String, U>> throwAppException<U>(
+    FutureOr<U> Function() call) async {
   try {
     return Right(await call());
   } on AppException catch (e) {

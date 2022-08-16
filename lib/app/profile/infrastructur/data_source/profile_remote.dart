@@ -1,12 +1,62 @@
 import 'package:dio/dio.dart';
 import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
+import 'package:freeland/common/constant/src/url.dart';
 
 class ProfileRemote {
   final Dio _dio;
 
   ProfileRemote(this._dio);
+
   getMyProfile() async {
-    final response = await _dio.get('Portfolio/App/GetPortfolioById');
+    final response = await _dio.get(AppUri.getMyProfile);
+    return MyProfile.fromJson({
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "fullName": "string",
+      "bio": "string",
+      "numOfCompletedProjects": 0,
+      "numOfConnections": 0,
+      "evalution": 0,
+      "careerDtos": [
+        {"id": "3fa85f64-5717-4562-b3fc-2c963f66afa6", "name": "string"}
+      ],
+      "educationDtos": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "startDate": "2022-08-16T19:37:57.384Z",
+          "graduationDate": "2022-08-16T19:37:57.384Z",
+          "name": "string"
+        }
+      ],
+      "serviceDtos": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "name": "FlowerLab",
+          "ownerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "nameOwner": "Woroud",
+          "description": "Good Description",
+          "evalution": 0,
+          "serviceType": 1,
+          "minPrice": 0,
+          "maxPrice": 200
+        }
+      ],
+      "workDtos": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "name": "string",
+          "description": "string",
+          "link": "http://karo1234-001-site1.atempurl.com/swagger/index.html",
+          "createdDate": "2022-08-16T19:37:57.384Z"
+        }
+      ],
+      "connectedUsers": [
+        {
+          "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          "name": "string",
+          "imagePath": "string"
+        }
+      ]
+    });
     return MyProfile.fromJson(response.data);
   }
 }

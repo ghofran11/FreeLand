@@ -1,3 +1,5 @@
+import 'package:freeland/app/home/infrastructure/models/service.dart';
+
 class MyProfile {
   late String id;
   late String fullName;
@@ -7,7 +9,7 @@ class MyProfile {
   late int evalution;
   late List<CareerDtos> careerDtos;
   late List<EducationDtos> educationDtos;
-  late List<ServiceDtos> serviceDtos;
+  late List<ServiceDto> serviceDtos;
   late List<WorkDtos> workDtos;
   late List<ConnectedUsers> connectedUsers;
 
@@ -46,7 +48,7 @@ class MyProfile {
     if (json['serviceDtos'] != null) {
       serviceDtos = [];
       json['serviceDtos'].forEach((v) {
-        serviceDtos.add(ServiceDtos.fromJson(v));
+        serviceDtos.add(ServiceDto.fromMap(v));
       });
     }
     if (json['workDtos'] != null) {
@@ -125,55 +127,6 @@ class EducationDtos {
     data['startDate'] = startDate;
     data['graduationDate'] = graduationDate;
     data['name'] = name;
-    return data;
-  }
-}
-
-class ServiceDtos {
-  late String id;
-  late String name;
-  late String ownerId;
-  late String nameOwner;
-  late String description;
-  late int evalution;
-  late int serviceType;
-  late int minPrice;
-  late int maxPrice;
-
-  ServiceDtos(
-      {required this.id,
-      required this.name,
-      required this.ownerId,
-      required this.nameOwner,
-      required this.description,
-      required this.evalution,
-      required this.serviceType,
-      required this.minPrice,
-      required this.maxPrice});
-
-  ServiceDtos.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    ownerId = json['ownerId'];
-    nameOwner = json['nameOwner'];
-    description = json['description'];
-    evalution = json['evalution'];
-    serviceType = json['serviceType'];
-    minPrice = json['minPrice'];
-    maxPrice = json['maxPrice'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['ownerId'] = ownerId;
-    data['nameOwner'] = nameOwner;
-    data['description'] = description;
-    data['evalution'] = evalution;
-    data['serviceType'] = serviceType;
-    data['minPrice'] = minPrice;
-    data['maxPrice'] = maxPrice;
     return data;
   }
 }

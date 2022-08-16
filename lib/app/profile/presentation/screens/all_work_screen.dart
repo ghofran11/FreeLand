@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
 import 'package:freeland/app/profile/presentation/widgets/project_info.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
 
+class AllWorkScreenParam {
+  final bool editable;
+  final List<WorkDtos> works;
+
+  AllWorkScreenParam({this.editable = false, required this.works});
+}
+
 class AllWorkScreen extends StatelessWidget {
-  const AllWorkScreen({Key? key, this.showEdit = false}) : super(key: key);
-  final bool showEdit;
+  const AllWorkScreen({Key? key, this.editable = false, required this.works})
+      : super(key: key);
+  final bool editable;
+  final List<WorkDtos> works;
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
+    final AllWorkScreenParam params = state.extra as AllWorkScreenParam;
     return MaterialPage<void>(
       key: state.pageKey,
-      child: const AllWorkScreen(),
+      child: AllWorkScreen(works: params.works, editable: params.editable),
     );
   }
 
@@ -43,9 +54,10 @@ class AllWorkScreen extends StatelessWidget {
                         thickness: 1.5,
                       )),
                   physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => const PortfolioInfoWidget(
-                      //ToDo:
-                      ),
+                  itemBuilder: (context, index) => PortfolioInfoWidget(
+                    workDtos: works[index],
+                    showEdit: editable,
+                  ),
                 ),
               ),
             ],

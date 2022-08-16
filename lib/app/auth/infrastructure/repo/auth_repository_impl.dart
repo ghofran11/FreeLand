@@ -11,7 +11,6 @@ import 'package:freeland/app/auth/infrastructure/data_source/local/reactive_user
 import 'package:freeland/app/auth/infrastructure/data_source/remote/aut_remote.dart';
 import 'package:freeland/app/auth/infrastructure/data_source/remote/refresh_device_token.dart';
 import 'package:freeland/app/auth/infrastructure/models/auth_token_model.dart';
-import 'package:freeland/common/network/app_exception.dart';
 import 'package:freeland/common/network/error_handler.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
 import 'package:freeland/core/user/entities/user.dart';
@@ -49,11 +48,11 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<String, Never>> login({
+  Future<Either<String, void>> login({
     required LoginParams params,
   }) async {
     final token = await _getToken();
-    return throwAppException<Never>(() async {
+    return throwAppException<void>(() async {
       final User result =
           await remote.login(params: params, deviceToken: token);
       //update user storage and token
@@ -65,18 +64,17 @@ class AuthRepositoryImpl extends AuthRepository {
       await setUser(userWithPass);
       _init();
       await _subscribeToTopics();
-      return null;
     });
   }
 
   @override
-  Future<Either<String, Never>> signUp({
+  Future<Either<String, void>> signUp({
     required SignUpParams params,
   }) async {
     final token = await _getToken();
-    return throwAppException<Never>(() async {
+    return throwAppException<void>(() async {
       final User result =
-      await remote.signUp(params: params, deviceToken: token);
+          await remote.signUp(params: params, deviceToken: token);
       //update user storage and token
       await reactiveTokenStorage.write(AuthTokenModel(
         accessToken: result.accessToken,
@@ -86,10 +84,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await setUser(userWithPass);
       _init();
       await _subscribeToTopics();
-      return null;
     });
-
-
   }
 
   @override

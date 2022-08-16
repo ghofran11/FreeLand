@@ -4,7 +4,16 @@ part of 'home_bloc.dart';
 abstract class HomeEvent {}
 
 class FetchAllCategory extends HomeEvent {}
+
 class FetchAllService extends HomeEvent {
   final String id;
-  FetchAllService({required this. id});
+  FetchAllService({required this.id});
+}
+
+class ContactUSSubmitted extends HomeEvent {
+  ContactUSSubmitted();
+}
+
+class CommonQuestionsFetched extends HomeEvent {
+  CommonQuestionsFetched();
 }
