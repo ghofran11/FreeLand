@@ -15,7 +15,6 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
-
   late User? _user;
   late final StreamSubscription<User?> _userStream;
 

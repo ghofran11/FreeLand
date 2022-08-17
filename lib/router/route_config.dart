@@ -5,7 +5,9 @@ import 'package:freeland/app/auth/presentation/login/login_screen.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
 import 'package:freeland/app/contract/contract_screen.dart';
+import 'package:freeland/app/home/presentation/ui/screen/searsh_users_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
+import 'package:freeland/app/profile/personal_profile_page.dart';
 import 'package:freeland/app/profile/presentation/screens/all_projects_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/all_work_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/personal_info_update_screen.dart';
@@ -156,6 +158,18 @@ class RouterConfig {
                   pageBuilder: (context, state) =>
                       TipsScreen.pageBuilder(context, state),
                   routes: []),
+              GoRoute(
+                  path: SearchUsersScreen.routePath,
+                  name: SearchUsersScreen.routeName,
+                  pageBuilder: (context, state) =>
+                      SearchUsersScreen.pageBuilder(context, state),
+                  routes: []),
+              // GoRoute(
+              //     path: PersonalProfilePage.routePath,
+              //     name: PersonalProfilePage.routeName,
+              //     pageBuilder: (context, state) =>
+              //         PersonalProfilePage.pageBuilder(context, state),
+              //     routes: []),
               GoRoute(
                   path: ProjectDetail.routePath,
                   name: ProjectDetail.routeName,

@@ -22,6 +22,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import '../../../../../common/config/theme/src/colors.dart';
 import '../../../../../common/config/theme/src/styles.dart';
 import '../widget/tip.dart';
+import 'searsh_users_screen.dart';
 
 final Tip tips = Tip();
 
@@ -61,21 +62,25 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ReactiveForm(
-                        formGroup: searchForm,
-                        child: InkWell(
-                          onTap: () {
-                            //ToDo: Navigate to search screen
-                          },
-                          child: CustomReactiveTextField(
-                            formControlName: 'searchKey',
-                            labelText: 'Search',
-                            keyboardType: TextInputType.text,
-                            readOnly: true,
-                            suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass,
-                                size: 18.0.r),
-                          ),
-                        ),
+                      Builder(
+                        builder: (context) {
+                          return ReactiveForm(
+                            formGroup: searchForm,
+                            child: CustomReactiveTextField(
+                              onTap: (){
+                                context.pushNamed(SearchUsersScreen.routeName,
+                                    extra: context.read<HomeBloc>().users);
+                                print(context.read<HomeBloc>().users);
+                              },
+                              formControlName: 'searchKey',
+                              labelText: 'Search',
+                              keyboardType: TextInputType.text,
+                              readOnly: true,
+                              suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass,
+                                  size: 18.0.r),
+                            ),
+                          );
+                        }
                       ),
                       SizedBox(
                         height: 16.0.h,

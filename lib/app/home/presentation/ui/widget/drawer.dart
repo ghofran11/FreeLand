@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../common/config/theme/src/colors.dart';
+import '../../../../profile/personal_profile_page.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({
@@ -99,17 +100,22 @@ class TopDrawerWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: SizedBox(
-        child: Column(
-          children: [
-            const ProfileImage(),
-            SizedBox(
-              height: 12.0.h,
-            ),
-            Text(
-              context.read<UserProvider>().user?.fullName ?? "",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ],
+        child: InkWell(
+          onTap: (){
+            // context.pushNamed(PersonalProfilePage.routeName);
+          },
+          child: Column(
+            children: [
+              const ProfileImage(),
+              SizedBox(
+                height: 12.0.h,
+              ),
+              Text(
+                context.read<UserProvider>().user?.fullName ?? "",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );
