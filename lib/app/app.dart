@@ -64,8 +64,7 @@ class MyAppState extends State<MyApp> {
                     create: (_) => BottomNavigationProvider()),
                 BlocProvider<AppManagerBloc>.value(value: _provider),
                 if (_profile != null)
-                  BlocProvider<MyProfileBloc>.value(
-                      value: _profile!..add(MyProfileFetched())),
+                  BlocProvider<MyProfileBloc>.value(value: _profile!),
               ],
               child: Builder(builder: (context) {
                 return ScreenUtilInit(

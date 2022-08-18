@@ -47,7 +47,9 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
         try {
           await doBeforeOpen?.call();
         } catch (_) {}
+
         _repo = lazyRepository();
+        add(MyProfileFetched());
       }
     });
   }
