@@ -33,15 +33,19 @@ class ProfileEducationSection extends StatelessWidget {
           ],
         ),
         SizedBox(height: 8.0.h),
-        ListView.separated(
-          shrinkWrap: true,
-          itemCount: _itemCount,
-          separatorBuilder: (context, index) => SizedBox(height: 10.0.h),
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => EducationInfoWidget(
-            course: courses[index],
+        if (courses.isNotEmpty)
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount: _itemCount,
+            separatorBuilder: (context, index) => SizedBox(height: 10.0.h),
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => EducationInfoWidget(
+              course: courses[index],
+            ),
           ),
-        ),
+        if (courses.isEmpty)
+          CustomText.bodyMedium('No Education Yet',
+              style: TextStyle(color: Theme.of(context).primaryColor)),
         if (_itemCount > 2)
           Center(
             child: TextButton(

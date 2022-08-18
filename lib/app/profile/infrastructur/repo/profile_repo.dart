@@ -13,4 +13,10 @@ class ProfileRepoImpl {
       return await remote.getMyProfile();
     });
   }
+
+  Future<Either<String, MyProfile>> getAnotherProfile(String id) async {
+    return throwAppException<MyProfile>(() async {
+      return await remote.getAnotherProfile(id);
+    });
+  }
 }

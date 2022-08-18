@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/home/infrastructure/models/user.dart';
+import 'package:freeland/app/profile/personal_profile_page.dart';
+import 'package:freeland/app/profile/profile_page.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
+import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:freeland/core/user/provider/user_provider.dart';
@@ -27,7 +30,6 @@ class SearchUsersScreen extends StatefulWidget {
       key: state.pageKey,
       child: SearchUsersScreen(
         users: state.extra as List<UserDto>,
-
       ),
     );
   }
@@ -41,6 +43,7 @@ class SearchUsersScreen extends StatefulWidget {
 
 class _SearchUsersScreenState extends State<SearchUsersScreen> {
   List<UserDto> matchUsers = [];
+  bool loading = false;
 
   @override
   void initState() {
@@ -48,10 +51,17 @@ class _SearchUsersScreenState extends State<SearchUsersScreen> {
         .debounceTime(const Duration(seconds: 1))
         .listen((event) {
       setState(() {
+        loading = false;
         matchUsers = widget.users
             .where((element) =>
                 element.fullName.contains(form.control('search').value))
             .toList();
+      });
+    });
+
+    (form.valueChanges).listen((event) {
+      setState(() {
+        loading = true;
       });
     });
     super.initState();
@@ -64,9 +74,11 @@ class _SearchUsersScreenState extends State<SearchUsersScreen> {
         formGroup: form,
         child: ListView(
           padding: screenPadding,
-          physics:const BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           children: [
-            SizedBox(height: 25.0.h,),
+            SizedBox(
+              height: 25.0.h,
+            ),
             Row(
               children: [
                 const SizedBox(
@@ -86,75 +98,86 @@ class _SearchUsersScreenState extends State<SearchUsersScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 25.0.h,),
+            SizedBox(
+              height: 25.0.h,
+            ),
             CustomReactiveTextField(
               formControlName: 'search',
               labelText: 'Search',
               keyboardType: TextInputType.text,
-              suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass, size: 18.0.r),
+              suffixIcon:
+                  FaIcon(FontAwesomeIcons.magnifyingGlass, size: 18.0.r),
             ),
-            SizedBox(height: 15.0.h,),
-            ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) => ListTile(
-                  onTap: () {},
-                  leading: GestureDetector(
-                    onTap: () async {
-                      // Display the image in large form.
-                    },
-                    child: Container(
-                      height: 50.0,
-                      width: 50.0,
-                      decoration: const BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(50))),
-                      child:  const CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage(
-                            'https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs='
-                              )),
-                    ),
-                  ),
-                  title:  Builder(
-                    builder: (context) {
-                      if(matchUsers[index].id==context.read<UserProvider>().user!.id) {
-                        return const Text(
-                        'me',
-                        style: TextStyle(fontSize: 15),
-                      );
-                      }
-                       return CustomText.bodySmall(
-                        matchUsers[index].fullName,
-                        style: const TextStyle(
-                          color: AppColors.grey2,
-                        ),
-                      );
-                    }
-                  ),
-                  subtitle:  Builder(
-                    builder: (context) {
-                      if(matchUsers[index].bio!=null){
-                        return CustomText.bodySmall(
-                          matchUsers[index].bio!,
-                          style: const TextStyle(
-                            color: AppColors.grey2,
-                          ),
-                        );
-                      }
-                       return const CustomText.bodySmall(
-                       '',
-                        style: TextStyle(
-                          color: AppColors.grey2,
-                        ),
-                      );
+            SizedBox(
+              height: 15.0.h,
+            ),
+            (!loading)
+                ? (matchUsers.isNotEmpty)
+                    ? ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            const Divider(thickness: 1.5),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          final bool isMe = matchUsers[index].id ==
+                              context.read<UserProvider>().user!.id;
 
-                    }
-                  ),
-                  ),
-              itemCount:matchUsers.length,
-            )
+                          return ListTile(
+                            onTap: () {
+                              if (!isMe) {
+                                context.pushNamed(ProfilePage.routeName,
+                                    extra: matchUsers[index].id);
+                              } else {
+                                context.pushNamed(PersonalProfilePage.routeName,
+                                    extra: matchUsers[index].id);
+                              }
+                            },
+                            leading: GestureDetector(
+                              onTap: () async {
+                                // Display the image in large form.
+                              },
+                              child: Container(
+                                height: 50.0,
+                                width: 50.0,
+                                decoration: const BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50))),
+                                child: const CircleAvatar(
+                                    radius: 50,
+                                    backgroundImage: NetworkImage(
+                                        'https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=')),
+                              ),
+                            ),
+                            title: Builder(builder: (context) {
+                              return CustomText.titleMedium(
+                                isMe ? 'Me' : matchUsers[index].fullName,
+                                style: const TextStyle(
+                                  color: AppColors.grey2,
+                                ),
+                              );
+                            }),
+                            subtitle: Builder(builder: (context) {
+                              if (matchUsers[index].bio != null) {
+                                return CustomText.bodySmall(
+                                  matchUsers[index].bio!,
+                                  style: const TextStyle(
+                                    color: AppColors.grey2,
+                                  ),
+                                );
+                              }
+                              return const CustomText.bodySmall(
+                                '',
+                                style: TextStyle(
+                                  color: AppColors.grey2,
+                                ),
+                              );
+                            }),
+                          );
+                        },
+                        itemCount: matchUsers.length,
+                      )
+                    : const Center(child: Text('No User matches you search'))
+                : const LoadingProgress()
           ],
         ),
       ),

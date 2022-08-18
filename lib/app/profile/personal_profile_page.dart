@@ -21,15 +21,15 @@ import 'presentation/widgets/profile_image.dart';
 class PersonalProfilePage extends StatefulWidget {
   const PersonalProfilePage({Key? key}) : super(key: key);
 
-  // static Page pageBuilder(BuildContext context, GoRouterState state) {
-  //   return MaterialPage<void>(
-  //     key: state.pageKey,
-  //     child: const PersonalProfilePage(),
-  //   );
-  // }
-  //
-  // static const routePath = 'PersonalProfilePage';
-  // static const routeName = 'PersonalProfilePage';
+  static Page pageBuilder(BuildContext context, GoRouterState state) {
+    return MaterialPage<void>(
+      key: state.pageKey,
+      child: const PersonalProfilePage(),
+    );
+  }
+
+  static const routePath = 'PersonalProfilePage';
+  static const routeName = 'PersonalProfilePage';
 
   @override
   State<PersonalProfilePage> createState() => _PersonalProfilePageState();
@@ -39,133 +39,143 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
   @override
   Widget build(BuildContext context) {
     final myProfileBloc = context.read<MyProfileBloc>();
-    return BlocConsumer<MyProfileBloc, MyProfileState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
-      builder: (context, state) {
-        if (state.profileStatus.isSuccess()) {
-          return ListView(
-            physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(
-                vertical: verticalAppPadding.h,
-                horizontal: horizontalAppPadding.w),
-            children: [
-              // ImageHolder(onUpdateImage: (image) {}, onDeleteImage: () {}),
-              ProfileImage(
-                  //ToDo
-                  // image: state.profile.,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.primary,
+            )),
+      ),
+      body: BlocConsumer<MyProfileBloc, MyProfileState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          if (state.profileStatus.isSuccess()) {
+            return ListView(
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(
+                  vertical: verticalAppPadding.h,
+                  horizontal: horizontalAppPadding.w),
+              children: [
+                // ImageHolder(onUpdateImage: (image) {}, onDeleteImage: () {}),
+                ProfileImage(
+                    //ToDo
+                    // image: state.profile.,
+                    ),
+                Padding(
+                  padding: EdgeInsets.all(8.0.r),
+                  child: CustomText.titleLarge(
+                    state.profile!.fullName,
+                    textAlign: TextAlign.center,
                   ),
-              Padding(
-                padding: EdgeInsets.all(8.0.r),
-                child: CustomText.titleLarge(
-                  state.profile!.fullName,
-                  textAlign: TextAlign.center,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0.r),
-                child: CustomText.bodyLarge(
-                  state.profile!.bio,
-                  textAlign: TextAlign.center,
+                if (state.profile!.bio != null)
+                  Padding(
+                    padding: EdgeInsets.all(8.0.r),
+                    child: CustomText.bodyLarge(
+                      state.profile!.bio!,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ElevatedButton(
+                    onPressed: () {
+                      context.pushNamed(PersonalInfoUpdate.routeName);
+                    },
+                    child: CustomText.bodyMedium(
+                      "Edit profile",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary),
+                    )),
+                SizedBox(
+                  height: 8.0.h,
                 ),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    context.pushNamed(PersonalInfoUpdate.routeName);
-                  },
-                  child: CustomText.bodyMedium(
-                    "Edit profile",
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary),
-                  )),
-              SizedBox(
-                height: 8.0.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  StatisticsWidget(
-                    color: AppColors.green,
-                    child: FaIcon(
-                      FontAwesomeIcons.listCheck,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    StatisticsWidget(
                       color: AppColors.green,
+                      child: FaIcon(
+                        FontAwesomeIcons.listCheck,
+                        color: AppColors.green,
+                      ),
+                      title: state.profile!.numOfCompletedProjects.toString(),
                     ),
-                    title: state.profile!.numOfCompletedProjects.toString(),
-                  ),
-                  StatisticsWidget(
-                    color: AppColors.blueAccent2,
-                    child: FaIcon(
-                      FontAwesomeIcons.solidCircleUser,
+                    StatisticsWidget(
                       color: AppColors.blueAccent2,
+                      child: FaIcon(
+                        FontAwesomeIcons.solidCircleUser,
+                        color: AppColors.blueAccent2,
+                      ),
+                      title: state.profile!.numOfConnections.toString(),
                     ),
-                    title: state.profile!.numOfConnections.toString(),
-                  ),
-                  StatisticsWidget(
-                    color: AppColors.yellow,
-                    child: FaIcon(
-                      FontAwesomeIcons.solidStar,
+                    StatisticsWidget(
                       color: AppColors.yellow,
+                      child: FaIcon(
+                        FontAwesomeIcons.solidStar,
+                        color: AppColors.yellow,
+                      ),
+                      title: state.profile!.evalution.toString(),
                     ),
-                    title: state.profile!.evalution.toString(),
-                  ),
-                ],
-              ),
-              Wrap(
-                  spacing: 4.0.w,
-                  alignment: WrapAlignment.center,
-                  children: List.generate(
-                    state.profile!.careerDtos.length,
-                    (index) => Chip(
-                      label: CustomText.bodyMedium(
-                          state.profile!.careerDtos[index].name),
-                    ),
-                  )),
-              SizedBox(
-                height: 12.0.h,
-              ),
-              ProfileProjectsSection(
-                services: state.profile!.serviceDtos,
-                isMe: true,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.0.h),
-                child: const Divider(color: AppColors.black),
-              ),
-              ProfilePortfolioSection(
-                works: state.profile!.workDtos,
-                isMe: true,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.0.h),
-                child: const Divider(color: AppColors.black),
-              ),
-              ProfileCareerSection(
-                careers: state.profile!.careerDtos,
-                isMe: true,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.0.h),
-                child: const Divider(color: AppColors.black),
-              ),
-              ProfileEducationSection(
-                isMe: true,
-                courses: state.profile!.educationDtos,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.0.h),
-                child: const Divider(color: AppColors.black),
-              ),
-            ],
-          );
-        }
+                  ],
+                ),
+                Wrap(
+                    spacing: 4.0.w,
+                    alignment: WrapAlignment.center,
+                    children: List.generate(
+                      state.profile!.careerDtos.length,
+                      (index) => Chip(
+                        label: CustomText.bodyMedium(
+                            state.profile!.careerDtos[index].name),
+                      ),
+                    )),
+                SizedBox(
+                  height: 12.0.h,
+                ),
+                ProfileProjectsSection(
+                  services: state.profile!.serviceDtos,
+                  isMe: true,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12.0.h),
+                  child: const Divider(color: AppColors.black),
+                ),
+                ProfilePortfolioSection(
+                  works: state.profile!.workDtos,
+                  isMe: true,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12.0.h),
+                  child: const Divider(color: AppColors.black),
+                ),
+                ProfileCareerSection(
+                  careers: state.profile!.careerDtos,
+                  isMe: true,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12.0.h),
+                  child: const Divider(color: AppColors.black),
+                ),
+                ProfileEducationSection(
+                  isMe: true,
+                  courses: state.profile!.educationDtos,
+                ),
+              ],
+            );
+          }
 
-        if (state.profileStatus.isFail()) {
-          return Text(state.profileStatus.error ?? AppStrings.defaultErrorMsg);
-        }
+          if (state.profileStatus.isFail()) {
+            return Text(
+                state.profileStatus.error ?? AppStrings.defaultErrorMsg);
+          }
 
-        return const LoadingProgress();
-      },
+          return const LoadingProgress();
+        },
+      ),
     );
   }
 }

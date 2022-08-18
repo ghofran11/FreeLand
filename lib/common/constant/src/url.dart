@@ -14,6 +14,7 @@ class AppUri {
   static const commonQuestionFetched = "CommonQuestion/GetAll";
   static const contactUsCreate = "ContactUs/App/Create";
   static const getMyProfile = "Portfolio/App/GetMyPortfolio";
+  static const getPortfolioById = "Portfolio/App/GetPortfolioById";
   static const getProfileById = "Portfolio/App/GetPortfolioById";
 
 //ToDo

@@ -8,18 +8,20 @@ import 'package:freeland/app/home/presentation/ui/screen/home_screen.dart';
 import 'package:freeland/app/notifications/presentation/notifications_page.dart';
 import 'package:freeland/app/profile/personal_profile_page.dart';
 import 'package:freeland/app/projects/presentation/ui/projects_screen.dart';
+import 'package:freeland/app/root/state/navigation_bar_provider.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-class RootScreen extends StatefulWidget {
-  const RootScreen({Key? key}) : super(key: key);
+class RootScreen extends StatelessWidget {
+  RootScreen({Key? key}) : super(key: key);
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: const RootScreen(),
+      child: RootScreen(),
     );
   }
 
@@ -27,90 +29,75 @@ class RootScreen extends StatefulWidget {
   static const routeName = '/root';
 
   @override
-  State<RootScreen> createState() => _RootScreenState();
-}
-
-class _RootScreenState extends State<RootScreen> {
-  int _selectedIndex = 0;
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: 0);
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider<HomeBloc>(
-            create: (_) => getIt<HomeBloc>()
-              ..add(FetchAllCategory())
-              ..add(FetchAllUser()),
-          ),
-        ],
-        child: Scaffold(
-          bottomNavigationBar: BottomNavyBar(
-            iconSize: 20.r,
-
-            selectedIndex: _selectedIndex,
-            showElevation: true,
-            backgroundColor: AppColors.background,
-            // use this to remove appBar's elevation
-            onItemSelected: (index) => setState(() {
-              _selectedIndex = index;
-              _pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeIn);
-            }),
-            items: [
-              BottomNavyBarItem(
-                icon: const FaIcon(
-                  FontAwesomeIcons.house,
+    return MultiProvider(
+      providers: [
+        BlocProvider<HomeBloc>(
+          create: (_) => getIt<HomeBloc>()
+            ..add(FetchAllCategory())
+            ..add(FetchAllUser()),
+        ),
+      ],
+      child: Consumer<BottomNavigationProvider>(
+        builder: (_, provider, ___) {
+          return Scaffold(
+            bottomNavigationBar: BottomNavyBar(
+              iconSize: 20.r,
+              selectedIndex: provider.index,
+              showElevation: true,
+              backgroundColor: AppColors.background,
+              onItemSelected: (index) {
+                provider.index = index;
+              },
+              items: [
+                BottomNavyBarItem(
+                  icon: const FaIcon(
+                    FontAwesomeIcons.house,
+                  ),
+                  inactiveColor: AppColors.borderColor,
+                  title: const CustomText.bodySmall("Home"),
+                  textAlign: TextAlign.center,
                 ),
-                inactiveColor: AppColors.borderColor,
-                title: const CustomText.bodySmall("Home"),
-                textAlign: TextAlign.center,
-              ),
-              BottomNavyBarItem(
-                icon: const FaIcon(
-                  FontAwesomeIcons.solidBell,
+                BottomNavyBarItem(
+                  icon: const FaIcon(
+                    FontAwesomeIcons.solidBell,
+                  ),
+                  inactiveColor: AppColors.borderColor,
+                  textAlign: TextAlign.center,
+                  title: const CustomText.bodySmall("Notifications"),
                 ),
-                inactiveColor: AppColors.borderColor,
-                textAlign: TextAlign.center,
-                title: const CustomText.bodySmall("Notifications"),
-              ),
-              BottomNavyBarItem(
-                inactiveColor: AppColors.borderColor,
-                icon: const FaIcon(
-                  FontAwesomeIcons.bookOpen,
+                BottomNavyBarItem(
+                  inactiveColor: AppColors.borderColor,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.bookOpen,
+                  ),
+                  textAlign: TextAlign.center,
+                  title: const CustomText.bodySmall("Projects"),
                 ),
-                textAlign: TextAlign.center,
-                title: const CustomText.bodySmall("Projects"),
-              ),
-              BottomNavyBarItem(
-                icon: const FaIcon(
-                  FontAwesomeIcons.solidUser,
+                BottomNavyBarItem(
+                  icon: const FaIcon(
+                    FontAwesomeIcons.solidUser,
+                  ),
+                  inactiveColor: AppColors.borderColor,
+                  textAlign: TextAlign.center,
+                  title: const CustomText.bodySmall("Profile"),
                 ),
-                inactiveColor: AppColors.borderColor,
-                textAlign: TextAlign.center,
-                title: const CustomText.bodySmall("Profile"),
-              ),
-            ],
-          ),
-          body: SafeArea(
-            child: PageView(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  HomePage(),
-                  NotificationsPage(),
-                  const ProjectPage(),
-                  const PersonalProfilePage(),
-                ]),
-          ),
-        ));
+              ],
+            ),
+            body: SafeArea(
+              child: PageView(
+                  controller: provider.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    HomePage(),
+                    NotificationsPage(),
+                    const ProjectPage(),
+                    const PersonalProfilePage(),
+                  ]),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

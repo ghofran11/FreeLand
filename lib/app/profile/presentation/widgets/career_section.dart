@@ -33,12 +33,15 @@ class ProfileCareerSection extends StatelessWidget {
           ],
         ),
         SizedBox(height: 8.0.h),
-        Wrap(
-            spacing: 12.0.w,
-            children: List.generate(
-              careers.length,
-              (index) => CustomText.bodyLarge(careers[index].name),
-            )),
+        (careers.isNotEmpty)
+            ? Wrap(
+                spacing: 12.0.w,
+                children: List.generate(
+                  careers.length,
+                  (index) => CustomText.bodyLarge(careers[index].name),
+                ))
+            : CustomText.bodyMedium('No Careers Yet',
+                style: TextStyle(color: Theme.of(context).primaryColor)),
         // ListView.separated(
         //     shrinkWrap: true,
         //     itemCount: 3,

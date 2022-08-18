@@ -3,7 +3,7 @@ import 'package:freeland/app/home/infrastructure/models/service.dart';
 class MyProfile {
   late String id;
   late String fullName;
-  late String bio;
+  late String? bio;
   late int numOfCompletedProjects;
   late int numOfConnections;
   late int evalution;

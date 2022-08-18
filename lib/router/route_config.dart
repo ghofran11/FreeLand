@@ -7,13 +7,15 @@ import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manage
 import 'package:freeland/app/contract/contract_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/searsh_users_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
-import 'package:freeland/app/payment/payment_method.dart' hide Status;
+import 'package:freeland/app/payment/payment_method.dart';
+import 'package:freeland/app/profile/personal_profile_page.dart';
 import 'package:freeland/app/profile/presentation/screens/all_projects_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/all_work_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/personal_info_update_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/protofolio_update_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/update_career_screen.dart';
 import 'package:freeland/app/profile/presentation/widgets/update_add_work.dart';
+import 'package:freeland/app/profile/profile_page.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/add_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/all_own_project.dart';
 import 'package:freeland/app/projects/presentation/ui/screen/comment_screen.dart';
@@ -170,7 +172,20 @@ class RouterConfig {
                   name: SearchUsersScreen.routeName,
                   pageBuilder: (context, state) =>
                       SearchUsersScreen.pageBuilder(context, state),
-                  routes: []),
+                  routes: [
+                    GoRoute(
+                        path: ProfilePage.routePath,
+                        name: ProfilePage.routeName,
+                        pageBuilder: (context, state) =>
+                            ProfilePage.pageBuilder(context, state),
+                        routes: []),
+                    GoRoute(
+                        path: PersonalProfilePage.routePath,
+                        name: PersonalProfilePage.routeName,
+                        pageBuilder: (context, state) =>
+                            PersonalProfilePage.pageBuilder(context, state),
+                        routes: []),
+                  ]),
               // GoRoute(
               //     path: PersonalProfilePage.routePath,
               //     name: PersonalProfilePage.routeName,

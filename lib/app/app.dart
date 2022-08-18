@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 
 import 'profile/infrastructur/repo/profile_repo.dart';
 import 'profile/presentation/state/my_proflile_bloc/my_profile_bloc.dart';
+import 'root/state/navigation_bar_provider.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -59,6 +60,8 @@ class MyAppState extends State<MyApp> {
         builder: (context) => MultiProvider(
               providers: [
                 ChangeNotifierProvider(create: (_) => UserProvider()),
+                ChangeNotifierProvider(
+                    create: (_) => BottomNavigationProvider()),
                 BlocProvider<AppManagerBloc>.value(value: _provider),
                 if (_profile != null)
                   BlocProvider<MyProfileBloc>.value(
