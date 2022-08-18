@@ -42,7 +42,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         AppUri.M_API_KEY_TEST, MFCountry.SAUDI_ARABIA, MFEnvironment.LIVE);
     MFSDK.setUpAppBar(backgroundColor: AppColors.primary);
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       initiatePayment(initPaymentResponse);
     });
   }
