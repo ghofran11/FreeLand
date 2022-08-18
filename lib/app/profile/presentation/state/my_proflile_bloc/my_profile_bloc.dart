@@ -8,7 +8,6 @@ import 'package:freeland/core/bloc_status.dart';
 import 'package:meta/meta.dart';
 
 part 'my_profile_event.dart';
-
 part 'my_profile_state.dart';
 
 class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {

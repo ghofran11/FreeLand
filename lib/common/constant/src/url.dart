@@ -35,5 +35,4 @@ class AppUri {
 
   //toDo
   static const connect = "";
-
 }

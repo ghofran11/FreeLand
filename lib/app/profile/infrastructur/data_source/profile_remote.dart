@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:either_dart/either.dart';
 import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
 import 'package:freeland/common/constant/src/url.dart';
 import 'package:freeland/common/network/error_handler.dart';
