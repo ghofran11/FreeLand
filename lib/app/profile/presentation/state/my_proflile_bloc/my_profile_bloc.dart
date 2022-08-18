@@ -6,6 +6,7 @@ import 'package:freeland/core/bloc_status.dart';
 import 'package:meta/meta.dart';
 
 part 'my_profile_event.dart';
+
 part 'my_profile_state.dart';
 
 class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
@@ -23,6 +24,16 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
                   emit(state.copyWith(
                       profile: right, profileStatus: BlocStatus.success()))
                 });
+      }
+
+      if (event is SendConnect) {
+        emit(state.copyWith(connectStatus: BlocStatus.loading()));
+
+        (await _repo.sendConnect()).fold(
+            (left) => emit(
+                state.copyWith(connectStatus: BlocStatus.fail(error: left))),
+            (right) =>
+                emit(state.copyWith(connectStatus: BlocStatus.success())));
       }
     });
   }

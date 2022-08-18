@@ -18,4 +18,8 @@ class AppUri {
 
 //ToDo
   static const refreshDeviceToken = "User/RefreshToken";
+
+  //toDo
+  static const connect = "";
+
 }

@@ -52,7 +52,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                 horizontal: horizontalAppPadding.w),
             children: [
               // ImageHolder(onUpdateImage: (image) {}, onDeleteImage: () {}),
-              ProfileImage(
+              const ProfileImage(
                   //ToDo
                   // image: state.profile.,
                   ),
@@ -87,7 +87,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                 children: [
                   StatisticsWidget(
                     color: AppColors.green,
-                    child: FaIcon(
+                    child: const FaIcon(
                       FontAwesomeIcons.listCheck,
                       color: AppColors.green,
                     ),
@@ -95,7 +95,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                   ),
                   StatisticsWidget(
                     color: AppColors.blueAccent2,
-                    child: FaIcon(
+                    child: const FaIcon(
                       FontAwesomeIcons.solidCircleUser,
                       color: AppColors.blueAccent2,
                     ),
@@ -103,7 +103,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                   ),
                   StatisticsWidget(
                     color: AppColors.yellow,
-                    child: FaIcon(
+                    child: const FaIcon(
                       FontAwesomeIcons.solidStar,
                       color: AppColors.yellow,
                     ),
