@@ -18,9 +18,9 @@ class UserDto {
 
   final String id;
   final String fullName;
-  final String bio;
+  final String? bio;
   final bool isConnect;
-  final String imagePath;
+  final String? imagePath;
 
   UserDto copyWith({
     String? id,

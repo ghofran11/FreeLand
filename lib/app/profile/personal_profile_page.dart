@@ -21,6 +21,16 @@ import 'presentation/widgets/profile_image.dart';
 class PersonalProfilePage extends StatefulWidget {
   const PersonalProfilePage({Key? key}) : super(key: key);
 
+  // static Page pageBuilder(BuildContext context, GoRouterState state) {
+  //   return MaterialPage<void>(
+  //     key: state.pageKey,
+  //     child: const PersonalProfilePage(),
+  //   );
+  // }
+  //
+  // static const routePath = 'PersonalProfilePage';
+  // static const routeName = 'PersonalProfilePage';
+
   @override
   State<PersonalProfilePage> createState() => _PersonalProfilePageState();
 }

@@ -7,7 +7,7 @@ class AppUri {
   static const serviceFetched = "Home/App/GetServices";
   static const sendOffer = "Offer/App/Create";
   static const sendComment = "Comment/App/Create";
-  static const userFetched = "GetUsers";
+  static const userFetched = "Account/App/GetUsers";
   static const commentOfferFetch = "Comment/App/GetCommentsByServiceId";
   static const notificationFetch = "Notification/App/GetAll";
 
