@@ -103,8 +103,8 @@ class CareerDtos {
 
 class EducationDtos {
   late String id;
-  late String startDate;
-  late String graduationDate;
+  late DateTime startDate;
+  late DateTime graduationDate;
   late String name;
 
   EducationDtos({
@@ -116,8 +116,8 @@ class EducationDtos {
 
   EducationDtos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    startDate = json['startDate'];
-    graduationDate = json['graduationDate'];
+    startDate = DateTime.parse(json['startDate']);
+    graduationDate = DateTime.parse(json['graduationDate']);
     name = json['name'];
   }
 

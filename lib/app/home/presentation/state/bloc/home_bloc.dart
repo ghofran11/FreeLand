@@ -31,7 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 state.copyWith(categoryStatus: BlocStatus.fail(error: left))),
             (right) => {
                   categories = right,
-                  // add(FetchAllService(id: right[0].id)),
+                  add(FetchAllService(id: right[0].id)),
                   emit(state.copyWith(categoryStatus: BlocStatus.success())),
                 });
       }

@@ -15,7 +15,6 @@ import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/common/widgets/text_field.dart';
 import 'package:freeland/core/user/provider/user_provider.dart';
-import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -49,149 +48,143 @@ class HomePage extends StatelessWidget {
         slider: const DrawerScreen(),
         child: Container(
           color: AppColors.background,
-          child: BlocProvider(
-            create: (context) => getIt<HomeBloc>()
-              ..add(FetchAllCategory())
-              ..add(FetchAllUser()),
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ReactiveForm(
-                        formGroup: searchForm,
-                        child: InkWell(
-                          onTap: () {
-                            //ToDo: Navigate to search screen
-                          },
-                          child: CustomReactiveTextField(
-                            formControlName: 'searchKey',
-                            labelText: 'Search',
-                            keyboardType: TextInputType.text,
-                            readOnly: true,
-                            suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass,
-                                size: 18.0.r),
-                          ),
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ReactiveForm(
+                      formGroup: searchForm,
+                      child: InkWell(
+                        onTap: () {
+                          //ToDo: Navigate to search screen
+                        },
+                        child: CustomReactiveTextField(
+                          formControlName: 'searchKey',
+                          labelText: 'Search',
+                          keyboardType: TextInputType.text,
+                          readOnly: true,
+                          suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass,
+                              size: 18.0.r),
                         ),
                       ),
-                      SizedBox(
-                        height: 16.0.h,
-                      ),
-                      const CustomText.titleMedium('Tips for you',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 16.0.h,
+                    ),
+                    const CustomText.titleMedium('Tips for you',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CarouselSlider(
-                      options: CarouselOptions(
-                        aspectRatio: 2.3,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        viewportFraction: 1.0,
-                      ),
-                      items: _items(context)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CarouselSlider(
+                    options: CarouselOptions(
+                      aspectRatio: 2.3,
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      viewportFraction: 1.0,
+                    ),
+                    items: _items(context)),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const CustomText.titleMedium('Latest Projects',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextButton(
+                      child: const CustomText.bodySmall('See All',
+                          style: TextStyle(color: AppColors.primary)),
+                      onPressed: () {},
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CustomText.titleMedium('Latest Projects',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextButton(
-                        child: const CustomText.bodySmall('See All',
-                            style: TextStyle(color: AppColors.primary)),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
-                BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
-                  if (state.categoryStatus.isFail()) {
-                    BotToast.showText(
-                        text: state.categoryStatus.error ??
-                            AppStrings.defaultErrorMsg);
-                  }
-                }, builder: (context, state) {
-                  final HomeBloc homeBloc = context.read<HomeBloc>();
-                  return Column(
-                    children: [
-                      //Categories
-                      (state.categoryStatus.isSuccess())
-                          ? Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: SizedBox(
-                                height: 30,
-                                child: ListView(
-                                  children: List.generate(
-                                      homeBloc.categories.length,
-                                      (index) => Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 8.0),
-                                            child: InkWell(
-                                              child: Chip(
-                                                padding: EdgeInsets.zero,
-                                                label: Text(
-                                                  homeBloc
-                                                      .categories[index].name,
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
+              ),
+              BlocConsumer<HomeBloc, HomeState>(listener: (context, state) {
+                if (state.categoryStatus.isFail()) {
+                  BotToast.showText(
+                      text: state.categoryStatus.error ??
+                          AppStrings.defaultErrorMsg);
+                }
+              }, builder: (context, state) {
+                final HomeBloc homeBloc = context.read<HomeBloc>();
+                return Column(
+                  children: [
+                    //Categories
+                    (state.categoryStatus.isSuccess())
+                        ? Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: SizedBox(
+                              height: 30,
+                              child: ListView(
+                                children: List.generate(
+                                    homeBloc.categories.length,
+                                    (index) => Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 8.0),
+                                          child: InkWell(
+                                            child: Chip(
+                                              padding: EdgeInsets.zero,
+                                              label: Text(
+                                                homeBloc.categories[index].name,
+                                                style: const TextStyle(
+                                                    fontSize: 12),
                                               ),
-                                              onTap: () {
-                                                homeBloc.add(FetchAllService(
-                                                    id: homeBloc
-                                                        .categories[index].id));
-                                              },
                                             ),
-                                          )),
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                ),
+                                            onTap: () {
+                                              homeBloc.add(FetchAllService(
+                                                  id: homeBloc
+                                                      .categories[index].id));
+                                            },
+                                          ),
+                                        )),
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
                               ),
-                            )
-                          : (state.categoryStatus.isFail())
-                              ? Text(state.categoryStatus.error ??
-                                  AppStrings.defaultErrorMsg)
-                              : const LoadingProgress(),
-                      SizedBox(
-                        height: 16.0.h,
-                      ),
-
-                      ///Services
-                      Builder(builder: (context) {
-                        if (state.serviceStatus.isSuccess()) {
-                          final _services = homeBloc.services;
-                          return ListView.separated(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                            separatorBuilder: (context, index) => SizedBox(
-                              height: 8.0.h,
                             ),
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) {
-                              return JobCard(service: _services[index]);
-                            },
-                            itemCount: _services.length,
-                          );
-                        } else if (state.serviceStatus.isFail()) {
-                          return Text(state.serviceStatus.error ??
-                              AppStrings.defaultErrorMsg);
-                        } else if (state.serviceStatus.isLoading()) {
-                          return const LoadingProgress();
-                        }
-                        return Container();
-                      }),
-                    ],
-                  );
-                }),
-              ],
-            ),
+                          )
+                        : (state.categoryStatus.isFail())
+                            ? Text(state.categoryStatus.error ??
+                                AppStrings.defaultErrorMsg)
+                            : const LoadingProgress(),
+                    SizedBox(
+                      height: 16.0.h,
+                    ),
+
+                    ///Services
+                    Builder(builder: (context) {
+                      if (state.serviceStatus.isSuccess()) {
+                        final _services = homeBloc.services;
+                        return ListView.separated(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: 8.0.h,
+                          ),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) {
+                            return JobCard(service: _services[index]);
+                          },
+                          itemCount: _services.length,
+                        );
+                      } else if (state.serviceStatus.isFail()) {
+                        return Text(state.serviceStatus.error ??
+                            AppStrings.defaultErrorMsg);
+                      } else if (state.serviceStatus.isLoading()) {
+                        return const LoadingProgress();
+                      }
+                      return Container();
+                    }),
+                  ],
+                );
+              }),
+            ],
           ),
         ),
       ),

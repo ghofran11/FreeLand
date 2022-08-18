@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'dart:ui';
 
-import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -81,9 +80,8 @@ final cardTheme = CardTheme(
     margin: EdgeInsets.zero,
     elevation: 2,
     shape: RoundedRectangleBorder(
-      borderRadius:BorderRadius.circular(15.0.r) ,
-    )
-    );
+      borderRadius: BorderRadius.circular(22.0.r),
+    ));
 
 final iconTheme = IconThemeData(size: kIconSize.r, color: AppColors.grey2);
 

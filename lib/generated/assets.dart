@@ -16,4 +16,6 @@ class Assets {
   static const String imagesCommonQuestions =
       'assets/images/common_questions.png';
   static const String imagesImg = 'assets/images/img.png';
+  static const String imagesMastercard = 'assets/images/mastercard.png';
+  static const String imagesVisa = 'assets/images/visa.png';
 }

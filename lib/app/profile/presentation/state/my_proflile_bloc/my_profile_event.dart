@@ -4,3 +4,5 @@ part of 'my_profile_bloc.dart';
 abstract class MyProfileEvent {}
 
 class MyProfileFetched extends MyProfileEvent {}
+
+class MyProfileStarted extends MyProfileEvent {}

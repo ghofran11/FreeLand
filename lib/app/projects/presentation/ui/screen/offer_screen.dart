@@ -19,21 +19,22 @@ class OfferScreen extends StatelessWidget {
   final String projectId;
   final String projectName;
 
-  const OfferScreen({Key? key, required this.projectId, required this.projectName}) : super(key: key);
+  const OfferScreen(
+      {Key? key, required this.projectId, required this.projectName})
+      : super(key: key);
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
       child: OfferScreen(
-        projectId:( state.extra as List)[0],
-        projectName:( state.extra as List)[1],
+        projectId: (state.extra as List)[0],
+        projectName: (state.extra as List)[1],
       ),
     );
   }
 
   static const routePath = 'offer_screen';
   static const routeName = 'offer_screen';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +58,7 @@ class OfferScreen extends StatelessWidget {
                           Icons.arrow_back_ios,
                           color: AppColors.primary,
                         )),
-                     CustomText.titleLarge(
+                    CustomText.titleLarge(
                       'Offer $projectName',
                       style: TextStyle(),
                     ),

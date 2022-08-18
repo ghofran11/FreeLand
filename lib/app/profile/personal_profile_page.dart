@@ -130,12 +130,18 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                 padding: EdgeInsets.symmetric(vertical: 12.0.h),
                 child: const Divider(color: AppColors.black),
               ),
-              const ProfileCareerSection(),
+              ProfileCareerSection(
+                careers: state.profile!.careerDtos,
+                isMe: true,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.0.h),
                 child: const Divider(color: AppColors.black),
               ),
-              const ProfileEducationSection(),
+              ProfileEducationSection(
+                isMe: true,
+                courses: state.profile!.educationDtos,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.0.h),
                 child: const Divider(color: AppColors.black),

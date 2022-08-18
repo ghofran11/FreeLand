@@ -23,7 +23,7 @@ class ContactUSModel {
 
   Future<FormData> formData() async => FormData.fromMap(toJson()
     ..addAll({
-      "file": image != null
+      "files": image != null
           ? await MultipartFile.fromFile(
               (await compressImages([image!])).first!.path)
           : null,

@@ -6,6 +6,7 @@ import 'package:freeland/app/auth/presentation/sign_up/sign_up_screen.dart';
 import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manager_bloc.dart';
 import 'package:freeland/app/contract/contract_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
+import 'package:freeland/app/payment/payment_method.dart' hide Status;
 import 'package:freeland/app/profile/presentation/screens/all_projects_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/all_work_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/personal_info_update_screen.dart';
@@ -118,7 +119,14 @@ class RouterConfig {
                   name: WorkingOn.routeName,
                   pageBuilder: (context, state) =>
                       WorkingOn.pageBuilder(context, state),
-                  routes: []),
+                  routes: [
+                    GoRoute(
+                        path: PaymentScreen.routePath,
+                        name: PaymentScreen.routeName,
+                        pageBuilder: (context, state) =>
+                            PaymentScreen.pageBuilder(context, state),
+                        routes: []),
+                  ]),
               GoRoute(
                   path: AllOwnProject.routePath,
                   name: AllOwnProject.routeName,

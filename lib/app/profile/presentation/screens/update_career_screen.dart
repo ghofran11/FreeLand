@@ -12,8 +12,9 @@ FormGroup formGroup = FormGroup({
 });
 
 class CareerUpdateScreen extends StatefulWidget {
-  const CareerUpdateScreen({Key? key, this.showEdit = false}) : super(key: key);
-  final bool showEdit;
+  const CareerUpdateScreen({
+    Key? key,
+  }) : super(key: key);
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(

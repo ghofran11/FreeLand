@@ -1,6 +1,7 @@
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freeland/app/payment/payment_method.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
@@ -83,7 +84,7 @@ class _WorkingOnState extends State<WorkingOn> {
         endChild: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           const CustomText.titleLarge('Analise'),
+            const CustomText.titleLarge('Analise'),
             const CustomText.bodyMedium(
               'Description for level is: Facebook is a social networking site that makes it easy for you to connect and share with family and friends online. Originally designed for college students, Facebook was created in 2004 by Mark Zuckerberg while he was enrolled at Harvard University. By 2006, anyone over the age of 13 with a valid email address could join Facebook. Today, Facebook is the worlds largest social network, with more than 1 billion users worldwide.',
             ),
@@ -104,6 +105,7 @@ class _WorkingOnState extends State<WorkingOn> {
                     setState(() {
                       _selectedIndex = index + 1;
                     });
+                    context.pushNamed(PaymentScreen.routeName);
                   },
                   child: const Text("Submit this level as Completed")),
             )

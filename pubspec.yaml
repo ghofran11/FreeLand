@@ -65,11 +65,12 @@ dependencies:
   file_picker: ^4.6.1
   image_picker: ^0.8.5+3
   flutter_image_compress: ^1.1.1
-  image_cropper: ^2.0.3
+  image_cropper: ^3.0.0
   internet_file: any
   native_pdf_view: ^6.0.0+1
   fancy_dialog: ^1.0.1
   timeago: ^3.2.2
+  myfatoorah_flutter: ^2.1.12
   dio_refresh_bot:
     git:
       url: https://github.com/flutterbots/flutterbots.git

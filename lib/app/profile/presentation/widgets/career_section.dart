@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
 import 'package:freeland/app/profile/presentation/screens/update_career_screen.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/widgets/edit_button.dart';
@@ -8,9 +9,11 @@ import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileCareerSection extends StatelessWidget {
-  const ProfileCareerSection({Key? key, this.showEdit = false})
+  const ProfileCareerSection(
+      {Key? key, this.isMe = false, required this.careers})
       : super(key: key);
-  final bool showEdit;
+  final bool isMe;
+  final List<CareerDtos> careers;
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +24,21 @@ class ProfileCareerSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const CustomText.headlineSmall("Careers"),
-            EditButton(onPressed: () {
-              context.pushNamed(CareerUpdateScreen.routeName);
-            })
+            if (isMe)
+              EditButton(onPressed: () {
+                context.pushNamed(
+                  CareerUpdateScreen.routeName,
+                );
+              })
           ],
         ),
         SizedBox(height: 8.0.h),
         Wrap(
-          spacing: 12.0.w,
-          children: [
-            CustomText.bodyLarge("Back End Developping"),
-            CustomText.bodyLarge("Dev-Ops Engineer"),
-            CustomText.bodyLarge("Text"),
-            CustomText.bodyLarge("Chiof technical"),
-          ],
-        ),
+            spacing: 12.0.w,
+            children: List.generate(
+              careers.length,
+              (index) => CustomText.bodyLarge(careers[index].name),
+            )),
         // ListView.separated(
         //     shrinkWrap: true,
         //     itemCount: 3,

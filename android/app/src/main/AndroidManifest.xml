@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yalantis.ucrop.UCropA.ctivity"
+            android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <!-- Don't delete the meta-data below.

@@ -62,7 +62,6 @@ class HomeRemote {
   }
 
   Future<void> contactUs(ContactUSModel contactUs) async {
-    print(await contactUs.toJson());
     return throwDioException<void>(() async {
       await _dio.post(AppUri.contactUsCreate, data: await contactUs.formData());
     });
