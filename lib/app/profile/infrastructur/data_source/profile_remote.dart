@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:either_dart/either.dart';
 import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
 import 'package:freeland/common/constant/src/url.dart';
+import 'package:freeland/common/network/error_handler.dart';
 
 class ProfileRemote {
   final Dio _dio;
@@ -58,6 +60,12 @@ class ProfileRemote {
       ]
     });
     return MyProfile.fromJson(response.data);
+  }
+
+  Future<void> sendConnect() async {
+    return throwDioException<void>(() async {
+      await _dio.post(AppUri.contactUsCreate);
+    });
   }
 
   getAnotherProfile(String id) async {

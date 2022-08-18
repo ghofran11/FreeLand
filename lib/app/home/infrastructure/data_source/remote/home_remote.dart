@@ -56,7 +56,6 @@ class HomeRemote {
     return throwDioException<List<UserDto>>(() async {
       late final Response response;
       response = await _dio.get(AppUri.userFetched);
-      print('dio dioghofran');
       print(response);
        var users = userFromJson(response.data);
 

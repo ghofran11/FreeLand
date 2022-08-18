@@ -19,4 +19,10 @@ class ProfileRepoImpl {
       return await remote.getAnotherProfile(id);
     });
   }
+
+  Future<Either<String, void>> sendConnect() {
+    return throwAppException<void>(() async {
+      await remote.sendConnect();
+    });
+  }
 }

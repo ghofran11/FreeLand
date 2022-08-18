@@ -54,8 +54,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 emit(state.copyWith(userStatus: BlocStatus.fail(error: left))),
             (right) => {
                   users = right,
-              print(users),
-              print('ghofran ghofran '),
                   emit(state.copyWith(userStatus: BlocStatus.success())),
                 });
       }

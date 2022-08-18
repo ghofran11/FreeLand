@@ -32,4 +32,8 @@ class AppUri {
       'vvkcNWpDVpGs3wLpc1GH4tVcgqvlCDSz2I3opMXKMDzXh7zCPUZv2go3jA'
       'RMftUe6_mRwWgBMGUl5R5KiErYRKo-2NrK1UZpVQZNu2Yaz8FKG89Cv8QwSvd-cxGgay0CYbHa6fSE9nlOYxp-4ec'
       'nHY2G1DcKb2BdAHuyFlHFy7EpDFTuYWl2RbCIGChulIbpc2LWv9PtWBE5M8x1JJB3VjAnVsX16IIOBsEt';
+
+  //toDo
+  static const connect = "";
+
 }
