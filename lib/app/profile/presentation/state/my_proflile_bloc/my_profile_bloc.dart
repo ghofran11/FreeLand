@@ -33,16 +33,6 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
                       profile: right, profileStatus: BlocStatus.success()))
                 });
       }
-
-      if (event is SendConnect) {
-        emit(state.copyWith(connectStatus: BlocStatus.loading()));
-
-        (await _repo.sendConnect()).fold(
-            (left) => emit(
-                state.copyWith(connectStatus: BlocStatus.fail(error: left))),
-            (right) =>
-                emit(state.copyWith(connectStatus: BlocStatus.success())));
-      }
       if (event is MyProfileStarted) {
         try {
           await doBeforeOpen?.call();

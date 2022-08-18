@@ -17,4 +17,21 @@ class NotificationRemote{
       return notification;
     });
   }
+
+  Future<List<NotificationDto>> fetchAllRequest() async {
+    return throwDioException<List<NotificationDto>>(() async {
+      late final Response response;
+      response = await _dio.get(AppUri.fetchAllRequest);
+      var requests = NotificationFromJson(response.data);
+      return requests;
+    });
+  }
+
+  Future<void> connectedRequest(bool isConnect) async {
+    return throwDioException<void>(() async {
+       await _dio.post(AppUri.connectRequest,data: isConnect);
+    });
+
+
+  }
 }

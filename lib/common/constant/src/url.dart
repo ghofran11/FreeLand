@@ -35,4 +35,9 @@ class AppUri {
 
   //toDo
   static const connect = "";
+  //toDo
+  static const connectRequest = "";
+  //toDo
+  static const fetchAllRequest= "";
+
 }

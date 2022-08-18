@@ -76,9 +76,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
    */
   void executeRegularPayment(
       int paymentMethodId, Function func, BuildContext _context) {
-    var request = new MFExecutePaymentRequest(
+    var request =  MFExecutePaymentRequest(
         paymentMethodId, double.parse(widget.amount!));
-
     MFSDK.executePayment(_context, request, MFAPILanguage.EN,
         onPaymentResponse: func);
   }

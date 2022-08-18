@@ -115,304 +115,126 @@ class NotificationsPage extends StatelessWidget {
                              }
                              return Container();
                            }),
-                            ListView(
-                              children: [
-                                ListTile(
-                                    onTap: () {},
-                                    leading: GestureDetector(
-                                      onTap: () async {
-                                        // Display the image in large form.
-                                      },
-                                      child: Container(
-                                        height: 50.0,
-                                        width: 50.0,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50))),
-                                        child: const CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: NetworkImage(
-                                                "https://thumbs.dreamstime.com/b/happy-beautiful-muslim-business-woman-brown-hijab-working-financial-business-report-calculator-home-office-happy-154129258.jpg")),
-                                      ),
-                                    ),
-                                    title: const Text(
-                                      'Malak yuons',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    subtitle: const CustomText.bodySmall(
-                                        'Flutter Developer',
-                                        style: TextStyle(
-                                          color: AppColors.grey2,
-                                        ),
-                                        maxLines: 2,
-                                        textOverflow: TextOverflow.ellipsis),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleCheck,
-                                          size: 30,
-                                          color: AppColors.primary,
-                                        ),
-                                        SizedBox(
-                                          width: 5.0.h,
-                                        ),
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleXmark,
-                                          size: 30,
-                                          color: AppColors.grey2,
-                                        ),
-                                      ],
-                                    )),
-                                const Divider(),
-                                ListTile(
-                                    onTap: () {},
-                                    leading: GestureDetector(
-                                      onTap: () async {
-                                        // Display the image in large form.
-                                      },
-                                      child: Container(
-                                        height: 50.0,
-                                        width: 50.0,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50))),
-                                        child: const CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: NetworkImage(
-                                                "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
-                                      ),
-                                    ),
-                                    title: const Text(
-                                      'Sami Salok',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    subtitle: const CustomText.bodySmall(
-                                        'UI Designer at Splendapp',
-                                        style: TextStyle(
-                                          color: AppColors.grey2,
-                                        ),
-                                        maxLines: 2,
-                                        textOverflow: TextOverflow.ellipsis),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleCheck,
-                                          size: 30,
-                                          color: AppColors.primary,
-                                        ),
-                                        SizedBox(
-                                          width: 5.0.h,
-                                        ),
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleXmark,
-                                          size: 30,
-                                          color: AppColors.grey2,
-                                        ),
-                                      ],
-                                    )),
-                                const Divider(),
-                                ListTile(
-                                    onTap: () {},
-                                    leading: GestureDetector(
-                                      onTap: () async {
-                                        // Display the image in large form.
-                                      },
-                                      child: Container(
-                                        height: 50.0,
-                                        width: 50.0,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50))),
-                                        child: const CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: NetworkImage(
-                                                "https://media.smallbiztrends.com/2016/12/shutterstock_270757481.jpg")),
-                                      ),
-                                    ),
-                                    title: const Text(
-                                      'Laila Alaa',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    subtitle: const CustomText.bodySmall(
-                                        'HR Generalist',
-                                        style: TextStyle(
-                                          color: AppColors.grey2,
-                                        ),
-                                        maxLines: 2,
-                                        textOverflow: TextOverflow.ellipsis),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleCheck,
-                                          size: 30,
-                                          color: AppColors.primary,
-                                        ),
-                                        SizedBox(
-                                          width: 5.0.h,
-                                        ),
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleXmark,
-                                          size: 30,
-                                          color: AppColors.grey2,
-                                        ),
-                                      ],
-                                    )),
-                                const Divider(),
-                                ListTile(
-                                    onTap: () {},
-                                    leading: GestureDetector(
-                                      onTap: () async {
-                                        // Display the image in large form.
-                                      },
-                                      child: Container(
-                                        height: 50.0,
-                                        width: 50.0,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50))),
-                                        child: const CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: NetworkImage(
-                                                "https://t4.ftcdn.net/jpg/02/97/24/51/360_F_297245133_gBPfK0h10UM3y7vfoEiBC3ZXt559KZar.jpg")),
-                                      ),
-                                    ),
-                                    title: const Text(
-                                      'Jon Aklas',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    subtitle: const CustomText.bodySmall(
-                                        'SoftWare Test Engineer',
-                                        style: TextStyle(
-                                          color: AppColors.grey2,
-                                        ),
-                                        maxLines: 2,
-                                        textOverflow: TextOverflow.ellipsis),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleCheck,
-                                          size: 30,
-                                          color: AppColors.primary,
-                                        ),
-                                        SizedBox(
-                                          width: 5.0.h,
-                                        ),
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleXmark,
-                                          size: 30,
-                                          color: AppColors.grey2,
-                                        ),
-                                      ],
-                                    )),
-                                const Divider(),
-                                ListTile(
-                                    onTap: () {},
-                                    leading: GestureDetector(
-                                      onTap: () async {
-                                        // Display the image in large form.
-                                      },
-                                      child: Container(
-                                        height: 50.0,
-                                        width: 50.0,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50))),
-                                        child: const CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: NetworkImage(
-                                                "https://t4.ftcdn.net/jpg/04/22/82/39/360_F_422823992_ZtyrE96o6wGTJcyZolZ6pLRUGHBRCH9c.jpg")),
-                                      ),
-                                    ),
-                                    title: const Text(
-                                      'Yaman Salm',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    subtitle: const CustomText.bodySmall(
-                                        'Technical Recruiter',
-                                        style: TextStyle(
-                                          color: AppColors.grey2,
-                                        ),
-                                        maxLines: 2,
-                                        textOverflow: TextOverflow.ellipsis),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleCheck,
-                                          size: 30,
-                                          color: AppColors.primary,
-                                        ),
-                                        SizedBox(
-                                          width: 5.0.h,
-                                        ),
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleXmark,
-                                          size: 30,
-                                          color: AppColors.grey2,
-                                        ),
-                                      ],
-                                    )),
-                                const Divider(),
-                                ListTile(
-                                    onTap: () {},
-                                    leading: GestureDetector(
-                                      onTap: () async {
-                                        // Display the image in large form.
-                                      },
-                                      child: Container(
-                                        height: 50.0,
-                                        width: 50.0,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50))),
-                                        child: const CircleAvatar(
-                                            radius: 50,
-                                            backgroundImage: NetworkImage(
-                                                "https://media.istockphoto.com/photos/portrait-of-happy-indian-man-smiling-at-home-picture-id1270067432?k=20&m=1270067432&s=170667a&w=0&h=oteWnPwtJfubzHmfGPfTfvrSSTVsLQ3hMP18oxIJaZk=")),
-                                      ),
-                                    ),
-                                    title: const Text(
-                                      'Jad ALAbed',
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    subtitle: const CustomText.bodySmall(
-                                        'Senior Machine Learning Engineer',
-                                        style: TextStyle(
-                                          color: AppColors.grey2,
-                                        ),
-                                        maxLines: 2,
-                                        textOverflow: TextOverflow.ellipsis),
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleCheck,
-                                          size: 30,
-                                          color: AppColors.primary,
-                                        ),
-                                        SizedBox(
-                                          width: 5.0.h,
-                                        ),
-                                        const FaIcon(
-                                          FontAwesomeIcons.circleXmark,
-                                          size: 30,
-                                          color: AppColors.grey2,
-                                        ),
-                                      ],
-                                    )),
-                                const Divider(),
-                              ],
-                              physics: const BouncingScrollPhysics(),
+                            Builder(
+                              builder: (context) {
+                                if(state.notificationStatus.isSuccess()){
+                                  return ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return const Divider();
+                                    },
+                                    itemBuilder: (context,index){
+                                      return ListTile(
+                                          onTap: () {},
+                                          leading: GestureDetector(
+                                            onTap: () async {
+                                              // Display the image in large form.
+                                            },
+                                            child: Container(
+                                              height: 50.0,
+                                              width: 50.0,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.blue,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(50))),
+                                              child: const CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage: NetworkImage(
+                                                      "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
+                                            ),
+                                          ),
+                                          title: const Text(
+                                            'Sami Salok',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          subtitle: const CustomText.bodySmall(
+                                              'UI Designer at Splendapp',
+                                              style: TextStyle(
+                                                color: AppColors.grey2,
+                                              ),
+                                              maxLines: 2,
+                                              textOverflow: TextOverflow.ellipsis),
+                                          trailing: Builder(
+                                            builder: (context) {
+                                              if(state.requestStatus.isFail()){
+                                                BotToast.showText(
+                                                    text: state.requestStatus.error ??
+                                                        AppStrings.defaultErrorMsg);
+                                                return Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    InkWell(
+
+                                                      child: const FaIcon(
+                                                        FontAwesomeIcons.circleCheck,
+                                                        size: 30,
+                                                        color: AppColors.primary,
+                                                      ),
+                                                      onTap: (){
+                                                        _notificationBloc.add(ConnectRequest(isConnect: true));
+                                                      },
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.0.h,
+                                                    ),
+                                                    InkWell(
+                                                      child: const FaIcon(
+                                                        FontAwesomeIcons.circleXmark,
+                                                        size: 30,
+                                                        color: AppColors.grey2,
+                                                      ),
+                                                      onTap: (){
+                                                        _notificationBloc.add(ConnectRequest(isConnect: false));
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              }
+                                            else  if(state.requestStatus.isSuccess()){
+                                                BotToast.showText(
+                                                    text: 'Request approved ');
+                                              }
+                                              return Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  InkWell(
+
+                                                    child: const FaIcon(
+                                                      FontAwesomeIcons.circleCheck,
+                                                      size: 30,
+                                                      color: AppColors.primary,
+                                                    ),
+                                                    onTap: (){
+                                                      _notificationBloc.add(ConnectRequest(isConnect: true));
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5.0.h,
+                                                  ),
+                                                  InkWell(
+                                                    child: const FaIcon(
+                                                      FontAwesomeIcons.circleXmark,
+                                                      size: 30,
+                                                      color: AppColors.grey2,
+                                                    ),
+                                                    onTap: (){
+                                                      _notificationBloc.add(ConnectRequest(isConnect: false));
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            }
+                                          ));
+
+                                    },
+                                    itemCount: 8,
+                                  );
+                                }
+                                else if (state.notificationStatus.isLoading()) {
+                                  return const LoadingProgress();
+                                }
+                                return Container();
+
+                              }
                             ),
                           ]),
                         );
@@ -670,3 +492,594 @@ class NotificationsPage extends StatelessWidget {
 //       style: const TextStyle(fontSize: 11)),
 // ),
 // const Divider(),
+// children: [
+//   ListTile(
+//       onTap: () {},
+//       leading: GestureDetector(
+//         onTap: () async {
+//           // Display the image in large form.
+//         },
+//         child: Container(
+//           height: 50.0,
+//           width: 50.0,
+//           decoration: const BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.all(
+//                   Radius.circular(50))),
+//           child: const CircleAvatar(
+//               radius: 50,
+//               backgroundImage: NetworkImage(
+//                   "https://thumbs.dreamstime.com/b/happy-beautiful-muslim-business-woman-brown-hijab-working-financial-business-report-calculator-home-office-happy-154129258.jpg")),
+//         ),
+//       ),
+//       title: const Text(
+//         'Malak yuons',
+//         style: TextStyle(fontSize: 15),
+//       ),
+//       subtitle: const CustomText.bodySmall(
+//           'Flutter Developer',
+//           style: TextStyle(
+//             color: AppColors.grey2,
+//           ),
+//           maxLines: 2,
+//           textOverflow: TextOverflow.ellipsis),
+//       trailing: Row(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const FaIcon(
+//             FontAwesomeIcons.circleCheck,
+//             size: 30,
+//             color: AppColors.primary,
+//           ),
+//           SizedBox(
+//             width: 5.0.h,
+//           ),
+//           const FaIcon(
+//             FontAwesomeIcons.circleXmark,
+//             size: 30,
+//             color: AppColors.grey2,
+//           ),
+//         ],
+//       )),
+//   const Divider(),
+//   ListTile(
+//       onTap: () {},
+//       leading: GestureDetector(
+//         onTap: () async {
+//           // Display the image in large form.
+//         },
+//         child: Container(
+//           height: 50.0,
+//           width: 50.0,
+//           decoration: const BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.all(
+//                   Radius.circular(50))),
+//           child: const CircleAvatar(
+//               radius: 50,
+//               backgroundImage: NetworkImage(
+//                   "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
+//         ),
+//       ),
+//       title: const Text(
+//         'Sami Salok',
+//         style: TextStyle(fontSize: 15),
+//       ),
+//       subtitle: const CustomText.bodySmall(
+//           'UI Designer at Splendapp',
+//           style: TextStyle(
+//             color: AppColors.grey2,
+//           ),
+//           maxLines: 2,
+//           textOverflow: TextOverflow.ellipsis),
+//       trailing: Row(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const FaIcon(
+//             FontAwesomeIcons.circleCheck,
+//             size: 30,
+//             color: AppColors.primary,
+//           ),
+//           SizedBox(
+//             width: 5.0.h,
+//           ),
+//           const FaIcon(
+//             FontAwesomeIcons.circleXmark,
+//             size: 30,
+//             color: AppColors.grey2,
+//           ),
+//         ],
+//       )),
+//   const Divider(),
+//   ListTile(
+//       onTap: () {},
+//       leading: GestureDetector(
+//         onTap: () async {
+//           // Display the image in large form.
+//         },
+//         child: Container(
+//           height: 50.0,
+//           width: 50.0,
+//           decoration: const BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.all(
+//                   Radius.circular(50))),
+//           child: const CircleAvatar(
+//               radius: 50,
+//               backgroundImage: NetworkImage(
+//                   "https://media.smallbiztrends.com/2016/12/shutterstock_270757481.jpg")),
+//         ),
+//       ),
+//       title: const Text(
+//         'Laila Alaa',
+//         style: TextStyle(fontSize: 15),
+//       ),
+//       subtitle: const CustomText.bodySmall(
+//           'HR Generalist',
+//           style: TextStyle(
+//             color: AppColors.grey2,
+//           ),
+//           maxLines: 2,
+//           textOverflow: TextOverflow.ellipsis),
+//       trailing: Row(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const FaIcon(
+//             FontAwesomeIcons.circleCheck,
+//             size: 30,
+//             color: AppColors.primary,
+//           ),
+//           SizedBox(
+//             width: 5.0.h,
+//           ),
+//           const FaIcon(
+//             FontAwesomeIcons.circleXmark,
+//             size: 30,
+//             color: AppColors.grey2,
+//           ),
+//         ],
+//       )),
+//   const Divider(),
+//   ListTile(
+//       onTap: () {},
+//       leading: GestureDetector(
+//         onTap: () async {
+//           // Display the image in large form.
+//         },
+//         child: Container(
+//           height: 50.0,
+//           width: 50.0,
+//           decoration: const BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.all(
+//                   Radius.circular(50))),
+//           child: const CircleAvatar(
+//               radius: 50,
+//               backgroundImage: NetworkImage(
+//                   "https://t4.ftcdn.net/jpg/02/97/24/51/360_F_297245133_gBPfK0h10UM3y7vfoEiBC3ZXt559KZar.jpg")),
+//         ),
+//       ),
+//       title: const Text(
+//         'Jon Aklas',
+//         style: TextStyle(fontSize: 15),
+//       ),
+//       subtitle: const CustomText.bodySmall(
+//           'SoftWare Test Engineer',
+//           style: TextStyle(
+//             color: AppColors.grey2,
+//           ),
+//           maxLines: 2,
+//           textOverflow: TextOverflow.ellipsis),
+//       trailing: Row(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const FaIcon(
+//             FontAwesomeIcons.circleCheck,
+//             size: 30,
+//             color: AppColors.primary,
+//           ),
+//           SizedBox(
+//             width: 5.0.h,
+//           ),
+//           const FaIcon(
+//             FontAwesomeIcons.circleXmark,
+//             size: 30,
+//             color: AppColors.grey2,
+//           ),
+//         ],
+//       )),
+//   const Divider(),
+//   ListTile(
+//       onTap: () {},
+//       leading: GestureDetector(
+//         onTap: () async {
+//           // Display the image in large form.
+//         },
+//         child: Container(
+//           height: 50.0,
+//           width: 50.0,
+//           decoration: const BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.all(
+//                   Radius.circular(50))),
+//           child: const CircleAvatar(
+//               radius: 50,
+//               backgroundImage: NetworkImage(
+//                   "https://t4.ftcdn.net/jpg/04/22/82/39/360_F_422823992_ZtyrE96o6wGTJcyZolZ6pLRUGHBRCH9c.jpg")),
+//         ),
+//       ),
+//       title: const Text(
+//         'Yaman Salm',
+//         style: TextStyle(fontSize: 15),
+//       ),
+//       subtitle: const CustomText.bodySmall(
+//           'Technical Recruiter',
+//           style: TextStyle(
+//             color: AppColors.grey2,
+//           ),
+//           maxLines: 2,
+//           textOverflow: TextOverflow.ellipsis),
+//       trailing: Row(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const FaIcon(
+//             FontAwesomeIcons.circleCheck,
+//             size: 30,
+//             color: AppColors.primary,
+//           ),
+//           SizedBox(
+//             width: 5.0.h,
+//           ),
+//           const FaIcon(
+//             FontAwesomeIcons.circleXmark,
+//             size: 30,
+//             color: AppColors.grey2,
+//           ),
+//         ],
+//       )),
+//   const Divider(),
+//   ListTile(
+//       onTap: () {},
+//       leading: GestureDetector(
+//         onTap: () async {
+//           // Display the image in large form.
+//         },
+//         child: Container(
+//           height: 50.0,
+//           width: 50.0,
+//           decoration: const BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.all(
+//                   Radius.circular(50))),
+//           child: const CircleAvatar(
+//               radius: 50,
+//               backgroundImage: NetworkImage(
+//                   "https://media.istockphoto.com/photos/portrait-of-happy-indian-man-smiling-at-home-picture-id1270067432?k=20&m=1270067432&s=170667a&w=0&h=oteWnPwtJfubzHmfGPfTfvrSSTVsLQ3hMP18oxIJaZk=")),
+//         ),
+//       ),
+//       title: const Text(
+//         'Jad ALAbed',
+//         style: TextStyle(fontSize: 15),
+//       ),
+//       subtitle: const CustomText.bodySmall(
+//           'Senior Machine Learning Engineer',
+//           style: TextStyle(
+//             color: AppColors.grey2,
+//           ),
+//           maxLines: 2,
+//           textOverflow: TextOverflow.ellipsis),
+//       trailing: Row(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           const FaIcon(
+//             FontAwesomeIcons.circleCheck,
+//             size: 30,
+//             color: AppColors.primary,
+//           ),
+//           SizedBox(
+//             width: 5.0.h,
+//           ),
+//           const FaIcon(
+//             FontAwesomeIcons.circleXmark,
+//             size: 30,
+//             color: AppColors.grey2,
+//           ),
+//         ],
+//       )),
+//   const Divider(),
+// ],   // children: [
+//                                     //   ListTile(
+//                                     //       onTap: () {},
+//                                     //       leading: GestureDetector(
+//                                     //         onTap: () async {
+//                                     //           // Display the image in large form.
+//                                     //         },
+//                                     //         child: Container(
+//                                     //           height: 50.0,
+//                                     //           width: 50.0,
+//                                     //           decoration: const BoxDecoration(
+//                                     //               color: Colors.blue,
+//                                     //               borderRadius: BorderRadius.all(
+//                                     //                   Radius.circular(50))),
+//                                     //           child: const CircleAvatar(
+//                                     //               radius: 50,
+//                                     //               backgroundImage: NetworkImage(
+//                                     //                   "https://thumbs.dreamstime.com/b/happy-beautiful-muslim-business-woman-brown-hijab-working-financial-business-report-calculator-home-office-happy-154129258.jpg")),
+//                                     //         ),
+//                                     //       ),
+//                                     //       title: const Text(
+//                                     //         'Malak yuons',
+//                                     //         style: TextStyle(fontSize: 15),
+//                                     //       ),
+//                                     //       subtitle: const CustomText.bodySmall(
+//                                     //           'Flutter Developer',
+//                                     //           style: TextStyle(
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //           maxLines: 2,
+//                                     //           textOverflow: TextOverflow.ellipsis),
+//                                     //       trailing: Row(
+//                                     //         mainAxisSize: MainAxisSize.min,
+//                                     //         children: [
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleCheck,
+//                                     //             size: 30,
+//                                     //             color: AppColors.primary,
+//                                     //           ),
+//                                     //           SizedBox(
+//                                     //             width: 5.0.h,
+//                                     //           ),
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleXmark,
+//                                     //             size: 30,
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //         ],
+//                                     //       )),
+//                                     //   const Divider(),
+//                                     //   ListTile(
+//                                     //       onTap: () {},
+//                                     //       leading: GestureDetector(
+//                                     //         onTap: () async {
+//                                     //           // Display the image in large form.
+//                                     //         },
+//                                     //         child: Container(
+//                                     //           height: 50.0,
+//                                     //           width: 50.0,
+//                                     //           decoration: const BoxDecoration(
+//                                     //               color: Colors.blue,
+//                                     //               borderRadius: BorderRadius.all(
+//                                     //                   Radius.circular(50))),
+//                                     //           child: const CircleAvatar(
+//                                     //               radius: 50,
+//                                     //               backgroundImage: NetworkImage(
+//                                     //                   "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
+//                                     //         ),
+//                                     //       ),
+//                                     //       title: const Text(
+//                                     //         'Sami Salok',
+//                                     //         style: TextStyle(fontSize: 15),
+//                                     //       ),
+//                                     //       subtitle: const CustomText.bodySmall(
+//                                     //           'UI Designer at Splendapp',
+//                                     //           style: TextStyle(
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //           maxLines: 2,
+//                                     //           textOverflow: TextOverflow.ellipsis),
+//                                     //       trailing: Row(
+//                                     //         mainAxisSize: MainAxisSize.min,
+//                                     //         children: [
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleCheck,
+//                                     //             size: 30,
+//                                     //             color: AppColors.primary,
+//                                     //           ),
+//                                     //           SizedBox(
+//                                     //             width: 5.0.h,
+//                                     //           ),
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleXmark,
+//                                     //             size: 30,
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //         ],
+//                                     //       )),
+//                                     //   const Divider(),
+//                                     //   ListTile(
+//                                     //       onTap: () {},
+//                                     //       leading: GestureDetector(
+//                                     //         onTap: () async {
+//                                     //           // Display the image in large form.
+//                                     //         },
+//                                     //         child: Container(
+//                                     //           height: 50.0,
+//                                     //           width: 50.0,
+//                                     //           decoration: const BoxDecoration(
+//                                     //               color: Colors.blue,
+//                                     //               borderRadius: BorderRadius.all(
+//                                     //                   Radius.circular(50))),
+//                                     //           child: const CircleAvatar(
+//                                     //               radius: 50,
+//                                     //               backgroundImage: NetworkImage(
+//                                     //                   "https://media.smallbiztrends.com/2016/12/shutterstock_270757481.jpg")),
+//                                     //         ),
+//                                     //       ),
+//                                     //       title: const Text(
+//                                     //         'Laila Alaa',
+//                                     //         style: TextStyle(fontSize: 15),
+//                                     //       ),
+//                                     //       subtitle: const CustomText.bodySmall(
+//                                     //           'HR Generalist',
+//                                     //           style: TextStyle(
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //           maxLines: 2,
+//                                     //           textOverflow: TextOverflow.ellipsis),
+//                                     //       trailing: Row(
+//                                     //         mainAxisSize: MainAxisSize.min,
+//                                     //         children: [
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleCheck,
+//                                     //             size: 30,
+//                                     //             color: AppColors.primary,
+//                                     //           ),
+//                                     //           SizedBox(
+//                                     //             width: 5.0.h,
+//                                     //           ),
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleXmark,
+//                                     //             size: 30,
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //         ],
+//                                     //       )),
+//                                     //   const Divider(),
+//                                     //   ListTile(
+//                                     //       onTap: () {},
+//                                     //       leading: GestureDetector(
+//                                     //         onTap: () async {
+//                                     //           // Display the image in large form.
+//                                     //         },
+//                                     //         child: Container(
+//                                     //           height: 50.0,
+//                                     //           width: 50.0,
+//                                     //           decoration: const BoxDecoration(
+//                                     //               color: Colors.blue,
+//                                     //               borderRadius: BorderRadius.all(
+//                                     //                   Radius.circular(50))),
+//                                     //           child: const CircleAvatar(
+//                                     //               radius: 50,
+//                                     //               backgroundImage: NetworkImage(
+//                                     //                   "https://t4.ftcdn.net/jpg/02/97/24/51/360_F_297245133_gBPfK0h10UM3y7vfoEiBC3ZXt559KZar.jpg")),
+//                                     //         ),
+//                                     //       ),
+//                                     //       title: const Text(
+//                                     //         'Jon Aklas',
+//                                     //         style: TextStyle(fontSize: 15),
+//                                     //       ),
+//                                     //       subtitle: const CustomText.bodySmall(
+//                                     //           'SoftWare Test Engineer',
+//                                     //           style: TextStyle(
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //           maxLines: 2,
+//                                     //           textOverflow: TextOverflow.ellipsis),
+//                                     //       trailing: Row(
+//                                     //         mainAxisSize: MainAxisSize.min,
+//                                     //         children: [
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleCheck,
+//                                     //             size: 30,
+//                                     //             color: AppColors.primary,
+//                                     //           ),
+//                                     //           SizedBox(
+//                                     //             width: 5.0.h,
+//                                     //           ),
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleXmark,
+//                                     //             size: 30,
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //         ],
+//                                     //       )),
+//                                     //   const Divider(),
+//                                     //   ListTile(
+//                                     //       onTap: () {},
+//                                     //       leading: GestureDetector(
+//                                     //         onTap: () async {
+//                                     //           // Display the image in large form.
+//                                     //         },
+//                                     //         child: Container(
+//                                     //           height: 50.0,
+//                                     //           width: 50.0,
+//                                     //           decoration: const BoxDecoration(
+//                                     //               color: Colors.blue,
+//                                     //               borderRadius: BorderRadius.all(
+//                                     //                   Radius.circular(50))),
+//                                     //           child: const CircleAvatar(
+//                                     //               radius: 50,
+//                                     //               backgroundImage: NetworkImage(
+//                                     //                   "https://t4.ftcdn.net/jpg/04/22/82/39/360_F_422823992_ZtyrE96o6wGTJcyZolZ6pLRUGHBRCH9c.jpg")),
+//                                     //         ),
+//                                     //       ),
+//                                     //       title: const Text(
+//                                     //         'Yaman Salm',
+//                                     //         style: TextStyle(fontSize: 15),
+//                                     //       ),
+//                                     //       subtitle: const CustomText.bodySmall(
+//                                     //           'Technical Recruiter',
+//                                     //           style: TextStyle(
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //           maxLines: 2,
+//                                     //           textOverflow: TextOverflow.ellipsis),
+//                                     //       trailing: Row(
+//                                     //         mainAxisSize: MainAxisSize.min,
+//                                     //         children: [
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleCheck,
+//                                     //             size: 30,
+//                                     //             color: AppColors.primary,
+//                                     //           ),
+//                                     //           SizedBox(
+//                                     //             width: 5.0.h,
+//                                     //           ),
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleXmark,
+//                                     //             size: 30,
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //         ],
+//                                     //       )),
+//                                     //   const Divider(),
+//                                     //   ListTile(
+//                                     //       onTap: () {},
+//                                     //       leading: GestureDetector(
+//                                     //         onTap: () async {
+//                                     //           // Display the image in large form.
+//                                     //         },
+//                                     //         child: Container(
+//                                     //           height: 50.0,
+//                                     //           width: 50.0,
+//                                     //           decoration: const BoxDecoration(
+//                                     //               color: Colors.blue,
+//                                     //               borderRadius: BorderRadius.all(
+//                                     //                   Radius.circular(50))),
+//                                     //           child: const CircleAvatar(
+//                                     //               radius: 50,
+//                                     //               backgroundImage: NetworkImage(
+//                                     //                   "https://media.istockphoto.com/photos/portrait-of-happy-indian-man-smiling-at-home-picture-id1270067432?k=20&m=1270067432&s=170667a&w=0&h=oteWnPwtJfubzHmfGPfTfvrSSTVsLQ3hMP18oxIJaZk=")),
+//                                     //         ),
+//                                     //       ),
+//                                     //       title: const Text(
+//                                     //         'Jad ALAbed',
+//                                     //         style: TextStyle(fontSize: 15),
+//                                     //       ),
+//                                     //       subtitle: const CustomText.bodySmall(
+//                                     //           'Senior Machine Learning Engineer',
+//                                     //           style: TextStyle(
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //           maxLines: 2,
+//                                     //           textOverflow: TextOverflow.ellipsis),
+//                                     //       trailing: Row(
+//                                     //         mainAxisSize: MainAxisSize.min,
+//                                     //         children: [
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleCheck,
+//                                     //             size: 30,
+//                                     //             color: AppColors.primary,
+//                                     //           ),
+//                                     //           SizedBox(
+//                                     //             width: 5.0.h,
+//                                     //           ),
+//                                     //           const FaIcon(
+//                                     //             FontAwesomeIcons.circleXmark,
+//                                     //             size: 30,
+//                                     //             color: AppColors.grey2,
+//                                     //           ),
+//                                     //         ],
+//                                     //       )),
+//                                     //   const Divider(),
+//                                     // ],

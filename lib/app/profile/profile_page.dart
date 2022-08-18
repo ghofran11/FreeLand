@@ -84,17 +84,24 @@ class ProfilePage extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    //ToDo:
-                                  },
-                                  child: CustomText.bodyMedium(
-                                    "Connect",
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary),
-                                  )),
+                              BlocConsumer(
+                                listener: (context, state) {
+                                },
+                                builder: (context, state) {
+                                  return ElevatedButton(
+                                      onPressed: () {
+                                        getIt<ProfileBloc>()
+                                            .add(SendConnect(id));
+                                      },
+                                      child: CustomText.bodyMedium(
+                                        "Connect",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary),
+                                      ));
+                                },
+                              ),
                               SizedBox(
                                 height: 8.0.h,
                               ),
@@ -104,7 +111,7 @@ class ProfilePage extends StatelessWidget {
                                 children: [
                                   StatisticsWidget(
                                     color: AppColors.green,
-                                    child: FaIcon(
+                                    child: const FaIcon(
                                       FontAwesomeIcons.listCheck,
                                       color: AppColors.green,
                                     ),
@@ -113,7 +120,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                   StatisticsWidget(
                                     color: AppColors.blueAccent2,
-                                    child: FaIcon(
+                                    child: const FaIcon(
                                       FontAwesomeIcons.solidCircleUser,
                                       color: AppColors.blueAccent2,
                                     ),
@@ -122,7 +129,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                   StatisticsWidget(
                                     color: AppColors.yellow,
-                                    child: FaIcon(
+                                    child: const FaIcon(
                                       FontAwesomeIcons.solidStar,
                                       color: AppColors.yellow,
                                     ),
