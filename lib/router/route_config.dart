@@ -7,7 +7,6 @@ import 'package:freeland/app/auth/presentation/state/app_manager_bloc/app_manage
 import 'package:freeland/app/contract/contract_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/searsh_users_screen.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
-import 'package:freeland/app/profile/personal_profile_page.dart';
 import 'package:freeland/app/payment/payment_method.dart' hide Status;
 import 'package:freeland/app/profile/presentation/screens/all_projects_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/all_work_screen.dart';
