@@ -10,6 +10,7 @@ class AddProjectParams {
      this.id,
    required this.name,
      this.ownerId,
+    required this.deadLine,
     this.nameOwner,
     required this.description,
     this.evalution,
@@ -22,6 +23,7 @@ class AddProjectParams {
 
   final String? id;
   final String name;
+  final DateTime deadLine;
   final String? ownerId;
   final String? nameOwner;
   final String description;
@@ -36,6 +38,7 @@ class AddProjectParams {
     String? id,
     String? name,
     String? ownerId,
+    final DateTime? deadLine,
     String? nameOwner,
     String? description,
     int? evalution,
@@ -49,6 +52,7 @@ class AddProjectParams {
         id: id ?? this.id,
         name: name ?? this.name,
         ownerId: ownerId ?? this.ownerId,
+        deadLine: deadLine ?? this.deadLine,
         nameOwner: nameOwner ?? this.nameOwner,
         description: description ?? this.description,
         evalution: evalution ?? this.evalution,
@@ -66,6 +70,7 @@ class AddProjectParams {
   factory AddProjectParams.fromMap(Map<String, dynamic> json) => AddProjectParams(
     id: json["id"],
     name: json["name"],
+    deadLine: json["deadLine"] ,
     ownerId: json["ownerId"],
     nameOwner: json["nameOwner"],
     description: json["description"],
@@ -88,7 +93,7 @@ class AddProjectParams {
     "minPrice": minPrice,
     "maxPrice": maxPrice,
     "documentDto": documentDto?.toMap(),
-    "contractDto": List<dynamic>.from(contractDto!.map((x) => x.toMap())),
+   // "contractDto": List<dynamic>.from(contractDto!.map((x) => x.toMap())),
   };
 }
 

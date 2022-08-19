@@ -32,6 +32,7 @@ class RootScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+
         BlocProvider<HomeBloc>(
           create: (_) => getIt<HomeBloc>()
             ..add(FetchAllCategory())

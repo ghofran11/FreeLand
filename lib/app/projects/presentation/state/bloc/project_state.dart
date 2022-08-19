@@ -59,8 +59,11 @@ class ProjectState {
 
   Future<AddProjectParams> getAddProjectParams(
       FormGroup addProjectForm, BuildContext context) async {
+    print('dsddghofran');
+    print(addProjectForm.control(ProjectBloc.categoryKey).value.runtimeType);
     return AddProjectParams(
         name: addProjectForm.control(ProjectBloc.projectNameKey).value,
+        deadLine: addProjectForm.control(ProjectBloc.projectDeadlineKey).value,
         description:  addProjectForm.control(ProjectBloc.projectDescKey).value,
         minPrice:  addProjectForm.control(ProjectBloc.minSalaryKey).value,
         maxPrice:  addProjectForm.control(ProjectBloc.maxSalaryKey).value,

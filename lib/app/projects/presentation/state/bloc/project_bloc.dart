@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/projects/domain/repos/project_repository.dart';
 import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
 import 'package:freeland/app/projects/infrastructure/repo/project_repository_impl.dart';
@@ -50,7 +51,8 @@ class ProjectBloc extends Bloc<ProjectEvent,ProjectState>{
       maxSalaryKey: FormControl<int>(
           validators: [Validators.required, ]),
 
-      imageKey: FormControl<ImageFile>(validators: [])
+      imageKey: FormControl<ImageFile>(validators: []),
+      categoryKey: FormControl<List<CategoryDto>>(validators: []),
     },
   );
 
@@ -122,4 +124,5 @@ class ProjectBloc extends Bloc<ProjectEvent,ProjectState>{
   static const minSalaryKey = "minSalaryKey";
   static const maxSalaryKey = "maxSalaryKey";
   static const imageKey = "imageKey";
+  static const categoryKey = "categoryKey";
 }
