@@ -15,7 +15,6 @@ class MyProfileState extends Equatable {
     return MyProfileState(
         profile: profile ?? this.profile,
         profileStatus: profileStatus ?? this.profileStatus,
-
     );
 
   }

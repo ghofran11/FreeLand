@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 class ProjectEvent{
   const ProjectEvent();
 }
@@ -19,4 +21,10 @@ class FetchAllComments extends ProjectEvent{
   final   String projectId;
 
   FetchAllComments({required this.projectId});
+}
+class ProjectSubmission extends ProjectEvent{
+  final BuildContext context;
+
+  ProjectSubmission(this.context);
+
 }
