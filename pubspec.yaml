@@ -78,7 +78,8 @@ dependencies:
       path: packages/dio_refresh_bot
 
 
-
+dependency_overrides:
+  image_picker_android: ^0.8.5+2
 
 
 dev_dependencies:

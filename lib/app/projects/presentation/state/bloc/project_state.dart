@@ -8,21 +8,26 @@ class ProjectState {
   final BlocStatus offerSubmission;
   final BlocStatus commentSubmission;
   final BlocStatus fetchAllComment;
+  final BlocStatus fetchMyProjectsStatus;
 
   ProjectState({
     this.offerSubmission = const BlocStatus(),
     this.commentSubmission = const BlocStatus(),
     this.fetchAllComment = const BlocStatus(),
+    this.fetchMyProjectsStatus = const BlocStatus(),
   });
 
   ProjectState copyWith({
     BlocStatus? offerState,
     BlocStatus? commentState,
     BlocStatus? fetchAllCommentState,
+    BlocStatus? fetchMyProjectsStatus,
   }) {
     return ProjectState(
         offerSubmission: offerState ?? offerSubmission,
         commentSubmission: commentState ?? commentSubmission,
+        fetchMyProjectsStatus:
+            fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
         fetchAllComment: fetchAllCommentState ?? fetchAllComment);
   }
 
@@ -46,6 +51,6 @@ class ProjectState {
 
   @override
   String toString() {
-    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission ";
+    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,fetchMyProjectsStatus: $fetchMyProjectsStatus ";
   }
 }
