@@ -45,15 +45,12 @@ class ProjectRemote{
     });
   }
 
-  Future<AddProjectParams> addProject({
+  Future<void> addProject({
     required AddProjectParams params,
   })
   async{
     return throwDioException(() async {
-      print(params.toJson());
-      final response =
-      await _dio.post(AppUri.addProject, data: await params.toJson());
-      return AddProjectParams.fromMap(response.data);
+      await _dio.post(AppUri.addProject, data: await params.formData());
     });
   }
 }

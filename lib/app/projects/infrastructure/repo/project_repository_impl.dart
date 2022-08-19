@@ -9,24 +9,21 @@ import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
 import 'package:freeland/app/projects/infrastructure/models/offer.dart';
 import 'package:freeland/common/network/error_handler.dart';
 
-class ProjectRepositoryImpl extends ProjectRepository{
+class ProjectRepositoryImpl extends ProjectRepository {
   final ProjectRemote remote;
   ProjectRepositoryImpl({required this.remote});
 
-
   @override
   Future<Either<String, dynamic>> sendOffer({required OfferParams params}) {
-    return throwAppException(()async{
-      final OfferDto result=
-          await remote.sendOffer(params: params);
+    return throwAppException(() async {
+      final OfferDto result = await remote.sendOffer(params: params);
     });
   }
 
   @override
   Future<Either<String, dynamic>> sendComment({required CommentParams params}) {
-    return throwAppException(()async{
-      final CommentDto result=
-      await remote.sendComment(params: params);
+    return throwAppException(() async {
+      final CommentDto result = await remote.sendComment(params: params);
     });
   }
 
@@ -36,14 +33,12 @@ class ProjectRepositoryImpl extends ProjectRepository{
       final List<CommentOfferDto> comments = await remote.fetchAllComment();
       return (comments);
     });
-
   }
 
   @override
-  Future<Either<String, dynamic>> addProject({required AddProjectParams params}) {
-    return throwAppException<AddProjectParams>(() async {
-      final AddProjectParams addProject=await remote.addProject(params: params);
-      return (addProject);
+  Future<Either<String, void>> addProject({required AddProjectParams params}) {
+    return throwAppException<void>(() async {
+      await remote.addProject(params: params);
     });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
@@ -13,12 +14,11 @@ class ProjectState {
   final BlocStatus projectSubmission;
   final BlocStatus fetchAllComment;
 
-  ProjectState({
-    this.offerSubmission = const BlocStatus(),
-    this.commentSubmission = const BlocStatus(),
-    this.fetchAllComment = const BlocStatus(),
-    this.projectSubmission=const BlocStatus()
-  });
+  ProjectState(
+      {this.offerSubmission = const BlocStatus(),
+      this.commentSubmission = const BlocStatus(),
+      this.fetchAllComment = const BlocStatus(),
+      this.projectSubmission = const BlocStatus()});
 
   ProjectState copyWith({
     BlocStatus? offerState,
@@ -30,8 +30,7 @@ class ProjectState {
         offerSubmission: offerState ?? offerSubmission,
         commentSubmission: commentState ?? commentSubmission,
         fetchAllComment: fetchAllCommentState ?? fetchAllComment,
-      projectSubmission: projectSubmission ?? this.projectSubmission
-    );
+        projectSubmission: projectSubmission ?? this.projectSubmission);
   }
 
   Future<OfferParams> getOfferParams(
@@ -59,16 +58,18 @@ class ProjectState {
 
   Future<AddProjectParams> getAddProjectParams(
       FormGroup addProjectForm, BuildContext context) async {
-    print('dsddghofran');
-    print(addProjectForm.control(ProjectBloc.categoryKey).value.runtimeType);
     return AddProjectParams(
-        name: addProjectForm.control(ProjectBloc.projectNameKey).value,
-        deadLine: addProjectForm.control(ProjectBloc.projectDeadlineKey).value,
-        description:  addProjectForm.control(ProjectBloc.projectDescKey).value,
-        minPrice:  addProjectForm.control(ProjectBloc.minSalaryKey).value,
-        maxPrice:  addProjectForm.control(ProjectBloc.maxSalaryKey).value,
-        documentDto:DocumentDto(name:'' ,id:'' ,type:2 ,path:'' ),
-        );
-
+      name: addProjectForm.control(ProjectBloc.projectNameKey).value,
+      deadLine: addProjectForm.control(ProjectBloc.projectDeadlineKey).value,
+      description: addProjectForm.control(ProjectBloc.projectDescKey).value,
+      minPrice: addProjectForm.control(ProjectBloc.minSalaryKey).value,
+      maxPrice: addProjectForm.control(ProjectBloc.maxSalaryKey).value,
+      categoriesIds: (addProjectForm.control(ProjectBloc.categoryKey).value
+              as List<CategoryDto>)
+          .map((e) => e.id)
+          .toList(),
+      image: (addProjectForm.control(ProjectBloc.imageKey).value as ImageFile)
+          .image,
+    );
   }
 }
