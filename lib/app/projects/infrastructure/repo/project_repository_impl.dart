@@ -16,7 +16,6 @@ class ProjectRepositoryImpl extends ProjectRepository {
 
   ProjectRepositoryImpl({required this.remote});
 
-
   @override
   Future<Either<String, dynamic>> sendOffer({required OfferParams params}) {
     return throwAppException(() async {
@@ -56,9 +55,11 @@ class ProjectRepositoryImpl extends ProjectRepository {
   }
 
   @override
-  Future<Either<String, dynamic>> addProject({required AddProjectParams params}) {
+  Future<Either<String, dynamic>> addProject(
+      {required AddProjectParams params}) {
     return throwAppException<AddProjectParams>(() async {
-      final AddProjectParams addProject=await remote.addProject(params: params);
+      final AddProjectParams addProject =
+          await remote.addProject(params: params);
       return (addProject);
     });
   }
