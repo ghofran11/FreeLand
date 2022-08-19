@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/profile/presentation/screens/connection_screen.dart';
 import 'package:freeland/app/profile/presentation/widgets/career_section.dart';
 import 'package:freeland/app/profile/presentation/widgets/education_section.dart';
 import 'package:freeland/app/profile/presentation/widgets/portfolio_section.dart';
@@ -63,7 +64,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                   horizontal: horizontalAppPadding.w),
               children: [
                 // ImageHolder(onUpdateImage: (image) {}, onDeleteImage: () {}),
-                ProfileImage(
+                const ProfileImage(
                     //ToDo
                     // image: state.profile.,
                     ),
@@ -99,23 +100,29 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                   children: [
                     StatisticsWidget(
                       color: AppColors.green,
-                      child: FaIcon(
+                      child: const FaIcon(
                         FontAwesomeIcons.listCheck,
                         color: AppColors.green,
                       ),
                       title: state.profile!.numOfCompletedProjects.toString(),
                     ),
-                    StatisticsWidget(
-                      color: AppColors.blueAccent2,
-                      child: FaIcon(
-                        FontAwesomeIcons.solidCircleUser,
+                    InkWell(
+                      child: StatisticsWidget(
                         color: AppColors.blueAccent2,
+                        child: const FaIcon(
+                          FontAwesomeIcons.solidCircleUser,
+                          color: AppColors.blueAccent2,
+                        ),
+                        title: state.profile!.numOfConnections.toString(),
                       ),
-                      title: state.profile!.numOfConnections.toString(),
+                      onTap: (){
+                        print('ghofran ghofran ');
+                        context.pushNamed(ConnectionScreen.routeName,extra: state.profile!.connectedUsers);
+                      },
                     ),
                     StatisticsWidget(
                       color: AppColors.yellow,
-                      child: FaIcon(
+                      child: const FaIcon(
                         FontAwesomeIcons.solidStar,
                         color: AppColors.yellow,
                       ),

@@ -5,14 +5,23 @@ class ProfileState extends Equatable {
 
   final MyProfile? profile;
 
-  const ProfileState({this.profileStatus = const BlocStatus(), this.profile});
+  final BlocStatus connectStatus;
 
-  ProfileState copyWith({MyProfile? profile, BlocStatus? profileStatus}) {
+   ProfileState({
+  this.connectStatus=const  BlocStatus(),
+    this.profileStatus = const BlocStatus(),
+    this.profile,
+
+  });
+
+  ProfileState copyWith({MyProfile? profile, BlocStatus? profileStatus,BlocStatus? connectStatus}) {
     return ProfileState(
         profile: profile ?? this.profile,
-        profileStatus: profileStatus ?? this.profileStatus);
+        profileStatus: profileStatus ?? this.profileStatus,
+      connectStatus:  connectStatus ?? this.connectStatus
+    );
   }
 
   @override
-  List<Object?> get props => [profileStatus, profile];
+  List<Object?> get props => [profileStatus, profile,connectStatus];
 }

@@ -8,6 +8,8 @@ import 'package:freeland/core/bloc_status.dart';
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   late final NotificationRepositoryImpl _notificationRepositoryImpl;
   List<NotificationDto> notification = [];
+  List<NotificationDto> requests = [];
+  bool isConnect=false;
 
   NotificationBloc(NotificationRepositoryImpl notificationRepositoryImpl)
       : super(NotificationState()) {
@@ -24,6 +26,26 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
                       state.copyWith(notificationStatus: BlocStatus.success())),
                       notification = right,
                 });
+      }
+
+      if(event is  ConnectRequest){
+        ( await _notificationRepositoryImpl.connectRequest(isConnect)).fold(
+                (left) => emit(state.copyWith(requestStatus: BlocStatus.fail(error: left))),
+
+                (right) => emit(state.copyWith(requestStatus: BlocStatus.success())));
+      }
+
+      if(event is FetchAllRequestById ){
+        emit(state.copyWith(requestStatus: BlocStatus.loading()));
+
+        (await _notificationRepositoryImpl.fetchAllRequest()).fold(
+                (left) => emit(state.copyWith(
+                requestStatus: BlocStatus.fail(error: left))),
+                (right) => {
+              emit(
+                  state.copyWith(requestStatus: BlocStatus.success())),
+              requests = right,
+            });
       }
     });
   }

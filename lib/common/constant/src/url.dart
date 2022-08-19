@@ -8,6 +8,7 @@ class AppUri {
   static const sendOffer = "Offer/App/Create";
   static const sendComment = "Comment/App/Create";
   static const userFetched = "Account/App/GetUsers";
+  static const addProject = "Service/App/Create";
   static const commentOfferFetch = "Comment/App/GetCommentsByServiceId";
   static const notificationFetch = "Notification/App/GetAll";
 
@@ -35,4 +36,9 @@ class AppUri {
 
   //toDo
   static const connect = "";
+  //toDo
+  static const connectRequest = "";
+  //toDo
+  static const fetchAllRequest= "";
+
 }

@@ -11,6 +11,7 @@ import 'package:freeland/app/payment/payment_method.dart';
 import 'package:freeland/app/profile/personal_profile_page.dart';
 import 'package:freeland/app/profile/presentation/screens/all_projects_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/all_work_screen.dart';
+import 'package:freeland/app/profile/presentation/screens/connection_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/personal_info_update_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/protofolio_update_screen.dart';
 import 'package:freeland/app/profile/presentation/screens/update_career_screen.dart';
@@ -178,6 +179,12 @@ class RouterConfig {
                         name: ProfilePage.routeName,
                         pageBuilder: (context, state) =>
                             ProfilePage.pageBuilder(context, state),
+                        routes: []),
+                    GoRoute(
+                        path: ConnectionScreen.routePath,
+                        name: ConnectionScreen.routeName,
+                        pageBuilder: (context, state) =>
+                            ConnectionScreen.pageBuilder(context, state),
                         routes: []),
                     GoRoute(
                         path: PersonalProfilePage.routePath,

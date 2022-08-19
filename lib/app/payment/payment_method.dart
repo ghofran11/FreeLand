@@ -42,7 +42,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         AppUri.M_API_KEY_TEST, MFCountry.SAUDI_ARABIA, MFEnvironment.LIVE);
     MFSDK.setUpAppBar(backgroundColor: AppColors.primary);
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       initiatePayment(initPaymentResponse);
     });
   }
@@ -76,9 +76,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
    */
   void executeRegularPayment(
       int paymentMethodId, Function func, BuildContext _context) {
-    var request = new MFExecutePaymentRequest(
+    var request =  MFExecutePaymentRequest(
         paymentMethodId, double.parse(widget.amount!));
-
     MFSDK.executePayment(_context, request, MFAPILanguage.EN,
         onPaymentResponse: func);
   }

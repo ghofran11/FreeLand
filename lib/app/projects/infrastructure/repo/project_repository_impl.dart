@@ -1,5 +1,6 @@
 import 'package:either_dart/src/either.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
+import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
@@ -14,6 +15,7 @@ class ProjectRepositoryImpl extends ProjectRepository {
   final ProjectRemote remote;
 
   ProjectRepositoryImpl({required this.remote});
+
 
   @override
   Future<Either<String, dynamic>> sendOffer({required OfferParams params}) {
@@ -50,6 +52,14 @@ class ProjectRepositoryImpl extends ProjectRepository {
           posted: postedServices,
           pending: pendingServices,
           working: workingOnServices));
+    });
+  }
+
+  @override
+  Future<Either<String, dynamic>> addProject({required AddProjectParams params}) {
+    return throwAppException<AddProjectParams>(() async {
+      final AddProjectParams addProject=await remote.addProject(params: params);
+      return (addProject);
     });
   }
 }

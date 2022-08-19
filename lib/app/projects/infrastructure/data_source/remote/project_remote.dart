@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
@@ -39,6 +40,18 @@ class ProjectRemote {
       response = await _dio.get(AppUri.commentOfferFetch);
       var comments = commentsFromJson(response.data);
       return comments;
+    });
+  }
+
+  Future<AddProjectParams> addProject({
+    required AddProjectParams params,
+  })
+  async{
+    return throwDioException(() async {
+      print(params.toJson());
+      final response =
+      await _dio.post(AppUri.addProject, data: await params.toJson());
+      return AddProjectParams.fromMap(response.data);
     });
   }
 

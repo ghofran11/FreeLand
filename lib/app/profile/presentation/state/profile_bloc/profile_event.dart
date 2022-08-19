@@ -8,3 +8,8 @@ class AnotherProfileFetched extends ProfileEvent {
 
   AnotherProfileFetched(this.id);
 }
+class SendConnect extends ProfileEvent {
+  final String id;
+
+  SendConnect(this.id);
+}

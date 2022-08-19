@@ -1,9 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
+ import 'dart:ffi';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freeland/app/projects/domain/repos/project_repository.dart';
 import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
 import 'package:freeland/app/projects/infrastructure/repo/project_repository_impl.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_state.dart';
+import 'package:freeland/common/widgets/image_holder/image_file.dart';
 import 'package:freeland/core/bloc_status.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -24,6 +30,45 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   List<CommentOfferDto> comments = [];
   MyProjects? myProjects;
 
+  var addProjectForm = FormGroup(
+    {
+      projectNameKey: FormControl<String>(
+        validators: [
+          Validators.required,
+        ],
+      ),
+      projectDeadlineKey: FormControl<DateTime>(
+        validators: [
+          Validators.required,
+        ],
+      ),
+      projectDescKey: FormControl<String>(validators: [
+        Validators.required,
+      ]),
+      minSalaryKey: FormControl<int>(
+        validators: [
+          Validators.required,
+        ],
+      ),
+      maxSalaryKey: FormControl<int>(
+          validators: [Validators.required, ]),
+
+      imageKey: FormControl<ImageFile>(validators: [])
+    },
+  );
+
+  ProjectBloc(ProjectRepositoryImpl projectRepositoryImpl) : super( ProjectState()){
+    _projectRepositoryImpl=projectRepositoryImpl;
+    on<ProjectEvent>((event,emit)async{
+      if(event is OfferSubmission){
+        if(offerForm.valid){
+          emit(state.copyWith(offerState:  BlocStatus.loading()));
+          (await _projectRepositoryImpl.sendOffer(params: await state.getOfferParams(offerForm,event.projectId)))
+              .fold((left) => emit(state.copyWith(offerState:  BlocStatus.fail(error: left))),
+                  (right) => emit(state.copyWith(offerState: BlocStatus.success())));
+        }
+        else{
+         offerForm.markAllAsTouched();
   ProjectBloc(ProjectRepositoryImpl projectRepositoryImpl)
       : super(ProjectState()) {
     _projectRepositoryImpl = projectRepositoryImpl;
@@ -68,6 +113,31 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
                           fetchAllCommentState: BlocStatus.success()))
                     });
       }
+
+      if (event is ProjectSubmission) {
+        if (addProjectForm.valid) {
+
+          await submission(emit, event.context);
+        } else {
+          addProjectForm.markAllAsTouched();
+        }
+      }
+     }
+    );
+
+  }
+
+
+  submission(Emitter emit, BuildContext context) async {
+    emit(state.copyWith(projectSubmission: BlocStatus.loading()));
+    (await _projectRepositoryImpl.addProject(
+        params: await state.getAddProjectParams(addProjectForm, context)))
+        .fold(
+            (left) =>
+            emit(state.copyWith(projectSubmission: BlocStatus.fail(error: left))),
+            (right) => {
+              emit(state.copyWith(projectSubmission: BlocStatus.success()))
+            });
       if (event is FetchMyProjects) {
         emit(state.copyWith(fetchMyProjectsStatus: BlocStatus.loading()));
 
@@ -82,7 +152,15 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       }
     });
   }
-
   static const descKey = "descKey";
+
   static const priceKey = "priceKey";
+
+
+  static const projectNameKey = "projectNameKey";
+  static const projectDeadlineKey = "projectDeadlineKey";
+  static const projectDescKey = "projectDescKey";
+  static const minSalaryKey = "minSalaryKey";
+  static const maxSalaryKey = "maxSalaryKey";
+  static const imageKey = "imageKey";
 }

@@ -296,8 +296,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     width: 120.0.w,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        // signUpBloc
-                                        //     .add(SignUpSubmission(context));
+                                        signUpBloc
+                                            .add(SignUpSubmission(context));
 
                                       },
                                       child: const Text(
