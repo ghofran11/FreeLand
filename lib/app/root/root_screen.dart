@@ -32,7 +32,6 @@ class RootScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-
         BlocProvider<HomeBloc>(
           create: (_) => getIt<HomeBloc>()
             ..add(FetchAllCategory())
@@ -92,7 +91,7 @@ class RootScreen extends StatelessWidget {
                   children: [
                     HomePage(),
                     NotificationsPage(),
-                    const ProjectPage(),
+                    ProjectPage(),
                     const PersonalProfilePage(),
                   ]),
             ),

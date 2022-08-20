@@ -25,7 +25,7 @@ class ServiceDto {
   final String ownerId;
   final String nameOwner;
   final String description;
-  final int evalution;
+  final int? evalution;
   final int serviceType;
   final int minPrice;
   final int maxPrice;

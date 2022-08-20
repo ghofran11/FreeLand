@@ -128,7 +128,7 @@ class _SearchUsersScreenState extends State<SearchUsersScreen> {
                                     extra: matchUsers[index].id);
                               } else {
                                 context.pushNamed(PersonalProfilePage.routeName,
-                                    extra: matchUsers[index].id);
+                                    extra: true);
                               }
                             },
                             leading: GestureDetector(

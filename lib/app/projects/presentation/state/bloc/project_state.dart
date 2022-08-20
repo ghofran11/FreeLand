@@ -59,7 +59,7 @@ class ProjectState {
 
   @override
   String toString() {
-    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission";
+    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission, fetchMyProjectsStatus: $fetchMyProjectsStatus";
   }
 
   Future<AddProjectParams> getAddProjectParams(

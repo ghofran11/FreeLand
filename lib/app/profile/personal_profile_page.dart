@@ -20,12 +20,16 @@ import 'presentation/state/my_proflile_bloc/my_profile_bloc.dart';
 import 'presentation/widgets/profile_image.dart';
 
 class PersonalProfilePage extends StatefulWidget {
-  const PersonalProfilePage({Key? key}) : super(key: key);
+  const PersonalProfilePage({Key? key, this.showBackButton = false})
+      : super(key: key);
+  final bool showBackButton;
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: const PersonalProfilePage(),
+      child: PersonalProfilePage(
+        showBackButton: state.extra != null ? state.extra as bool : false,
+      ),
     );
   }
 
@@ -42,14 +46,16 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
     final myProfileBloc = context.read<MyProfileBloc>();
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              context.pop();
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.primary,
-            )),
+        leading: widget.showBackButton
+            ? IconButton(
+                onPressed: () {
+                  context.pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.primary,
+                ))
+            : null,
       ),
       body: BlocConsumer<MyProfileBloc, MyProfileState>(
         listener: (context, state) {
@@ -115,9 +121,10 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                         ),
                         title: state.profile!.numOfConnections.toString(),
                       ),
-                      onTap: (){
+                      onTap: () {
                         print('ghofran ghofran ');
-                        context.pushNamed(ConnectionScreen.routeName,extra: state.profile!.connectedUsers);
+                        context.pushNamed(ConnectionScreen.routeName,
+                            extra: state.profile!.connectedUsers);
                       },
                     ),
                     StatisticsWidget(

@@ -42,9 +42,9 @@ class ProjectRepositoryImpl extends ProjectRepository {
   Future<Either<String, MyProjects>> fetchMyProjects() {
     return throwAppException<MyProjects>(() async {
       final List<ServiceDto> postedServices =
-          await remote.fetchMyPendingServices();
-      final List<ServiceDto> pendingServices =
           await remote.fetchMyPostedServices();
+      final List<ServiceDto> pendingServices =
+          await remote.fetchMyPendingServices();
       final List<ServiceDto> workingOnServices =
           await remote.fetchMyWorkingOnServices();
       return (MyProjects(
