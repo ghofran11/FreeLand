@@ -60,5 +60,4 @@ class ProjectRepositoryImpl extends ProjectRepository {
       await remote.addProject(params: params);
     });
   }
-
 }

@@ -10,15 +10,15 @@ import 'package:freeland/common/widgets/image_holder/image_file.dart';
 import 'package:freeland/core/bloc_status.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class ProjectBloc extends Bloc<ProjectEvent,ProjectState>{
+class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   late final ProjectRepositoryImpl _projectRepositoryImpl;
-  var offerForm=FormGroup({
-    descKey  : FormControl<String>(
+  var offerForm = FormGroup({
+    descKey: FormControl<String>(
       validators: [
         Validators.required,
       ],
     ),
-    priceKey  : FormControl<int>(
+    priceKey: FormControl<int>(
       validators: [
         Validators.required,
       ],
@@ -55,18 +55,23 @@ class ProjectBloc extends Bloc<ProjectEvent,ProjectState>{
   );
   MyProjects? myProjects;
 
-  ProjectBloc(ProjectRepositoryImpl projectRepositoryImpl) : super( ProjectState()){
-    _projectRepositoryImpl=projectRepositoryImpl;
-    on<ProjectEvent>((event,emit)async{
-      if(event is OfferSubmission){
-        if(offerForm.valid){
-          emit(state.copyWith(offerState:  BlocStatus.loading()));
-          (await _projectRepositoryImpl.sendOffer(params: await state.getOfferParams(offerForm,event.projectId)))
-              .fold((left) => emit(state.copyWith(offerState:  BlocStatus.fail(error: left))),
-                  (right) => emit(state.copyWith(offerState: BlocStatus.success())));
-        }
-        else{
-         offerForm.markAllAsTouched();
+  ProjectBloc(ProjectRepositoryImpl projectRepositoryImpl)
+      : super(ProjectState()) {
+    _projectRepositoryImpl = projectRepositoryImpl;
+    on<ProjectEvent>((event, emit) async {
+      if (event is OfferSubmission) {
+        if (offerForm.valid) {
+          emit(state.copyWith(offerState: BlocStatus.loading()));
+          (await _projectRepositoryImpl.sendOffer(
+                  params:
+                      await state.getOfferParams(offerForm, event.projectId)))
+              .fold(
+                  (left) => emit(
+                      state.copyWith(offerState: BlocStatus.fail(error: left))),
+                  (right) =>
+                      emit(state.copyWith(offerState: BlocStatus.success())));
+        } else {
+          offerForm.markAllAsTouched();
         }
       }
       if (event is CommentSubmission) {
@@ -80,21 +85,23 @@ class ProjectBloc extends Bloc<ProjectEvent,ProjectState>{
                 (right) =>
                     emit(state.copyWith(commentState: BlocStatus.success())));
       }
-      if(event is FetchAllComments){
+      if (event is FetchAllComments) {
         emit(state.copyWith(fetchAllCommentState: BlocStatus.loading()));
 
-        (await projectRepositoryImpl.fetchAllComment(serviceId: event.projectId)).fold(
-                (left) => emit(
-                state.copyWith(fetchAllCommentState: BlocStatus.fail(error: left))),
+        (await projectRepositoryImpl.fetchAllComment(
+                serviceId: event.projectId))
+            .fold(
+                (left) => emit(state.copyWith(
+                    fetchAllCommentState: BlocStatus.fail(error: left))),
                 (right) => {
-              comments = right,
-              emit(state.copyWith(fetchAllCommentState: BlocStatus.success()))
-            });
+                      comments = right,
+                      emit(state.copyWith(
+                          fetchAllCommentState: BlocStatus.success()))
+                    });
       }
 
       if (event is ProjectSubmission) {
         if (addProjectForm.valid) {
-
           await submission(emit, event.context);
         } else {
           addProjectForm.markAllAsTouched();
@@ -104,31 +111,29 @@ class ProjectBloc extends Bloc<ProjectEvent,ProjectState>{
         emit(state.copyWith(fetchMyProjectsStatus: BlocStatus.loading()));
 
         (await projectRepositoryImpl.fetchMyProjects()).fold(
-              (left) => emit(state.copyWith(
+          (left) => emit(state.copyWith(
               fetchMyProjectsStatus: BlocStatus.fail(error: left))),
-              (right) => {
+          (right) => {
             myProjects = right,
             emit(state.copyWith(fetchMyProjectsStatus: BlocStatus.success()))
           },
         );
       }
-     }
-    );
-
+    });
   }
-
 
   submission(Emitter emit, BuildContext context) async {
     emit(state.copyWith(projectSubmission: BlocStatus.loading()));
     (await _projectRepositoryImpl.addProject(
-        params: await state.getAddProjectParams(addProjectForm, context)))
+            params: await state.getAddProjectParams(addProjectForm, context)))
         .fold(
-            (left) =>
-            emit(state.copyWith(projectSubmission: BlocStatus.fail(error: left))),
+            (left) => emit(state.copyWith(
+                projectSubmission: BlocStatus.fail(error: left))),
             (right) => {
-              emit(state.copyWith(projectSubmission: BlocStatus.success()))
-            });
+                  emit(state.copyWith(projectSubmission: BlocStatus.success()))
+                });
   }
+
   static const descKey = "descKey";
 
   static const priceKey = "priceKey";

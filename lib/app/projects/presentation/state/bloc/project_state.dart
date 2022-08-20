@@ -4,6 +4,7 @@ import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_bloc.dart';
+import 'package:freeland/common/widgets/image_holder/image_file.dart';
 import 'package:freeland/core/bloc_status.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -14,13 +15,12 @@ class ProjectState {
   final BlocStatus fetchAllComment;
   final BlocStatus fetchMyProjectsStatus;
 
-  ProjectState({
-    this.offerSubmission = const BlocStatus(),
-    this.commentSubmission = const BlocStatus(),
-    this.fetchAllComment = const BlocStatus(),
-    this.fetchMyProjectsStatus = const BlocStatus(),
-    this.projectSubmission=const BlocStatus()
-  });
+  ProjectState(
+      {this.offerSubmission = const BlocStatus(),
+      this.commentSubmission = const BlocStatus(),
+      this.fetchAllComment = const BlocStatus(),
+      this.fetchMyProjectsStatus = const BlocStatus(),
+      this.projectSubmission = const BlocStatus()});
 
   ProjectState copyWith({
     BlocStatus? offerState,
@@ -30,12 +30,12 @@ class ProjectState {
     BlocStatus? fetchMyProjectsStatus,
   }) {
     return ProjectState(
-        offerSubmission: offerState ?? offerSubmission,
-        commentSubmission: commentState ?? commentSubmission,
-        fetchAllComment: fetchAllCommentState ?? fetchAllComment,
-        projectSubmission: projectSubmission ?? this.projectSubmission
+      offerSubmission: offerState ?? offerSubmission,
+      commentSubmission: commentState ?? commentSubmission,
+      fetchAllComment: fetchAllCommentState ?? fetchAllComment,
+      projectSubmission: projectSubmission ?? this.projectSubmission,
       fetchMyProjectsStatus:
-      fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
+          fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
     );
   }
 
