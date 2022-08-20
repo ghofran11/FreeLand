@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
+import 'package:freeland/app/notifications/infrastructure/models/send_response_params.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_bloc.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_event.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_state.dart';
@@ -173,7 +174,8 @@ class NotificationsPage extends StatelessWidget {
                                                         color: AppColors.primary,
                                                       ),
                                                       onTap: (){
-                                                        _notificationBloc.add(ResponseConnection(isConnect: true));
+                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: "ghhh")));
+
                                                       },
                                                     ),
                                                     SizedBox(
@@ -186,7 +188,7 @@ class NotificationsPage extends StatelessWidget {
                                                         color: AppColors.grey2,
                                                       ),
                                                       onTap: (){
-                                                        _notificationBloc.add(ResponseConnection(isConnect: false));
+                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: "ghhh")));
                                                       },
                                                     ),
                                                   ],
@@ -206,29 +208,13 @@ class NotificationsPage extends StatelessWidget {
                                                       color: AppColors.primary,
                                                     ),
                                                     onTap: (){
-                                                      print("ghofran ghofran ture");
-                                                      _notificationBloc.add(ResponseConnection(isConnect: true));
-                                                    },
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5.0.h,
-                                                  ),
-                                                  InkWell(
-                                                    child: const FaIcon(
-                                                      FontAwesomeIcons.circleXmark,
-                                                      size: 30,
-                                                      color: AppColors.grey2,
-                                                    ),
-                                                    onTap: (){
-                                                      print("ghofran ghofran false");
-                                                      _notificationBloc.add(ResponseConnection(isConnect: false));
+                                                      print("ghofran ghofran ture trueeee");
                                                     },
                                                   ),
                                                 ],
                                               );
                                             }
                                           ));
-
                                     },
                                     itemCount: 8,
                                   );
@@ -237,7 +223,6 @@ class NotificationsPage extends StatelessWidget {
                                   return const LoadingProgress();
                                 }
                                 return Container();
-
                               }
                             ),
                           ]),

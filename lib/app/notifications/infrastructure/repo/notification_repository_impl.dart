@@ -2,6 +2,8 @@
 import 'package:freeland/app/notifications/domain/repos/notification_repository.dart';
 import 'package:freeland/app/notifications/infrastructure/data_source/remote.dart';
 import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
+import 'package:freeland/app/notifications/infrastructure/models/send_response_params.dart';
+import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
 import 'package:freeland/common/network/error_handler.dart';
 
 class NotificationRepositoryImpl extends NotificationRepository{
@@ -16,9 +18,9 @@ class NotificationRepositoryImpl extends NotificationRepository{
   }
 
   @override
-  Future<Either<String, void>> responseConnection(bool isConnect) {
+  Future<Either<String, void>> responseConnection({required SendResponseParam param}) {
     return throwAppException<void>(() async {
-      await remote.connectedResponse(isConnect);
+      await remote.connectedResponse(param: param);
     });
   }
 

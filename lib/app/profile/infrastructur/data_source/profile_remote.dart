@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
+import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
 import 'package:freeland/common/constant/src/url.dart';
 import 'package:freeland/common/network/error_handler.dart';
 
@@ -61,9 +62,9 @@ class ProfileRemote {
     return MyProfile.fromJson(response.data);
   }
 
-  Future<void> sendConnect() async {
+  Future<void> sendConnect({required SendConnectionParam param}) async {
     return throwDioException<void>(() async {
-      await _dio.post(AppUri.contactUsCreate);
+      await _dio.post(AppUri.contactUsCreate,data: await param.toJson());
     });
   }
 

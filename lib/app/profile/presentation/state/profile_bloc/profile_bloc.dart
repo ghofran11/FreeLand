@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
+import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
 import 'package:freeland/app/profile/infrastructur/repo/profile_repo.dart';
 import 'package:freeland/core/bloc_status.dart';
 import 'package:meta/meta.dart';
@@ -29,7 +30,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       if(event is SendConnect){
         emit(state.copyWith(connectStatus: BlocStatus.loading()));
 
-        (await _repo.sendConnect(event.id)).fold(
+        (await _repo.sendConnect(params:event._param)).fold(
                 (left) => emit(
                 state.copyWith(connectStatus: BlocStatus.fail(error: left))),
                 (right) => {

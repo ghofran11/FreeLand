@@ -9,7 +9,7 @@ class AnotherProfileFetched extends ProfileEvent {
   AnotherProfileFetched(this.id);
 }
 class SendConnect extends ProfileEvent {
-  final String id;
+  final SendConnectionParam _param;
 
-  SendConnect(this.id);
+  SendConnect(this._param);
 }
