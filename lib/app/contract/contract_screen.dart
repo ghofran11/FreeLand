@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freeland/app/profile/presentation/state/my_proflile_bloc/my_profile_bloc.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
 import 'package:freeland/common/widgets/text.dart';
@@ -70,12 +72,12 @@ class ContractScreen extends StatelessWidget {
               ],
             ),
             Row(
-              children: const [
+              children: [
                 CustomText.bodyMedium(
                   'Project Owner: ',
                 ),
                 CustomText.bodyMedium(
-                  'Mahmoud Mahmoud',
+                  context.read<MyProfileBloc>().state.profile!.fullName,
                   style: TextStyle(color: AppColors.primary),
                 ),
               ],
@@ -86,8 +88,9 @@ class ContractScreen extends StatelessWidget {
             Row(
               children: const [
                 CustomText.bodyMedium(
-                  'Project Owner: ',
+                  'Project FreeLancer: ',
                 ),
+                //To
                 CustomText.bodyMedium(
                   'Mahmoud Ahmed',
                   style: TextStyle(color: AppColors.primary),
@@ -102,7 +105,7 @@ class ContractScreen extends StatelessWidget {
               formControlName: 'desc',
               maxLines: 6,
               labelText: "Project Description",
-              hintText: "Plaeas add a clear full description of this contract ",
+              hintText: "Please add a clear full description of this contract ",
             ),
             SizedBox(
               height: 12.0.h,
@@ -157,7 +160,8 @@ class ContractScreen extends StatelessWidget {
                     return Container();
                   }
                 }),
-            ElevatedButton(onPressed: () {}, child: const Text('Submit Contract'))
+            ElevatedButton(
+                onPressed: () {}, child: const Text('Submit Contract'))
           ],
         ),
       )),
