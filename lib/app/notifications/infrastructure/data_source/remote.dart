@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
+import 'package:freeland/app/notifications/infrastructure/models/send_response_params.dart';
+import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
 import 'package:freeland/common/constant/src/url.dart';
 import 'package:freeland/common/network/error_handler.dart';
 
@@ -27,9 +29,9 @@ class NotificationRemote{
     });
   }
 
-  Future<void> connectedResponse(bool isConnect) async {
+  Future<void> connectedResponse({required SendResponseParam param}) async {
     return throwDioException<void>(() async {
-       await _dio.post(AppUri.connectResponse,data: isConnect);
+       await _dio.post(AppUri.connectResponse,data: param.toJson());
     });
   }
 }

@@ -1,7 +1,9 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
 import 'package:freeland/app/profile/presentation/state/profile_bloc/profile_bloc.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
@@ -84,14 +86,24 @@ class ProfilePage extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
-                              BlocConsumer(
+                              BlocConsumer<ProfileBloc,ProfileState>(
                                 listener: (context, state) {
+                                  if(state.connectStatus.isFail()){
+                                    BotToast.showText(
+                                        text: state.connectStatus.error ??
+                                            AppStrings.defaultErrorMsg);
+                                  }
+                                  if(state.connectStatus.isSuccess()){
+                                    BotToast.showText(
+                                        text:
+                                            AppStrings.defaultSuccessMsg);
+                                  }
                                 },
                                 builder: (context, state) {
                                   return ElevatedButton(
                                       onPressed: () {
                                         getIt<ProfileBloc>()
-                                            .add(SendConnect(id));
+                                            .add(SendConnect(SendConnectionParam(userId: id,status: 1)));
                                       },
                                       child: CustomText.bodyMedium(
                                         "Connect",

@@ -1,6 +1,7 @@
 import 'package:either_dart/either.dart';
 import 'package:freeland/app/profile/infrastructur/data_source/profile_remote.dart';
 import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
+import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
 import 'package:freeland/common/network/error_handler.dart';
 
 class ProfileRepoImpl {
@@ -20,9 +21,9 @@ class ProfileRepoImpl {
     });
   }
 
-  Future<Either<String, void>> sendConnect(String id) {
+  Future<Either<String, void>> sendConnect({required SendConnectionParam params}) {
     return throwAppException<void>(() async {
-      await remote.sendConnect();
+      await remote.sendConnect(param:params );
     });
   }
 }

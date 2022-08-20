@@ -29,7 +29,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       }
 
       if(event is  ResponseConnection){
-        ( await _notificationRepositoryImpl.responseConnection(isConnect)).fold(
+        ( await _notificationRepositoryImpl.responseConnection(param: event.param)).fold(
                 (left) => emit(state.copyWith(responseStatus: BlocStatus.fail(error: left))),
 
                 (right) => emit(state.copyWith(responseStatus:BlocStatus.success())));
