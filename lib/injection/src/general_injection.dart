@@ -22,7 +22,9 @@ Future generalInject(BuildContext context) async {
   getIt.registerSingleton<FirebaseNotificationService>(
       FirebaseNotificationServiceImpl());
   getIt.registerSingleton<Dio>(
-    DioClient(AppUri.baseUrlDevelopment + "api/", context: context),
+    DioClient(
+      AppUri.baseUrlDevelopment + "api/",
+    ),
   );
 
   getIt.registerFactory(() => ProfileRemote(getIt<Dio>()));
