@@ -18,7 +18,6 @@ import 'package:freeland/injection/injection.dart';
 import 'package:freeland/router/route_config.dart';
 import 'package:provider/provider.dart';
 
-import 'profile/infrastructur/repo/profile_repo.dart';
 import 'profile/presentation/state/my_proflile_bloc/my_profile_bloc.dart';
 import 'root/state/navigation_bar_provider.dart';
 
@@ -43,10 +42,7 @@ class MyAppState extends State<MyApp> {
       doBeforeOpen: _beforeOpen,
       lazyAuthRepository: () => getIt<AuthRepository>(),
     )..add(AppManagerStarted());
-    _profile = MyProfileBloc(
-      doBeforeOpen: _beforeOpen,
-      lazyRepository: () => getIt<ProfileRepoImpl>(),
-    )..add(MyProfileStarted());
+    _profile = MyProfileBloc();
     routerConfig = RouterConfig(provider: _provider);
   }
 

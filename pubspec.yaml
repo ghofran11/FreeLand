@@ -71,6 +71,9 @@ dependencies:
   fancy_dialog: ^1.0.1
   timeago: ^3.2.2
   myfatoorah_flutter: ^2.1.12
+  pull_to_refresh: ^2.0.0
+
+
   dio_refresh_bot:
     git:
       url: https://github.com/flutterbots/flutterbots.git
@@ -78,7 +81,8 @@ dependencies:
       path: packages/dio_refresh_bot
 
 
-
+dependency_overrides:
+  image_picker_android: ^0.8.5+2
 
 
 dev_dependencies:

@@ -1,6 +1,8 @@
 import 'package:either_dart/src/either.dart';
+import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
+import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
 import 'package:freeland/app/projects/domain/repos/project_repository.dart';
 import 'package:freeland/app/projects/infrastructure/data_source/remote/project_remote.dart';
@@ -11,6 +13,7 @@ import 'package:freeland/common/network/error_handler.dart';
 
 class ProjectRepositoryImpl extends ProjectRepository {
   final ProjectRemote remote;
+
   ProjectRepositoryImpl({required this.remote});
 
   @override
@@ -32,6 +35,22 @@ class ProjectRepositoryImpl extends ProjectRepository {
     return throwAppException<List<CommentOfferDto>>(() async {
       final List<CommentOfferDto> comments = await remote.fetchAllComment();
       return (comments);
+    });
+  }
+
+  @override
+  Future<Either<String, MyProjects>> fetchMyProjects() {
+    return throwAppException<MyProjects>(() async {
+      final List<ServiceDto> postedServices =
+          await remote.fetchMyPostedServices();
+      final List<ServiceDto> pendingServices =
+          await remote.fetchMyPendingServices();
+      final List<ServiceDto> workingOnServices =
+          await remote.fetchMyWorkingOnServices();
+      return (MyProjects(
+          posted: postedServices,
+          pending: pendingServices,
+          working: workingOnServices));
     });
   }
 

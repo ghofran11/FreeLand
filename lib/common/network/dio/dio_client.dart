@@ -1,15 +1,8 @@
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_flutter_transformer2/dio_flutter_transformer2.dart';
-import 'package:dio_refresh_bot/dio_refresh_bot.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:freeland/app/auth/infrastructure/data_source/local/reactive_token_storage.dart';
-import 'package:freeland/app/auth/infrastructure/models/auth_token_model.dart';
 import 'package:freeland/common/network/dio/error_interceptor.dart';
-import 'package:freeland/injection/injection.dart';
-
-import 'localization_interceptor.dart';
 
 // const _defaultConnectTimeout = 10000;
 // const _defaultReceiveTimeout = 10000;
@@ -18,7 +11,6 @@ class DioClient with DioMixin implements Dio {
   DioClient(
     this.baseUrl, {
     List<Interceptor> interceptors = const [],
-    required this.context,
   }) {
     options = BaseOptions(
       connectTimeout: 30000,
@@ -78,5 +70,4 @@ class DioClient with DioMixin implements Dio {
   }
 
   final String baseUrl;
-  final BuildContext context;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freeland/app/home/infrastructure/models/category.dart';
+import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
 import 'package:freeland/app/projects/infrastructure/repo/project_repository_impl.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
@@ -52,6 +53,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       categoryKey: FormControl<List<CategoryDto>>(validators: []),
     },
   );
+  MyProjects? myProjects;
 
   ProjectBloc(ProjectRepositoryImpl projectRepositoryImpl)
       : super(ProjectState()) {
@@ -104,6 +106,18 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         } else {
           addProjectForm.markAllAsTouched();
         }
+      }
+      if (event is FetchMyProjects) {
+        emit(state.copyWith(fetchMyProjectsStatus: BlocStatus.loading()));
+
+        (await projectRepositoryImpl.fetchMyProjects()).fold(
+          (left) => emit(state.copyWith(
+              fetchMyProjectsStatus: BlocStatus.fail(error: left))),
+          (right) => {
+            myProjects = right,
+            emit(state.copyWith(fetchMyProjectsStatus: BlocStatus.success()))
+          },
+        );
       }
     });
   }

@@ -24,8 +24,20 @@ class AllOwnProject extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                context.pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.primary,
+              )),
+          title: CustomText.titleLarge('My Posted Projects',
+              style: TextStyle(color: Theme.of(context).primaryColor)),
+        ),
         body: Padding(
-          padding:  EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
               horizontal: horizontalAppPadding.w,
               vertical: verticalAppPadding.h),
           child: ListView.separated(
@@ -53,16 +65,14 @@ class AllOwnProject extends StatelessWidget {
                             height: 15.0.h,
                           ),
                           Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Column(
                                 children: [
                                   const CustomText.titleMedium(
                                     '\$ 200-500',
                                     style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 14),
+                                        color: AppColors.primary, fontSize: 14),
                                   ),
                                   SizedBox(
                                     height: 10.0.h,
@@ -70,8 +80,7 @@ class AllOwnProject extends StatelessWidget {
                                   const CustomText.bodyMedium(
                                     'Salary',
                                     style: TextStyle(
-                                        color: AppColors.grey2,
-                                        fontSize: 12),
+                                        color: AppColors.grey2, fontSize: 12),
                                   ),
                                 ],
                               ),
@@ -85,8 +94,7 @@ class AllOwnProject extends StatelessWidget {
                                   const CustomText.titleMedium(
                                     ' 15',
                                     style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 14),
+                                        color: AppColors.primary, fontSize: 14),
                                   ),
                                   SizedBox(
                                     height: 10.0.h,
@@ -94,8 +102,7 @@ class AllOwnProject extends StatelessWidget {
                                   const CustomText.bodyMedium(
                                     'Offer',
                                     style: TextStyle(
-                                        color: AppColors.grey2,
-                                        fontSize: 12),
+                                        color: AppColors.grey2, fontSize: 12),
                                   ),
                                 ],
                               ),
@@ -109,8 +116,7 @@ class AllOwnProject extends StatelessWidget {
                                   const CustomText.titleMedium(
                                     '\$ 200',
                                     style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontSize: 14),
+                                        color: AppColors.primary, fontSize: 14),
                                   ),
                                   SizedBox(
                                     height: 10.0.h,
@@ -118,8 +124,7 @@ class AllOwnProject extends StatelessWidget {
                                   const CustomText.bodyMedium(
                                     'Average',
                                     style: TextStyle(
-                                        color: AppColors.grey2,
-                                        fontSize: 12),
+                                        color: AppColors.grey2, fontSize: 12),
                                   ),
                                 ],
                               ),

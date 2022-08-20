@@ -13,11 +13,13 @@ class ProjectState {
   final BlocStatus commentSubmission;
   final BlocStatus projectSubmission;
   final BlocStatus fetchAllComment;
+  final BlocStatus fetchMyProjectsStatus;
 
   ProjectState(
       {this.offerSubmission = const BlocStatus(),
       this.commentSubmission = const BlocStatus(),
       this.fetchAllComment = const BlocStatus(),
+      this.fetchMyProjectsStatus = const BlocStatus(),
       this.projectSubmission = const BlocStatus()});
 
   ProjectState copyWith({
@@ -25,12 +27,16 @@ class ProjectState {
     BlocStatus? commentState,
     BlocStatus? fetchAllCommentState,
     BlocStatus? projectSubmission,
+    BlocStatus? fetchMyProjectsStatus,
   }) {
     return ProjectState(
-        offerSubmission: offerState ?? offerSubmission,
-        commentSubmission: commentState ?? commentSubmission,
-        fetchAllComment: fetchAllCommentState ?? fetchAllComment,
-        projectSubmission: projectSubmission ?? this.projectSubmission);
+      offerSubmission: offerState ?? offerSubmission,
+      commentSubmission: commentState ?? commentSubmission,
+      fetchAllComment: fetchAllCommentState ?? fetchAllComment,
+      projectSubmission: projectSubmission ?? this.projectSubmission,
+      fetchMyProjectsStatus:
+          fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
+    );
   }
 
   Future<OfferParams> getOfferParams(
@@ -53,7 +59,7 @@ class ProjectState {
 
   @override
   String toString() {
-    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission";
+    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission, fetchMyProjectsStatus: $fetchMyProjectsStatus";
   }
 
   Future<AddProjectParams> getAddProjectParams(

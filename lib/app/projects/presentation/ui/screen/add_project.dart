@@ -147,7 +147,7 @@ class AddProject extends StatelessWidget {
                     ),
                     SizedBox(height: 12.0.h),
                     const CustomReactiveTextField(
-                      maxLines: 1,
+                      maxLines: null,
                       labelText: "Project Description",
                       formControlName: ProjectBloc.projectDescKey,
                       icon: FaIcon(FontAwesomeIcons.fileSignature),
@@ -155,7 +155,7 @@ class AddProject extends StatelessWidget {
                     SizedBox(height: 12.0.h),
                     const CustomReactiveTextField(
                       maxLines: null,
-                      labelText: "Min Salary",
+                      labelText: "Min Budget",
                       formControlName: ProjectBloc.minSalaryKey,
                       keyboardType: TextInputType.number,
                       icon: FaIcon(Icons.monetization_on_outlined),
@@ -163,7 +163,7 @@ class AddProject extends StatelessWidget {
                     SizedBox(height: 12.0.h),
                     const CustomReactiveTextField(
                       maxLines: null,
-                      labelText: "Max Salary",
+                      labelText: "Max Budget",
                       formControlName: ProjectBloc.maxSalaryKey,
                       keyboardType: TextInputType.number,
                       icon: FaIcon(Icons.monetization_on_outlined),
@@ -219,6 +219,9 @@ class AddProject extends StatelessWidget {
                             .value = image;
                       }),
                     ),
+                    SizedBox(
+                      height: 100,
+                    )
                   ],
                 ),
               ),
