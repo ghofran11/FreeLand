@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_bloc.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_state.dart';
@@ -16,15 +17,19 @@ import 'package:freeland/common/widgets/text_field.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
+import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AddProject extends StatelessWidget {
-  AddProject({Key? key}) : super(key: key);
+  final List<CategoryDto>? categories;
+  AddProject({Key? key, this.categories}) : super(key: key);
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: AddProject(),
+      child: AddProject(
+       categories: state.extra as List<CategoryDto>,
+      ),
     );
   }
 
@@ -163,9 +168,45 @@ class AddProject extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       icon: FaIcon(Icons.monetization_on_outlined),
                     ),
+                    SizedBox(height: 12.0.h),
+                    ReactiveDropdownSearchMultiSelection<CategoryDto, CategoryDto>(
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.zero,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: borderRadiusCircular,
+                              borderSide: BorderSide(
+                                  style: BorderStyle.none,
+                                  width: 2.0.r),
+                            ),
+                            border: InputBorder.none,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: borderRadiusCircular,
+                              borderSide: BorderSide(
+                                  width: 1.0.r,
+                                  style: BorderStyle.none),
+                            ),
+                            filled: true,
+                            fillColor: AppColors.white,
+                            icon: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: FaIcon(
+                                FontAwesomeIcons.lightbulb,
+                                color: AppColors.grey2,
+                                size: 20,
+                              ),
+                            ),
+
+                            labelText: ' Category'),
+                        mode: Mode.MENU,
+                        formControlName: ProjectBloc.categoryKey,
+                        items:categories,
+                        itemAsString: (CategoryDto? u) => u!.name
+
+                    ),
                     SizedBox(
                       height: 22.0.h,
                     ),
+
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 35.0.h),
                       child: const CustomText.bodyMedium(

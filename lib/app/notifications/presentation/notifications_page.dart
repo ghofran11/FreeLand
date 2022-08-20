@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_bloc.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_event.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_state.dart';
@@ -58,6 +59,7 @@ class NotificationsPage extends StatelessWidget {
                       },
                       builder: (context, state) {
                         NotificationBloc _notificationBloc=context.read<NotificationBloc>();
+                        List<NotificationDto> notification = _notificationBloc.notification;
                         return Expanded(
                           child: TabBarView(children: [
                            Builder(builder: (context){
@@ -89,12 +91,12 @@ class NotificationsPage extends StatelessWidget {
                                              )),
                                        ),
                                      ),
-                                     title: const Text(
-                                       'Yaser Ali',
-                                       style: TextStyle(fontSize: 15),
+                                     title:  Text(
+                                       notifications[index].title,
+                                       style:const TextStyle(fontSize: 15),
                                      ),
-                                     subtitle: const CustomText.bodySmall(
-                                         'shared a post:I am working on a #free #YouTube #course so I want a video production',
+                                     subtitle:  CustomText.bodySmall(
+                                         notifications[index].body ,
                                          style: TextStyle(
                                            color: AppColors.grey2,
                                          ),

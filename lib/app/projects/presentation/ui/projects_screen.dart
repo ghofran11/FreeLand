@@ -1,8 +1,11 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:freeland/app/home/presentation/state/bloc/home_bloc.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_bloc.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
@@ -319,7 +322,7 @@ class ProjectPage extends StatelessWidget {
               ],
             ),
             onPressed: () {
-              context.pushNamed(AddProject.routeName);
+              context.pushNamed(AddProject.routeName,extra:  context.read<HomeBloc>().categories);
             },
             //  hoverColor: Colors.orange,
           ),

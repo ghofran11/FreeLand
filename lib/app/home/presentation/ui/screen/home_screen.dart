@@ -10,6 +10,7 @@ import 'package:freeland/app/home/presentation/state/bloc/home_bloc.dart';
 import 'package:freeland/app/home/presentation/ui/screen/tips_screen.dart';
 import 'package:freeland/app/home/presentation/ui/widget/drawer.dart';
 import 'package:freeland/app/home/presentation/ui/widget/job_card.dart';
+import 'package:freeland/app/projects/presentation/ui/screen/add_project.dart';
 import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';

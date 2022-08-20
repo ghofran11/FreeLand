@@ -21,6 +21,6 @@ class NotificationState {
   }
   @override
   String toString() {
-    return "offerSubmission: $notificationStatus, connectRequest:$requestStatus,allRequest: $allRequestStatus ";
+    return "notificationSubmission: $notificationStatus, connectRequest:$requestStatus,allRequest: $allRequestStatus ";
   }
 }
