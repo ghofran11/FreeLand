@@ -59,6 +59,7 @@ class NotificationsPage extends StatelessWidget {
                       },
                       builder: (context, state) {
                         NotificationBloc _notificationBloc=context.read<NotificationBloc>();
+                        //toDo
                         List<NotificationDto> notification = _notificationBloc.notification;
                         return Expanded(
                           child: TabBarView(children: [
@@ -108,7 +109,7 @@ class NotificationsPage extends StatelessWidget {
                                          style: const TextStyle(fontSize: 11)),
                                    );
                                  },
-                                 itemCount: 8,
+                                 itemCount: notifications.length,
                                  physics: const BouncingScrollPhysics(),
                                );
                              }
@@ -157,9 +158,9 @@ class NotificationsPage extends StatelessWidget {
                                               textOverflow: TextOverflow.ellipsis),
                                           trailing: Builder(
                                             builder: (context) {
-                                              if(state.requestStatus.isFail()){
+                                              if(state.responseStatus.isFail()){
                                                 BotToast.showText(
-                                                    text: state.requestStatus.error ??
+                                                    text: state.responseStatus.error ??
                                                         AppStrings.defaultErrorMsg);
                                                 return Row(
                                                   mainAxisSize: MainAxisSize.min,
@@ -172,7 +173,7 @@ class NotificationsPage extends StatelessWidget {
                                                         color: AppColors.primary,
                                                       ),
                                                       onTap: (){
-                                                        _notificationBloc.add(ConnectRequest(isConnect: true));
+                                                        _notificationBloc.add(ResponseConnection(isConnect: true));
                                                       },
                                                     ),
                                                     SizedBox(
@@ -185,13 +186,13 @@ class NotificationsPage extends StatelessWidget {
                                                         color: AppColors.grey2,
                                                       ),
                                                       onTap: (){
-                                                        _notificationBloc.add(ConnectRequest(isConnect: false));
+                                                        _notificationBloc.add(ResponseConnection(isConnect: false));
                                                       },
                                                     ),
                                                   ],
                                                 );
                                               }
-                                            else  if(state.requestStatus.isSuccess()){
+                                            else  if(state.responseStatus.isSuccess()){
                                                 BotToast.showText(
                                                     text: 'Request approved ');
                                               }
@@ -199,14 +200,14 @@ class NotificationsPage extends StatelessWidget {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   InkWell(
-
                                                     child: const FaIcon(
                                                       FontAwesomeIcons.circleCheck,
                                                       size: 30,
                                                       color: AppColors.primary,
                                                     ),
                                                     onTap: (){
-                                                      _notificationBloc.add(ConnectRequest(isConnect: true));
+                                                      print("ghofran ghofran ture");
+                                                      _notificationBloc.add(ResponseConnection(isConnect: true));
                                                     },
                                                   ),
                                                   SizedBox(
@@ -219,7 +220,8 @@ class NotificationsPage extends StatelessWidget {
                                                       color: AppColors.grey2,
                                                     ),
                                                     onTap: (){
-                                                      _notificationBloc.add(ConnectRequest(isConnect: false));
+                                                      print("ghofran ghofran false");
+                                                      _notificationBloc.add(ResponseConnection(isConnect: false));
                                                     },
                                                   ),
                                                 ],

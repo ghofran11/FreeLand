@@ -16,9 +16,9 @@ class NotificationRepositoryImpl extends NotificationRepository{
   }
 
   @override
-  Future<Either<String, void>> connectRequest(bool isConnect) {
+  Future<Either<String, void>> responseConnection(bool isConnect) {
     return throwAppException<void>(() async {
-      await remote.connectedRequest(isConnect);
+      await remote.connectedResponse(isConnect);
     });
   }
 

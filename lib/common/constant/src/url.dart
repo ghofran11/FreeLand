@@ -35,9 +35,9 @@ class AppUri {
       'nHY2G1DcKb2BdAHuyFlHFy7EpDFTuYWl2RbCIGChulIbpc2LWv9PtWBE5M8x1JJB3VjAnVsX16IIOBsEt';
 
   //toDo
-  static const connect = "";
+  static const connect = "Connection/App/Connect";
   //toDo
-  static const connectRequest = "";
+  static const connectResponse = "Connection/App/Response";
   //toDo
   static const fetchAllRequest= "";
 

@@ -28,22 +28,22 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
                 });
       }
 
-      if(event is  ConnectRequest){
-        ( await _notificationRepositoryImpl.connectRequest(isConnect)).fold(
-                (left) => emit(state.copyWith(requestStatus: BlocStatus.fail(error: left))),
+      if(event is  ResponseConnection){
+        ( await _notificationRepositoryImpl.responseConnection(isConnect)).fold(
+                (left) => emit(state.copyWith(responseStatus: BlocStatus.fail(error: left))),
 
-                (right) => emit(state.copyWith(requestStatus: BlocStatus.success())));
+                (right) => emit(state.copyWith(responseStatus:BlocStatus.success())));
       }
 
       if(event is FetchAllRequestById ){
-        emit(state.copyWith(requestStatus: BlocStatus.loading()));
+        emit(state.copyWith(responseStatus: BlocStatus.loading()));
 
         (await _notificationRepositoryImpl.fetchAllRequest()).fold(
                 (left) => emit(state.copyWith(
-                requestStatus: BlocStatus.fail(error: left))),
+                AllrequestStatus: BlocStatus.fail(error: left))),
                 (right) => {
               emit(
-                  state.copyWith(requestStatus: BlocStatus.success())),
+                  state.copyWith(AllrequestStatus: BlocStatus.success())),
               requests = right,
             });
       }

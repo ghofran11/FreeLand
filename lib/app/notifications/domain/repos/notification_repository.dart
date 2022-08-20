@@ -8,7 +8,7 @@ abstract class NotificationRepository{
   //toDo:the type of allrequest
   Future<Either<String, List<NotificationDto>>> fetchAllRequest();
 
-  Future<Either<String, void>> connectRequest(bool isConnect);
+  Future<Either<String, void>> responseConnection(bool isConnect);
 
 
 }
