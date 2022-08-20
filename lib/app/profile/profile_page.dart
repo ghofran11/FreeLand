@@ -55,15 +55,13 @@ class ProfilePage extends StatelessWidget {
           ),
           body: BlocConsumer<ProfileBloc, ProfileState>(
             listener: (context, state) {
-              if(state.connectStatus.isFail()){
+              if (state.connectStatus.isFail()) {
                 BotToast.showText(
                     text: state.connectStatus.error ??
                         AppStrings.defaultErrorMsg);
               }
-              if(state.connectStatus.isSuccess()){
-                BotToast.showText(
-                    text:
-                    AppStrings.defaultSuccessMsg);
+              if (state.connectStatus.isSuccess()) {
+                BotToast.showText(text: AppStrings.defaultSuccessMsg);
               }
             },
             builder: (context, state) {
@@ -94,8 +92,8 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ElevatedButton(
                           onPressed: () {
-                            getIt<ProfileBloc>()
-                                .add(SendConnect(SendConnectionParam(userId: id,status: 1)));
+                            getIt<ProfileBloc>().add(SendConnect(
+                                SendConnectionParam(userId: id, status: 1)));
                           },
                           child: CustomText.bodyMedium(
                             "Connect",
