@@ -28,7 +28,7 @@ class AddProject extends StatelessWidget {
     return MaterialPage<void>(
       key: state.pageKey,
       child: AddProject(
-       categories: state.extra as List<CategoryDto>,
+        categories: state.extra as List<CategoryDto>,
       ),
     );
   }
@@ -147,7 +147,7 @@ class AddProject extends StatelessWidget {
                     ),
                     SizedBox(height: 12.0.h),
                     const CustomReactiveTextField(
-                      maxLines: 1,
+                      maxLines: null,
                       labelText: "Project Description",
                       formControlName: ProjectBloc.projectDescKey,
                       icon: FaIcon(FontAwesomeIcons.fileSignature),
@@ -169,21 +169,20 @@ class AddProject extends StatelessWidget {
                       icon: FaIcon(Icons.monetization_on_outlined),
                     ),
                     SizedBox(height: 12.0.h),
-                    ReactiveDropdownSearchMultiSelection<CategoryDto, CategoryDto>(
+                    ReactiveDropdownSearchMultiSelection<CategoryDto,
+                            CategoryDto>(
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             focusedBorder: OutlineInputBorder(
                               borderRadius: borderRadiusCircular,
                               borderSide: BorderSide(
-                                  style: BorderStyle.none,
-                                  width: 2.0.r),
+                                  style: BorderStyle.none, width: 2.0.r),
                             ),
                             border: InputBorder.none,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: borderRadiusCircular,
                               borderSide: BorderSide(
-                                  width: 1.0.r,
-                                  style: BorderStyle.none),
+                                  width: 1.0.r, style: BorderStyle.none),
                             ),
                             filled: true,
                             fillColor: AppColors.white,
@@ -195,18 +194,14 @@ class AddProject extends StatelessWidget {
                                 size: 20,
                               ),
                             ),
-
                             labelText: ' Category'),
                         mode: Mode.MENU,
                         formControlName: ProjectBloc.categoryKey,
-                        items:categories,
-                        itemAsString: (CategoryDto? u) => u!.name
-
-                    ),
+                        items: categories,
+                        itemAsString: (CategoryDto? u) => u!.name),
                     SizedBox(
                       height: 22.0.h,
                     ),
-
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 35.0.h),
                       child: const CustomText.bodyMedium(
