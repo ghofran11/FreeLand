@@ -3,24 +3,24 @@ import 'package:freeland/core/bloc_status.dart';
 
 class NotificationState {
   final BlocStatus notificationStatus;
-  final BlocStatus requestStatus;
+  final BlocStatus responseStatus;
   final BlocStatus allRequestStatus;
 
   NotificationState({
     this.notificationStatus = const BlocStatus(),
-    this.requestStatus=const BlocStatus(),
+    this.responseStatus=const BlocStatus(),
     this.allRequestStatus=const BlocStatus()
   });
 
-  NotificationState copyWith({BlocStatus? notificationStatus,BlocStatus? requestStatus,BlocStatus? AllrequestStatus}) {
+  NotificationState copyWith({BlocStatus? notificationStatus,BlocStatus? responseStatus,BlocStatus? AllrequestStatus}) {
     return NotificationState(
         notificationStatus: notificationStatus ?? this.notificationStatus,
-      requestStatus: requestStatus ?? this.requestStatus,
+        responseStatus: responseStatus ?? this.responseStatus,
       allRequestStatus: AllrequestStatus ?? this.allRequestStatus
     );
   }
   @override
   String toString() {
-    return "notificationSubmission: $notificationStatus, connectRequest:$requestStatus,allRequest: $allRequestStatus ";
+    return "notificationSubmission: $notificationStatus, responseStatus:$responseStatus,allRequest: $allRequestStatus ";
   }
 }

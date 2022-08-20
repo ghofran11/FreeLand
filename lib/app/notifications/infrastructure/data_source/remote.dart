@@ -27,11 +27,9 @@ class NotificationRemote{
     });
   }
 
-  Future<void> connectedRequest(bool isConnect) async {
+  Future<void> connectedResponse(bool isConnect) async {
     return throwDioException<void>(() async {
-       await _dio.post(AppUri.connectRequest,data: isConnect);
+       await _dio.post(AppUri.connectResponse,data: isConnect);
     });
-
-
   }
 }

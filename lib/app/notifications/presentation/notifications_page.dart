@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,10 +8,15 @@ import 'package:freeland/app/notifications/infrastructure/models/notification.da
 import 'package:freeland/app/notifications/presentation/state/notification_bloc.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_event.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_state.dart';
+import 'package:freeland/app/profile/presentation/widgets/read_more.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
+import 'package:freeland/common/widgets/text_field.dart';
+import 'package:freeland/contact/contact_us.dart';
+import 'package:go_router/go_router.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../injection/injection.dart';
@@ -44,199 +50,196 @@ class NotificationsPage extends StatelessWidget {
                     ),
                     BlocConsumer<NotificationBloc, NotificationState>(
                       listener: (context, state) {
-                        if (state.notificationStatus.isFail()) {
+                        if(state.notificationStatus.isFail()){
                           BotToast.showText(
                               text: state.notificationStatus.error ??
                                   AppStrings.defaultErrorMsg);
                         }
+
                       },
                       builder: (context, state) {
-                        NotificationBloc _notificationBloc =
-                            context.read<NotificationBloc>();
-                        List<NotificationDto> notification =
-                            _notificationBloc.notification;
+                        NotificationBloc _notificationBloc=context.read<NotificationBloc>();
+                        //toDo
+                        List<NotificationDto> notification = _notificationBloc.notification;
                         return Expanded(
                           child: TabBarView(children: [
-                            Builder(builder: (context) {
-                              if (state.notificationStatus.isSuccess()) {
-                                final notifications =
-                                    _notificationBloc.notification;
-                                return ListView.separated(
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return const Divider();
-                                  },
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return ListTile(
-                                      onTap: () {},
-                                      leading: GestureDetector(
-                                        onTap: () async {
-                                          // Display the image in large form.
-                                        },
-                                        child: Container(
-                                          height: 50.0,
-                                          width: 50.0,
-                                          decoration: const BoxDecoration(
-                                              color: Colors.blue,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(50))),
-                                          child: const CircleAvatar(
-                                              radius: 50,
-                                              backgroundImage: NetworkImage(
-                                                "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
-                                              )),
-                                        ),
-                                      ),
-                                      title: Text(
-                                        notifications[index].title,
-                                        style: const TextStyle(fontSize: 15),
-                                      ),
-                                      subtitle: CustomText.bodySmall(
-                                          notifications[index].body,
-                                          style: const TextStyle(
-                                            color: AppColors.grey2,
-                                          ),
-                                          maxLines: 2,
-                                          textOverflow: TextOverflow.ellipsis),
-                                      trailing: Text(
-                                          timeago.format(minAgo,
-                                              locale: 'en_short'),
-                                          style: const TextStyle(fontSize: 11)),
-                                    );
-                                  },
-                                  itemCount: notifications.length,
-                                  physics: const BouncingScrollPhysics(),
-                                );
-                              } else if (state.notificationStatus.isLoading()) {
-                                return const LoadingProgress();
-                              }
-                              return Container();
-                            }),
-                            Builder(builder: (context) {
-                              if (state.notificationStatus.isSuccess()) {
-                                return ListView.separated(
-                                  separatorBuilder: (context, index) {
-                                    return const Divider();
-                                  },
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                        onTap: () {},
-                                        leading: GestureDetector(
-                                          onTap: () async {
-                                            // Display the image in large form.
-                                          },
-                                          child: Container(
-                                            height: 50.0,
-                                            width: 50.0,
-                                            decoration: const BoxDecoration(
-                                                color: Colors.blue,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(50))),
-                                            child: const CircleAvatar(
-                                                radius: 50,
-                                                backgroundImage: NetworkImage(
-                                                    "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
-                                          ),
-                                        ),
-                                        title: const Text(
-                                          'Sami Salok',
-                                          style: TextStyle(fontSize: 15),
-                                        ),
-                                        subtitle: const CustomText.bodySmall(
-                                            'UI Designer at Splendapp',
-                                            style: TextStyle(
-                                              color: AppColors.grey2,
+                           Builder(builder: (context){
+                             if(state.notificationStatus.isSuccess()){
+                               final notifications =_notificationBloc.notification;
+                               return  ListView.separated(
+                                 separatorBuilder:
+                                     (BuildContext context, int index) {
+                                   return const Divider();
+                                 },
+                                 itemBuilder: (BuildContext context, int index) {
+                                   return ListTile(
+                                     onTap: () {},
+                                     leading: GestureDetector(
+                                       onTap: () async {
+                                         // Display the image in large form.
+                                       },
+                                       child: Container(
+                                         height: 50.0,
+                                         width: 50.0,
+                                         decoration: const BoxDecoration(
+                                             color: Colors.blue,
+                                             borderRadius: BorderRadius.all(
+                                                 Radius.circular(50))),
+                                         child: const CircleAvatar(
+                                             radius: 50,
+                                             backgroundImage: NetworkImage(
+                                               "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
+                                             )),
+                                       ),
+                                     ),
+                                     title:  Text(
+                                       notifications[index].title,
+                                       style:const TextStyle(fontSize: 15),
+                                     ),
+                                     subtitle:  CustomText.bodySmall(
+                                         notifications[index].body ,
+                                         style: TextStyle(
+                                           color: AppColors.grey2,
+                                         ),
+                                         maxLines: 2,
+                                         textOverflow: TextOverflow.ellipsis),
+                                     trailing: Text(
+                                         timeago.format(minAgo,
+                                             locale: 'en_short'),
+                                         style: const TextStyle(fontSize: 11)),
+                                   );
+                                 },
+                                 itemCount: notifications.length,
+                                 physics: const BouncingScrollPhysics(),
+                               );
+                             }
+                             else if (state.notificationStatus.isLoading()) {
+                               return const LoadingProgress();
+                             }
+                             return Container();
+                           }),
+                            Builder(
+                              builder: (context) {
+                                if(state.notificationStatus.isSuccess()){
+                                  return ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return const Divider();
+                                    },
+                                    itemBuilder: (context,index){
+                                      return ListTile(
+                                          onTap: () {},
+                                          leading: GestureDetector(
+                                            onTap: () async {
+                                              // Display the image in large form.
+                                            },
+                                            child: Container(
+                                              height: 50.0,
+                                              width: 50.0,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.blue,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(50))),
+                                              child: const CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage: NetworkImage(
+                                                      "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
                                             ),
-                                            maxLines: 2,
-                                            textOverflow:
-                                                TextOverflow.ellipsis),
-                                        trailing: Builder(builder: (context) {
-                                          if (state.requestStatus.isFail()) {
-                                            BotToast.showText(
-                                                text: state
-                                                        .requestStatus.error ??
-                                                    AppStrings.defaultErrorMsg);
-                                            return Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                InkWell(
-                                                  child: const FaIcon(
-                                                    FontAwesomeIcons
-                                                        .circleCheck,
-                                                    size: 30,
-                                                    color: AppColors.primary,
+                                          ),
+                                          title: const Text(
+                                            'Sami Salok',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          subtitle: const CustomText.bodySmall(
+                                              'UI Designer at Splendapp',
+                                              style: TextStyle(
+                                                color: AppColors.grey2,
+                                              ),
+                                              maxLines: 2,
+                                              textOverflow: TextOverflow.ellipsis),
+                                          trailing: Builder(
+                                            builder: (context) {
+                                              if(state.responseStatus.isFail()){
+                                                BotToast.showText(
+                                                    text: state.responseStatus.error ??
+                                                        AppStrings.defaultErrorMsg);
+                                                return Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    InkWell(
+
+                                                      child: const FaIcon(
+                                                        FontAwesomeIcons.circleCheck,
+                                                        size: 30,
+                                                        color: AppColors.primary,
+                                                      ),
+                                                      onTap: (){
+                                                        _notificationBloc.add(ResponseConnection(isConnect: true));
+                                                      },
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5.0.h,
+                                                    ),
+                                                    InkWell(
+                                                      child: const FaIcon(
+                                                        FontAwesomeIcons.circleXmark,
+                                                        size: 30,
+                                                        color: AppColors.grey2,
+                                                      ),
+                                                      onTap: (){
+                                                        _notificationBloc.add(ResponseConnection(isConnect: false));
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              }
+                                            else  if(state.responseStatus.isSuccess()){
+                                                BotToast.showText(
+                                                    text: 'Request approved ');
+                                              }
+                                              return Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  InkWell(
+                                                    child: const FaIcon(
+                                                      FontAwesomeIcons.circleCheck,
+                                                      size: 30,
+                                                      color: AppColors.primary,
+                                                    ),
+                                                    onTap: (){
+                                                      print("ghofran ghofran ture");
+                                                      _notificationBloc.add(ResponseConnection(isConnect: true));
+                                                    },
                                                   ),
-                                                  onTap: () {
-                                                    _notificationBloc.add(
-                                                        ConnectRequest(
-                                                            isConnect: true));
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  width: 5.0.h,
-                                                ),
-                                                InkWell(
-                                                  child: const FaIcon(
-                                                    FontAwesomeIcons
-                                                        .circleXmark,
-                                                    size: 30,
-                                                    color: AppColors.grey2,
+                                                  SizedBox(
+                                                    width: 5.0.h,
                                                   ),
-                                                  onTap: () {
-                                                    _notificationBloc.add(
-                                                        ConnectRequest(
-                                                            isConnect: false));
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          } else if (state.requestStatus
-                                              .isSuccess()) {
-                                            BotToast.showText(
-                                                text: 'Request approved ');
-                                          }
-                                          return Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              InkWell(
-                                                child: const FaIcon(
-                                                  FontAwesomeIcons.circleCheck,
-                                                  size: 30,
-                                                  color: AppColors.primary,
-                                                ),
-                                                onTap: () {
-                                                  _notificationBloc.add(
-                                                      ConnectRequest(
-                                                          isConnect: true));
-                                                },
-                                              ),
-                                              SizedBox(
-                                                width: 5.0.h,
-                                              ),
-                                              InkWell(
-                                                child: const FaIcon(
-                                                  FontAwesomeIcons.circleXmark,
-                                                  size: 30,
-                                                  color: AppColors.grey2,
-                                                ),
-                                                onTap: () {
-                                                  _notificationBloc.add(
-                                                      ConnectRequest(
-                                                          isConnect: false));
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        }));
-                                  },
-                                  itemCount: 8,
-                                );
-                              } else if (state.notificationStatus.isLoading()) {
-                                return const LoadingProgress();
+                                                  InkWell(
+                                                    child: const FaIcon(
+                                                      FontAwesomeIcons.circleXmark,
+                                                      size: 30,
+                                                      color: AppColors.grey2,
+                                                    ),
+                                                    onTap: (){
+                                                      print("ghofran ghofran false");
+                                                      _notificationBloc.add(ResponseConnection(isConnect: false));
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            }
+                                          ));
+
+                                    },
+                                    itemCount: 8,
+                                  );
+                                }
+                                else if (state.notificationStatus.isLoading()) {
+                                  return const LoadingProgress();
+                                }
+                                return Container();
+
                               }
-                              return Container();
-                            }),
+                            ),
                           ]),
                         );
                       },
