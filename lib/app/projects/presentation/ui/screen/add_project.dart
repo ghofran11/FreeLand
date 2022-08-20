@@ -210,10 +210,13 @@ class AddProject extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: ImageHolder(onDeleteImage: () {
-                        // homeBloc.form.control('photo').value = null;
+                        projectBloc.addProjectForm
+                            .control(ProjectBloc.imageKey)
+                            .value = null;
                       }, onUpdateImage: (image) {
-                        // homeBloc.form.control('photo').value =
-                        //     image;
+                        projectBloc.addProjectForm
+                            .control(ProjectBloc.imageKey)
+                            .value = image;
                       }),
                     ),
                   ],

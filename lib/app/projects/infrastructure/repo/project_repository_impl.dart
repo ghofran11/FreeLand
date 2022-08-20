@@ -55,12 +55,10 @@ class ProjectRepositoryImpl extends ProjectRepository {
   }
 
   @override
-  Future<Either<String, dynamic>> addProject(
-      {required AddProjectParams params}) {
-    return throwAppException<AddProjectParams>(() async {
-      final AddProjectParams addProject =
-          await remote.addProject(params: params);
-      return (addProject);
+  Future<Either<String, void>> addProject({required AddProjectParams params}) {
+    return throwAppException<void>(() async {
+      await remote.addProject(params: params);
     });
   }
+
 }
