@@ -14,7 +14,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  List<CategoryDto> categories = [];
+  List<CategoryDto2> categories = [];
   List<ServiceDto> services = [];
   List<UserDto> users = [];
   List<CommonQuestionModel> commonQuestions = [];

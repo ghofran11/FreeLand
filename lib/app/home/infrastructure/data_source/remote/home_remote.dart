@@ -12,8 +12,8 @@ class HomeRemote {
 
   HomeRemote(Dio dio) : _dio = dio;
 
-  Future<List<CategoryDto>> fetchAllCategory() async {
-    return throwDioException<List<CategoryDto>>(() async {
+  Future<List<CategoryDto2>> fetchAllCategory() async {
+    return throwDioException<List<CategoryDto2>>(() async {
       late final Response response;
       response = await _dio.get(AppUri.categoryFetched);
       var categories = categoriesFromJson(response.data);

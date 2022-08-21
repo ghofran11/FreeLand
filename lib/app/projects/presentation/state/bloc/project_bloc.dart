@@ -4,6 +4,7 @@ import 'package:freeland/app/contract/contract_add_param.dart';
 import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
+import 'package:freeland/app/projects/infrastructure/models/deatail_service_dto.dart';
 import 'package:freeland/app/projects/infrastructure/repo/project_repository_impl.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_state.dart';
@@ -13,6 +14,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   late final ProjectRepositoryImpl _projectRepositoryImpl;
+   late DetailServiceDto detailServices;
   var offerForm = FormGroup({
     descKey: FormControl<String>(
       validators: [
@@ -51,7 +53,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
         Validators.required,
       ]),
       imageKey: FormControl<ImageFile>(validators: []),
-      categoryKey: FormControl<List<CategoryDto>>(validators: []),
+      categoryKey: FormControl<List<CategoryDto2>>(validators: []),
     },
   );
 
@@ -130,6 +132,20 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
                 (right) => emit(
                     state.copyWith(addContractStatus: BlocStatus.success())));
       }
+
+      if(event is FetchDetailProjects){
+
+        emit(state.copyWith(fetchDetailProject: BlocStatus.loading()));
+
+        (await projectRepositoryImpl.fetchDetailServices(projectId: event.idProject)).fold(
+              (left) => emit(state.copyWith(
+              fetchDetailProject: BlocStatus.fail(error: left))),
+              (right) => {
+            detailServices = right,
+            emit(state.copyWith(fetchDetailProject: BlocStatus.success()))
+          },
+        );
+      }
     });
   }
 
@@ -193,13 +209,13 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
           contractForm.control('deadline_support').value as DateTime,
       totalPrice: contractForm.control('price').value as int,
       deadLine: contractForm.control('deadline').value as DateTime,
-      partDtos: List.generate(
+      partDtos2: List.generate(
           (levelsForm.control('levelsArray') as FormArray).controls.length,
           (index) {
         final FormGroup thisLeveFormGroup =
             (levelsForm.control('levelsArray') as FormArray).controls[index]
                 as FormGroup;
-        return PartDto(
+        return PartDto2(
           order: thisLeveFormGroup.control('order').value as int,
           deadLine: thisLeveFormGroup.control('deadLine').value as DateTime?,
           price: thisLeveFormGroup.control('price').value as int,

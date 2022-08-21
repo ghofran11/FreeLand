@@ -7,9 +7,10 @@ import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
 import 'package:freeland/app/projects/domain/repos/project_repository.dart';
 import 'package:freeland/app/projects/infrastructure/data_source/remote/project_remote.dart';
-import 'package:freeland/app/projects/infrastructure/models/comment.dart';
+//import 'package:freeland/app/projects/infrastructure/models/comment.dart';
 import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
-import 'package:freeland/app/projects/infrastructure/models/offer.dart';
+import 'package:freeland/app/projects/infrastructure/models/deatail_service_dto.dart';
+//import 'package:freeland/app/projects/infrastructure/models/offer.dart';
 import 'package:freeland/common/network/error_handler.dart';
 
 class ProjectRepositoryImpl extends ProjectRepository {
@@ -68,4 +69,13 @@ class ProjectRepositoryImpl extends ProjectRepository {
       await remote.addContract(params: param);
     });
   }
+
+  @override
+  Future<Either<String,DetailServiceDto>> fetchDetailServices({required String projectId}) {
+    return throwAppException<DetailServiceDto>(() async {
+      final DetailServiceDto detailServiceDto = await remote.fetchDetailServices(projectId);
+      return (detailServiceDto);
+    });
+  }
+
 }

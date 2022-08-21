@@ -15,6 +15,8 @@ class ProjectState {
   final BlocStatus fetchAllComment;
   final BlocStatus addContract;
   final BlocStatus fetchMyProjectsStatus;
+  final BlocStatus fetchDetailProject;
+
 
   ProjectState(
       {this.offerSubmission = const BlocStatus(),
@@ -22,7 +24,9 @@ class ProjectState {
       this.fetchAllComment = const BlocStatus(),
       this.addContract = const BlocStatus(),
       this.fetchMyProjectsStatus = const BlocStatus(),
-      this.projectSubmission = const BlocStatus()});
+      this.projectSubmission = const BlocStatus(),
+        this.fetchDetailProject=const BlocStatus()
+      });
 
   ProjectState copyWith({
     BlocStatus? offerState,
@@ -31,6 +35,7 @@ class ProjectState {
     BlocStatus? projectSubmission,
     BlocStatus? fetchMyProjectsStatus,
     BlocStatus? addContractStatus,
+    BlocStatus? fetchDetailProject
   }) {
     return ProjectState(
       offerSubmission: offerState ?? offerSubmission,
@@ -40,6 +45,7 @@ class ProjectState {
       addContract: addContractStatus ?? this.addContract,
       fetchMyProjectsStatus:
           fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
+      fetchDetailProject: fetchDetailProject?? this.fetchDetailProject
     );
   }
 
@@ -63,7 +69,7 @@ class ProjectState {
 
   @override
   String toString() {
-    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission, fetchMyProjectsStatus: $fetchMyProjectsStatus";
+    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission, fetchMyProjectsStatus: $fetchMyProjectsStatus, fetchDetailProject :$fetchDetailProject";
   }
 
   Future<AddProjectParams> getAddProjectParams(
@@ -75,7 +81,7 @@ class ProjectState {
       minPrice: addProjectForm.control(ProjectBloc.minSalaryKey).value,
       maxPrice: addProjectForm.control(ProjectBloc.maxSalaryKey).value,
       categoriesIds: (addProjectForm.control(ProjectBloc.categoryKey).value
-              as List<CategoryDto>)
+              as List<CategoryDto2>)
           .map((e) => e.id)
           .toList(),
       image: (addProjectForm.control(ProjectBloc.imageKey).value as ImageFile)
