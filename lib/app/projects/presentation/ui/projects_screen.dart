@@ -107,7 +107,7 @@ class ProjectPage extends StatelessWidget {
                                       child: InkWell(
                                           onTap: () {
                                             context.pushNamed(
-                                                ProjectOwn.routeName);
+                                                ProjectOwn.routeName,extra: myProjects.posted[index].id);
                                           },
                                           child: PostedProjectCard(
                                             project: myProjects.posted[index],

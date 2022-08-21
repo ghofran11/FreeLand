@@ -21,14 +21,14 @@ import 'package:reactive_dropdown_search/reactive_dropdown_search.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AddProject extends StatelessWidget {
-  final List<CategoryDto>? categories;
+  final List<CategoryDto2>? categories;
   AddProject({Key? key, this.categories}) : super(key: key);
 
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
       child: AddProject(
-        categories: state.extra as List<CategoryDto>,
+        categories: state.extra as List<CategoryDto2>,
       ),
     );
   }
@@ -169,8 +169,8 @@ class AddProject extends StatelessWidget {
                       icon: FaIcon(Icons.monetization_on_outlined),
                     ),
                     SizedBox(height: 12.0.h),
-                    ReactiveDropdownSearchMultiSelection<CategoryDto,
-                            CategoryDto>(
+                    ReactiveDropdownSearchMultiSelection<CategoryDto2,
+                            CategoryDto2>(
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.zero,
                             focusedBorder: OutlineInputBorder(
@@ -198,7 +198,7 @@ class AddProject extends StatelessWidget {
                         mode: Mode.MENU,
                         formControlName: ProjectBloc.categoryKey,
                         items: categories,
-                        itemAsString: (CategoryDto? u) => u!.name),
+                        itemAsString: (CategoryDto2? u) => u!.name),
                     SizedBox(
                       height: 22.0.h,
                     ),

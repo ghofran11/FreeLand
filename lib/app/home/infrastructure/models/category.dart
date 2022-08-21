@@ -1,15 +1,14 @@
 // To parse this JSON data, do
 //
-//     final categoryDto = categoryDtoFromMap(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
-List<CategoryDto> categoriesFromJson(List<dynamic> data) {
-  return data.map((e) => CategoryDto.fromJson(e)).toList();
+List<CategoryDto2> categoriesFromJson(List<dynamic> data) {
+  return data.map((e) => CategoryDto2.fromJson(e)).toList();
 }
-class CategoryDto {
+class CategoryDto2 {
 
-  CategoryDto({
+  CategoryDto2({
     required this.id,
     required this.name,
     required this.mainCategoryId,
@@ -19,12 +18,12 @@ class CategoryDto {
   final String name;
   final String? mainCategoryId;
 
-  CategoryDto copyWith({
+  CategoryDto2 copyWith({
     required String id,
     required String name,
     required String mainCategoryId,
   }) =>
-      CategoryDto(
+      CategoryDto2(
         id: id,
         name: name ,
         mainCategoryId: mainCategoryId ,
@@ -34,7 +33,7 @@ class CategoryDto {
 
   String toJson() => json.encode(toMap());
 
-  factory CategoryDto.fromJson(Map<String, dynamic> json) => CategoryDto(
+  factory CategoryDto2.fromJson(Map<String, dynamic> json) => CategoryDto2(
     id: json["id"],
     name: json["name"],
     mainCategoryId: json["mainCategoryId"],

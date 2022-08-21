@@ -13,203 +13,210 @@ import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../../injection/injection.dart';
 
 class NotificationsPage extends StatelessWidget {
   NotificationsPage({Key? key}) : super(key: key);
-  DateTime minAgo = DateTime.now().subtract(const Duration(minutes: 1));
-
+  final _refreshController = RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
           getIt<NotificationBloc>()..add(FetchAllNotification())..add(FetchAllRequestById()),
-      child: Scaffold(
-          body: Center(
-        child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DefaultTabController(
-                length: 2,
-                child: Column(
-                  children: [
-                    const TabBar(
-                      tabs: [
-                        Tab(
-                          text: 'Notification',
-                        ),
-                        Tab(
-                          text: 'Invitations',
-                        ),
-                      ],
-                    ),
-                    BlocConsumer<NotificationBloc, NotificationState>(
-                      listener: (context, state) {
-                        if(state.notificationStatus.isFail()){
-                          BotToast.showText(
-                              text: state.notificationStatus.error ??
-                                  AppStrings.defaultErrorMsg);
-                        }
+      child: SmartRefresher(
+        controller: _refreshController,
+        onRefresh: () {
+          context.read<NotificationBloc>().add(FetchAllNotification());
+        },
+        child: Scaffold(
+            body: Center(
+          child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: DefaultTabController(
+                  length: 2,
+                  child: Column(
+                    children: [
+                      const TabBar(
+                        tabs: [
+                          Tab(
+                            text: 'Notification',
+                          ),
+                          Tab(
+                            text: 'Invitations',
+                          ),
+                        ],
+                      ),
+                      BlocConsumer<NotificationBloc, NotificationState>(
+                        listener: (context, state) {
+                          print('plz ya ghofran ');
+                          if(state.notificationStatus.isFail()){
+                            BotToast.showText(
+                                text: state.notificationStatus.error ??
+                                    AppStrings.defaultErrorMsg);
+                          }
 
-                        if(state.allRequestStatus.isFail()){
-                          BotToast.showText(
-                              text: state.allRequestStatus.error ??
-                                  AppStrings.defaultErrorMsg);
-                        }
+                          if(state.allRequestStatus.isFail()){
+                            BotToast.showText(
+                                text: state.allRequestStatus.error ??
+                                    AppStrings.defaultErrorMsg);
+                          }
 
-                      },
-                      builder: (context, state) {
-                        NotificationBloc _notificationBloc=context.read<NotificationBloc>();
-                        return Expanded(
-                          child: TabBarView(children: [
-                           Builder(builder: (context){
-                             if(state.notificationStatus.isSuccess()){
-                               final notifications =_notificationBloc.notification;
-                               return  ListView.separated(
-                                 separatorBuilder:
-                                     (BuildContext context, int index) {
-                                   return const Divider();
-                                 },
-                                 itemBuilder: (BuildContext context, int index) {
-                                   return ListTile(
-                                     onTap: () {},
-                                     leading: GestureDetector(
-                                       onTap: () async {
-                                         // Display the image in large form.
-                                       },
-                                       child: Container(
-                                         height: 50.0,
-                                         width: 50.0,
-                                         decoration: const BoxDecoration(
-                                             color: Colors.blue,
-                                             borderRadius: BorderRadius.all(
-                                                 Radius.circular(50))),
-                                         child: const CircleAvatar(
-                                             radius: 50,
-                                             backgroundImage: NetworkImage(
-                                               "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
-                                             )),
-                                       ),
-                                     ),
-                                     title:  Text(
-                                       notifications[index].title,
-                                       style:const TextStyle(fontSize: 15),
-                                     ),
-                                     subtitle:  CustomText.bodySmall(
-                                         notifications[index].body ,
-                                         style: const TextStyle(
-                                           color: AppColors.grey2,
+                          if (!state.allRequestStatus.isLoading()&&!state.notificationStatus.isLoading()) {
+                            _refreshController.refreshCompleted();
+                          }
+                        },
+                        builder: (context, state) {
+                          NotificationBloc _notificationBloc=context.read<NotificationBloc>();
+                          return Expanded(
+                            child: TabBarView(children: [
+                             Builder(builder: (context){
+
+                               if(state.notificationStatus.isSuccess()){
+
+                                 final notifications =_notificationBloc.notification;
+                                 return  ListView.separated(
+                                   separatorBuilder:
+                                       (BuildContext context, int index) {
+                                     return const Divider();
+                                   },
+                                   itemBuilder: (BuildContext context, int index) {
+                                     return ListTile(
+                                       onTap: () {},
+                                       leading: GestureDetector(
+                                         onTap: () async {
+                                           // Display the image in large form.
+                                         },
+                                         child: Container(
+                                           height: 50.0,
+                                           width: 50.0,
+                                           decoration: const BoxDecoration(
+                                               color: Colors.blue,
+                                               borderRadius: BorderRadius.all(
+                                                   Radius.circular(50))),
+                                           child: const CircleAvatar(
+                                               radius: 50,
+                                               backgroundImage: NetworkImage(
+                                                 "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
+                                               )),
                                          ),
-                                         maxLines: 2,
-                                         textOverflow: TextOverflow.ellipsis),
-                                     trailing: Text(
-                                         timeago.format(notifications[index].date,
-                                             locale: 'en_short'),
-                                         style: const TextStyle(fontSize: 11)),
-                                   );
-                                 },
-                                 itemCount: notifications.length,
-                                 physics: const BouncingScrollPhysics(),
-                               );
-                             }
-                             else if (state.notificationStatus.isLoading()) {
-                               return const LoadingProgress();
-                             }
-                             return Container();
-                           }),
-                            Builder(
-                              builder: (context) {
-                                final List<AllRequest> allRequest=context.read<NotificationBloc>().requests;
-                                if(state.allRequestStatus.isSuccess()){
-                                  return ListView.separated(
-                                    separatorBuilder: (context, index) {
-                                      return const Divider();
-                                    },
-                                    itemBuilder: (context,index){
-                                      return ListTile(
-                                          onTap: () {},
-                                          leading: GestureDetector(
-                                            onTap: () async {
-                                              // Display the image in large form.
-                                            },
-                                            child: Container(
-                                              height: 50.0,
-                                              width: 50.0,
-                                              decoration: const BoxDecoration(
-                                                  color: Colors.blue,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(50))),
-                                              child: const CircleAvatar(
-                                                  radius: 50,
-                                                  backgroundImage: NetworkImage(
-                                                      "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
+                                       ),
+                                       title:  Text(
+                                         notifications[index].title,
+                                         style:const TextStyle(fontSize: 15),
+                                       ),
+                                       subtitle:  CustomText.bodySmall(
+                                           notifications[index].body ,
+                                           style: const TextStyle(
+                                             color: AppColors.grey2,
+                                           ),
+                                           maxLines: 2,
+                                           textOverflow: TextOverflow.ellipsis),
+                                       trailing: Text(
+                                           timeago.format(notifications[index].date,
+                                               locale: 'en_short'),
+                                           style: const TextStyle(fontSize: 11)),
+                                     );
+                                   },
+                                   itemCount: notifications.length,
+                                   physics: const BouncingScrollPhysics(),
+                                 );
+                               }
+                               return LoadingProgress();
+                             }),
+                              Builder(
+                                builder: (context) {
+                                  final List<AllRequest> allRequest=context.read<NotificationBloc>().requests;
+                                  if(state.allRequestStatus.isSuccess()){
+                                    return ListView.separated(
+                                      separatorBuilder: (context, index) {
+                                        return const Divider();
+                                      },
+                                      itemBuilder: (context,index){
+                                        return ListTile(
+                                            onTap: () {},
+                                            leading: GestureDetector(
+                                              onTap: () async {
+                                                // Display the image in large form.
+                                              },
+                                              child: Container(
+                                                height: 50.0,
+                                                width: 50.0,
+                                                decoration: const BoxDecoration(
+                                                    color: Colors.blue,
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(50))),
+                                                child: const CircleAvatar(
+                                                    radius: 50,
+                                                    backgroundImage: NetworkImage(
+                                                        "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
+                                              ),
                                             ),
-                                          ),
-                                          title:  Text(
-                                            allRequest[index].name,
-                                            style: const TextStyle(fontSize: 15),
-                                          ),
-                                          trailing: Builder(
-                                            builder: (context) {
-                                              if(state.responseStatus.isFail()){
-                                                BotToast.showText(
-                                                    text: state.responseStatus.error ??
-                                                        AppStrings.defaultErrorMsg);
+                                            title:  Text(
+                                              allRequest[index].name,
+                                              style: const TextStyle(fontSize: 15),
+                                            ),
+                                            trailing: Builder(
+                                              builder: (context) {
+                                                if(state.responseStatus.isFail()){
+                                                  BotToast.showText(
+                                                      text: state.responseStatus.error ??
+                                                          AppStrings.defaultErrorMsg);
 
-                                              }
-                                            else  if(state.responseStatus.isSuccess()){
-                                                BotToast.showText(
-                                                    text: 'Request approved ');
-                                                return Container();
-                                              }
-                                              return Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  InkWell(
+                                                }
+                                              else  if(state.responseStatus.isSuccess()){
+                                                  BotToast.showText(
+                                                      text: 'Request approved ');
+                                                  return Container();
+                                                }
+                                                return Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    InkWell(
 
-                                                    child: const FaIcon(
-                                                      FontAwesomeIcons.circleCheck,
-                                                      size: 30,
-                                                      color: AppColors.primary,
+                                                      child: const FaIcon(
+                                                        FontAwesomeIcons.circleCheck,
+                                                        size: 30,
+                                                        color: AppColors.primary,
+                                                      ),
+                                                      onTap: (){
+                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: allRequest[index].id)));
+                                                      },
                                                     ),
-                                                    onTap: (){
-                                                      _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: allRequest[index].id)));
-                                                    },
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5.0.h,
-                                                  ),
-                                                  InkWell(
-                                                    child: const FaIcon(
-                                                      FontAwesomeIcons.circleXmark,
-                                                      size: 30,
-                                                      color: AppColors.grey2,
+                                                    SizedBox(
+                                                      width: 5.0.h,
                                                     ),
-                                                    onTap: (){
-                                                      _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: false,id:allRequest[index].id)));
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            }
-                                          ));
-                                    },
-                                    itemCount: allRequest.length,
-                                  );
+                                                    InkWell(
+                                                      child: const FaIcon(
+                                                        FontAwesomeIcons.circleXmark,
+                                                        size: 30,
+                                                        color: AppColors.grey2,
+                                                      ),
+                                                      onTap: (){
+                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: false,id:allRequest[index].id)));
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              }
+                                            ));
+                                      },
+                                      itemCount: allRequest.length,
+                                    );
+                                  }
+
+                                  return LoadingProgress();
                                 }
-                                else if (state.allRequestStatus.isLoading()) {
-                                  return const LoadingProgress();
-                                }
-                                return Container();
-                              }
-                            ),
-                          ]),
-                        );
-                      },
-                    ),
-                  ],
-                ))),
-      )),
+                              ),
+                            ]),
+                          );
+                        },
+                      ),
+                    ],
+                  ))),
+        )),
+      ),
     );
   }
 }

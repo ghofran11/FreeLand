@@ -4,6 +4,7 @@ import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
+import 'package:freeland/app/projects/infrastructure/models/deatail_service_dto.dart';
 
 abstract class ProjectRepository {
   Future<Either<String, dynamic>> sendOffer({
@@ -29,4 +30,8 @@ abstract class ProjectRepository {
   Future<Either<String, void>> responsePart(String idPart);
 
   Future<Either<String, void>> submitPart(String idPart);
+
+  Future<Either<String, DetailServiceDto>> fetchDetailServices({
+    required String projectId,
+  });
 }

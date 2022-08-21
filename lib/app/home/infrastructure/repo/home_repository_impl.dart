@@ -14,9 +14,9 @@ class HomeRepositoryImpl extends HomeRepository {
   HomeRepositoryImpl({required this.remote});
 
   @override
-  Future<Either<String, List<CategoryDto>>> fetchAllCategory() {
-    return throwAppException<List<CategoryDto>>(() async {
-      final List<CategoryDto> categories = await remote.fetchAllCategory();
+  Future<Either<String, List<CategoryDto2>>> fetchAllCategory() {
+    return throwAppException<List<CategoryDto2>>(() async {
+      final List<CategoryDto2> categories = await remote.fetchAllCategory();
       return (categories);
     });
   }

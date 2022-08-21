@@ -1,10 +1,10 @@
-class PartDto {
+class PartDto2 {
   int? order;
   String? description;
   DateTime? deadLine;
   int? price;
 
-  PartDto({this.order, this.description, this.deadLine, this.price});
+  PartDto2({this.order, this.description, this.deadLine, this.price});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
@@ -23,7 +23,7 @@ class AddContractParam {
   DateTime? deadLine;
   DateTime? deadLineSupport;
   int? totalPrice;
-  List<PartDto?>? partDtos;
+  List<PartDto2?>? partDtos2;
 
   AddContractParam(
       {this.serviceId,
@@ -32,7 +32,7 @@ class AddContractParam {
       this.deadLine,
       this.deadLineSupport,
       this.totalPrice,
-      this.partDtos});
+      this.partDtos2});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
@@ -43,7 +43,7 @@ class AddContractParam {
     data['deadLineSupport'] = deadLineSupport?.toIso8601String();
     data['totalPrice'] = totalPrice;
     data['partDtos'] =
-        partDtos != null ? partDtos!.map((v) => v?.toJson()).toList() : null;
+        partDtos2 != null ? partDtos2!.map((v) => v?.toJson()).toList() : null;
     return data;
   }
 }
