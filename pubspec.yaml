@@ -61,7 +61,6 @@ dependencies:
   comment_box: ^0.0.17
   syncfusion_flutter_sliders: ^20.2.39
   smooth_page_indicator: ^1.0.0+2
-  percent_indicator: ^4.0.1
   file_picker: ^4.6.1
   image_picker: ^0.8.5+3
   flutter_image_compress: ^1.1.1

@@ -64,7 +64,7 @@ class ProfileRemote {
 
   Future<void> sendConnect({required SendConnectionParam param}) async {
     return throwDioException<void>(() async {
-      await _dio.post(AppUri.contactUsCreate,data: await param.toJson());
+      await _dio.post(AppUri.connect,data: await param.toJson());
     });
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freeland/app/notifications/infrastructure/models/all_request.dart';
 import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
 import 'package:freeland/app/notifications/infrastructure/repo/notification_repository_impl.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_event.dart';
@@ -8,7 +9,7 @@ import 'package:freeland/core/bloc_status.dart';
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   late final NotificationRepositoryImpl _notificationRepositoryImpl;
   List<NotificationDto> notification = [];
-  List<NotificationDto> requests = [];
+  List<AllRequest> requests = [];
   bool isConnect=false;
 
   NotificationBloc(NotificationRepositoryImpl notificationRepositoryImpl)
@@ -42,8 +43,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
                 (left) => emit(state.copyWith(
                 AllrequestStatus: BlocStatus.fail(error: left))),
                 (right) => {
-              emit(
-                  state.copyWith(AllrequestStatus: BlocStatus.success())),
+              emit(state.copyWith(AllrequestStatus: BlocStatus.success())),
               requests = right,
             });
       }

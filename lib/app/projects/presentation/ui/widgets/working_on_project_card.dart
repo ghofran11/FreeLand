@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/widgets/text.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class WorkingOnProjectCard extends StatelessWidget {
   final ServiceDto project;
@@ -31,13 +30,13 @@ class WorkingOnProjectCard extends StatelessWidget {
                 SizedBox(
                   width: 15.0.w,
                 ),
-                CircularPercentIndicator(
-                  radius: 25.0,
-                  lineWidth: 3.5,
-                  percent: 0.7,
-                  center: const Text("75%"),
-                  progressColor: AppColors.green,
-                ),
+                // CircularPercentIndicator(
+                //   radius: 25.0,
+                //   lineWidth: 3.5,
+                //   percent: 0.7,
+                //   center: const Text("75%"),
+                //   progressColor: AppColors.green,
+                // ),
               ],
             ),
             Column(

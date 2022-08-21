@@ -16,7 +16,7 @@ class NotificationState {
     return NotificationState(
         notificationStatus: notificationStatus ?? this.notificationStatus,
         responseStatus: responseStatus ?? this.responseStatus,
-      allRequestStatus: AllrequestStatus ?? this.allRequestStatus
+      allRequestStatus: AllrequestStatus ?? allRequestStatus
     );
   }
   @override

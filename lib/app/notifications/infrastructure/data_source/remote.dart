@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:freeland/app/notifications/infrastructure/models/all_request.dart';
 import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
 import 'package:freeland/app/notifications/infrastructure/models/send_response_params.dart';
 import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
@@ -20,11 +21,11 @@ class NotificationRemote{
     });
   }
 
-  Future<List<NotificationDto>> fetchAllRequest() async {
-    return throwDioException<List<NotificationDto>>(() async {
+  Future<List<AllRequest>> fetchAllRequest() async {
+    return throwDioException<List<AllRequest>>(() async {
       late final Response response;
       response = await _dio.get(AppUri.fetchAllRequest);
-      var requests = NotificationFromJson(response.data);
+      var requests = RequestFromJson(response.data);
       return requests;
     });
   }

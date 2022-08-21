@@ -1,6 +1,7 @@
  import 'package:either_dart/src/either.dart';
 import 'package:freeland/app/notifications/domain/repos/notification_repository.dart';
 import 'package:freeland/app/notifications/infrastructure/data_source/remote.dart';
+import 'package:freeland/app/notifications/infrastructure/models/all_request.dart';
 import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
 import 'package:freeland/app/notifications/infrastructure/models/send_response_params.dart';
 import 'package:freeland/app/profile/infrastructur/models/sendConnectionParams.dart';
@@ -25,9 +26,9 @@ class NotificationRepositoryImpl extends NotificationRepository{
   }
 
   @override
-  Future<Either<String, List<NotificationDto>>> fetchAllRequest() {
-    return throwAppException<List<NotificationDto>>(() async {
-      final List<NotificationDto> requests = await remote.fetchAllNotifications();
+  Future<Either<String, List<AllRequest>>> fetchAllRequest() {
+    return throwAppException<List<AllRequest>>(() async {
+      final List<AllRequest> requests = await remote.fetchAllRequest();
       return (requests);
     });
   }

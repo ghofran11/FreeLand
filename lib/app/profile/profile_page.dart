@@ -43,163 +43,149 @@ class ProfilePage extends StatelessWidget {
         create: (context) =>
             getIt<ProfileBloc>()..add(AnotherProfileFetched(id)),
         child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  context.pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.primary,
+                )),
+          ),
           body: BlocConsumer<ProfileBloc, ProfileState>(
             listener: (context, state) {
-              // TODO: implement listener
+              if (state.connectStatus.isFail()) {
+                BotToast.showText(
+                    text: state.connectStatus.error ??
+                        AppStrings.defaultErrorMsg);
+              }
+              if (state.connectStatus.isSuccess()) {
+                BotToast.showText(text: AppStrings.defaultSuccessMsg);
+              }
             },
             builder: (context, state) {
-              if (state.profileStatus.isSuccess()) {
-                return Scaffold(
-                    appBar: AppBar(
-                      leading: IconButton(
-                          onPressed: () {
-                            context.pop();
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primary,
+              if (state.profileStatus.isSuccess() && state.profile != null) {
+                final profile = state.profile!;
+                if (state.profileStatus.isSuccess()) {
+                  return ListView(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.symmetric(
+                        vertical: verticalAppPadding.h,
+                        horizontal: horizontalAppPadding.w),
+                    children: [
+                      const ProfileImage(),
+                      Padding(
+                        padding: EdgeInsets.all(8.0.r),
+                        child: CustomText.titleLarge(
+                          profile.fullName,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      if (profile.bio != null)
+                        Padding(
+                          padding: EdgeInsets.all(8.0.r),
+                          child: CustomText.bodyLarge(
+                            profile.bio!,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      Builder(
+                        builder: (context) {
+                          return ElevatedButton(
+                              onPressed: () {
+                                print('test ya ghofran plz be clam');
+                                getIt<ProfileBloc>().add(SendConnect(
+                                    SendConnectionParam(userId: id, status: 1)));
+                              },
+                              child: CustomText.bodyMedium(
+                                "Connect",
+                                style: TextStyle(
+                                    color: Theme.of(context).colorScheme.onPrimary),
+                              ));
+                        }
+                      ),
+                      SizedBox(
+                        height: 8.0.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          StatisticsWidget(
+                            color: AppColors.green,
+                            child: const FaIcon(
+                              FontAwesomeIcons.listCheck,
+                              color: AppColors.green,
+                            ),
+                            title: profile.numOfCompletedProjects.toString(),
+                          ),
+                          StatisticsWidget(
+                            color: AppColors.blueAccent2,
+                            child: const FaIcon(
+                              FontAwesomeIcons.solidCircleUser,
+                              color: AppColors.blueAccent2,
+                            ),
+                            title: profile.numOfCompletedProjects.toString(),
+                          ),
+                          StatisticsWidget(
+                            color: AppColors.yellow,
+                            child: const FaIcon(
+                              FontAwesomeIcons.solidStar,
+                              color: AppColors.yellow,
+                            ),
+                            title: profile.evalution.toString(),
+                          ),
+                        ],
+                      ),
+                      Wrap(
+                          spacing: 4.0.w,
+                          alignment: WrapAlignment.center,
+                          children: List.generate(
+                            state.profile!.careerDtos.length,
+                            (index) => Chip(
+                              label: CustomText.bodyMedium(
+                                  state.profile!.careerDtos[index].name),
+                            ),
                           )),
-                    ),
-                    body: Builder(
-                      builder: (context) {
-                        final profile = state.profile!;
-                        if (state.profileStatus.isSuccess()) {
-                          return ListView(
-                            physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.symmetric(
-                                vertical: verticalAppPadding.h,
-                                horizontal: horizontalAppPadding.w),
-                            children: [
-                              const ProfileImage(),
-                              Padding(
-                                padding: EdgeInsets.all(8.0.r),
-                                child: CustomText.titleLarge(
-                                  profile.fullName,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              if (profile.bio != null)
-                                Padding(
-                                  padding: EdgeInsets.all(8.0.r),
-                                  child: CustomText.bodyLarge(
-                                    profile.bio!,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              BlocConsumer<ProfileBloc,ProfileState>(
-                                listener: (context, state) {
-                                  if(state.connectStatus.isFail()){
-                                    BotToast.showText(
-                                        text: state.connectStatus.error ??
-                                            AppStrings.defaultErrorMsg);
-                                  }
-                                  if(state.connectStatus.isSuccess()){
-                                    BotToast.showText(
-                                        text:
-                                            AppStrings.defaultSuccessMsg);
-                                  }
-                                },
-                                builder: (context, state) {
-                                  return ElevatedButton(
-                                      onPressed: () {
-                                        getIt<ProfileBloc>()
-                                            .add(SendConnect(SendConnectionParam(userId: id,status: 1)));
-                                      },
-                                      child: CustomText.bodyMedium(
-                                        "Connect",
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary),
-                                      ));
-                                },
-                              ),
-                              SizedBox(
-                                height: 8.0.h,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  StatisticsWidget(
-                                    color: AppColors.green,
-                                    child: const FaIcon(
-                                      FontAwesomeIcons.listCheck,
-                                      color: AppColors.green,
-                                    ),
-                                    title: profile.numOfCompletedProjects
-                                        .toString(),
-                                  ),
-                                  StatisticsWidget(
-                                    color: AppColors.blueAccent2,
-                                    child: const FaIcon(
-                                      FontAwesomeIcons.solidCircleUser,
-                                      color: AppColors.blueAccent2,
-                                    ),
-                                    title: profile.numOfCompletedProjects
-                                        .toString(),
-                                  ),
-                                  StatisticsWidget(
-                                    color: AppColors.yellow,
-                                    child: const FaIcon(
-                                      FontAwesomeIcons.solidStar,
-                                      color: AppColors.yellow,
-                                    ),
-                                    title: profile.evalution.toString(),
-                                  ),
-                                ],
-                              ),
-                              Wrap(
-                                  spacing: 4.0.w,
-                                  alignment: WrapAlignment.center,
-                                  children: List.generate(
-                                    state.profile!.careerDtos.length,
-                                    (index) => Chip(
-                                      label: CustomText.bodyMedium(state
-                                          .profile!.careerDtos[index].name),
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: 12.0.h,
-                              ),
-                              ProfileProjectsSection(
-                                services: profile.serviceDtos,
-                                isMe: false,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 12.0.h),
-                                child: const Divider(color: AppColors.black),
-                              ),
-                              ProfilePortfolioSection(
-                                works: profile.workDtos,
-                                isMe: false,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 12.0.h),
-                                child: const Divider(color: AppColors.black),
-                              ),
-                              ProfileCareerSection(
-                                careers: profile.careerDtos,
-                                isMe: false,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 12.0.h),
-                                child: const Divider(color: AppColors.black),
-                              ),
-                              ProfileEducationSection(
-                                isMe: false,
-                                courses: profile.educationDtos,
-                              ),
-                            ],
-                          );
-                        }
-                        if (state.profileStatus.isFail()) {
-                          return Text(state.profileStatus.error ??
-                              AppStrings.defaultErrorMsg);
-                        }
-                        return const LoadingProgress();
-                      },
-                    ));
+                      SizedBox(
+                        height: 12.0.h,
+                      ),
+                      ProfileProjectsSection(
+                        services: profile.serviceDtos,
+                        isMe: false,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 12.0.h),
+                        child: const Divider(color: AppColors.black),
+                      ),
+                      ProfilePortfolioSection(
+                        works: profile.workDtos,
+                        isMe: false,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 12.0.h),
+                        child: const Divider(color: AppColors.black),
+                      ),
+                      ProfileCareerSection(
+                        careers: profile.careerDtos,
+                        isMe: false,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 12.0.h),
+                        child: const Divider(color: AppColors.black),
+                      ),
+                      ProfileEducationSection(
+                        isMe: false,
+                        courses: profile.educationDtos,
+                      ),
+                    ],
+                  );
+                }
+                if (state.profileStatus.isFail()) {
+                  return Text(
+                      state.profileStatus.error ?? AppStrings.defaultErrorMsg);
+                }
+                return const LoadingProgress();
               }
 
               if (state.profileStatus.isFail()) {
