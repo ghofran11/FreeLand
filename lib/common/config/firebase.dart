@@ -40,7 +40,6 @@ class DefaultFirebaseOptions {
     );
   }
 
-  ///ToDo
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCC1EXTjmGYXAW8qJlFXwUDLhEabEkh3cs',
     appId: '1:569088224038:android:3bdc6e66b756e39794afe7',

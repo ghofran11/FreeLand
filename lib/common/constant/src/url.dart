@@ -5,6 +5,7 @@ class AppUri {
   static const countryFetched = "Country/GetAll";
   static const categoryFetched = "Category/GetAll";
   static const serviceFetched = "Home/App/GetServices";
+  static const myServiceFetched = "Service/App/GetMyServices";
   static const sendOffer = "Offer/App/Create";
   static const sendComment = "Comment/App/Create";
   static const userFetched = "Account/App/GetUsers";

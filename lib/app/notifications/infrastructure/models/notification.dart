@@ -2,10 +2,10 @@
 //
 //     final notificationDto = notificationDtoFromMap(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
+
 List<NotificationDto> NotificationFromJson(List<dynamic> data) {
-  return data.map((e) => NotificationDto.fromJson(e)).toList();
+  return data.map((e) => NotificationDto.fromMap(e)).toList();
 }
 
 class NotificationDto {
@@ -38,23 +38,24 @@ class NotificationDto {
         isRead: isRead ?? this.isRead,
       );
 
-  factory NotificationDto.fromJson(String str) => NotificationDto.fromMap(json.decode(str));
+  factory NotificationDto.fromJson(String str) =>
+      NotificationDto.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory NotificationDto.fromMap(Map<String, dynamic> json) => NotificationDto(
-    id: json["id"],
-    title: json["title"],
-    body: json["body"],
-    date: DateTime.parse(json["date"]),
-    isRead: json["isRead"],
-  );
+        id: json["id"],
+        title: json["title"],
+        body: json["body"],
+        date: DateTime.parse(json["date"]),
+        isRead: json["isRead"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "id": id,
-    "title": title,
-    "body": body,
-    "date": date.toIso8601String(),
-    "isRead": isRead,
-  };
+        "id": id,
+        "title": title,
+        "body": body,
+        "date": date.toIso8601String(),
+        "isRead": isRead,
+      };
 }

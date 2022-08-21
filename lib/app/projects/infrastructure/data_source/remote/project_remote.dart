@@ -67,7 +67,7 @@ class ProjectRemote {
     return throwDioException<List<ServiceDto>>(() async {
       late final Response response;
       response =
-          await _dio.get(AppUri.serviceFetched, queryParameters: {'type': 2});
+          await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 2});
       var services = serviceFromJson(response.data);
       // var services = [
       //   ServiceDto(
@@ -89,7 +89,7 @@ class ProjectRemote {
     return throwDioException<List<ServiceDto>>(() async {
       late final Response response;
       response =
-          await _dio.get(AppUri.serviceFetched, queryParameters: {'type': 3});
+          await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 3});
       var services = serviceFromJson(response.data);
       // var services = [
       //   ServiceDto(
@@ -111,7 +111,7 @@ class ProjectRemote {
     return throwDioException<List<ServiceDto>>(() async {
       late final Response response;
       response =
-          await _dio.get(AppUri.serviceFetched, queryParameters: {'type': 1});
+          await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 1});
       var services = serviceFromJson(response.data);
 
       return services;

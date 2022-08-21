@@ -96,7 +96,7 @@ class MyAppState extends State<MyApp> {
       try {
         await getIt<FirebaseNotificationService>()
             .setUpFirebase()
-            .timeout(const Duration(seconds: 4), onTimeout: () {
+            .timeout(const Duration(seconds: 15), onTimeout: () {
           completer.complete();
         });
         getIt<FirebaseNotificationService>().getToken().then((value) {
