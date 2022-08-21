@@ -93,8 +93,9 @@ class ProfilePage extends StatelessWidget {
                       Builder(builder: (context) {
                         return ElevatedButton(
                             onPressed: () {
+
                               print('test ya ghofran plz be clam');
-                              getIt<ProfileBloc>().add(SendConnect(
+                           context.read<ProfileBloc>().add(SendConnect(
                                   SendConnectionParam(userId: id, status: 1)));
                             },
                             child: CustomText.bodyMedium(
