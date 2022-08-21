@@ -103,7 +103,7 @@ class NotificationsPage extends StatelessWidget {
                                          maxLines: 2,
                                          textOverflow: TextOverflow.ellipsis),
                                      trailing: Text(
-                                         timeago.format(minAgo,
+                                         timeago.format(notifications[index].date,
                                              locale: 'en_short'),
                                          style: const TextStyle(fontSize: 11)),
                                    );
