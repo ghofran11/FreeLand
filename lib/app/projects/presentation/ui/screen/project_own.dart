@@ -17,11 +17,10 @@ import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class ProjectOwn extends StatelessWidget {
-  ProjectOwn({Key? key,required this.idProject}) : super(key: key);
-final String idProject;
+  ProjectOwn({Key? key, required this.idProject}) : super(key: key);
+  final String idProject;
   static Page pageBuilder(BuildContext context, GoRouterState state) {
     return MaterialPage<void>(
       key: state.pageKey,
@@ -31,278 +30,323 @@ final String idProject;
     );
   }
 
-
-
   static const routePath = 'projectOwn_screen';
   static const routeName = 'projectOwn_screen';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create:(context)=> getIt<ProjectBloc>()..add(FetchDetailProjects(idProject: idProject)),
-        child: SingleChildScrollView(
-          child: BlocConsumer<ProjectBloc,ProjectState>(
-            listener: (context, state){
+      body: SafeArea(
+        child: BlocProvider(
+          create: (context) => getIt<ProjectBloc>()
+            ..add(FetchDetailProjects(idProject: idProject)),
+          child: BlocConsumer<ProjectBloc, ProjectState>(
+            listener: (context, state) {
               if (state.fetchDetailProject.isFail()) {
                 BotToast.showText(
                     text: state.fetchDetailProject.error ??
                         AppStrings.defaultErrorMsg);
               }
             },
-            builder: (context, state){
+            builder: (context, state) {
               if (state.fetchDetailProject.isSuccess()) {
-              final detailProject=context.read<ProjectBloc>().detailServices;
-              return Column(
-                children: [
-                  Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                final detailProject =
+                    context.read<ProjectBloc>().detailServices;
+                return ListView(
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                height: MediaQuery.of(context).size.height / 4,
+                                width: MediaQuery.of(context).size.width,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: CachedNetworkImageProvider(
+                                            "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft:
+                                            Radius.circular(buttonBorderRadius),
+                                        bottomRight: Radius.circular(
+                                            buttonBorderRadius)))),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 18, vertical: 10),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomText.titleMedium(
+                                              detailProject.name),
+                                          CustomText.bodySmall(
+                                            detailProject.nameOwner,
+                                            style:
+                                                TextStyle(color: Colours.grey),
+                                          ),
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      Row(
+                                        children: [
+                                          CustomText.labelMedium(
+                                            detailProject.minPrice.toString(),
+                                            style: const TextStyle(
+                                                color: AppColors.primary),
+                                          ),
+                                          const CurrencySymbol(
+                                            color: AppColors.primary,
+                                          ),
+                                          const CustomText.labelMedium(' - '),
+                                          CustomText.labelMedium(
+                                            detailProject.maxPrice.toString(),
+                                            style: const TextStyle(
+                                                color: AppColors.primary),
+                                          ),
+                                          const CurrencySymbol(
+                                            color: AppColors.primary,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 15.0.h,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 5.0.h,
+                                      ),
+                                      AppReadMore(
+                                          text: detailProject.description)
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              context.pop();
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: AppColors.primary,
+                            )),
+                      ],
+                    ),
+                    SingleChildScrollView(
+                      child: Column(
                         children: [
-                          Container(
-                              height: MediaQuery.of(context).size.height / 4,
-                              width: MediaQuery.of(context).size.width,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: CachedNetworkImageProvider(
-                                          "https://www.mindinventory.com/blog/wp-content/uploads/2021/08/app-ui-ux-design.png")),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(buttonBorderRadius),
-                                      bottomRight:
-                                      Radius.circular(buttonBorderRadius)))),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 18, vertical: 10),
+                          DefaultTabController(
+                            length: 2,
                             child: Column(
                               children: [
-                                Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children:  [
-                                        CustomText.titleMedium(detailProject.name),
-                                        CustomText.bodySmall(
-                                          detailProject.nameOwner,
-                                          style: TextStyle(color: Colours.grey),
-                                        ),
-                                      ],
+                                const TabBar(
+                                  tabs: [
+                                    Tab(
+                                      text: 'Offer',
                                     ),
-                                    const Spacer(),
-                                     Row(
-                              children: [
-                                CustomText.labelMedium(detailProject.minPrice.toString() ,style:const TextStyle(color: AppColors.primary),),
-                                const CurrencySymbol(color: AppColors.primary,),
-                                const CustomText.labelMedium(' - ' ),
-                                CustomText.labelMedium(detailProject.maxPrice. toString(),style:const TextStyle(color: AppColors.primary),),
-                                const CurrencySymbol(color: AppColors.primary,),
-
-                              ],
-                            ),
+                                    Tab(
+                                      text: 'Comment',
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 15.0.h,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: 5.0.h,
-                                    ),
-                                     AppReadMore(
-                                        text:
-                                        detailProject.description)
-                                  ],
-                                ),
+                                  height: 300,
+                                  child: TabBarView(
+                                    children: [
+                                      ListView.separated(
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return ListTile(
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    elevation: 25,
+                                                    title: Text(detailProject
+                                                        .commentDtos![index]
+                                                        .offerName),
+                                                    content: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: <Widget>[
+                                                        Text(
+                                                          detailProject
+                                                              .offerDtos![index]
+                                                              .text,
+                                                          style: const TextStyle(
+                                                              color: AppColors
+                                                                  .grey2,
+                                                              fontSize: 14),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10.0.h,
+                                                        ),
+                                                        const Text(
+                                                          'Would you like to approve of this message?',
+                                                          style: TextStyle(
+                                                              color: AppColors
+                                                                  .primary,
+                                                              fontSize: 18),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        child: const Text(
+                                                          'Approve',
+                                                          style: TextStyle(
+                                                              color: AppColors
+                                                                  .primary),
+                                                        ),
+                                                        onPressed: () {
+                                                          context.pushNamed(
+                                                              ContractScreen
+                                                                  .routeName);
+                                                        },
+                                                      ),
+                                                      TextButton(
+                                                        child: const Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                                color: AppColors
+                                                                    .grey2)),
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            leading: GestureDetector(
+                                              onTap: () async {
+                                                // Display the image in large form.
+                                              },
+                                              child: Container(
+                                                height: 50.0,
+                                                width: 50.0,
+                                                decoration: const BoxDecoration(
+                                                    color: Colors.blue,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                50))),
+                                                child: const CircleAvatar(
+                                                    radius: 50,
+                                                    backgroundImage: NetworkImage(
+                                                        "https://picsum.photos/300/30")),
+                                              ),
+                                            ),
+                                            title: const Text(
+                                              'Ahmad Ahmad',
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            subtitle: CustomText.bodySmall(
+                                                detailProject
+                                                    .offerDtos![index].text,
+                                                style: const TextStyle(
+                                                  color: AppColors.grey2,
+                                                ),
+                                                maxLines: 1,
+                                                textOverflow:
+                                                    TextOverflow.ellipsis),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                          width: 7.0.w,
+                                        ),
+                                        itemCount:
+                                            detailProject.offerDtos!.length,
+                                        physics: const BouncingScrollPhysics(),
+                                      ),
+                                      ListView.separated(
+                                        separatorBuilder: (context, index) {
+                                          return const Divider();
+                                        },
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                            leading: GestureDetector(
+                                              onTap: () async {
+                                                // Display the image in large form.
+                                              },
+                                              child: Container(
+                                                height: 50.0,
+                                                width: 50.0,
+                                                decoration: const BoxDecoration(
+                                                    color: Colors.blue,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                50))),
+                                                child: const CircleAvatar(
+                                                    radius: 50,
+                                                    backgroundImage: NetworkImage(
+                                                        "https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uJTIwbG9va2luZyUyMGF0JTIwY2FtZXJhfGVufDB8fDB8fA%3D%3D&w=1000&q=80")),
+                                              ),
+                                            ),
+                                            title: Text(
+                                              detailProject.commentDtos![index]
+                                                  .senderName,
+                                              style:
+                                                  const TextStyle(fontSize: 15),
+                                            ),
+                                            subtitle: CustomText.bodySmall(
+                                                detailProject
+                                                    .commentDtos![index].text,
+                                                style: const TextStyle(
+                                                  color: AppColors.grey2,
+                                                ),
+                                                maxLines: 1,
+                                                textOverflow:
+                                                    TextOverflow.ellipsis),
+                                          );
+                                        },
+                                        itemCount:
+                                            detailProject.commentDtos!.length,
+                                      ),
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ),
                         ],
                       ),
-                      IconButton(
-                          onPressed: () {
-                            context.pop();
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primary,
-                          )),
-                    ],
-                  ),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        DefaultTabController(
-                          length: 2,
-                          child: Column(
-                            children: [
-                              const TabBar(
-                                tabs: [
-                                  Tab(
-                                    text: 'Offer',
-                                  ),
-                                  Tab(
-                                    text: 'Comment',
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 300,
-                                child: TabBarView(
-                                  children: [
-                                    ListView.separated(
-                                      itemBuilder: (BuildContext context, int index) {
-                                        return ListTile(
-                                          onTap: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  elevation: 25,
-                                                  title:  Text(detailProject.commentDtos![index].offerName),
-                                                  content: Column(
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                    children: <Widget>[
-                                                       Text(
-                                                        detailProject.offerDtos![index].text,
-                                                        style:const TextStyle(
-                                                            color: AppColors.grey2,
-                                                            fontSize: 14),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10.0.h,
-                                                      ),
-                                                      const Text(
-                                                        'Would you like to approve of this message?',
-                                                        style: TextStyle(
-                                                            color: AppColors.primary,
-                                                            fontSize: 18),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: const Text(
-                                                        'Approve',
-                                                        style: TextStyle(
-                                                            color: AppColors.primary),
-                                                      ),
-                                                      onPressed: () {
-                                                        context.pushNamed(ContractScreen.routeName);
-                                                      },
-                                                    ),
-                                                    TextButton(
-                                                      child: const Text('Cancel',
-                                                          style: TextStyle(
-                                                              color:
-                                                              AppColors.grey2)),
-                                                      onPressed: () {
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                          leading: GestureDetector(
-                                            onTap: () async {
-                                              // Display the image in large form.
-                                            },
-                                            child: Container(
-                                              height: 50.0,
-                                              width: 50.0,
-                                              decoration: const BoxDecoration(
-                                                  color: Colors.blue,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(50))),
-                                              child: const CircleAvatar(
-                                                  radius: 50,
-                                                  backgroundImage: NetworkImage(
-                                                      "https://picsum.photos/300/30")),
-                                            ),
-                                          ),
-                                          title: const Text(
-                                            'Ahmad Ahmad',
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                          subtitle:  CustomText.bodySmall(
-                                            detailProject.offerDtos![index].text,
-                                              style:const TextStyle(
-                                                color: AppColors.grey2,
-                                              ),
-                                              maxLines: 1,
-                                              textOverflow: TextOverflow.ellipsis),
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) => SizedBox(
-                                        width: 7.0.w,
-                                      ),
-                                      itemCount: detailProject.offerDtos!.length,
-                                      physics: const BouncingScrollPhysics(),
-                                    ),
-                                    ListView.separated(
-                                      separatorBuilder: (context, index) {
-                                        return const Divider();
-                                      },
-                                      itemBuilder: (context,index){
-                                        return ListTile(
-                                          leading: GestureDetector(
-                                            onTap: () async {
-                                              // Display the image in large form.
-                                            },
-                                            child: Container(
-                                              height: 50.0,
-                                              width: 50.0,
-                                              decoration: const BoxDecoration(
-                                                  color: Colors.blue,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(50))),
-                                              child: const CircleAvatar(
-                                                  radius: 50,
-                                                  backgroundImage: NetworkImage(
-                                                      "https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uJTIwbG9va2luZyUyMGF0JTIwY2FtZXJhfGVufDB8fDB8fA%3D%3D&w=1000&q=80")),
-                                            ),
-                                          ),
-                                          title:  Text(
-                                            detailProject.commentDtos![index].senderName,
-                                            style:const TextStyle(fontSize: 15),
-                                          ),
-                                          subtitle:  CustomText.bodySmall(
-                                              detailProject.commentDtos![index].text,
-                                              style:const TextStyle(
-                                                color: AppColors.grey2,
-                                              ),
-                                              maxLines: 1,
-                                              textOverflow: TextOverflow.ellipsis),
-                                        );
-                                      },
-                                      itemCount:detailProject.commentDtos!.length,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
                     ),
-                  ),
-                ],
-              );
+                  ],
+                );
               }
               if (state.fetchDetailProject.isFail()) {
-                return Text(state.fetchDetailProject.error ??
-                    AppStrings.defaultErrorMsg);
+                return Center(
+                  child: Text(state.fetchDetailProject.error ??
+                      AppStrings.defaultErrorMsg),
+                );
               }
-              return const LoadingProgress();
+              return Center(child: const LoadingProgress());
             },
-
           ),
         ),
       ),

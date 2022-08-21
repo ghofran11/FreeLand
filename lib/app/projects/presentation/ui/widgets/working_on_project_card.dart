@@ -46,13 +46,7 @@ class WorkingOnProjectCard extends StatelessWidget {
                 SizedBox(
                   height: 5.0.h,
                 ),
-                //ToDo:
-                Row(
-                  children: const [
-                    CustomText.titleMedium('Level:  '),
-                    Icon(Icons.looks_two_rounded, color: AppColors.primary),
-                  ],
-                ),
+                CustomText.titleMedium('Level:  ${project.currentPart ?? 1}'),
                 SizedBox(
                   height: 5.0.h,
                 ),

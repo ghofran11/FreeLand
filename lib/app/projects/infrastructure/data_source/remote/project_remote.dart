@@ -50,8 +50,6 @@ class ProjectRemote {
     required AddProjectParams params,
   }) async {
     return throwDioException(() async {
-      final x = await params.toJson();
-      print(x);
       await _dio.post(AppUri.addProject, data: await params.formData());
     });
   }
@@ -67,22 +65,22 @@ class ProjectRemote {
   Future<List<ServiceDto>> fetchMyPendingServices() async {
     return throwDioException<List<ServiceDto>>(() async {
       late final Response response;
-      //response =
-       //   await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 3});
-    //  var services = serviceFromJson(response.data);
-      var services = [
-        ServiceDto(
-            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            name: "name",
-            ownerId: "ownerId",
-            nameOwner: "nameOwner",
-            description: "description",
-            evalution: 5,
-            serviceType: 1,
-            minPrice: 20,
-            maxPrice: 200,
-            deadLine: null)
-      ];
+      response =
+          await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 3});
+      var services = serviceFromJson(response.data);
+      // var services = [
+      //   ServiceDto(
+      //       id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      //       name: "name",
+      //       ownerId: "ownerId",
+      //       nameOwner: "nameOwner",
+      //       description: "description",
+      //       evalution: 5,
+      //       serviceType: 1,
+      //       minPrice: 20,
+      //       maxPrice: 200,
+      //       deadLine: null)
+      // ];
       return services;
     });
   }
@@ -90,22 +88,22 @@ class ProjectRemote {
   Future<List<ServiceDto>> fetchMyWorkingOnServices() async {
     return throwDioException<List<ServiceDto>>(() async {
       late final Response response;
-      //response =
-       //   await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 3});
-      // var services = serviceFromJson(response.data);
-      var services = [
-        ServiceDto(
-            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            name: "name",
-            ownerId: "ownerId",
-            nameOwner: "nameOwner",
-            description: "description",
-            evalution: 5,
-            serviceType: 1,
-            minPrice: 20,
-            maxPrice: 200,
-            deadLine: null)
-      ];
+      response =
+          await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 3});
+      var services = serviceFromJson(response.data);
+      // var services = [
+      //   ServiceDto(
+      //       id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      //       name: "name",
+      //       ownerId: "ownerId",
+      //       nameOwner: "nameOwner",
+      //       description: "description",
+      //       evalution: 5,
+      //       serviceType: 1,
+      //       minPrice: 20,
+      //       maxPrice: 200,
+      //       deadLine: null)
+      // ];
       return services;
     });
   }
@@ -113,21 +111,22 @@ class ProjectRemote {
   Future<List<ServiceDto>> fetchMyPostedServices() async {
     return throwDioException<List<ServiceDto>>(() async {
       late final Response response;
-    //  response =
-       //   await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 3});
-      var services = [
-        ServiceDto(
-            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            name: "name",
-            ownerId: "ownerId",
-            nameOwner: "nameOwner",
-            description: "description",
-            evalution: 5,
-            serviceType: 1,
-            minPrice: 20,
-            maxPrice: 200,
-            deadLine: null)
-      ];
+      response =
+          await _dio.get(AppUri.myServiceFetched, queryParameters: {'type': 3});
+      var services = serviceFromJson(response.data);
+      // var services = [
+      //   ServiceDto(
+      //       id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      //       name: "name",
+      //       ownerId: "ownerId",
+      //       nameOwner: "nameOwner",
+      //       description: "description",
+      //       evalution: 5,
+      //       serviceType: 1,
+      //       minPrice: 20,
+      //       maxPrice: 200,
+      //       deadLine: null)
+      // ];
       return services;
     });
   }
@@ -149,12 +148,13 @@ class ProjectRemote {
     });
   }
 
-  Future<DetailServiceDto> fetchDetailServices(String id)async{
+  Future<DetailServiceDto> fetchDetailServices(String id) async {
     return throwDioException<DetailServiceDto>(() async {
       late final Response response;
-      response = await _dio.get(AppUri.fetchDetailProject,queryParameters: {'type':id});
-      var detailServiceDto = DetailServiceFromJson(response.data);
-      var x=detailServiceDto[0];
+      response = await _dio
+          .get(AppUri.fetchDetailProject, queryParameters: {'id': id});
+      var detailServiceDto = DetailServiceDto.fromMap(response.data);
+      var x = detailServiceDto;
       return x;
     });
   }

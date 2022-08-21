@@ -39,6 +39,7 @@ class AddContract extends ProjectEvent {
 
   const AddContract({required this.freelancerId, required this.projectId});
 }
+
 class FetchDetailProjects extends ProjectEvent {
   String idProject;
   FetchDetailProjects({required this.idProject});

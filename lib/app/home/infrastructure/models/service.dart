@@ -127,6 +127,8 @@ class ServiceDto {
   int? numOfOffer;
   int? averageOfPrice;
   List<DocumentDto?>? documentDto;
+  int? currentPart;
+  num? completionRate;
 
   ServiceDto(
       {required this.id,
@@ -140,6 +142,8 @@ class ServiceDto {
       required this.evalution,
       this.serviceType,
       this.minPrice,
+      this.completionRate,
+      this.currentPart,
       this.maxPrice,
       this.numOfOffer,
       this.averageOfPrice,
@@ -161,6 +165,8 @@ class ServiceDto {
     maxPrice = json['maxPrice'];
     numOfOffer = json['numOfOffer'];
     averageOfPrice = json['averageOfPrice'];
+    completionRate = json['completionRate'];
+    currentPart = json['currentPart'];
     if (json['documentDto'] != null) {
       documentDto = <DocumentDto>[];
       json['documentDto'].forEach((v) {

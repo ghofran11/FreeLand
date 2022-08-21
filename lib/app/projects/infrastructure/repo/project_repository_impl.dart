@@ -86,11 +86,12 @@ class ProjectRepositoryImpl extends ProjectRepository {
   }
 
   @override
-  Future<Either<String,DetailServiceDto>> fetchDetailServices({required String projectId}) {
+  Future<Either<String, DetailServiceDto>> fetchDetailServices(
+      {required String projectId}) {
     return throwAppException<DetailServiceDto>(() async {
-      final DetailServiceDto detailServiceDto = await remote.fetchDetailServices(projectId);
+      final DetailServiceDto detailServiceDto =
+          await remote.fetchDetailServices(projectId);
       return (detailServiceDto);
     });
   }
-
 }

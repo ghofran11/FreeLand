@@ -29,19 +29,18 @@ class ProjectState {
       this.fetchMyProjectsStatus = const BlocStatus(),
       this.projectSubmission = const BlocStatus()});
 
-  ProjectState copyWith({
-    BlocStatus? offerState,
-    BlocStatus? commentState,
-    BlocStatus? fetchAllCommentState,
-    BlocStatus? projectSubmission,
-    BlocStatus? fetchMyProjectsStatus,
-    BlocStatus? addContractStatus,
-    BlocStatus? partStatus,
-    BlocStatus? fetchDetailProject
-  }) {
+  ProjectState copyWith(
+      {BlocStatus? offerState,
+      BlocStatus? commentState,
+      BlocStatus? fetchAllCommentState,
+      BlocStatus? projectSubmission,
+      BlocStatus? fetchMyProjectsStatus,
+      BlocStatus? addContractStatus,
+      BlocStatus? partStatus,
+      BlocStatus? fetchDetailProject}) {
     return ProjectState(
       partStatus: partStatus ?? this.partStatus,
-      fetchDetailProject: fetchDetailProject?? this.fetchDetailProject,
+      fetchDetailProject: fetchDetailProject ?? this.fetchDetailProject,
       offerSubmission: offerState ?? offerSubmission,
       commentSubmission: commentState ?? commentSubmission,
       fetchAllComment: fetchAllCommentState ?? fetchAllComment,
@@ -80,12 +79,10 @@ class ProjectState {
       minPrice: addProjectForm.control(ProjectBloc.minSalaryKey).value,
       maxPrice: addProjectForm.control(ProjectBloc.maxSalaryKey).value,
       categoriesIds: (addProjectForm.control(ProjectBloc.categoryKey).value
-              as List<CategoryDto>)
+              as List<CategoryDto2>)
           .map((e) => e.id)
           .toList(),
       image: (addProjectForm.control(ProjectBloc.imageKey).value as ImageFile)
-      partStatus: partStatus ?? this.partStatus,
-              as List<CategoryDto2>)
           .image,
     );
   }

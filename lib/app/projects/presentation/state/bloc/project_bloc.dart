@@ -14,7 +14,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   late final ProjectRepositoryImpl _projectRepositoryImpl;
-   late DetailServiceDto detailServices;
+  late DetailServiceDto detailServices;
   var offerForm = FormGroup({
     descKey: FormControl<String>(
       validators: [
@@ -133,14 +133,15 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
                     state.copyWith(addContractStatus: BlocStatus.success())));
       }
 
-      if(event is FetchDetailProjects){
-
+      if (event is FetchDetailProjects) {
         emit(state.copyWith(fetchDetailProject: BlocStatus.loading()));
 
-        (await projectRepositoryImpl.fetchDetailServices(projectId: event.idProject)).fold(
-              (left) => emit(state.copyWith(
-              fetchDetailProject: BlocStatus.fail(error: left))),
-              (right) => {
+        (await projectRepositoryImpl.fetchDetailServices(
+                projectId: event.idProject))
+            .fold(
+          (left) => emit(
+              state.copyWith(fetchDetailProject: BlocStatus.fail(error: left))),
+          (right) => {
             detailServices = right,
             emit(state.copyWith(fetchDetailProject: BlocStatus.success()))
           },
