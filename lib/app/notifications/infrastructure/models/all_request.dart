@@ -5,7 +5,7 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 List<AllRequest> RequestFromJson(List<dynamic> data) {
-  return data.map((e) => AllRequest.fromJson(e)).toList();
+  return data.map((e) => AllRequest.fromMap(e)).toList();
 }
 class AllRequest {
   AllRequest({
@@ -16,7 +16,7 @@ class AllRequest {
 
   final String id;
   final String name;
-  final String imagePath;
+  final String? imagePath;
 
   AllRequest copyWith({
     String? id,

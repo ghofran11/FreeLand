@@ -37,7 +37,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       }
 
       if(event is FetchAllRequestById ){
-        emit(state.copyWith(responseStatus: BlocStatus.loading()));
+        emit(state.copyWith(AllrequestStatus: BlocStatus.loading()));
 
         (await _notificationRepositoryImpl.fetchAllRequest()).fold(
                 (left) => emit(state.copyWith(

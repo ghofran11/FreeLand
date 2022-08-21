@@ -155,52 +155,38 @@ class NotificationsPage extends StatelessWidget {
                                                 BotToast.showText(
                                                     text: state.responseStatus.error ??
                                                         AppStrings.defaultErrorMsg);
-                                                return Row(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    InkWell(
 
-                                                      child: const FaIcon(
-                                                        FontAwesomeIcons.circleCheck,
-                                                        size: 30,
-                                                        color: AppColors.primary,
-                                                      ),
-                                                      onTap: (){
-                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: allRequest[index].id)));
-
-                                                      },
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5.0.h,
-                                                    ),
-                                                    InkWell(
-                                                      child: const FaIcon(
-                                                        FontAwesomeIcons.circleXmark,
-                                                        size: 30,
-                                                        color: AppColors.grey2,
-                                                      ),
-                                                      onTap: (){
-                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id:allRequest[index].id)));
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
                                               }
                                             else  if(state.responseStatus.isSuccess()){
                                                 BotToast.showText(
                                                     text: 'Request approved ');
+                                                return Container();
                                               }
                                               return Row(
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   InkWell(
+
                                                     child: const FaIcon(
                                                       FontAwesomeIcons.circleCheck,
                                                       size: 30,
                                                       color: AppColors.primary,
                                                     ),
                                                     onTap: (){
-
+                                                      _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: allRequest[index].id)));
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5.0.h,
+                                                  ),
+                                                  InkWell(
+                                                    child: const FaIcon(
+                                                      FontAwesomeIcons.circleXmark,
+                                                      size: 30,
+                                                      color: AppColors.grey2,
+                                                    ),
+                                                    onTap: (){
+                                                      _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: false,id:allRequest[index].id)));
                                                     },
                                                   ),
                                                 ],

@@ -32,7 +32,11 @@ class NotificationRemote{
 
   Future<void> connectedResponse({required SendResponseParam param}) async {
     return throwDioException<void>(() async {
+      print('swdsd');
+
+      print(param.toJson());
        await _dio.post(AppUri.connectResponse,data: param.toJson());
+
     });
   }
 }

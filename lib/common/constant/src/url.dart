@@ -41,5 +41,5 @@ class AppUri {
   //toDo
   static const connectResponse = "Connection/App/Response";
   //toDo
-  static const fetchAllRequest = "";
+  static const fetchAllRequest = "Connection/Dash/GetMyRequests";
 }
