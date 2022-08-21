@@ -31,7 +31,7 @@ class PendingProjectCard extends StatelessWidget {
                   children: [
                     //ToDo:
                     CustomText.titleMedium(
-                      project.nameOwner,
+                      project.nameFreeLancer ?? "Test user",
                       style: TextStyle(color: AppColors.primary, fontSize: 14),
                     ),
                     SizedBox(
@@ -54,7 +54,9 @@ class PendingProjectCard extends StatelessWidget {
                       children: [
                         CurrencySymbol(),
                         CustomText.titleMedium(
-                          project.minPrice.toString(),
+                          project.minPrice.toString() +
+                              ' - ' +
+                              project.minPrice.toString(),
                           style:
                               TextStyle(color: AppColors.primary, fontSize: 14),
                         ),

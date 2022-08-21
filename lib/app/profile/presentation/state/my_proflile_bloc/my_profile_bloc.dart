@@ -1,11 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:freeland/app/profile/infrastructur/data_source/profile_remote.dart';
 import 'package:freeland/app/profile/infrastructur/models/my_profile.dart';
 import 'package:freeland/app/profile/infrastructur/repo/profile_repo.dart';
-import 'package:freeland/common/constant/src/url.dart';
-import 'package:freeland/common/network/dio/dio_client.dart';
 import 'package:freeland/core/bloc_status.dart';
+import 'package:freeland/injection/injection.dart';
 import 'package:meta/meta.dart';
 
 part 'my_profile_event.dart';
@@ -18,11 +16,7 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
   /// Do some initiation before close splash and open app
   // final FutureOr<void> Function()? doBeforeOpen;
 
-  final ProfileRepoImpl _repo = ProfileRepoImpl(ProfileRemote(
-    DioClient(
-      AppUri.baseUrlDevelopment + "api/",
-    ),
-  ));
+  final ProfileRepoImpl _repo = getIt<ProfileRepoImpl>();
 
   MyProfileBloc() : super(const MyProfileState()) {
     on<MyProfileEvent>((event, emit) async {

@@ -1,4 +1,5 @@
 import 'package:either_dart/either.dart';
+import 'package:freeland/app/contract/contract_add_param.dart';
 import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
@@ -21,4 +22,6 @@ abstract class ProjectRepository {
   });
 
   Future<Either<String, MyProjects>> fetchMyProjects();
+
+  Future<Either<String, void>> addContract(AddContractParam param);
 }

@@ -35,19 +35,7 @@ class HomeRemote {
       late final Response response;
       response = await _dio.get(AppUri.serviceFetched,
           queryParameters: {'categoryId': categoryId});
-      // var services = serviceFromJson(response.data);
-      var services = [
-        ServiceDto(
-            id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            name: "name",
-            ownerId: "ownerId",
-            nameOwner: "nameOwner",
-            description: "description",
-            evalution: 5,
-            serviceType: 1,
-            minPrice: 20,
-            maxPrice: 200)
-      ];
+      var services = serviceFromJson(response.data);
       return services;
     });
   }
@@ -57,7 +45,7 @@ class HomeRemote {
       late final Response response;
       response = await _dio.get(AppUri.userFetched);
       print(response);
-       var users = userFromJson(response.data);
+      var users = userFromJson(response.data);
 
       return users;
     });

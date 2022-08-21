@@ -73,17 +73,20 @@ class ProjectPage extends StatelessWidget {
                           Row(
                             children: [
                               const CustomText.titleMedium(
-                                'Post projects',
+                                'Posted projects',
                                 style: TextStyle(fontSize: 15),
                               ),
                               const Spacer(),
-                              InkWell(
-                                onTap: () {
-                                  context.pushNamed(AllOwnProject.routeName);
-                                },
-                                child: const CustomText.bodySmall("See All",
-                                    style: TextStyle(color: AppColors.primary)),
-                              )
+                              if (myProjects.posted.isNotEmpty)
+                                InkWell(
+                                  onTap: () {
+                                    context.pushNamed(AllOwnProject.routeName,
+                                        extra: myProjects.posted);
+                                  },
+                                  child: const CustomText.bodySmall("See All",
+                                      style:
+                                          TextStyle(color: AppColors.primary)),
+                                )
                             ],
                           ),
                           SizedBox(height: 10.0.h),
@@ -118,7 +121,6 @@ class ProjectPage extends StatelessWidget {
                           ),
                           const CustomText.titleMedium(
                             'Working On',
-                            style: const TextStyle(),
                           ),
                           SizedBox(height: 5.0.h),
                           myProjects.working.isNotEmpty

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:freeland/app/contract/contract_add_param.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
@@ -11,6 +12,7 @@ import 'package:freeland/common/network/error_handler.dart';
 
 class ProjectRemote {
   final Dio _dio;
+
   ProjectRemote(Dio dio) : _dio = dio;
 
   Future<OfferDto> sendOffer({
@@ -47,7 +49,17 @@ class ProjectRemote {
     required AddProjectParams params,
   }) async {
     return throwDioException(() async {
+      final x = await params.formData();
+      print(x);
       await _dio.post(AppUri.addProject, data: await params.formData());
+    });
+  }
+
+  Future<void> addContract({
+    required AddContractParam params,
+  }) async {
+    return throwDioException(() async {
+      await _dio.post(AppUri.addContract, data: params.toJson());
     });
   }
 

@@ -13,12 +13,14 @@ class ProjectState {
   final BlocStatus commentSubmission;
   final BlocStatus projectSubmission;
   final BlocStatus fetchAllComment;
+  final BlocStatus addContract;
   final BlocStatus fetchMyProjectsStatus;
 
   ProjectState(
       {this.offerSubmission = const BlocStatus(),
       this.commentSubmission = const BlocStatus(),
       this.fetchAllComment = const BlocStatus(),
+      this.addContract = const BlocStatus(),
       this.fetchMyProjectsStatus = const BlocStatus(),
       this.projectSubmission = const BlocStatus()});
 
@@ -28,12 +30,14 @@ class ProjectState {
     BlocStatus? fetchAllCommentState,
     BlocStatus? projectSubmission,
     BlocStatus? fetchMyProjectsStatus,
+    BlocStatus? addContractStatus,
   }) {
     return ProjectState(
       offerSubmission: offerState ?? offerSubmission,
       commentSubmission: commentState ?? commentSubmission,
       fetchAllComment: fetchAllCommentState ?? fetchAllComment,
       projectSubmission: projectSubmission ?? this.projectSubmission,
+      addContract: addContractStatus ?? this.addContract,
       fetchMyProjectsStatus:
           fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
     );

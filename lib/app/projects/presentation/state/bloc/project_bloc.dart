@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freeland/app/contract/contract_add_param.dart';
 import 'package:freeland/app/home/infrastructure/models/category.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
@@ -53,6 +54,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
       categoryKey: FormControl<List<CategoryDto>>(validators: []),
     },
   );
+
   MyProjects? myProjects;
 
   ProjectBloc(ProjectRepositoryImpl projectRepositoryImpl)
@@ -119,6 +121,15 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
           },
         );
       }
+      if (event is AddContract) {
+        emit(state.copyWith(addContractStatus: BlocStatus.loading()));
+        (await _projectRepositoryImpl.addContract(getContractParams(event)))
+            .fold(
+                (left) => emit(state.copyWith(
+                    addContractStatus: BlocStatus.fail(error: left))),
+                (right) => emit(
+                    state.copyWith(addContractStatus: BlocStatus.success())));
+      }
     });
   }
 
@@ -145,4 +156,56 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   static const maxSalaryKey = "maxSalaryKey";
   static const imageKey = "imageKey";
   static const categoryKey = "categoryKey";
+
+  ///Contract
+  ///
+  final contractForm = FormGroup(
+    {
+      'desc': FormControl<String>(validators: [
+        Validators.required,
+      ]),
+      'levels': FormControl<int>(validators: [
+        Validators.required,
+        Validators.number,
+      ]),
+      'deadline_support': FormControl<DateTime>(validators: [
+        Validators.required,
+      ]),
+      'deadline': FormControl<DateTime>(validators: [
+        Validators.required,
+      ]),
+      'price': FormControl<int>(validators: [
+        Validators.required,
+        Validators.number,
+      ]),
+    },
+  );
+
+  // an array of groups
+  final levelsForm = FormGroup({'levelsArray': FormArray([])});
+
+  getContractParams(AddContract event) {
+    return AddContractParam(
+      serviceId: event.projectId,
+      freeLancerId: event.freelancerId,
+      description: contractForm.control('desc').value as String,
+      deadLineSupport:
+          contractForm.control('deadline_support').value as DateTime,
+      totalPrice: contractForm.control('price').value as int,
+      deadLine: contractForm.control('deadline').value as DateTime,
+      partDtos: List.generate(
+          (levelsForm.control('levelsArray') as FormArray).controls.length,
+          (index) {
+        final FormGroup thisLeveFormGroup =
+            (levelsForm.control('levelsArray') as FormArray).controls[index]
+                as FormGroup;
+        return PartDto(
+          order: thisLeveFormGroup.control('order').value as int,
+          deadLine: thisLeveFormGroup.control('deadLine').value as DateTime?,
+          price: thisLeveFormGroup.control('price').value as int,
+          description: thisLeveFormGroup.control('description').value as String,
+        );
+      }),
+    );
+  }
 }

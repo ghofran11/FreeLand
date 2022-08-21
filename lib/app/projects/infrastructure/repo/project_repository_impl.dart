@@ -1,4 +1,5 @@
 import 'package:either_dart/src/either.dart';
+import 'package:freeland/app/contract/contract_add_param.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
@@ -58,6 +59,13 @@ class ProjectRepositoryImpl extends ProjectRepository {
   Future<Either<String, void>> addProject({required AddProjectParams params}) {
     return throwAppException<void>(() async {
       await remote.addProject(params: params);
+    });
+  }
+
+  @override
+  Future<Either<String, void>> addContract(AddContractParam param) async {
+    return throwAppException<void>(() async {
+      await remote.addContract(params: param);
     });
   }
 }

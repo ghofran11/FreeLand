@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
+import 'package:freeland/common/utils/date_utils.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -35,6 +36,7 @@ class WorkingOnProjectCard extends StatelessWidget {
                   radius: 25.0,
                   lineWidth: 3.5,
                   percent: 0.7,
+                  //ToDo:
                   center: const Text("75%"),
                   progressColor: AppColors.green,
                 ),
@@ -46,6 +48,7 @@ class WorkingOnProjectCard extends StatelessWidget {
                 SizedBox(
                   height: 5.0.h,
                 ),
+                //ToDo:
                 Row(
                   children: const [
                     CustomText.titleMedium('Level:  '),
@@ -55,13 +58,15 @@ class WorkingOnProjectCard extends StatelessWidget {
                 SizedBox(
                   height: 5.0.h,
                 ),
-                Row(
-                  children: [
-                    const CustomText.titleMedium('Deadline: '),
-                    CustomText.titleMedium(project.name,
-                        style: const TextStyle(color: Colors.redAccent)),
-                  ],
-                ),
+                if (project.deadLine != null)
+                  Row(
+                    children: [
+                      const CustomText.titleMedium('Deadline: '),
+                      CustomText.titleMedium(
+                          AppDateUtils.dateOnly(project.deadLine!),
+                          style: const TextStyle(color: Colors.redAccent)),
+                    ],
+                  ),
               ],
             ),
           ],

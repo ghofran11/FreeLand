@@ -10,9 +10,20 @@ import 'package:freeland/common/utils/storage_service.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class Instance {
+  static SharedPreferences? _instance;
+
+  static Future<SharedPreferences> instance() async {
+    if (_instance != null) {
+      return _instance!;
+    } else {
+      return await SharedPreferences.getInstance();
+    }
+  }
+}
+
 Future generalInject(BuildContext context) async {
-  getIt.registerSingleton<SharedPreferences>(
-      await SharedPreferences.getInstance());
+  getIt.registerSingleton<SharedPreferences>(await Instance.instance());
   getIt.registerSingleton<StorageService<SharedStorage>>(
       StorageService.shared(getIt<SharedPreferences>()));
 

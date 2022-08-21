@@ -55,9 +55,8 @@ class PostedProjectCard extends StatelessWidget {
                     )),
                 Column(
                   children: [
-                    //ToDo:
-                    const CustomText.titleMedium(
-                      ' 15',
+                    CustomText.titleMedium(
+                      (project.numOfOffer ?? 0).toString(),
                       style: TextStyle(color: AppColors.primary, fontSize: 14),
                     ),
                     SizedBox(
@@ -76,8 +75,10 @@ class PostedProjectCard extends StatelessWidget {
                     )),
                 Column(
                   children: [
-                    const CustomText.titleMedium(
-                      '\$ 200',
+                    CustomText.titleMedium(
+                      (project.averageOfPrice != null)
+                          ? project.averageOfPrice.toString()
+                          : 'No offers yet',
                       style: TextStyle(color: AppColors.primary, fontSize: 14),
                     ),
                     SizedBox(

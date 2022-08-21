@@ -40,9 +40,11 @@ class MyAppState extends State<MyApp> {
     super.initState();
     _provider = AppManagerBloc(
       doBeforeOpen: _beforeOpen,
+      doAfterOpen: () {
+        _profile = MyProfileBloc();
+      },
       lazyAuthRepository: () => getIt<AuthRepository>(),
     )..add(AppManagerStarted());
-    _profile = MyProfileBloc();
     routerConfig = RouterConfig(provider: _provider);
   }
 

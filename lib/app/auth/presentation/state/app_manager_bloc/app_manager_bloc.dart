@@ -17,7 +17,10 @@ part 'app_manager_state.dart';
 
 ///This bloc use for redirect in go router
 class AppManagerBloc extends Bloc<AppManagerEvent, AppManagerState> {
-  AppManagerBloc({required this.lazyAuthRepository, this.doBeforeOpen})
+  AppManagerBloc(
+      {required this.lazyAuthRepository,
+      this.doBeforeOpen,
+      required this.doAfterOpen})
       : super(const AppManagerState(status: Status.initial)) {
     on<AppManagerEvent>(_handler);
   }
@@ -27,6 +30,7 @@ class AppManagerBloc extends Bloc<AppManagerEvent, AppManagerState> {
 
   /// Do some initiation before close splash and open app
   final FutureOr<void> Function()? doBeforeOpen;
+  final FutureOr<void> Function() doAfterOpen;
 
   late final AuthRepository _authRepository;
 
@@ -54,6 +58,7 @@ class AppManagerBloc extends Bloc<AppManagerEvent, AppManagerState> {
               getIt<StorageService<SharedStorage>>().getBool(kIsFirstOpen)));
 
       _authRepository = lazyAuthRepository();
+      await doAfterOpen();
       _authStateStream = _authRepository.authStatusStream.listen(
         (event) {
           add(AppManageStatusChanged(

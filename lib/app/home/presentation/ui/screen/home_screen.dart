@@ -178,18 +178,25 @@ class HomePage extends StatelessWidget {
                         Builder(builder: (context) {
                           if (state.serviceStatus.isSuccess()) {
                             final _services = homeBloc.services;
-                            return ListView.separated(
-                              padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                              separatorBuilder: (context, index) => SizedBox(
-                                height: 8.0.h,
-                              ),
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) {
-                                return JobCard(service: _services[index]);
-                              },
-                              itemCount: _services.length,
-                            );
+                            return homeBloc.services.isNotEmpty
+                                ? ListView.separated(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8.0.w),
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                      height: 8.0.h,
+                                    ),
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return JobCard(service: _services[index]);
+                                    },
+                                    itemCount: _services.length,
+                                  )
+                                : const CustomText.bodyMedium(
+                                    'No posted projects in the category you have selected');
                           } else if (state.serviceStatus.isFail()) {
                             return Text(state.serviceStatus.error ??
                                 AppStrings.defaultErrorMsg);

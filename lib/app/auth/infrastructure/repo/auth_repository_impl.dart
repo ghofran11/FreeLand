@@ -63,6 +63,8 @@ class AuthRepositoryImpl extends AuthRepository {
       final User userWithPass = result.copyWith(password: params.password);
       await setUser(userWithPass);
       _init();
+      _saveUser(result, params.password);
+
       await _subscribeToTopics();
     });
   }
@@ -83,6 +85,8 @@ class AuthRepositoryImpl extends AuthRepository {
       final User userWithPass = result.copyWith(password: params.password);
       await setUser(userWithPass);
       _init();
+      _saveUser(result, params.password);
+
       await _subscribeToTopics();
     });
   }
@@ -112,12 +116,12 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Stream<User?> get userStream => reactiveUser.stream;
 
-  _saveUser(User user, SignUpParams params) async {
+  _saveUser(User user, String password) async {
     await reactiveTokenStorage.write(AuthTokenModel(
       accessToken: user.accessToken,
       refreshToken: user.refreshToken,
     ));
-    final User userWithPass = user.copyWith(password: params.password);
+    final User userWithPass = user.copyWith(password: password);
     await setUser(userWithPass);
     await _subscribeToTopics();
   }
