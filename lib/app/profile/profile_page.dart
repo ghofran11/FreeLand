@@ -90,16 +90,21 @@ class ProfilePage extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      ElevatedButton(
-                          onPressed: () {
-                            getIt<ProfileBloc>().add(SendConnect(
-                                SendConnectionParam(userId: id, status: 1)));
-                          },
-                          child: CustomText.bodyMedium(
-                            "Connect",
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimary),
-                          )),
+                      Builder(
+                        builder: (context) {
+                          return ElevatedButton(
+                              onPressed: () {
+                                print('test ya ghofran plz be clam');
+                                getIt<ProfileBloc>().add(SendConnect(
+                                    SendConnectionParam(userId: id, status: 1)));
+                              },
+                              child: CustomText.bodyMedium(
+                                "Connect",
+                                style: TextStyle(
+                                    color: Theme.of(context).colorScheme.onPrimary),
+                              ));
+                        }
+                      ),
                       SizedBox(
                         height: 8.0.h,
                       ),

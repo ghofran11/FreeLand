@@ -4,22 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:freeland/app/notifications/infrastructure/models/notification.dart';
+import 'package:freeland/app/notifications/infrastructure/models/all_request.dart';
 import 'package:freeland/app/notifications/infrastructure/models/send_response_params.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_bloc.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_event.dart';
 import 'package:freeland/app/notifications/presentation/state/notification_state.dart';
-import 'package:freeland/app/profile/presentation/widgets/read_more.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
-import 'package:freeland/common/widgets/text_field.dart';
-import 'package:freeland/contact/contact_us.dart';
-import 'package:go_router/go_router.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
 import '../../../injection/injection.dart';
 
 class NotificationsPage extends StatelessWidget {
@@ -30,7 +24,7 @@ class NotificationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          getIt<NotificationBloc>()..add(FetchAllNotification()),
+          getIt<NotificationBloc>()..add(FetchAllNotification())..add(FetchAllRequestById()),
       child: Scaffold(
           body: Center(
         child: Padding(
@@ -57,11 +51,15 @@ class NotificationsPage extends StatelessWidget {
                                   AppStrings.defaultErrorMsg);
                         }
 
+                        if(state.allRequestStatus.isFail()){
+                          BotToast.showText(
+                              text: state.allRequestStatus.error ??
+                                  AppStrings.defaultErrorMsg);
+                        }
+
                       },
                       builder: (context, state) {
                         NotificationBloc _notificationBloc=context.read<NotificationBloc>();
-                        //toDo
-                        List<NotificationDto> notification = _notificationBloc.notification;
                         return Expanded(
                           child: TabBarView(children: [
                            Builder(builder: (context){
@@ -99,7 +97,7 @@ class NotificationsPage extends StatelessWidget {
                                      ),
                                      subtitle:  CustomText.bodySmall(
                                          notifications[index].body ,
-                                         style: TextStyle(
+                                         style: const TextStyle(
                                            color: AppColors.grey2,
                                          ),
                                          maxLines: 2,
@@ -121,7 +119,8 @@ class NotificationsPage extends StatelessWidget {
                            }),
                             Builder(
                               builder: (context) {
-                                if(state.notificationStatus.isSuccess()){
+                                final List<AllRequest> allRequest=context.read<NotificationBloc>().requests;
+                                if(state.allRequestStatus.isSuccess()){
                                   return ListView.separated(
                                     separatorBuilder: (context, index) {
                                       return const Divider();
@@ -146,17 +145,10 @@ class NotificationsPage extends StatelessWidget {
                                                       "https://media.istockphoto.com/photos/happy-male-executive-in-office-picture-id1208414307?k=20&m=1208414307&s=612x612&w=0&h=6_K-g8mu8VMCh0TX3F4q3VORaFK_7tJD3PzubGHwdZs=")),
                                             ),
                                           ),
-                                          title: const Text(
-                                            'Sami Salok',
-                                            style: TextStyle(fontSize: 15),
+                                          title:  Text(
+                                            allRequest[index].name,
+                                            style: const TextStyle(fontSize: 15),
                                           ),
-                                          subtitle: const CustomText.bodySmall(
-                                              'UI Designer at Splendapp',
-                                              style: TextStyle(
-                                                color: AppColors.grey2,
-                                              ),
-                                              maxLines: 2,
-                                              textOverflow: TextOverflow.ellipsis),
                                           trailing: Builder(
                                             builder: (context) {
                                               if(state.responseStatus.isFail()){
@@ -174,7 +166,7 @@ class NotificationsPage extends StatelessWidget {
                                                         color: AppColors.primary,
                                                       ),
                                                       onTap: (){
-                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: "ghhh")));
+                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: allRequest[index].id)));
 
                                                       },
                                                     ),
@@ -188,7 +180,7 @@ class NotificationsPage extends StatelessWidget {
                                                         color: AppColors.grey2,
                                                       ),
                                                       onTap: (){
-                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id: "ghhh")));
+                                                        _notificationBloc.add(ResponseConnection(param: SendResponseParam(isAccepted: true,id:allRequest[index].id)));
                                                       },
                                                     ),
                                                   ],
@@ -208,7 +200,7 @@ class NotificationsPage extends StatelessWidget {
                                                       color: AppColors.primary,
                                                     ),
                                                     onTap: (){
-                                                      print("ghofran ghofran ture trueeee");
+
                                                     },
                                                   ),
                                                 ],
@@ -216,10 +208,10 @@ class NotificationsPage extends StatelessWidget {
                                             }
                                           ));
                                     },
-                                    itemCount: 8,
+                                    itemCount: allRequest.length,
                                   );
                                 }
-                                else if (state.notificationStatus.isLoading()) {
+                                else if (state.allRequestStatus.isLoading()) {
                                   return const LoadingProgress();
                                 }
                                 return Container();
