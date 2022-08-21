@@ -74,8 +74,8 @@ class AddProjectParams {
         "description": description,
         "minPrice": minPrice,
         "maxPrice": maxPrice,
-        'categoryIds': categoriesIds
-        // "contractDto": List<dynamic>.from(contractDto!.map((x) => x.toMap())),
+        'categoryIds': ['eedf012a-fe2d-4457-f3df-08da82e65cb9'],
+        'deadline': deadLine.toIso8601String(),
       };
 
   Future<FormData> formData() async => FormData.fromMap(toMap()

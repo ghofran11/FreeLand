@@ -49,7 +49,7 @@ class ProjectRemote {
     required AddProjectParams params,
   }) async {
     return throwDioException(() async {
-      final x = await params.formData();
+      final x = await params.toJson();
       print(x);
       await _dio.post(AppUri.addProject, data: await params.formData());
     });

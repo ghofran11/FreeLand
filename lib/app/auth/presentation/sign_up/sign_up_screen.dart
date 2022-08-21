@@ -7,11 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_bloc.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_event.dart';
 import 'package:freeland/app/auth/presentation/sign_up/sign_up_bloc/sign_up_state.dart';
-import 'package:freeland/app/home/presentation/ui/screen/home_screen.dart';
 import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_event.dart';
 import 'package:freeland/app/info/country/presentation/country_bloc/country_state.dart';
-import 'package:freeland/app/root/root_screen.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/text.dart';
@@ -298,14 +296,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       onPressed: () {
                                         signUpBloc
                                             .add(SignUpSubmission(context));
-
                                       },
                                       child: const Text(
                                         "Sign Up",
                                       ),
                                     ),
                                   )
-                                : const CircularProgressIndicator(),
+                                : Center(
+                                    child: const CircularProgressIndicator()),
                             SizedBox(height: 4.0.h),
                           ],
                         )

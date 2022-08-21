@@ -1,7 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:freeland/app/info/country/infrastrcture/model/country.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
 import 'package:freeland/injection/injection.dart';
 
@@ -16,8 +13,7 @@ class SignUpParams extends Equatable {
   final String? cityId;
   final String? deviceToken;
   final int userType;
-  final String bDay;
-
+  final DateTime bDay;
 
   @override
   List<Object> get props => [
@@ -34,7 +30,7 @@ class SignUpParams extends Equatable {
       required this.phoneNumber,
       this.cityId,
       this.deviceToken,
-      this.userType = 1,
+      this.userType = 3,
       required this.bDay,
       required this.userName});
 
@@ -51,7 +47,7 @@ class SignUpParams extends Equatable {
       'CountryId': countryId,
       'deviceToken': token,
       'UserType': userType,
-      'BDay': bDay,
+      'BDay': bDay.toIso8601String(),
     };
   }
 
@@ -68,7 +64,7 @@ class SignUpParams extends Equatable {
     String? cityId,
     String? countryId,
     int? userType,
-    String? bDay,
+    DateTime? bDay,
     String? file,
   }) {
     return SignUpParams(

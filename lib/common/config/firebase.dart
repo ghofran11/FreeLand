@@ -42,11 +42,11 @@ class DefaultFirebaseOptions {
 
   ///ToDo
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA0h0Up9MCIivcyWURrPDM5W8OJvusI7U4',
-    appId: '1:683807261155:android:909bcacc3b35ade218e0d6',
-    messagingSenderId: '683807261155',
-    projectId: 'memate-e5c9a',
-    storageBucket: 'memate-e5c9a.appspot.com',
+    apiKey: 'AIzaSyCC1EXTjmGYXAW8qJlFXwUDLhEabEkh3cs',
+    appId: '1:569088224038:android:3bdc6e66b756e39794afe7',
+    messagingSenderId: '569088224038',
+    projectId: 'freeland-36920',
+    storageBucket: 'freeland-36920.appspot.com',
   );
 
   ///ToDo:
