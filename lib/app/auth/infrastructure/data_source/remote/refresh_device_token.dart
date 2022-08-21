@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:freeland/common/constant/src/url.dart';
 import 'package:freeland/common/platform_services/firebase/notification_firebase.dart';
 import 'package:freeland/common/utils/storage_service.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 const _deviceTokenKey = '__device_token__';
 
@@ -13,7 +12,7 @@ class RefreshDeviceTokenService {
   final StorageService _storageService;
   final FirebaseNotificationService _firebaseNotificationService;
   StreamSubscription<String?>? onTokenRefresh;
-  Timer? _timer;
+  // Timer? _timer;
 
   RefreshDeviceTokenService({
     required Dio dio,
@@ -28,14 +27,14 @@ class RefreshDeviceTokenService {
         _firebaseNotificationService.onTokenRefresh.listen((token) {
       _refreshDeviceToken(token: token);
     });
-    if (shouldRefreshToken) {
-      _startTimer();
-    }
+    // if (shouldRefreshToken) {
+    //   _startTimer();
+    // }
   }
 
   void stop() {
     onTokenRefresh?.cancel();
-    _stopTimer();
+    // _stopTimer();
   }
 
   bool get shouldRefreshToken =>
@@ -53,18 +52,18 @@ class RefreshDeviceTokenService {
           'deviceToken': token,
         },
       );
-      _stopTimer();
+      // _stopTimer();
       await _deleteCache(_deviceTokenKey);
     } catch (e) {
       await _cacheToken(token);
-      _startTimer();
+      // _startTimer();
     }
   }
 
-  void _stopTimer() {
-    _timer?.cancel();
-    _timer = null;
-  }
+  // void _stopTimer() {
+  //   _timer?.cancel();
+  //   _timer = null;
+  // }
 
   Future<void> _cacheToken(String token) {
     return _storageService.setString(_deviceTokenKey, token);
@@ -73,15 +72,15 @@ class RefreshDeviceTokenService {
   Future<void> _deleteCache(String token) {
     return _storageService.remove(_deviceTokenKey);
   }
-
-  void _startTimer() {
-    _timer ??= Timer.periodic(
-      const Duration(seconds: 60),
-      (timer) async {
-        if (await InternetConnectionChecker().hasConnection) {
-          _refreshDeviceToken(token: storedDeviceToken!);
-        }
-      },
-    );
-  }
+  //
+  // void _startTimer() {
+  //   _timer ??= Timer.periodic(
+  //     const Duration(seconds: 60),
+  //     (timer) async {
+  //       if (await InternetConnectionChecker().hasConnection) {
+  //         _refreshDeviceToken(token: storedDeviceToken!);
+  //       }
+  //     },
+  //   );
+  // }
 }

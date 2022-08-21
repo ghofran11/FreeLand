@@ -74,7 +74,7 @@ class AddProjectParams {
         "description": description,
         "minPrice": minPrice,
         "maxPrice": maxPrice,
-        'categoryIds': ['eedf012a-fe2d-4457-f3df-08da82e65cb9'],
+        'categoryIds': categoriesIds,
         'deadline': deadLine.toIso8601String(),
       };
 
