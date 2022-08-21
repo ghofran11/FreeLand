@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:freeland/app/home/infrastructure/models/service.dart';
 
 class MyProfile {
   late String id;
   late String fullName;
+  late String? imagePath;
+  late File? newImage;
   late String? bio;
   late int numOfCompletedProjects;
   late int numOfConnections;
@@ -12,10 +16,11 @@ class MyProfile {
   late List<ServiceDto> serviceDtos;
   late List<WorkDtos> workDtos;
   late List<ConnectedUsers> connectedUsers;
-
   MyProfile(
       {required this.id,
       required this.fullName,
+      this.imagePath,
+      this.newImage,
       required this.bio,
       required this.numOfCompletedProjects,
       required this.numOfConnections,
@@ -29,6 +34,7 @@ class MyProfile {
   MyProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullName = json['fullName'];
+    imagePath = json['imagePath'];
     bio = json['bio'];
     numOfCompletedProjects = json['numOfCompletedProjects'];
     numOfConnections = json['numOfConnections'];
@@ -69,6 +75,7 @@ class MyProfile {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['fullName'] = fullName;
+    data['imagePath'] = imagePath;
     data['bio'] = bio;
     data['numOfCompletedProjects'] = numOfCompletedProjects;
     data['numOfConnections'] = numOfConnections;

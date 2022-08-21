@@ -2,20 +2,16 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_bloc.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_state.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/constant/src/strings.dart';
+import 'package:freeland/common/utils/image.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/core/user/provider/user_provider.dart';
 import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../../common/config/theme/src/styles.dart';
-import '../../../../../common/widgets/text.dart';
 
 class CommentScreen extends StatefulWidget {
   CommentScreen({Key? key, required this.projectId}) : super(key: key);
@@ -64,11 +60,10 @@ class _CommentScreenState extends State<CommentScreen> {
     //   'message': 'Very cool'
     // },
   ];
-
+  bool firstTime = true;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -84,75 +79,96 @@ class _CommentScreenState extends State<CommentScreen> {
       body: BlocProvider(
         create: (context) => getIt<ProjectBloc>()
           ..add(FetchAllComments(projectId: widget.projectId)),
-        child: Builder(
-          builder: (context) {
-            return SafeArea(
-              child: CommentBox(
-                userImage:
-                    "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
-                child: BlocConsumer<ProjectBloc, ProjectState>(
-                  listener: (context, state) {
-                    if (state.commentSubmission.isFail()) {
-                      BotToast.showText(
-                          text: state.commentSubmission.error ??
-                              AppStrings.defaultErrorMsg);
-                    }
-                    if (state.commentSubmission.isSuccess()) {
-                      setState(() {
-                        var value = {
-                          'name': context.read<UserProvider>().user?.fullName,
-                          'pic': context.read<UserProvider>().user?.imagePath,
-                          'message': commentController.text,
-                        };
-                        filedata.insert(0, value);
-                      });
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state.fetchAllComment.isFail()) {
-                      return const Text(AppStrings.defaultErrorMsg);
-                    }
-                    if (state.fetchAllComment.isSuccess()) {
-                      context.read<ProjectBloc>().comments.forEach((element) {
-                        filedata.add({
-                          'name': element.senderName,
-                          'pic':
-                              'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
-                          'message': element.text,
-                        });
-                      });
-                      return commentChild(filedata);
-                    }
-                    return const LoadingProgress();
-                  },
-                ),
-                labelText: 'Write a comment...',
-                withBorder: false,
-                errorText: 'Comment cannot be blank',
-                sendButtonMethod: () {
-                  if (formKey.currentState!.validate()) {
-                  context.read<ProjectBloc>().add(CommentSubmission(
-                        projectId: widget.projectId, msg: commentController.text));
+        child: Builder(builder: (context) {
+          return SafeArea(
+            child: CommentBox(
+              userImage:
+                  buildDocPath(context.read<UserProvider>().user?.imagePath),
+              child: BlocConsumer<ProjectBloc, ProjectState>(
+                listener: (context, state) {
+                  if (state.commentSubmission.isFail()) {
+                    BotToast.showText(
+                        text: state.commentSubmission.error ??
+                            AppStrings.defaultErrorMsg);
+                  }
+                  if (state.commentSubmission.isSuccess()) {
+                    setState(() {
+                      filedata.clear();
 
-                    commentController.clear();
-                    FocusScope.of(context).unfocus();
-                  } else {
-                    print("Not validated");
+                      var value = {
+                        'name': context.read<UserProvider>().user?.fullName,
+                        'pic': buildDocPath(
+                            context.read<UserProvider>().user?.imagePath),
+                        'message': commentController.text,
+                      };
+                      commentController.clear();
+
+                      filedata.insert(0, value);
+                    });
                   }
                 },
-                formKey: formKey,
-                commentController: commentController,
-                backgroundColor: const Color(0xfffffFFF),
-                textColor: Colors.black,
-                sendWidget: const Icon(Icons.send_sharp,
-                    size: 30, color: AppColors.primary),
+                builder: (context, state) {
+                  return Stack(
+                    children: [
+                      Builder(
+                        builder: (context) {
+                          if (state.fetchAllComment.isFail()) {
+                            return Text(state.fetchAllComment.error ??
+                                AppStrings.defaultErrorMsg);
+                          }
+                          if (state.fetchAllComment.isSuccess()) {
+                            context
+                                .read<ProjectBloc>()
+                                .comments
+                                .forEach((element) {
+                              filedata.add({
+                                'name': element.senderName,
+                                'pic':
+                                    'https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400',
+                                'message': element.text,
+                              });
+                            });
+
+                            return commentChild(filedata);
+                          }
+                          if (state.fetchAllComment.isSuccess()) {
+                            return Text(state.fetchAllComment.error ??
+                                AppStrings.defaultSuccessMsg);
+                          }
+                          return const LoadingProgress();
+                        },
+                      ),
+                      if (state.commentSubmission.isLoading()) LoadingProgress()
+                    ],
+                  );
+                },
               ),
-            );
-          }
-        ),
+              labelText: 'Write a comment...',
+              withBorder: false,
+              errorText: 'Comment cannot be blank',
+              sendButtonMethod: () {
+                if (formKey.currentState!.validate()) {
+                  context.read<ProjectBloc>().add(CommentSubmission(
+                      projectId: widget.projectId,
+                      msg: commentController.text));
+                  FocusScope.of(context).unfocus();
+                } else {
+                  print("Not validated");
+                }
+              },
+              formKey: formKey,
+              commentController: commentController,
+              backgroundColor: const Color(0xfffffFFF),
+              textColor: Colors.black,
+              sendWidget: const Icon(Icons.send_sharp,
+                  size: 30, color: AppColors.primary),
+            ),
+          );
+        }),
       ),
     );
   }
+
   Widget commentChild(data) {
     return ListView(
       physics: const BouncingScrollPhysics(),
@@ -193,4 +209,9 @@ class _CommentScreenState extends State<CommentScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    commentController.dispose();
+    super.dispose();
+  }
 }

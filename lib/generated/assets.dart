@@ -15,6 +15,7 @@ class Assets {
   static const String iconsUser = 'assets/icons/user.svg';
   static const String imagesCommonQuestions =
       'assets/images/common_questions.png';
+  static const String imagesDone = 'assets/images/done.png';
   static const String imagesImg = 'assets/images/img.png';
   static const String imagesMastercard = 'assets/images/mastercard.png';
   static const String imagesVisa = 'assets/images/visa.png';

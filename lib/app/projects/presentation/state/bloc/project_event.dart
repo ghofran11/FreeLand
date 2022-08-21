@@ -39,3 +39,21 @@ class AddContract extends ProjectEvent {
 
   const AddContract({required this.freelancerId, required this.projectId});
 }
+
+class PartResponsed extends ProjectEvent {
+  final String partId;
+  final double? evaluation;
+
+  const PartResponsed({
+    required this.partId,
+    this.evaluation,
+  });
+}
+
+class PartSubmitted extends ProjectEvent {
+  final String partId;
+
+  const PartSubmitted({
+    required this.partId,
+  });
+}

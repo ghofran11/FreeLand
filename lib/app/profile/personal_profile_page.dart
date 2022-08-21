@@ -10,6 +10,7 @@ import 'package:freeland/app/profile/presentation/widgets/projects_section.dart'
 import 'package:freeland/common/config/theme/src/colors.dart';
 import 'package:freeland/common/config/theme/src/styles.dart';
 import 'package:freeland/common/constant/constants.dart';
+import 'package:freeland/common/utils/image.dart';
 import 'package:freeland/common/widgets/loading_progress.dart';
 import 'package:freeland/common/widgets/text.dart';
 import 'package:go_router/go_router.dart';
@@ -69,11 +70,9 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                   vertical: verticalAppPadding.h,
                   horizontal: horizontalAppPadding.w),
               children: [
-                // ImageHolder(onUpdateImage: (image) {}, onDeleteImage: () {}),
-                const ProfileImage(
-                    //ToDo
-                    // image: state.profile.,
-                    ),
+                ProfileImage(
+                  image: buildDocPath(state.profile?.imagePath),
+                ),
                 Padding(
                   padding: EdgeInsets.all(8.0.r),
                   child: CustomText.titleLarge(

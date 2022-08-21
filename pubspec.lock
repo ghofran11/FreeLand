@@ -671,6 +671,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.7"
+  flutter_rating_bar:
+    dependency: transitive
+    description:
+      name: flutter_rating_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -1236,6 +1243,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  rating_dialog:
+    dependency: "direct main"
+    description:
+      name: rating_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   reactive_date_time_picker:
     dependency: "direct main"
     description:

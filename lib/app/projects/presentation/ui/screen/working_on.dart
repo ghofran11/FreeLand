@@ -1,10 +1,19 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:colours/colours.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/app/payment/payment_method.dart';
+import 'package:freeland/app/projects/presentation/state/bloc/project_bloc.dart';
+import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
+import 'package:freeland/app/projects/presentation/state/bloc/project_state.dart';
 import 'package:freeland/common/config/theme/src/colors.dart';
+import 'package:freeland/common/constant/src/strings.dart';
 import 'package:freeland/common/widgets/text.dart';
+import 'package:freeland/generated/assets.dart';
+import 'package:freeland/injection/injection.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 final int length = 4;
@@ -28,43 +37,61 @@ class WorkingOn extends StatefulWidget {
 
 class _WorkingOnState extends State<WorkingOn> {
   int _selectedIndex = 0;
+  final bool _isFreelancer = true;
+  double rate = 3;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          children: [
-            Row(
-              children: [
-                const SizedBox(
-                  height: 12,
-                ),
-                IconButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.primary,
-                    )),
-                const CustomText.titleLarge(
-                  'Flower Lab Details',
-                ),
-              ],
+    return BlocProvider<ProjectBloc>(
+      create: (context) => getIt<ProjectBloc>(),
+      child: BlocConsumer<ProjectBloc, ProjectState>(
+        listener: (context, state) {
+          if (state.partStatus.isFail()) {
+            BotToast.showText(
+                text: state.partStatus.error ?? AppStrings.defaultErrorMsg);
+          }
+          if (state.partStatus.isSuccess()) {
+            BotToast.showText(text: AppStrings.defaultSuccessMsg);
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView(
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back_ios,
+                            color: AppColors.primary,
+                          )),
+                      const CustomText.titleLarge(
+                        'Flower Lab Details',
+                      ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: const CustomText.bodyMedium(
+                        "These are the levels of Flowes LAb prject, when you finish a level please submit it as completed to move on to next level>"),
+                  ),
+                  SizedBox(
+                    height: 20.0.h,
+                  ),
+                  ...levels()
+                ],
+              ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(12.0),
-              child: const CustomText.bodyMedium(
-                  "These are the levels of Flowes LAb prject, when you finish a level please submit it as completed to move on to next level>"),
-            ),
-            SizedBox(
-              height: 20.0.h,
-            ),
-            ...levels()
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -102,6 +129,25 @@ class _WorkingOnState extends State<WorkingOn> {
               padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: ElevatedButton(
                   onPressed: () {
+                    if (_isFreelancer) {
+                      context.read<ProjectBloc>().add(const PartSubmitted(
+                          //ToDo:
+                          partId: ''));
+                    } else {
+                      bool lastLevel = true;
+                      if (lastLevel) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => _dialog(),
+                        );
+                      }
+                      context.read<ProjectBloc>().add(PartResponsed(
+                            //ToDo:
+                            partId: '',
+                            evaluation: lastLevel ? rate : null,
+                          ));
+                    }
                     setState(() {
                       _selectedIndex = index + 1;
                     });
@@ -145,6 +191,33 @@ class _WorkingOnState extends State<WorkingOn> {
           color: Colours.grey,
           thickness: 3,
         ),
+      );
+
+  RatingDialog _dialog() => RatingDialog(
+        initialRating: rate,
+        // your app's name?
+        title: const Text(
+          'Rating Project',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        // encourage your user to leave a high rating?
+        message: const Text(
+          'Tap a star to set your rating of this project.',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 15),
+        ),
+        // your app's logo?
+        image: Image.asset(Assets.imagesDone),
+        onSubmitted: (ratingDialogResponse) {
+          setState(() {
+            rate = ratingDialogResponse.rating;
+          });
+        },
+        submitButtonText: 'Submit',
       );
 }
 

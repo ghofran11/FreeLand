@@ -31,6 +31,19 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
                       profile: right, profileStatus: BlocStatus.success()))
                 });
       }
+      if (event is MyProfileChanged) {
+        emit(state.copyWith(profileStatus: BlocStatus.loading()));
+        emit(state.copyWith(
+            profileStatus: BlocStatus.success(), profile: event.profile));
+        //
+        // (await _repo.getMyProfile()).fold(
+        //     (left) => emit(
+        //         state.copyWith(profileStatus: BlocStatus.fail(error: left))),
+        //     (right) => {
+        //           emit(state.copyWith(
+        //               profile: right, profileStatus: BlocStatus.success()))
+        //         });
+      }
     });
   }
 }

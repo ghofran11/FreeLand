@@ -2,10 +2,10 @@
 //
 //     final commentOfferDto = commentOfferDtoFromMap(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
+
 List<CommentOfferDto> commentsFromJson(List<dynamic> data) {
-  return data.map((e) => CommentOfferDto.fromJson(e)).toList();
+  return data.map((e) => CommentOfferDto.fromMap(e)).toList();
 }
 
 class CommentOfferDto {
@@ -21,15 +21,15 @@ class CommentOfferDto {
     required this.offerName,
   });
 
-  final String id;
-  final String parentCommentId;
+  final String? id;
+  final String? parentCommentId;
   final String text;
   final String senderId;
   final String senderName;
   final String serviceId;
   final String sericeName;
-  final String offerId;
-  final String offerName;
+  final String? offerId;
+  final String? offerName;
 
   CommentOfferDto copyWith({
     String? id,
@@ -54,31 +54,32 @@ class CommentOfferDto {
         offerName: offerName ?? this.offerName,
       );
 
-  factory CommentOfferDto.fromJson(String str) => CommentOfferDto.fromMap(json.decode(str));
+  factory CommentOfferDto.fromJson(String str) =>
+      CommentOfferDto.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory CommentOfferDto.fromMap(Map<String, dynamic> json) => CommentOfferDto(
-    id: json["id"],
-    parentCommentId: json["parentCommentId"],
-    text: json["text"],
-    senderId: json["senderId"],
-    senderName: json["senderName"],
-    serviceId: json["serviceId"],
-    sericeName: json["sericeName"],
-    offerId: json["offerId"],
-    offerName: json["offerName"],
-  );
+        id: json["id"],
+        parentCommentId: json["parentCommentId"],
+        text: json["text"],
+        senderId: json["senderId"],
+        senderName: json["senderName"],
+        serviceId: json["serviceId"],
+        sericeName: json["sericeName"],
+        offerId: json["offerId"],
+        offerName: json["offerName"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "id": id,
-    "parentCommentId": parentCommentId,
-    "text": text,
-    "senderId": senderId,
-    "senderName": senderName,
-    "serviceId": serviceId,
-    "sericeName": sericeName,
-    "offerId": offerId,
-    "offerName": offerName,
-  };
+        "id": id,
+        "parentCommentId": parentCommentId,
+        "text": text,
+        "senderId": senderId,
+        "senderName": senderName,
+        "serviceId": serviceId,
+        "sericeName": sericeName,
+        "offerId": offerId,
+        "offerName": offerName,
+      };
 }

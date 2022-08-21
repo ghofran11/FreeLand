@@ -15,6 +15,7 @@ class ProjectState {
   final BlocStatus fetchAllComment;
   final BlocStatus addContract;
   final BlocStatus fetchMyProjectsStatus;
+  final BlocStatus partStatus;
 
   ProjectState(
       {this.offerSubmission = const BlocStatus(),
@@ -22,6 +23,7 @@ class ProjectState {
       this.fetchAllComment = const BlocStatus(),
       this.addContract = const BlocStatus(),
       this.fetchMyProjectsStatus = const BlocStatus(),
+      this.partStatus = const BlocStatus(),
       this.projectSubmission = const BlocStatus()});
 
   ProjectState copyWith({
@@ -31,12 +33,14 @@ class ProjectState {
     BlocStatus? projectSubmission,
     BlocStatus? fetchMyProjectsStatus,
     BlocStatus? addContractStatus,
+    BlocStatus? partStatus,
   }) {
     return ProjectState(
       offerSubmission: offerState ?? offerSubmission,
       commentSubmission: commentState ?? commentSubmission,
       fetchAllComment: fetchAllCommentState ?? fetchAllComment,
       projectSubmission: projectSubmission ?? this.projectSubmission,
+      partStatus: partStatus ?? this.partStatus,
       addContract: addContractStatus ?? this.addContract,
       fetchMyProjectsStatus:
           fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
@@ -54,11 +58,7 @@ class ProjectState {
 
   Future<CommentParams> getCommentParams(String projectId, dynamic msg) async {
     return CommentParams(
-        parentCommentId: null,
-        text: msg,
-        serviceId: projectId,
-        //Todo: Ask Caroline
-        offerId: 0);
+        parentCommentId: null, text: msg, serviceId: projectId, offerId: null);
   }
 
   @override

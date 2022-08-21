@@ -9,6 +9,7 @@ abstract class ProjectRepository {
   Future<Either<String, dynamic>> sendOffer({
     required OfferParams params,
   });
+
   Future<Either<String, dynamic>> sendComment({
     required CommentParams params,
   });
@@ -24,4 +25,8 @@ abstract class ProjectRepository {
   Future<Either<String, MyProjects>> fetchMyProjects();
 
   Future<Either<String, void>> addContract(AddContractParam param);
+
+  Future<Either<String, void>> responsePart(String idPart);
+
+  Future<Either<String, void>> submitPart(String idPart);
 }

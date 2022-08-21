@@ -42,4 +42,6 @@ class AppUri {
   static const connectResponse = "Connection/App/Response";
   //toDo
   static const fetchAllRequest = "Connection/Dash/GetMyRequests";
+  static const submitPart = "Service/App/SubmitPart";
+  static const responsePart = "Service/App/ResponsePart";
 }

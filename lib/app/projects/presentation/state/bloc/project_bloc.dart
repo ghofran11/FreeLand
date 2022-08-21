@@ -130,6 +130,20 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
                 (right) => emit(
                     state.copyWith(addContractStatus: BlocStatus.success())));
       }
+      if (event is PartSubmitted) {
+        emit(state.copyWith(partStatus: BlocStatus.loading()));
+        (await _projectRepositoryImpl.submitPart(event.partId)).fold(
+            (left) =>
+                emit(state.copyWith(partStatus: BlocStatus.fail(error: left))),
+            (right) => emit(state.copyWith(partStatus: BlocStatus.success())));
+      }
+      if (event is PartResponsed) {
+        emit(state.copyWith(partStatus: BlocStatus.loading()));
+        (await _projectRepositoryImpl.responsePart(event.partId)).fold(
+            (left) =>
+                emit(state.copyWith(partStatus: BlocStatus.fail(error: left))),
+            (right) => emit(state.copyWith(partStatus: BlocStatus.success())));
+      }
     });
   }
 

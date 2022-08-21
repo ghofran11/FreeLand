@@ -5,5 +5,8 @@ abstract class MyProfileEvent {}
 
 class MyProfileFetched extends MyProfileEvent {}
 
+class MyProfileChanged extends MyProfileEvent {
+  final MyProfile profile;
 
-class MyProfileStarted extends MyProfileEvent {}
+  MyProfileChanged(this.profile);
+}

@@ -19,7 +19,6 @@ class ProjectRemote {
     required OfferParams params,
   }) async {
     return throwDioException(() async {
-      print(params.toJson());
       final response =
           await _dio.post(AppUri.sendOffer, data: await params.toJson());
       return OfferDto.fromMap(response.data);
@@ -36,10 +35,11 @@ class ProjectRemote {
     });
   }
 
-  Future<List<CommentOfferDto>> fetchAllComment() async {
+  Future<List<CommentOfferDto>> fetchAllComment(String id) async {
     return throwDioException<List<CommentOfferDto>>(() async {
       late final Response response;
-      response = await _dio.get(AppUri.commentOfferFetch);
+      response = await _dio
+          .get(AppUri.commentOfferFetch, queryParameters: {'serviceId': id});
       var comments = commentsFromJson(response.data);
       return comments;
     });
@@ -115,6 +115,23 @@ class ProjectRemote {
       var services = serviceFromJson(response.data);
 
       return services;
+    });
+  }
+
+  Future<void> submitPart({
+    required String idPart,
+  }) async {
+    return throwDioException(() async {
+      await _dio.post(AppUri.submitPart, queryParameters: {'partId': idPart});
+    });
+  }
+
+  Future<void> responsePart({
+    required String idPart,
+  }) async {
+    return throwDioException(() async {
+      await _dio.post(AppUri.responsePart,
+          queryParameters: {'partId': idPart, 'accepted': true});
     });
   }
 }

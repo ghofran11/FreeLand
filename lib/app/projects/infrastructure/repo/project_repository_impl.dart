@@ -34,7 +34,8 @@ class ProjectRepositoryImpl extends ProjectRepository {
   @override
   Future<Either<String, dynamic>> fetchAllComment({required String serviceId}) {
     return throwAppException<List<CommentOfferDto>>(() async {
-      final List<CommentOfferDto> comments = await remote.fetchAllComment();
+      final List<CommentOfferDto> comments =
+          await remote.fetchAllComment(serviceId);
       return (comments);
     });
   }
@@ -66,6 +67,20 @@ class ProjectRepositoryImpl extends ProjectRepository {
   Future<Either<String, void>> addContract(AddContractParam param) async {
     return throwAppException<void>(() async {
       await remote.addContract(params: param);
+    });
+  }
+
+  @override
+  Future<Either<String, void>> submitPart(String idPart) async {
+    return throwAppException<void>(() async {
+      await remote.submitPart(idPart: idPart);
+    });
+  }
+
+  @override
+  Future<Either<String, void>> responsePart(String idPart) async {
+    return throwAppException<void>(() async {
+      await remote.submitPart(idPart: idPart);
     });
   }
 }
