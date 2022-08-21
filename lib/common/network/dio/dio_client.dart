@@ -45,7 +45,7 @@ class DioClient with DioMixin implements Dio {
       ]);
     this.interceptors.addAll([
       RefreshTokenInterceptor<AuthTokenModel>(
-        tokenHeaderBuilder: ,
+        // tokenHeaderBuilder: ,
         dio: this,
         tokenProtocol: TokenProtocol(
           shouldRefresh: (response, token) => false,
