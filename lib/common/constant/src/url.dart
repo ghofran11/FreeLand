@@ -47,4 +47,8 @@ class AppUri {
 
   static const submitPart = "Service/App/SubmitPart";
   static const responsePart = "Service/App/ResponsePart";
+
+  //toDo
+  static const responseOffer = "";
+
 }

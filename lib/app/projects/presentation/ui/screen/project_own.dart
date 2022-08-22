@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freeland/app/contract/contract_screen.dart';
 import 'package:freeland/app/profile/presentation/widgets/read_more.dart';
+import 'package:freeland/app/projects/domain/entities/response_offer_param.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_bloc.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_event.dart';
 import 'package:freeland/app/projects/presentation/state/bloc/project_state.dart';
@@ -219,6 +220,10 @@ class ProjectOwn extends StatelessWidget {
                                                                   .primary),
                                                         ),
                                                         onPressed: () {
+                                                          context.read<ProjectBloc>().add(ResponseOffer(
+                                                              ResponseOfferParam(userId:  detailProject
+                                                                  .commentDtos![index]
+                                                                  .offerId, isAgree: true)));
                                                           context.pushNamed(
                                                               ContractScreen
                                                                   .routeName);
@@ -231,6 +236,10 @@ class ProjectOwn extends StatelessWidget {
                                                                 color: AppColors
                                                                     .grey2)),
                                                         onPressed: () {
+                                                          context.read<ProjectBloc>().add(ResponseOffer(
+                                                              ResponseOfferParam(userId:  detailProject
+                                                                  .commentDtos![index]
+                                                                  .offerId, isAgree: false)));
                                                           Navigator.of(context)
                                                               .pop();
                                                         },

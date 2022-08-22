@@ -16,6 +16,7 @@ class ProjectState {
   final BlocStatus addContract;
   final BlocStatus fetchMyProjectsStatus;
   final BlocStatus fetchDetailProject;
+  final BlocStatus responseOffer;
 
   final BlocStatus partStatus;
 
@@ -27,7 +28,9 @@ class ProjectState {
       this.partStatus = const BlocStatus(),
       this.fetchDetailProject = const BlocStatus(),
       this.fetchMyProjectsStatus = const BlocStatus(),
-      this.projectSubmission = const BlocStatus()});
+      this.projectSubmission = const BlocStatus(),
+      this.responseOffer = const BlocStatus(),
+      });
 
   ProjectState copyWith(
       {BlocStatus? offerState,
@@ -37,7 +40,9 @@ class ProjectState {
       BlocStatus? fetchMyProjectsStatus,
       BlocStatus? addContractStatus,
       BlocStatus? partStatus,
-      BlocStatus? fetchDetailProject}) {
+      BlocStatus? fetchDetailProject,
+        BlocStatus? responseOffer
+      }) {
     return ProjectState(
       partStatus: partStatus ?? this.partStatus,
       fetchDetailProject: fetchDetailProject ?? this.fetchDetailProject,
@@ -48,6 +53,7 @@ class ProjectState {
       addContract: addContractStatus ?? this.addContract,
       fetchMyProjectsStatus:
           fetchMyProjectsStatus ?? this.fetchMyProjectsStatus,
+      responseOffer: responseOffer ?? this.responseOffer
     );
   }
 
@@ -67,7 +73,7 @@ class ProjectState {
 
   @override
   String toString() {
-    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission, fetchMyProjectsStatus: $fetchMyProjectsStatus";
+    return "offerSubmission: $offerSubmission,commentSubmission: $commentSubmission,projectSubmission : $projectSubmission, fetchMyProjectsStatus: $fetchMyProjectsStatus,responseOffer: $responseOffer";
   }
 
   Future<AddProjectParams> getAddProjectParams(

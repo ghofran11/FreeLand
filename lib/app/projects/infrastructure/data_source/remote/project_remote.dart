@@ -4,6 +4,7 @@ import 'package:freeland/app/home/infrastructure/models/service.dart';
 import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
+import 'package:freeland/app/projects/domain/entities/response_offer_param.dart';
 //import 'package:freeland/app/projects/infrastructure/models/comment.dart';
 import 'package:freeland/app/projects/infrastructure/models/comment_offer.dart';
 import 'package:freeland/app/projects/infrastructure/models/deatail_service_dto.dart';
@@ -156,6 +157,12 @@ class ProjectRemote {
       var detailServiceDto = DetailServiceDto.fromMap(response.data);
       var x = detailServiceDto;
       return x;
+    });
+  }
+
+  Future<void> responseOffer({required ResponseOfferParam param}) async {
+    return throwDioException<void>(() async {
+      await _dio.post(AppUri.responseOffer,data: await param.toJson());
     });
   }
 }

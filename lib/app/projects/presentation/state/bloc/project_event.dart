@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freeland/app/projects/domain/entities/response_offer_param.dart';
 
 class ProjectEvent {
   const ProjectEvent();
@@ -61,4 +62,9 @@ class PartSubmitted extends ProjectEvent {
   const PartSubmitted({
     required this.partId,
   });
+}
+
+class ResponseOffer extends ProjectEvent{
+  final ResponseOfferParam param;
+  ResponseOffer(this.param);
 }

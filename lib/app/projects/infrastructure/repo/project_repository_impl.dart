@@ -5,6 +5,7 @@ import 'package:freeland/app/projects/domain/entities/add_project_params.dart';
 import 'package:freeland/app/projects/domain/entities/comment_params.dart';
 import 'package:freeland/app/projects/domain/entities/my_projects.dart';
 import 'package:freeland/app/projects/domain/entities/offer_params.dart';
+import 'package:freeland/app/projects/domain/entities/response_offer_param.dart';
 import 'package:freeland/app/projects/domain/repos/project_repository.dart';
 import 'package:freeland/app/projects/infrastructure/data_source/remote/project_remote.dart';
 //import 'package:freeland/app/projects/infrastructure/models/comment.dart';
@@ -92,6 +93,11 @@ class ProjectRepositoryImpl extends ProjectRepository {
       final DetailServiceDto detailServiceDto =
           await remote.fetchDetailServices(projectId);
       return (detailServiceDto);
+    });
+  }
+  Future<Either<String, void>> responseOffer({required ResponseOfferParam params}) {
+    return throwAppException<void>(() async {
+      await remote.responseOffer(param:params );
     });
   }
 }

@@ -31,7 +31,10 @@ abstract class ProjectRepository {
 
   Future<Either<String, void>> submitPart(String idPart);
 
+
+
   Future<Either<String, DetailServiceDto>> fetchDetailServices({
     required String projectId,
   });
+
 }
