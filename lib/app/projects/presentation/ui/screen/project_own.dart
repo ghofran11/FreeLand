@@ -348,12 +348,12 @@ class ProjectOwn extends StatelessWidget {
                   ],
                 );
               }
-              if (state.fetchDetailProject.isFail()) {
-                return Center(
-                  child: Text(state.fetchDetailProject.error ??
-                      AppStrings.defaultErrorMsg),
-                );
-              }
+              // if (state.fetchDetailProject.isFail()) {
+              //   return Center(
+              //     child: Text(state.fetchDetailProject.error ??
+              //         AppStrings.defaultErrorMsg),
+              //   );
+              // }
               return Center(child: const LoadingProgress());
             },
           ),
